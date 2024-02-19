@@ -2,34 +2,75 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import productArray from './assets/scripts/product'
+import product from './assets/scripts/product'
+import { ProductLine } from './assets/scripts/productLine'
+
+const products = [
+  { title: 'Cabbage', id: 1 },
+  { title: 'Garlic', id: 2 },
+  { title: 'Apple', id: 3 },
+];
+
+productArray.forEach((product) => {
+  console.log(product.name);
+});
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    {productArray.map((product) => {
+  return (
+    <ProductLine
+      quantity={1} // replace with actual quantity
+      totalPrice={100}
+      product={product}
+      totalRebate={0}
+      inStock={true}
+    />
+  );
+  })}
+
+
+    productLine
+  <h1>Checkout</h1>
+  <h2>Shopping cart</h2>
+  <table className="shoppingCart">
+    <tbody>
+      <tr>
+        <th>imgplaceholder</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+      <tr>
+        <td>
+          <img
+            className="productImages"
+            src="src/assets/Media/banana-for-scale-sticker.jpg"
+            alt="Billede af banan"
+          />
+        </td>
+        <td>Product 1</td>
+        <td id="price">100</td>
+        <td>
+        <input id="antal" name="age" type="number" />
+
+          
+        </td>
+        <td id="total" />
+      </tr>
+    </tbody>
+  </table>
+  <p />
+  
+</>
+       
   )
 }
+
 
 export default App
