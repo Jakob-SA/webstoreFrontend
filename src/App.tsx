@@ -1,13 +1,11 @@
 
-import './App.css'
-
+import './App.css';
+import GetItems from './components/items';
 
 function App() {
-  
-
   return (
-    <div className='App'>
-
+    <div>
+    <GetItems/>
     </div>
     
     
