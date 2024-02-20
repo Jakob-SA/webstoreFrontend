@@ -54,11 +54,14 @@ function App() {
             alt="Billede af banan"
           />
         </td>
-        <td>Product 1</td>
-        <td id="price">100</td>
+        <td>{productArray[1].name}</td>
+        <td id="price">
+          <div>
+            {productArray[1].price }
+          </div>
+        </td>
         <td>
         <input id="antal" name="age" type="number" />
-
           
         </td>
         <td id="total" />

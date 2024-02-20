@@ -19,6 +19,7 @@ export function ProductLine({ quantity, totalPrice, product ,totalRebate, inStoc
             <div>{product.price}</div>
         </div>
         
+        
 
     )
 
