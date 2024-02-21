@@ -9,7 +9,7 @@ export interface Product {
     amountInStock: number;
 }
 
-import products from 'C:/Users/jakob/OneDrive - Danmarks Tekniske Universitet/4. semester/Frontend Web/Project/FrontendWebApp/src/assets/media/products.json';
+import products from '../media/products.json';
 const productArray: Product[] = products;
 
 export default productArray;
