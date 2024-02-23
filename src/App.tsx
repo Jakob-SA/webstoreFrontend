@@ -21,9 +21,9 @@ function App() {
 
   return (
     <>
-    {productArray.map((product) => {
+    {productArray.map((product,i) => {
   return (
-    <ProductLine
+    <ProductLine key={i}
       quantity={1} // replace with actual quantity
       totalPrice={100}
       product={product}
