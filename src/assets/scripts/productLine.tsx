@@ -13,13 +13,25 @@ interface productLineProps {
 
 export function ProductLine({ quantity, totalPrice, product ,totalRebate, inStock }: productLineProps) {
     return (
-        <div className="lineItem">
-            <div>{product.name}</div>
+        <tr>   
+            <th>
+                <div>{product.name}</div>
+            </th>
+
+
+            
+
             <div>{product.currency}</div>
             <div>{product.price}</div>
-        </div>
+            <div><input type="number" /></div>
+        </tr>
         
 
-    )
 
+
+
+        
+            
+        
+    )
 }

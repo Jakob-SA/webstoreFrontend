@@ -21,54 +21,38 @@ function App() {
 
   return (
     <>
-    {productArray.map((product) => {
-  return (
-    <ProductLine
-      quantity={1} // replace with actual quantity
-      totalPrice={100}
-      product={product}
-      totalRebate={0}
-      inStock={true}
-    />
-  );
-  })}
 
 
-    productLine
-  <h1>Checkout</h1>
-  <h2>Shopping cart</h2>
-  <table className="shoppingCart">
-    <tbody>
-      <tr>
-        <th>imgplaceholder</th>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Total</th>
-      </tr>
-      <tr>
-        <td>
-          <img
-            className="productImages"
-            src="src/assets/Media/banana-for-scale-sticker.jpg"
-            alt="Billede af banan"
-          />
-        </td>
-        <td>Product 1</td>
-        <td id="price">100</td>
-        <td>
-        <input id="antal" name="age" type="number" />
+      <h1>Checkout</h1>
+      <h2>Shopping cart</h2>
+      <table className="shoppingCart">
+        <tbody>
+          <tr>
+            <th>imgplaceholder</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+          <tr>
+            {productArray.map((product) => {
+              return (
+                <ProductLine
+                  quantity={1} // replace with actual quantity
+                  totalPrice={100}
+                  product={product}
+                  totalRebate={0}
+                  inStock={true}
+                />
+              );
+            })}
+          </tr>
+        </tbody>
+      </table>
+      <p />
 
-          
-        </td>
-        <td id="total" />
-      </tr>
-    </tbody>
-  </table>
-  <p />
-  
-</>
-       
+    </>
+
   )
 }
 
