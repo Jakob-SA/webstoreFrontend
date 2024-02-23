@@ -33,8 +33,8 @@ function App() {
             <th>Price</th>
             <th>Quantity</th>
             <th>Total</th>
+            <th></th>
           </tr>
-          <tr>
             {productArray.map((product) => {
               return (
                 <ProductLine
@@ -46,7 +46,7 @@ function App() {
                 />
               );
             })}
-          </tr>
+
         </tbody>
       </table>
       <p />

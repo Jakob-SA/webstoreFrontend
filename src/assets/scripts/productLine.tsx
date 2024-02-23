@@ -13,26 +13,28 @@ interface productLineProps {
 
 export function ProductLine({ quantity, totalPrice, product ,totalRebate, inStock }: productLineProps) {
     return (
-        <tr>   
-            <th>
+        <tr>  
+            <td>
+                <div>Image</div>
+            </td> 
+            <td>
                 <div>{product.name}</div>
-            </th>
-
-
-            
-
-            <div>{product.currency}</div>
+            </td>
+            <td>
             <div>{product.price}</div>
-            <div><input type="number" /></div>
-        </tr>
-        
-        
-
-
-
-
-        
+            </td>
+            <td>
+            <div><input type="number" defaultValue={1} /></div>
+            </td>
+            <td>
+            <div>{totalPrice}</div>
+            </td>
+            <td>
+            <div><button>Remove</button></div>
+            </td>
             
+            
+        </tr>
         
     )
 }
