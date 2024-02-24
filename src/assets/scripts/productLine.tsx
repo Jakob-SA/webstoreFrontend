@@ -24,7 +24,7 @@ export function ProductLine({ quantity, product ,totalRebate, inStock }: product
     return (
         <tr>  
             <td>
-                <div>Image</div>
+                <div><img src={"src/assets/media/productPics/product" + product.id + ".jpg"} width="150" height="150" /></div>
             </td> 
             <td>
                 <div>{product.name}</div>
@@ -33,7 +33,7 @@ export function ProductLine({ quantity, product ,totalRebate, inStock }: product
             <div>{product.price}</div>
             </td>
             <td>
-            <div><input type="number" defaultValue={1} onChange={onQuantityChange}/></div>
+            <div><input type="number" id={product.id.toString()} defaultValue={1} onChange={onQuantityChange}/></div>
             </td>
             <td>
             <div>{totalPrice.toFixed(2)}</div>
