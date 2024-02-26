@@ -1,8 +1,18 @@
+import { useState } from "react";
 import productArray from "./product";
 import { ProductLine } from "./productLine";
 
 
+
+
+
+
 function Basket() {
+  const [basketItems, setBasketItems] = useState(productArray);
+
+  const handleRemoveItem = (id : number) => {
+    setBasketItems(prevItems => prevItems.filter(item => item.id !== id));
+  }
 
  return (
     <>
@@ -18,7 +28,7 @@ function Basket() {
             <th>Total</th>
             <th></th>
           </tr>
-            {productArray.map((product) => {
+            {basketItems.map((product) => {
               return (
                 <ProductLine
                   key = {product.id}
@@ -27,6 +37,7 @@ function Basket() {
                   product={product}
                   totalRebate={0}
                   inStock={true}
+                  handleRemoveItem={handleRemoveItem}
                 />
               );
             })}

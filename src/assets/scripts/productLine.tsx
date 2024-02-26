@@ -8,11 +8,12 @@ interface productLineProps {
     product: Product;
     totalRebate: number;
     inStock: boolean;
+    handleRemoveItem: (id: number) => void;
 }
 
 
 
-export function ProductLine({ quantity, product ,totalRebate, inStock }: productLineProps) {
+export function ProductLine({ quantity, product ,totalRebate, inStock, handleRemoveItem }: productLineProps) {
     const [totalPrice, setTotalPrice] = useState(product.price * quantity);
     const [giftwrapping, setGiftwrapping] = useState(false);
     
@@ -22,9 +23,6 @@ export function ProductLine({ quantity, product ,totalRebate, inStock }: product
     }
     const onGiftwrappingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setGiftwrapping(event.target.checked);
-    }
-    const removeLineItem = () => {
-        
     }
 
     return (
@@ -51,7 +49,7 @@ export function ProductLine({ quantity, product ,totalRebate, inStock }: product
                 </div>
             </td>
             <td>
-            <div><button onClick={removeLineItem}>Remove</button></div>
+                <div><button onClick={() => handleRemoveItem(product.id)}>Remove</button></div>
             </td>
         </tr>
         
