@@ -4,18 +4,16 @@ import { Product } from "./product";
 
 interface productLineProps {
     quantity: number;
-    totalPrice: number;
     product: Product;
-    totalRebate: number;
-    inStock: boolean;
     handleRemoveItem: (id: number) => void;
 }
 
 
 
-export function ProductLine({ quantity, product ,totalRebate, inStock, handleRemoveItem }: productLineProps) {
+export function ProductLine({ quantity, product , handleRemoveItem }: productLineProps) {
     const [totalPrice, setTotalPrice] = useState(product.price * quantity);
     const [giftwrapping, setGiftwrapping] = useState(false);
+    giftwrapping.valueOf();
     
 
     const onQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
