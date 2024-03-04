@@ -14,40 +14,39 @@ function Basket() {
   }
 
  return (
-    <>
-      <h1>Checkout</h1>
-      <h2>Shopping cart</h2>
-      <table className="shoppingCart">
-        <tbody>
-          <tr>
-            <th>imgplaceholder</th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-            <th></th>
-          </tr>
-            {basketItems.map((product) => {
-              return (
-                <ProductLine
-                  key = {product.id}
-                  quantity={1} // replace with actual quantity
-                  product={product}
-                  handleRemoveItem={handleRemoveItem}
-                />
-              );
-            })}
-
-        </tbody>
-      </table>
-      <p>Total Price: {}</p>
-      <p />
-
-    </>
-
+  <>
+    <h1>Checkout</h1>
+    <h2>Shopping cart</h2>
+    {basketItems.length > 0 && (
+    <table className="shoppingCart">
+      <tbody>
+      <tr>
+        <th>imgplaceholder</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+      {basketItems.map((product) => {
+        return (
+        <ProductLine
+          key={product.id}
+          quantity={1} // replace with actual quantity
+          product={product}
+          handleRemoveItem={handleRemoveItem}
+        />
+        );
+      })}
+      </tbody>
+    </table>
+    )}
+    {basketItems.length === 0 && <p>No items in basket. Reload the page <a href=".">here</a> to restore</p>}
+    <p>Total Price: {}</p>
+    <p />
+  </>
   );
 }
 
-
-
-  export default Basket;
+export default Basket;
+// Add this closing curly brace

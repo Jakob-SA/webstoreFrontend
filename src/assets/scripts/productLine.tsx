@@ -16,7 +16,8 @@ export function ProductLine({ quantity, product , handleRemoveItem}: productLine
     const [antal, setQuantity] = useState(quantity);
     giftwrapping.valueOf();         // to be deleted
 
-    var totalLinePrice = antal >= product.rebateQuantity ? (product.price * antal) * (1 - (product.rebatePercent/100)) : product.price * antal;
+    var totalLinePrice = antal >= product.rebateQuantity ?
+    (product.price * antal) * (1 - (product.rebatePercent/100)) : product.price * antal;
 
     const onQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setQuantity(parseInt(event.target.value));
