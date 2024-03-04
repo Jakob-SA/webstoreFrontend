@@ -11,23 +11,25 @@ interface productLineProps {
 
 
 export function ProductLine({ quantity, product , handleRemoveItem }: productLineProps) {
-    const [totalPrice, setTotalPrice] = useState(product.price * quantity);
     const [giftwrapping, setGiftwrapping] = useState(false);
+    const [antal, setQuantity] = useState(quantity);
     giftwrapping.valueOf();
-    
+
+    var totalPrice = product.price * antal;
 
     const onQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTotalPrice(product.price * parseInt(event.target.value));
+        setQuantity(parseInt(event.target.value));
     }
+
     const onGiftwrappingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setGiftwrapping(event.target.checked);
     }
 
     return (
-        <tr>  
+        <tr>
             <td>
                 <div><img src={"productPics/product" + product.id + ".jpg"} className = "productImages" width="150" height="150" /></div>
-            </td> 
+            </td>
             <td>
                 <div>{product.name}</div>
             </td>
@@ -35,7 +37,7 @@ export function ProductLine({ quantity, product , handleRemoveItem }: productLin
             <div>{product.price}</div>
             </td>
             <td>
-            <div><input type="number" id={`Quantity-${product.id.toString()}`} defaultValue={1} onChange={onQuantityChange}/></div>
+            <div><input type="number" min="1" id={`Quantity-${product.id.toString()}`} defaultValue={1} onChange={onQuantityChange}/></div>
             </td>
             <td>
             <div>{totalPrice.toFixed(2)}</div>
@@ -50,7 +52,7 @@ export function ProductLine({ quantity, product , handleRemoveItem }: productLin
                 <div><button onClick={() => handleRemoveItem(product.id)}>Remove</button></div>
             </td>
         </tr>
-        
+
     )
 }
 
