@@ -6,16 +6,17 @@ interface productLineProps {
     quantity: number;
     product: Product;
     handleRemoveItem: (id: number) => void;
+
 }
 
 
 
-export function ProductLine({ quantity, product , handleRemoveItem }: productLineProps) {
+export function ProductLine({ quantity, product , handleRemoveItem}: productLineProps) {
     const [giftwrapping, setGiftwrapping] = useState(false);
     const [antal, setQuantity] = useState(quantity);
-    giftwrapping.valueOf();
+    giftwrapping.valueOf();         // to be deleted
 
-    var totalPrice = product.price * antal;
+    var totalLinePrice = antal >= product.rebateQuantity ? (product.price * antal) * (1 - (product.rebatePercent/100)) : product.price * antal;
 
     const onQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setQuantity(parseInt(event.target.value));
@@ -40,7 +41,7 @@ export function ProductLine({ quantity, product , handleRemoveItem }: productLin
             <div><input type="number" min="1" id={`Quantity-${product.id.toString()}`} defaultValue={1} onChange={onQuantityChange}/></div>
             </td>
             <td>
-            <div>{totalPrice.toFixed(2)}</div>
+            <div>{totalLinePrice.toFixed(2)}</div>
             </td>
             <td>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>        {/*shoukd be moved*/}

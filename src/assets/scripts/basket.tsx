@@ -9,7 +9,6 @@ import { ProductLine } from "./productLine";
 
 function Basket() {
   const [basketItems, setBasketItems] = useState(productArray);
-
   const handleRemoveItem = (id : number) => {
     setBasketItems(prevItems => prevItems.filter(item => item.id !== id));
   }
@@ -41,10 +40,14 @@ function Basket() {
 
         </tbody>
       </table>
+      <p>Total Price: {}</p>
       <p />
 
     </>
 
-  );}
+  );
+}
+
+
 
   export default Basket;
