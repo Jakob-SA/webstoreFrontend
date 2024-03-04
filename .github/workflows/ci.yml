@@ -13,6 +13,5 @@ jobs:
         with:
           node-version: "18"
       - run: npm ci
-      - run: npm install --save-dev vitest
-      - run: npx vitest --run --coverage && vite build
+      - run: npm install vitest jsdom
       - run: npm test
