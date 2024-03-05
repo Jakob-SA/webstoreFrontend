@@ -26,7 +26,7 @@ export function ProductLine({ quantity, product , handleRemoveItem }: productLin
     return (
         <tr>  
             <td>
-                <div><img src={"productPics/product" + product.id + ".jpg"} className = "productImages" width="150" height="150" /></div>
+                <div><img src={"src/assets/productPics/product" + product.id + ".jpg"} className = "productImages" width="150" height="150" /></div>
             </td> 
             <td>
                 <div>{product.name}</div>
