@@ -9,7 +9,7 @@ export interface Product {
     amountInStock: number;
 }
 
-import products from '../media/products.json';
+import products from '../assets/media/products.json';
 const productArray: Product[] = products;
 
 export default productArray;

@@ -1,5 +1,5 @@
 import './App.css'
-import Basket from './assets/scripts/basket'
+import Basket from './components/basket'
 
 
 function App() {
