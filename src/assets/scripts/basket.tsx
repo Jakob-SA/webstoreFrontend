@@ -7,11 +7,24 @@ function Basket() {
   const handleRemoveItem = (id: number) => {
     setBasketItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
+  const getBasketAmount = () => {
+    let total = 0;
+    basketItems.forEach((product) => {
+      total += product.price 
+    });
+    if (total>300){
+      return total*0.9;
+    }
+    else return total;
+};
 
   return (
     <>
       <h1>Checkout</h1>
       <h2>Shopping cart</h2>
+      <div style={{textAlign: 'center', fontSize: '1.5em'}}  >
+       Total amount { getBasketAmount().toFixed(2)}
+        </div>
       {basketItems.length > 0 && (
         <table className="shoppingCart">
           <tbody>
@@ -36,6 +49,7 @@ function Basket() {
           </tbody>
         </table>
       )}
+      
       {basketItems.length === 0 && (
         <p>
           No items in basket. Reload the page <a href=".">here</a> to restore
