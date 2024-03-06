@@ -38,7 +38,7 @@ function Orderform() {
           <input
             type="tel"
             required
-            pattern="^(?:\+45|0045)?\s?\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}$"
+            pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // Used LLM to find the pattern
             name="user_telephoneNumber"
           ></input>
         </li>
