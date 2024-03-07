@@ -17,6 +17,11 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+
+.productImages:hover {
+  transform: scale(1.5);
+  transition: transform 0.5s;
+}
 .productImages {
   border-radius: 15px;
   width: 100px;
