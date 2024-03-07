@@ -1,15 +1,17 @@
 import './App.css'
 import Basket from './assets/scripts/basket'
 import UpsellItem from './assets/scripts/upsellItem'
+import Header from './assets/scripts/header'
 
 
 function App() {
   return (
-    <div >
-      <div className="upsellItems">
+    <div>
+    <Header/>
+    <div className='frontPage' >
       <UpsellItem/>
-      </div>
       <Basket/>
+    </div>
     </div>
   );  
 }

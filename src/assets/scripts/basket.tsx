@@ -28,13 +28,6 @@ function Basket() {
 
   return (
     <>
-      <h1>Checkout</h1>
-      <h2>Shopping cart</h2>
-      
-      
-      <div style={{textAlign: 'center', fontSize: '1.5em'}}  >
-       Total amount { getBasketAmount().toFixed(2)}
-        </div>
       {basketItems.length > 0 && (
         <table className="shoppingCart">
           <tbody>
@@ -66,8 +59,11 @@ function Basket() {
           No items in basket. Reload the page <a href=".">here</a> to restore
         </p>
       )}
-      <p>Total Price: {totalPrice}</p>
+      
       <p />
+      <p>
+      {getBasketAmount().toFixed(2)}
+      </p>
     </>
   );
 }
