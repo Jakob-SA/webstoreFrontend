@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Product } from "./product";
 import { RemoveButton } from "./removeButton";
+import { QuantityBox } from "./quantityBox";
 interface productLineProps {
   quantity: number;
   product: Product;
@@ -28,7 +29,12 @@ export function ProductLine({
   }, [totalLinePrice]);
 
   const onQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuantity(parseInt(event.target.value));
+    const newValue = parseInt(event.target.value);
+    if (newValue < 1) {
+      setQuantity(1);
+    } else {
+      setQuantity(newValue);
+    }
   };
 
   const onGiftwrappingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,9 +42,9 @@ export function ProductLine({
   };
 
   return (
-    <tr className="lineItem">
+    <tr>
       <td>
-        <div>
+        <div className="lineItemFirst">
           <img
             src={"productPics/product" + product.id + ".jpg"}
             className="productImages"
@@ -55,12 +61,9 @@ export function ProductLine({
       </td>
       <td>
         <div>
-          <input
-            type="number"
-            min="1"
-            id={`Quantity-${product.id.toString()}`}
-            defaultValue={1}
-            onChange={onQuantityChange}
+          <QuantityBox
+            product={product}
+            onQuantityChange={() => onQuantityChange}
           />
         </div>
       </td>
@@ -68,15 +71,9 @@ export function ProductLine({
         <div>{totalLinePrice.toFixed(2)}</div>
       </td>
       <td>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          {/*shoukd be moved*/}
+        <div className="lineItemGiftwrapping">
           <input
+            className="giftwrappingCheckbox"
             type="checkbox"
             id={`Giftwrapping-${product.id.toString()}`}
             onChange={onGiftwrappingChange}
@@ -88,7 +85,7 @@ export function ProductLine({
       </td>
 
       <td>
-        <div>
+        <div className="lineItemLast">
           <RemoveButton onClick={() => handleRemoveItem(product.id)} />
         </div>
       </td>
