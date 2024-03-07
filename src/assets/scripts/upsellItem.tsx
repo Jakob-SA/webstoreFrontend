@@ -16,7 +16,6 @@ export function UpsellItem() {
                 
                 <h2>Products you might also like!</h2>
                  <img src={"productPics/product" + upsellItems[4].id + ".jpg"} className = "productImages" width="150" height="150"  />
-                 
                  <ul>
                     <ul>
                         <b>Product </b>
@@ -25,8 +24,9 @@ export function UpsellItem() {
                     <ul>
                         <b>Price {
                         upsellItems[4].price}</b>
-                        
                     </ul>
+                    <button> Contiue Shopping 
+                        <a href="."></a> </button>
                  </ul>
                 
                         
