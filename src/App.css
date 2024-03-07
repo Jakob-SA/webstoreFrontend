@@ -45,13 +45,24 @@
 .upsellItems{
   background-color: rgb(117, 115, 221);
   border-radius: 15px ;
-  margin-left: auto;
+  
 
+}
+.frontPage {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: default ;
+  padding: 2em;
 }
 
 th{
   padding-left: 5px;
   padding-right: 5px;
+}
+ul {
+  color: #030303;
+  size: 1.5em;
 }
 
 
