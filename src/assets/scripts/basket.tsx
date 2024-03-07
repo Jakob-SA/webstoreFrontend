@@ -36,8 +36,8 @@ function Basket() {
               <th>Product</th>
               <th>Price</th>
               <th>Quantity</th>
-              <th>Total</th>
-              <th></th>
+              <th>Total </th>
+              <th style={{ fontSize: '1.5em' }}> {getBasketAmount().toFixed(2)}</th>
             </tr>
             {basketItems.map((product) => {
               return (
@@ -61,9 +61,7 @@ function Basket() {
       )}
       
       <p />
-      <p>
-      {getBasketAmount().toFixed(2)}
-      </p>
+      
     </>
   );
 }

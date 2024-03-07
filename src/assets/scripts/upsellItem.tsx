@@ -5,25 +5,26 @@ import { useState } from "react";
 export function UpsellItem() {
     const [upsellItems, setUpsellItems] = useState(productArray);
 
-    const getUpsellItemsName = (id: number) => {    
+    const getUpsellItemsName = (id: number) => {    //to use later?
         upsellItems.sort((a, b) => a.id - b.id);
         let i = upsellItems[id].upsellProductId
         return upsellItems[i].name;
     }
-    return (
+    return ( //should not return static information
         <>
             <section className="upsellItems">
                 
-                <h2>Products you may like!</h2>
-                 <img src={"productPics/product" + upsellItems[1].upsellProductId + ".jpg"} className = "productImages" width="150" height="150"  />
+                <h2>Products you might also like!</h2>
+                 <img src={"productPics/product" + upsellItems[4].id + ".jpg"} className = "productImages" width="150" height="150"  />
+                 
                  <ul>
                     <ul>
                         <b>Product </b>
-                        {getUpsellItemsName(1)}
+                        {upsellItems[4].name}
                     </ul>
                     <ul>
                         <b>Price {
-                        upsellItems[3].price}</b>
+                        upsellItems[4].price}</b>
                         
                     </ul>
                  </ul>
