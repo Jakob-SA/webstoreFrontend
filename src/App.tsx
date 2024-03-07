@@ -6,13 +6,12 @@ import UpsellItem from './assets/scripts/upsellItem'
 function App() {
   return (
     <div >
-      <div style ={{ display: 'flex', justifyContent: 'right' }}>
-        <UpsellItem/>
-        </div>
+      <div className="upsellItems">
+      <UpsellItem/>
+      </div>
       <Basket/>
-      
     </div>
-  );
+  );  
 }
 
   

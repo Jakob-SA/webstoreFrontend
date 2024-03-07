@@ -5,25 +5,23 @@ import { useState } from "react";
 export function UpsellItem() {
     const [upsellItems, setupsellItems] = useState(productArray);
 
-    const getUpsellItems = () => {
-        
+    const getUpsellItemsName = (id: number) => {    
+        let i = productArray[id].upsellProductId
+        return productArray[i].name;
     }
     return (
         <>
-            
-            <table className="UpsellItems" width={0.5}>
+            <table className="upsellItems">
                 <tbody>
                     <tr>
-                        <th>imgplaceholder</th>
-                        <th>Product</th>
+                    <th><img src={"productPics/product" + productArray[0].upsellProductId + ".jpg"} className = "productImages" width="150" height="150"  />
+                    </th>
+                        <th>Why not also buy</th>
+                        <th>{getUpsellItemsName(0)}</th>
                         <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th></th>
                         
                     </tr>
-                    <img src={"productPics/product" + upsellItems[0].id + ".jpg"} className = "productImages" width="150" height="150"  />
-                    {upsellItems[0].upsellProductId}
+                    
                     
                 </tbody>
             </table>

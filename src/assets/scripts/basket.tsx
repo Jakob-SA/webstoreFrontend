@@ -1,6 +1,7 @@
 import { useState } from "react";
 import productArray from "./product";
 import { ProductLine } from "./productLine";
+import { UpsellItem } from "./upsellItem";
 
 function Basket() {
   const [basketItems, setBasketItems] = useState(productArray);
@@ -22,6 +23,8 @@ function Basket() {
     <>
       <h1>Checkout</h1>
       <h2>Shopping cart</h2>
+      
+      
       <div style={{textAlign: 'center', fontSize: '1.5em'}}  >
        Total amount { getBasketAmount().toFixed(2)}
         </div>
