@@ -25,9 +25,10 @@ function Basket() {
             <tr>
               <th></th>
               <th>Product</th>
-              <th>Price</th>
+              <th>Price per unit</th>
               <th>Quantity</th>
               <th>Total</th>
+              <th></th>
               <th></th>
             </tr>
             {basketItems.map((product) => {
