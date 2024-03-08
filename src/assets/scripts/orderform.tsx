@@ -1,6 +1,42 @@
 import "./orderform.css";
+import { useState } from "react";
+
+function ZipCodeChecker() {
+  const [validationMessage, setValidationMessage] = useState("");
+
+  const handleZipCode = async (zipCode: string) => {
+    try {
+      const response = await fetch(
+        "https://api.dataforsyningen.dk/postnumre/" + zipCode
+      );
+      const data = await response.json();
+
+      if (data.nr === zipCode) {
+        setValidationMessage("");
+        const cityInput = document.getElementById("city") as HTMLInputElement;
+        if (cityInput) {
+          cityInput.value = data.navn;
+        }
+      } else {
+        setValidationMessage("Postal code is invalid");
+      }
+    } catch (error) {
+      console.error("Error validating postal code", error);
+      setValidationMessage("Error validating postal code");
+    }
+  };
+
+  return { validationMessage, handleZipCode };
+}
 
 function Orderform() {
+  const [zipCode, setZipCode] = useState("");
+  const { validationMessage, handleZipCode } = ZipCodeChecker();
+
+  const handleSubmit = (zipCode: string) => {
+    handleZipCode(zipCode);
+  };
+
   return (
     <form action="/my-handling-form-page" method="post">
       <legend>Enter your shipping details</legend>
@@ -23,8 +59,17 @@ function Orderform() {
         </li>
         <li>
           <label htmlFor="zip">Zip Code:</label>
-          <input type="text" required id="zip" name="user_zip" />
+          <input
+            type="text"
+            required
+            id="zip"
+            name="user_zip"
+            value={zipCode}
+            onChange={(e) => setZipCode(e.target.value)}
+            onBlur={(e) => handleSubmit(e.target.value)}
+          />
         </li>
+        <li>{validationMessage}</li>
         <li>
           <label htmlFor="city">City:</label>
           <input type="text" required id="city" name="user_city" />
