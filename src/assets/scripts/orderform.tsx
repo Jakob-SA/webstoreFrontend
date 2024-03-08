@@ -4,7 +4,7 @@ import { useState } from "react";
 function ZipCodeChecker() {
   const [validationMessage, setValidationMessage] = useState("");
 
-  const handleZipCode = async (zipCode: string) => {
+  const handleZipCode = async (zipCode: string, id: string) => {
     try {
       const response = await fetch(
         "https://api.dataforsyningen.dk/postnumre/" + zipCode
@@ -14,8 +14,17 @@ function ZipCodeChecker() {
       if (data.nr === zipCode) {
         setValidationMessage("");
         const cityInput = document.getElementById("city") as HTMLInputElement;
+        const deliveryCity = document.getElementById(
+          "deliveryCity"
+        ) as HTMLInputElement;
+
         if (cityInput) {
-          cityInput.value = data.navn;
+          if (id === "zip") {
+            cityInput.value = data.navn;
+          }
+          if (id === "deliveryZip") {
+            deliveryCity.value = data.navn;
+          }
         }
       } else {
         setValidationMessage("Postal code is invalid");
@@ -31,16 +40,22 @@ function ZipCodeChecker() {
 
 function Orderform() {
   const [zipCode, setZipCode] = useState("");
+  const [deliveryZip, setDeliveryZip] = useState("");
   const { validationMessage, handleZipCode } = ZipCodeChecker();
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isBusiness, setIsBusiness] = useState(false);
+  const [isDiliveryAdress, setIsDiliveryAdress] = useState(false);
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
+  const handleBusinessChange = () => {
+    setIsBusiness(!isBusiness);
   };
 
-  const handleSubmit = (zipCode: string) => {
-    handleZipCode(zipCode);
+  const handleDeliveryAdressChange = () => {
+    setIsDiliveryAdress(!isDiliveryAdress);
+  };
+
+  const handleSubmit = (zipCode: string, id: string) => {
+    handleZipCode(zipCode, id);
   };
 
   return (
@@ -59,22 +74,29 @@ function Orderform() {
                   type="checkbox"
                   id="businessOrder"
                   name="user_businessOrder"
-                  checked={isChecked}
-                  onChange={handleCheckboxChange}
+                  checked={isBusiness}
+                  onChange={handleBusinessChange}
                 />
-                {isChecked && (
+                {isBusiness && (
                   <div>
                     <div className="input-group">
                       <label htmlFor="businessName">Business Name:</label>
                       <input
                         type="text"
+                        required
                         id="businessName"
                         name="user_businessName"
                       />
                     </div>
                     <div className="input-group">
                       <label htmlFor="VAT">Vat Number:</label>
-                      <input type="text" id="VAT" name="user_VAT" />
+                      <input
+                        type="text"
+                        required
+                        id="VAT"
+                        name="user_VAT"
+                        pattern="^\d{8}$"
+                      />
                     </div>
                   </div>
                 )}
@@ -102,10 +124,6 @@ function Orderform() {
             <label htmlFor="adress2">Appartment, suite etc.:</label>
             <input type="text" id="adress2" name="user_adress2" />
           </div>
-          <div className="address-checkbox">
-            <label>Different shipping address</label>
-            <input type="checkbox"></input>
-          </div>
           <div className="input-group">
             <label htmlFor="zip">Zip Code:</label>
             <input
@@ -115,13 +133,68 @@ function Orderform() {
               name="user_zip"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-              onBlur={(e) => handleSubmit(e.target.value)}
+              onBlur={(e) => handleSubmit(e.target.value, e.target.id)}
             />
             <div>{validationMessage}</div>
           </div>
           <div className="input-group">
             <label htmlFor="city">City:</label>
             <input type="text" required id="city" name="user_city" />
+          </div>
+          <div>
+            <label htmlFor="deliveryAdress">Different delivery adress:</label>
+            <input
+              type="checkbox"
+              id="deliveryAdress"
+              name="user_deliveryAdress"
+              checked={isDiliveryAdress}
+              onChange={handleDeliveryAdressChange}
+            />
+            {isDiliveryAdress && (
+              <div>
+                <div className="input-group">
+                  <label htmlFor="deliveryAdress1">Adress:</label>
+                  <input
+                    type="text"
+                    required
+                    id="deliveryAdress1"
+                    name="user_deliveryAdress1"
+                  />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="deliveryAdress2">
+                    Appartment, suite etc.:
+                  </label>
+                  <input
+                    type="text"
+                    id="deliveryAdress2"
+                    name="user_deliveryAdress2"
+                  />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="deliveryZip">Zip Code:</label>
+                  <input
+                    type="text"
+                    required
+                    id="deliveryZip"
+                    name="user_deliveryZip"
+                    value={deliveryZip}
+                    onChange={(e) => setDeliveryZip(e.target.value)}
+                    onBlur={(e) => handleSubmit(e.target.value, e.target.id)}
+                  />
+                  <div>{validationMessage}</div>
+                </div>
+                <div className="input-group">
+                  <label htmlFor="deliveryCity">City:</label>
+                  <input
+                    type="text"
+                    required
+                    id="deliveryCity"
+                    name="user_deliveryCity"
+                  />
+                </div>
+              </div>
+            )}
           </div>
           <div className="input-group">
             <label htmlFor="email">Email:</label>
