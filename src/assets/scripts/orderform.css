@@ -1,7 +1,7 @@
 form {
     /* Center the form on the page */
     margin: 0 auto;
-    width: 400px;
+    width: 600px;
     /* Form outline */
     padding: 1em;
     border: 1px solid #ccc;
@@ -21,7 +21,7 @@ form {
   label {
     /* Uniform size & alignment */
     display: inline-block;
-    width: 90px;
+    width: 200px;
     text-align: right;
   }
   

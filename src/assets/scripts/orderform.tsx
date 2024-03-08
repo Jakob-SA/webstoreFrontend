@@ -33,6 +33,12 @@ function Orderform() {
   const [zipCode, setZipCode] = useState("");
   const { validationMessage, handleZipCode } = ZipCodeChecker();
 
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   const handleSubmit = (zipCode: string) => {
     handleZipCode(zipCode);
   };
@@ -41,10 +47,26 @@ function Orderform() {
     <form action="/my-handling-form-page" method="post">
       <legend>Enter your shipping details</legend>
       <ul>
-        <select id="businessCustomer" required name="businessCustomer">
-          <option value="private">Private</option>
-          <option value="business">Business</option>
-        </select>
+        <div>
+          <li>
+            <label htmlFor="businessOrder">Business order:</label>
+            <input
+              type="checkbox"
+              id="businessOrder"
+              name="user_businessOrder"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+            />
+            {isChecked && (
+              <div>
+                <label htmlFor="businessName">Business Name:</label>
+                <input type="text" id="businessName" name="user_businessName" />
+                <label htmlFor="VAT">Vat Number:</label>
+                <input type="text" id="VAT" name="user_VAT" />
+              </div>
+            )}
+          </li>
+        </div>
         <li>
           <label htmlFor="name">Name:</label>
           <input type="text" required id="name" name="user_name" />
@@ -54,7 +76,7 @@ function Orderform() {
           <input type="text" required id="adress1" name="user_adress1" />
         </li>
         <li>
-          <label htmlFor="adress2">Appartment, suite etc. *Optional*:</label>
+          <label htmlFor="adress2">Appartment, suite etc. :</label>
           <input type="text" id="adress2" name="user_adress2" />
         </li>
         <li>
