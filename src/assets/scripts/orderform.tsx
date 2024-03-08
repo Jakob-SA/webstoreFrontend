@@ -61,7 +61,7 @@ function Orderform() {
           </div>
         </section>
         <section>
-          <div>
+          <div className="submit-button">
             <input type="submit" value="Place order" />
           </div>
         </section>
