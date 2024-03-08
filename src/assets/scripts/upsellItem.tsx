@@ -2,6 +2,10 @@ import productArray from "./product";
 import { ProductLine } from "./productLine";
 import { useState } from "react";
 
+
+ function handleClick(){
+    alert("Are you sure you want to checkout?");
+ }
 export function UpsellItem() {
     const [upsellItems, setUpsellItems] = useState(productArray);
 
@@ -25,7 +29,7 @@ export function UpsellItem() {
                         <b>Price {
                         upsellItems[4].price}</b>
                     </ul>
-                    <button> Contiue Shopping 
+                    <button onClick={handleClick}> Contiue Shopping 
                         <a href="."></a> </button>
                  </ul>
                 
