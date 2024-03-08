@@ -1,62 +1,34 @@
 import "./orderform.css";
 import { useState } from "react";
+import ZipCodeChecker from "./zipCodeChecker";
 
-function ZipCodeChecker() {
-  const [validationMessage, setValidationMessage] = useState("");
-
-  const handleZipCode = async (zipCode: string, id: string) => {
-    try {
-      const response = await fetch(
-        "https://api.dataforsyningen.dk/postnumre/" + zipCode
-      );
-      const data = await response.json();
-
-      if (data.nr === zipCode) {
-        setValidationMessage("");
-        const cityInput = document.getElementById("city") as HTMLInputElement;
-        const deliveryCity = document.getElementById(
-          "deliveryCity"
-        ) as HTMLInputElement;
-
-        if (cityInput) {
-          if (id === "zip") {
-            cityInput.value = data.navn;
-          }
-          if (id === "deliveryZip") {
-            deliveryCity.value = data.navn;
-          }
-        }
-      } else {
-        setValidationMessage("Postal code is invalid");
-      }
-    } catch (error) {
-      console.error("Error validating postal code", error);
-      setValidationMessage("Error validating postal code");
-    }
-  };
-
-  return { validationMessage, handleZipCode };
-}
+// This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
+// Throughout the development of this form LLM has been used to debugging, sparring and pair programming. However no code has been copied from LLM's
+// GitHub copilot has been used to generate some of the comments.
 
 function Orderform() {
   const [zipCode, setZipCode] = useState("");
   const [deliveryZip, setDeliveryZip] = useState("");
-  const { validationMessage, handleZipCode } = ZipCodeChecker();
 
   const [isBusiness, setIsBusiness] = useState(false);
-  const [isDiliveryAdress, setIsDiliveryAdress] = useState(false);
-
+  // This function is used to toggle the business name and VAT number fields
   const handleBusinessChange = () => {
     setIsBusiness(!isBusiness);
   };
 
+  const [isDiliveryAdress, setIsDiliveryAdress] = useState(false);
+  // This function is used to toggle the delivery adress fields
   const handleDeliveryAdressChange = () => {
     setIsDiliveryAdress(!isDiliveryAdress);
   };
 
-  const handleSubmit = (zipCode: string, id: string) => {
+  // This function is used to submit the postal code to the custom hook below
+  const handleZipCodeSubmit = (zipCode: string, id: string) => {
     handleZipCode(zipCode, id);
   };
+
+  // This is a custom hook that checks if the postal code is valid and fills in the city name
+  const { isValid, handleZipCode } = ZipCodeChecker(); // @Joes use isValid to show error message if postal code is invalid
 
   return (
     <form action="/shipping-information" method="post">
@@ -68,6 +40,8 @@ function Orderform() {
         <section>
           <div>
             <div>
+              {" "}
+              {/* -- This is a checkbox to toggle the business name and VAT number fields */}
               <div>
                 <label htmlFor="businessOrder">Business order:</label>
                 <input
@@ -95,7 +69,7 @@ function Orderform() {
                         required
                         id="VAT"
                         name="user_VAT"
-                        pattern="^\d{8}$"
+                        pattern="^\d{8}$" // This is a pattern to validate the VAT number to the danish format
                       />
                     </div>
                   </div>
@@ -117,6 +91,17 @@ function Orderform() {
             <input type="text" required id="last-name" name="user_last_name" />
           </div>
           <div className="input-group">
+            <label htmlFor="Country">Country:</label>
+            <input
+              type="text"
+              required
+              id="country"
+              name="user_country"
+              value={"Denmark"}
+              readOnly
+            />
+          </div>
+          <div className="input-group">
             <label htmlFor="adress1">Adress:</label>
             <input type="text" required id="adress1" name="user_adress1" />
           </div>
@@ -133,15 +118,16 @@ function Orderform() {
               name="user_zip"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-              onBlur={(e) => handleSubmit(e.target.value, e.target.id)}
+              onBlur={(e) => handleZipCodeSubmit(e.target.value, e.target.id)}
             />
-            <div>{validationMessage}</div>
           </div>
           <div className="input-group">
             <label htmlFor="city">City:</label>
             <input type="text" required id="city" name="user_city" />
           </div>
           <div>
+            {" "}
+            {/* -- This is a checkbox to toggle the delivery adress fields */}
             <label htmlFor="deliveryAdress">Different delivery adress:</label>
             <input
               type="checkbox"
@@ -152,6 +138,17 @@ function Orderform() {
             />
             {isDiliveryAdress && (
               <div>
+                <div className="input-group">
+                  <label htmlFor="deliveryCountry">Country:</label>
+                  <input
+                    type="text"
+                    required
+                    id="deliveryCountry"
+                    name="user_deliveryCountry"
+                    value={"Denmark"}
+                    readOnly
+                  />
+                </div>
                 <div className="input-group">
                   <label htmlFor="deliveryAdress1">Adress:</label>
                   <input
@@ -180,9 +177,10 @@ function Orderform() {
                     name="user_deliveryZip"
                     value={deliveryZip}
                     onChange={(e) => setDeliveryZip(e.target.value)}
-                    onBlur={(e) => handleSubmit(e.target.value, e.target.id)}
+                    onBlur={(e) =>
+                      handleZipCodeSubmit(e.target.value, e.target.id)
+                    }
                   />
-                  <div>{validationMessage}</div>
                 </div>
                 <div className="input-group">
                   <label htmlFor="deliveryCity">City:</label>
@@ -205,7 +203,7 @@ function Orderform() {
             <input
               type="tel"
               required
-              pattern="^(?:\+45|0045)?\s?\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}$"
+              pattern="^(?:\+45|0045)?\s?\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}$" // This is a pattern to validate the phone number to the danish format
               name="user_telephoneNumber"
             ></input>
           </div>
