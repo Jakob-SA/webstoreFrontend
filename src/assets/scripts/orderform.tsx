@@ -1,6 +1,48 @@
 import "./orderform.css";
+import { useState } from "react";
+
+function ZipCodeChecker() {
+  const [validationMessage, setValidationMessage] = useState("");
+
+  const handleZipCode = async (zipCode: string) => {
+    try {
+      const response = await fetch(
+        "https://api.dataforsyningen.dk/postnumre/" + zipCode
+      );
+      const data = await response.json();
+
+      if (data.nr === zipCode) {
+        setValidationMessage("");
+        const cityInput = document.getElementById("city") as HTMLInputElement;
+        if (cityInput) {
+          cityInput.value = data.navn;
+        }
+      } else {
+        setValidationMessage("Postal code is invalid");
+      }
+    } catch (error) {
+      console.error("Error validating postal code", error);
+      setValidationMessage("Error validating postal code");
+    }
+  };
+
+  return { validationMessage, handleZipCode };
+}
 
 function Orderform() {
+  const [zipCode, setZipCode] = useState("");
+  const { validationMessage, handleZipCode } = ZipCodeChecker();
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const handleSubmit = (zipCode: string) => {
+    handleZipCode(zipCode);
+  };
+
   return (
     <form action="/shipping-information" method="post">
       <h1>Checkout</h1>
