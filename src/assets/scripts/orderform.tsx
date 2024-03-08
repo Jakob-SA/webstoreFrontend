@@ -50,19 +50,45 @@ function Orderform() {
       <h2>Shipping</h2>
       <legend>Enter your shipping details</legend>
       <ul>
-        <select id="businessCustomer" required name="businessCustomer">
-          <option value="private">Private</option>
-          <option value="business">Business</option>
-        </select>
         <section>
-          <div className="input-group">
-            <label htmlFor="first-name">First Name:</label>
-            <input
-              type="text"
-              required
-              id="first-name"
-              name="user_first_name"
-            />
+          <div>
+            <div>
+              <div>
+                <label htmlFor="businessOrder">Business order:</label>
+                <input
+                  type="checkbox"
+                  id="businessOrder"
+                  name="user_businessOrder"
+                  checked={isChecked}
+                  onChange={handleCheckboxChange}
+                />
+                {isChecked && (
+                  <div>
+                    <div className="input-group">
+                      <label htmlFor="businessName">Business Name:</label>
+                      <input
+                        type="text"
+                        id="businessName"
+                        name="user_businessName"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label htmlFor="VAT">Vat Number:</label>
+                      <input type="text" id="VAT" name="user_VAT" />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="input-group">
+              <label htmlFor="first-name">First Name:</label>
+              <input
+                type="text"
+                required
+                id="first-name"
+                name="user_first_name"
+              />
+            </div>
           </div>
           <div className="input-group">
             <label htmlFor="last-name">Last Name:</label>
@@ -73,7 +99,7 @@ function Orderform() {
             <input type="text" required id="adress1" name="user_adress1" />
           </div>
           <div className="input-group">
-            <label htmlFor="adress2">Appartment, suite etc. *Optional*:</label>
+            <label htmlFor="adress2">Appartment, suite etc.:</label>
             <input type="text" id="adress2" name="user_adress2" />
           </div>
           <div className="address-checkbox">
@@ -82,7 +108,16 @@ function Orderform() {
           </div>
           <div className="input-group">
             <label htmlFor="zip">Zip Code:</label>
-            <input type="text" required id="zip" name="user_zip" />
+            <input
+              type="text"
+              required
+              id="zip"
+              name="user_zip"
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
+              onBlur={(e) => handleSubmit(e.target.value)}
+            />
+            <div>{validationMessage}</div>
           </div>
           <div className="input-group">
             <label htmlFor="city">City:</label>
