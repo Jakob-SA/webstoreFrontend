@@ -54,14 +54,16 @@ function Orderform() {
           <div>
             <div>
               <div>
-                <label htmlFor="businessOrder">Business order:</label>
-                <input
-                  type="checkbox"
-                  id="businessOrder"
-                  name="user_businessOrder"
-                  checked={isChecked}
-                  onChange={handleCheckboxChange}
-                />
+                <div className="business-checkbox">
+                  <label htmlFor="businessOrder">Business order:</label>
+                  <input
+                    type="checkbox"
+                    id="businessOrder"
+                    name="user_businessOrder"
+                    checked={isChecked}
+                    onChange={handleCheckboxChange}
+                  />
+                </div>
                 {isChecked && (
                   <div>
                     <div className="input-group">

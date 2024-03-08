@@ -22,7 +22,6 @@ ul {
 .input-group label {
   margin-top: -30px;
   position: absolute;
-  top: 0;
   cursor: text;
 }
 .input-group input {
@@ -43,7 +42,9 @@ ul {
 
 .address-checkbox {
   text-align: left;
-  margin: 0px 0px 30px 0px;
+  margin: 1em;
+  position: relative;
+  height: 50px;
 }
 
 .submit-button {
@@ -64,4 +65,21 @@ ul {
   border-radius: 1em;
   cursor: pointer;
   font-size: 20px;
+}
+
+.business-checkbox {
+  text-align: left;
+  margin: 1em;
+  position: relative;
+  height: 50px;
+}
+
+.business-checkbox-content {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.business-checkbox-content.active {
+  max-height: 100px; /* Set to an appropriate value based on your content */
 }
