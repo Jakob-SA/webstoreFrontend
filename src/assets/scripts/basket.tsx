@@ -34,7 +34,7 @@ function Basket() {
             <tr>
               <th></th>
               <th>Product</th>
-              <th>Price</th>
+              <th>Price per unit</th>
               <th>Quantity</th>
               <th>Total </th>
               <th style={{ fontSize: '1.5em' }}> {getBasketAmount().toFixed(2)}</th>

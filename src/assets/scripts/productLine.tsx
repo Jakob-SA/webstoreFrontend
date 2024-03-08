@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import { Product } from "./product";
-
-export interface ProductLine {
-  quantity: number;
-  product: Product;
-  handleRemoveItem: (id: number) => void;
-  updateTotalPrice: (price: number) => void;
-}
-
+import { RemoveButton } from "./removeButton";
 interface productLineProps {
   quantity: number;
   product: Product;
@@ -43,7 +36,7 @@ export function ProductLine({
   };
 
   return (
-    <tr>
+    <tr className="lineItem">
       <td>
         <div>
           <img
@@ -82,7 +75,6 @@ export function ProductLine({
             alignItems: "center",
           }}
         >
-          {" "}
           {/*shoukd be moved*/}
           <input
             type="checkbox"
@@ -94,11 +86,10 @@ export function ProductLine({
           </label>
         </div>
       </td>
+
       <td>
         <div>
-          <button onClick={() => handleRemoveItem(product.id)}>
-            <img className="trashcan" src="trashcan.svg" width={35} />
-          </button>
+          <RemoveButton onClick={() => handleRemoveItem(product.id)} />
         </div>
       </td>
     </tr>
