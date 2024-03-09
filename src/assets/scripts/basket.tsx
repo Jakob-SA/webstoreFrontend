@@ -5,19 +5,25 @@ import { UpsellItem } from "./upsellItem";
 
 function Basket() {
   const [basketItems, setBasketItems] = useState(productArray);
-  const prices = new Map<number, number>();
+  const [prices, setPrices] = useState(new Map<number, number>());
   const handleRemoveItem = (id: number) => {
     setBasketItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
-  let totalPrice = 0; // Initialize totalPrice variable
+  const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
 
   const updateTotalPrice = (productID: number, price: number) => {
-    prices.set(productID, price);
-    totalPrice = 0; // Reset totalPrice to 0
-    prices.forEach((price) => {
-      totalPrice += price; // Accumulate prices using +=
+    setPrices(prices.set(productID, price));
+    var tempTotalPrice = 0;
+    Array.from(prices.values()).forEach((price) => {
+      tempTotalPrice += price;
     });
+    if (tempTotalPrice > 300) {
+      /*Here discount if the total price is over 300*/
+      setTotalPrice(tempTotalPrice * 0.9);
+    } else {
+      setTotalPrice(tempTotalPrice);
+    }
   };
 
   return (
@@ -31,9 +37,8 @@ function Basket() {
               <th>Price per unit</th>
               <th>Quantity</th>
               <th>Total </th>
-              <th style={{ fontSize: "1.5em" }}>
-                {"Total price: " + totalPrice.toFixed(2)}{" "}
-              </th>
+              <th></th>
+              <th></th>
             </tr>
             {basketItems.map((product) => {
               return (
@@ -54,8 +59,10 @@ function Basket() {
           No items in basket. Reload the page <a href=".">here</a> to restore
         </p>
       )}
-
-      <p />
+      <div>
+        <h3>Total price: {totalPrice}</h3> {/*Should be moved*/} This price is
+        discounted
+      </div>
     </>
   );
 }

@@ -35,7 +35,6 @@
 }
 .frontPage {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: default ;
   padding: 2em;
@@ -96,6 +95,9 @@ input [type="number"] {
   width: 40px;
   height: 30px;
   text-align: center;
+  padding-left: 11px;
+  padding-right: 0;
+
 }
 
 
