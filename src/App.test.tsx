@@ -13,11 +13,11 @@ describe(App.name, () => {
 })
 
 describe(ProductLine.name, () => {
-    test("Should show correct total: 179.98", () => {
+    test("Price of 2 loafers should show correct total: 161.98", () => { //With 10% rebate
         const product: Product = productsData[0]
         const quantity = 2
-        const totalPrice = product.price * quantity
-        render(<ProductLine quantity={quantity} product={product} handleRemoveItem={() => {}} />)
+        const totalPrice = (product.price * quantity * (1 - product.rebatePercent / 100)).toFixed(2)
+        render(<ProductLine quantity={quantity} product={product} handleRemoveItem={() => {}} updateTotalPrice={() => {}}/>)
         expect(screen.getByText(totalPrice)).toBeInTheDocument()
     })
 })
