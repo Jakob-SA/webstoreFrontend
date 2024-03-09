@@ -3,38 +3,27 @@ import { Product } from "./product";
 import { RemoveButton } from "./removeButton";
 import { QuantityBox } from "./quantityBox";
 interface productLineProps {
-  quantity: number;
   product: Product;
   handleRemoveItem: (id: number) => void;
   updateTotalPrice: (price: number) => void;
 }
 
 export function ProductLine({
-  quantity,
   product,
   handleRemoveItem,
   updateTotalPrice,
 }: productLineProps) {
   const [giftwrapping, setGiftwrapping] = useState(false);
-  const [antal, setQuantity] = useState(quantity);
+  const [quantity, setQuantity] = useState(1);
   giftwrapping.valueOf(); // to be deleted
 
   var totalLinePrice =
-    antal >= product.rebateQuantity
-      ? product.price * antal * (1 - product.rebatePercent / 100)
-      : product.price * antal;
+    quantity >= product.rebateQuantity
+      ? product.price * quantity * (1 - product.rebatePercent / 100)
+      : product.price * quantity;
 
-  useEffect(() => {
-    updateTotalPrice(totalLinePrice);
-  }, [totalLinePrice]);
-
-  const onQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(event.target.value);
-    if (newValue < 1) {
-      setQuantity(1);
-    } else {
-      setQuantity(newValue);
-    }
+  const onQuantityChange = (quantity: number) => {
+    setQuantity(quantity);
   };
 
   const onGiftwrappingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,6 +51,8 @@ export function ProductLine({
       <td>
         <div>
           <QuantityBox
+            quantity={quantity}
+            setQuantity={setQuantity}
             product={product}
             onQuantityChange={() => onQuantityChange}
           />
