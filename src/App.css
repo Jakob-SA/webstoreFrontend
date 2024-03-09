@@ -30,7 +30,7 @@
   background-color: rgb(117, 115, 221);
   border-radius: 15px ;
   width: auto;
-  height: 400px;  
+  height: 400px;
 
 }
 .frontPage {
@@ -78,11 +78,24 @@
 input [type="number"] {
   width: 100px;
 }
+.quantityInput {
+  display: flex;
+  height:fit-content;
+  align-items: center;
+
+}
 .quantityButton {
   background-color: orange;
   border-radius: 8px;
   margin: 5px;
-
+}
+.quantityButton:active {
+  background-color: whitesmoke; /* Change the color to your desired color */
+}
+.quantityBox {
+  width: 40px;
+  height: 30px;
+  text-align: center;
 }
 
 
