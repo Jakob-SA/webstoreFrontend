@@ -43,7 +43,6 @@ function Basket() {
               return (
                 <ProductLine
                   key={product.id}
-                  quantity={1} // replace with actual quantity
                   product={product}
                   handleRemoveItem={handleRemoveItem}
                   updateTotalPrice={updateTotalPrice}
