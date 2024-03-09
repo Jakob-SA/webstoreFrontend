@@ -23,6 +23,22 @@
   border-collapse: collapse;
   width: 100%;
   height: auto;
+  justify-content: space-between;
+}
+
+.upsellItems{
+  background-color: rgb(117, 115, 221);
+  border-radius: 15px ;
+  width: auto;
+  height: 400px;  
+
+}
+.frontPage {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: default ;
+  padding: 2em;
 }
 .shoppingCart td, .shoppingCart th {
   padding: 10px;  /* Adjust as needed */
@@ -68,6 +84,8 @@ input [type="number"] {
   margin: 5px;
 
 }
+
+
 
 
 

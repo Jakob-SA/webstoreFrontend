@@ -1,6 +1,7 @@
 import { useState } from "react";
 import productArray from "./product";
 import { ProductLine } from "./productLine";
+import { UpsellItem } from "./upsellItem";
 
 function Basket() {
   const [basketItems, setBasketItems] = useState(productArray);
@@ -10,6 +11,16 @@ function Basket() {
   const handleRemoveItem = (id: number) => {
     setBasketItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
+  const getBasketAmount = () => {
+    let total = 0;
+    basketItems.forEach((product) => {
+      total += product.price 
+    });
+    if (total>300){
+      return total*0.9;
+    }
+    else return total;
+};
 
   const updateTotalPrice = (price: number) => {
     prices.push(price);
@@ -17,8 +28,6 @@ function Basket() {
 
   return (
     <>
-      <h1>Checkout</h1>
-      <h2>Shopping cart</h2>
       {basketItems.length > 0 && (
         <table className="shoppingCart">
           <tbody>
@@ -27,9 +36,8 @@ function Basket() {
               <th>Product</th>
               <th>Price per unit</th>
               <th>Quantity</th>
-              <th>Total</th>
-              <th></th>
-              <th></th>
+              <th>Total </th>
+              <th style={{ fontSize: '1.5em' }}> {getBasketAmount().toFixed(2)}</th>
             </tr>
             {basketItems.map((product) => {
               return (
@@ -44,13 +52,15 @@ function Basket() {
           </tbody>
         </table>
       )}
+      
       {basketItems.length === 0 && (
         <p>
           No items in basket. Reload the page <a href=".">here</a> to restore
         </p>
       )}
-      <p>Total Price: {totalPrice}</p>
+      
       <p />
+      
     </>
   );
 }
