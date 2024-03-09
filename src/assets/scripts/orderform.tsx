@@ -43,14 +43,17 @@ function Orderform() {
               {" "}
               {/* -- This is a checkbox to toggle the business name and VAT number fields */}
               <div>
-                <label htmlFor="businessOrder">Business order:</label>
-                <input
-                  type="checkbox"
-                  id="businessOrder"
-                  name="user_businessOrder"
-                  checked={isBusiness}
-                  onChange={handleBusinessChange}
-                />
+                {" "}
+                <div className="business-checkbox">
+                  <label htmlFor="businessOrder">Business order:</label>
+                  <input
+                    type="checkbox"
+                    id="businessOrder"
+                    name="user_businessOrder"
+                    checked={isBusiness}
+                    onChange={handleBusinessChange}
+                  />
+                </div>
                 {isBusiness && (
                   <div>
                     <div className="input-group">
@@ -128,14 +131,16 @@ function Orderform() {
           <div>
             {" "}
             {/* -- This is a checkbox to toggle the delivery adress fields */}
-            <label htmlFor="deliveryAdress">Different delivery adress:</label>
-            <input
-              type="checkbox"
-              id="deliveryAdress"
-              name="user_deliveryAdress"
-              checked={isDiliveryAdress}
-              onChange={handleDeliveryAdressChange}
-            />
+            <div className="address-checkbox">
+              <label htmlFor="deliveryAdress">Different delivery adress:</label>
+              <input
+                type="checkbox"
+                id="deliveryAdress"
+                name="user_deliveryAdress"
+                checked={isDiliveryAdress}
+                onChange={handleDeliveryAdressChange}
+              />
+            </div>
             {isDiliveryAdress && (
               <div>
                 <div className="input-group">

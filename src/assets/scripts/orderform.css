@@ -73,13 +73,3 @@ ul {
   position: relative;
   height: 50px;
 }
-
-.business-checkbox-content {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.5s ease-in-out;
-}
-
-.business-checkbox-content.active {
-  max-height: 100px; /* Set to an appropriate value based on your content */
-}
