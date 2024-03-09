@@ -1,23 +1,24 @@
 import React, { useState } from "react";
+import { Product } from "./product";
+
+interface QuantityBoxProps {
+  quantity: number;
+  setQuantity: (quantity: number) => void;
+  product: Product;
+}
 
 export function QuantityBox({
+  quantity,
+  setQuantity,
   product,
-  onQuantityChange,
-}: {
-  product: any;
-  onQuantityChange: (quantity: number) => void;
-}) {
-  const [quantity, setQuantity] = useState(1);
-
+}: QuantityBoxProps) {
   const incrementQuantity = () => {
-    setQuantity((prevQuantity: number) => prevQuantity + 1);
-    onQuantityChange(quantity + 1);
+    setQuantity(quantity + 1);
   };
 
   const decrementQuantity = () => {
     if (quantity > 1) {
-      setQuantity((prevQuantity: number) => prevQuantity - 1);
-      onQuantityChange(quantity - 1);
+      setQuantity(quantity - 1);
     }
   };
 
@@ -31,10 +32,10 @@ export function QuantityBox({
         min="1"
         id={`Quantity-${product.id.toString()}`}
         value={quantity}
-        onChange={(e) => {
-          setQuantity(e.target.valueAsNumber);
+        readOnly={true} //Dont know if we want this
+        /*onChange={(e) => {
           onQuantityChange(e.target.valueAsNumber);
-        }}
+        }}*/
       />
       <button className="quantityButton" onClick={incrementQuantity}>
         <b>+</b>
