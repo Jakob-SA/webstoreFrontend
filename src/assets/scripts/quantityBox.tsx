@@ -10,8 +10,6 @@ interface QuantityBoxProps {
 export function QuantityBox({
   quantity,
   setQuantity,
-  quantity,
-  setQuantity,
   product,
 }: QuantityBoxProps) {
   const incrementQuantity = () => {
@@ -38,10 +36,7 @@ export function QuantityBox({
         value={quantity}
         readOnly={true} //Dont know if we want this
         /*onChange={(e) => {
-        readOnly={true} //Dont know if we want this
-        /*onChange={(e) => {
-          onQuantityChange(e.target.valueAsNumber);
-        }}*/
+          setQuantity(parseInt(e.target.value));
         }}*/
       />
       <button className="quantityButton" onClick={incrementQuantity}>
