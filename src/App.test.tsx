@@ -1,9 +1,10 @@
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import { describe, expect, test } from "vitest"
 import App from "./App"
 import { ProductLine } from "./assets/scripts/productLine"
 import productsData from './assets/media/products.json'
 import  { Product } from './assets/scripts/product'
+import { RemoveButton } from "./assets/scripts/removeButton"
 
 describe(App.name, () => {
   test("should render", () => {
@@ -20,4 +21,14 @@ describe(ProductLine.name, () => {
         render(<ProductLine quantity={quantity} product={product} handleRemoveItem={() => {}} updateTotalPrice={() => {}}/>)
         expect(screen.getByText(totalPrice)).toBeInTheDocument()
     })
+})
+
+describe(RemoveButton.name, () => {
+  test("Should change the basketicon on hover", () => {
+    render(<RemoveButton onClick={() => {}}/>)
+    const button = screen.getByRole('button')
+    const openTrashcanImage  = screen.getByRole('img') as HTMLImageElement
+    fireEvent.mouseOver(button)
+    expect(openTrashcanImage.src).toContain('openTrashcan.png')
+  })
 })
