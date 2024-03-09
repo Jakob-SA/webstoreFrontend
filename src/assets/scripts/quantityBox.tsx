@@ -10,14 +10,18 @@ interface QuantityBoxProps {
 export function QuantityBox({
   quantity,
   setQuantity,
+  quantity,
+  setQuantity,
   product,
 }: QuantityBoxProps) {
   const incrementQuantity = () => {
+    setQuantity(quantity + 1);
     setQuantity(quantity + 1);
   };
 
   const decrementQuantity = () => {
     if (quantity > 1) {
+      setQuantity(quantity - 1);
       setQuantity(quantity - 1);
     }
   };
@@ -34,7 +38,10 @@ export function QuantityBox({
         value={quantity}
         readOnly={true} //Dont know if we want this
         /*onChange={(e) => {
+        readOnly={true} //Dont know if we want this
+        /*onChange={(e) => {
           onQuantityChange(e.target.valueAsNumber);
+        }}*/
         }}*/
       />
       <button className="quantityButton" onClick={incrementQuantity}>
