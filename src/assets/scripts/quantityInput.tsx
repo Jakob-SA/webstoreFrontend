@@ -1,35 +1,34 @@
 import React, { useState } from "react";
 import { Product } from "./product";
 
-interface QuantityBoxProps {
+interface QuantityInputProps {
   quantity: number;
   setQuantity: (quantity: number) => void;
   product: Product;
 }
 
-export function QuantityBox({
+export function QuantityInput({
   quantity,
   setQuantity,
   product,
-}: QuantityBoxProps) {
+}: QuantityInputProps) {
   const incrementQuantity = () => {
-    setQuantity(quantity + 1);
     setQuantity(quantity + 1);
   };
 
   const decrementQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
-      setQuantity(quantity - 1);
     }
   };
 
   return (
-    <div className="quantity-input">
+    <div className="quantityInput">
       <button className="quantityButton" onClick={decrementQuantity}>
         <b>-</b>
       </button>
       <input
+        className="quantityBox"
         type="number"
         min="1"
         id={`Quantity-${product.id.toString()}`}

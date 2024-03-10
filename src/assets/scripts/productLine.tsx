@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Product } from "./product";
 import { RemoveButton } from "./removeButton";
-import { QuantityBox } from "./quantityBox";
+import { QuantityInput } from "./quantityInput";
 interface productLineProps {
   product: Product;
   handleRemoveItem: (id: number) => void;
-  updateTotalPrice: (price: number) => void;
+  updateTotalPrice: (id: number, price: number) => void;
 }
 
 export function ProductLine({
@@ -22,7 +22,12 @@ export function ProductLine({
       ? product.price * quantity * (1 - product.rebatePercent / 100)
       : product.price * quantity;
 
+  useEffect(() => {
+    updateTotalPrice(product.id, totalLinePrice);
+  }, [totalLinePrice]);
+
   const onQuantityChange = (quantity: number) => {
+    //not used
     setQuantity(quantity);
   };
 
@@ -50,7 +55,7 @@ export function ProductLine({
       </td>
       <td>
         <div>
-          <QuantityBox
+          <QuantityInput
             quantity={quantity}
             setQuantity={setQuantity}
             product={product}
