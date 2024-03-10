@@ -18,7 +18,7 @@ describe(ProductLine.name, () => {
         const product: Product = productsData[0]
         const quantity = 2
         const totalPrice = (product.price * quantity * (1 - product.rebatePercent / 100)).toFixed(2)
-        render(<ProductLine quantity={quantity} product={product} handleRemoveItem={() => {}} updateTotalPrice={() => {}}/>)
+        render(<ProductLine product={product} handleRemoveItem={() => {}} updateTotalPrice={() => {}}/>)
         expect(screen.getByText(totalPrice)).toBeInTheDocument()
     })
 })
