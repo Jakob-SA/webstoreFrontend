@@ -40,6 +40,7 @@ function Basket() {
   
   return (
     <>
+    <div>
       {basketItems.length > 0 && (
         <table className="shoppingCart">
           <tbody>
@@ -51,7 +52,7 @@ function Basket() {
               <th>Price per unit</th>
               <th>Quantity</th>
               <th>Total </th>
-              <th> Total price: {totalPrice.toFixed(2)}. {calculateDiscount(totalPrice)}</th>
+              <th> </th>
               <th></th>
             </tr>
             {basketItems.map((product) => {
@@ -75,7 +76,9 @@ function Basket() {
         </p>
       )}
       <div>
-        <h3></h3> {/*Should be moved*/} 
+        <h3>Total price: {totalPrice.toFixed(2)} </h3>
+        <h3>{calculateDiscount(totalPrice)}</h3> {/*Should be moved*/} 
+      </div>
       </div>
     </>
   );
