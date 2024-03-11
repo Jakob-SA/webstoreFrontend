@@ -14,10 +14,14 @@ function App() {
         <Header />
         <div className="frontPage">
           <Basket />
-          <UpsellItem />
-          <button onClick={() => setCurrentStep(Steps.Checkout)}>
-            Checkout
-          </button>
+          <div className="rightCollumn">
+            <UpsellItem />
+            <button onClick={() => {alert("are you sure you want to checkout?");
+            setCurrentStep(Steps.Checkout);
+            }}>
+              Checkout
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -26,7 +30,7 @@ function App() {
     return (
       <div>
         <Orderform />
-        <button onClick={() => setCurrentStep(Steps.Basket)}>Checkout</button>
+        <button onClick={() => setCurrentStep(Steps.Basket)}>Basket</button>
       </div>
     );
   }

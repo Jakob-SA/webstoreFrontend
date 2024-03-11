@@ -3,7 +3,7 @@ import { useState } from "react";
 
 
  function handleClick(){
-    alert("Are you sure you want to checkout?");
+    alert("Taking you back to the shop!");
  }
 export function UpsellItem() {
     const [upsellItems, setUpsellItems] = useState(productArray);

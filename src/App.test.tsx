@@ -1,4 +1,4 @@
-import { fireEvent, getByTestId, render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { afterEach, describe, expect, test, vi } from "vitest"
 import App from "./App"
@@ -42,6 +42,7 @@ describe(RemoveButton.name, () => {
   })
 })
 
+// Test doesn't seem to be able to work. We might need to look into how we input the city into forms.
 describe(Orderform.name, () => {
   afterEach(() => {
     vi.restoreAllMocks()
@@ -56,12 +57,12 @@ describe(Orderform.name, () => {
 
     render(<Orderform/>)
     
-    const zipCodeInput = screen.getByLabelText("Zip Code:")
+    const zipCodeInput = screen.getByLabelText("Zip Code:*")
     await user.type(zipCodeInput, "2200")
-    const form = screen.getByTestId("zip-data-form")
-    fireEvent.submit(form)
+    fireEvent.blur(zipCodeInput)
     
     await screen.findByText("København N")
+
     expect(mockFetch).toHaveBeenCalledWith(
       "https://api.dataforsyningen.dk/postnumre/2200"
     )
