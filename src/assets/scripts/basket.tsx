@@ -59,8 +59,8 @@ function Basket() {
         </p>
       )}
       <div>
-        <h3>Total price: {totalPrice}</h3> {/*Should be moved*/} This price is
-        discounted
+        <h3>Total price: {totalPrice.toFixed(2)}</h3> {/*Should be moved*/} This
+        price is discounted
       </div>
     </>
   );
