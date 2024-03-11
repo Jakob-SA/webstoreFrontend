@@ -204,12 +204,13 @@ function Orderform() {
             <input type="email" required id="email" name="user_email" />
           </div>
           <div className="input-group">
-            <label htmlFor="tel">Phonenumber:</label>
+            <label htmlFor="telephoneNumber">Phonenumber:</label>
             <input
               type="tel"
               required
               pattern="^(?:\+45|0045)?\s?\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}$" // This is a pattern to validate the phone number to the danish format
               name="user_telephoneNumber"
+              id="telephoneNumber"
             ></input>
           </div>
         </section>
