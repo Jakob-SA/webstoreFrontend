@@ -5,11 +5,11 @@ import { ProductLine } from "./productLine";
 function Basket() {
   const [basketItems, setBasketItems] = useState(productArray);
   const [prices, setPrices] = useState(new Map<number, number>());
+  const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
   const handleRemoveItem = (id: number) => {
     setBasketItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    updateTotalPrice(id, 0);
   };
-
-  const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
 
   const updateTotalPrice = (productID: number, price: number) => {
     setPrices(prices.set(productID, price));
@@ -59,8 +59,8 @@ function Basket() {
         </p>
       )}
       <div>
-        <h3>Total price: {totalPrice}</h3> {/*Should be moved*/} This price is
-        discounted
+        <h3>Total price: {totalPrice.toFixed(2)}</h3> {/*Should be moved*/} This
+        price is discounted
       </div>
     </>
   );
