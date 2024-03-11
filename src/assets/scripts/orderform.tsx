@@ -3,11 +3,12 @@ import { useState } from "react";
 import ZipCodeChecker from "./zipCodeChecker";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
-// Throughout the development of this form LLM has been used to debugging, sparring and pair programming. However no code has been copied from LLM's
+// Throughout the development of this form LLM has been used to debugging, sparring and pair programming. However no code has been copied from LLMs
 // GitHub copilot has been used to generate some of the comments.
 
 function Orderform() {
   const [zipCode, setZipCode] = useState("");
+
   const [deliveryZip, setDeliveryZip] = useState("");
 
   const [isBusiness, setIsBusiness] = useState(false);
@@ -29,6 +30,9 @@ function Orderform() {
 
   // This is a custom hook that checks if the postal code is valid and fills in the city name
   const { isValid, handleZipCode } = ZipCodeChecker(); // @Joes use isValid to show error message if postal code is invalid
+
+  const [zipTouched, setZipTouched] = useState(false);
+  const [deliveryZipTouched, setDeliveryZipTouched] = useState(false);
 
   return (
     <form action="/shipping-information" method="post">
@@ -121,8 +125,14 @@ function Orderform() {
               name="user_zip"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-              onBlur={(e) => handleZipCodeSubmit(e.target.value, e.target.id)}
+              onBlur={(e) => {
+                setZipTouched(true);
+                handleZipCodeSubmit(e.target.value, e.target.id);
+              }}
             />
+            {zipTouched && !isValid && (
+              <p className="zip-error-message">Postal code is invalid</p>
+            )}
           </div>
           <div className="input-group">
             <label htmlFor="city">City:</label>
@@ -182,10 +192,14 @@ function Orderform() {
                     name="user_deliveryZip"
                     value={deliveryZip}
                     onChange={(e) => setDeliveryZip(e.target.value)}
-                    onBlur={(e) =>
-                      handleZipCodeSubmit(e.target.value, e.target.id)
-                    }
+                    onBlur={(e) => {
+                      setDeliveryZipTouched(true);
+                      handleZipCodeSubmit(e.target.value, e.target.id);
+                    }}
                   />
+                  {deliveryZipTouched && !isValid && (
+                    <p className="zip-error-message">Postal code is invalid</p>
+                  )}
                 </div>
                 <div className="input-group">
                   <label htmlFor="deliveryCity">City:</label>

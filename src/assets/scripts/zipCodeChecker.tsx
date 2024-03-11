@@ -6,7 +6,7 @@ import { useState } from "react";
 function ZipCodeChecker() {
   const [isValid, setIsValid] = useState(false);
 
-  // submits th postal code to the custom hook below and then opens async function to fetch the data from the api
+  // submits the postal code to the custom hook below and then opens async function to fetch the data from the api
   const handleZipCode = async (zipCode: string, id: string) => {
     try {
       const response = await fetch(

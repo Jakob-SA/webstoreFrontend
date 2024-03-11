@@ -73,3 +73,10 @@ ul {
   position: relative;
   height: 50px;
 }
+
+.zip-error-message {
+  color: red;
+  font-size: 0.8em;
+  margin: 0;
+  padding: 0;
+}
