@@ -4,9 +4,10 @@ import { useState } from "react";
 // Throughout the development of this form LLM has been used to debugging, sparring and pair programming. However no code has been copied from LLM's
 
 function ZipCodeChecker() {
-  const [isValid, setIsValid] = useState(false);
+  const [validZip, setValidZip] = useState(false);
+  const [validDeliveryZip, setValidDeliveryZip] = useState(false);
 
-  // submits th postal code to the custom hook below and then opens async function to fetch the data from the api
+  // submits the postal code to the custom hook below and then opens async function to fetch the data from the api
   const handleZipCode = async (zipCode: string, id: string) => {
     try {
       const response = await fetch(
@@ -14,9 +15,8 @@ function ZipCodeChecker() {
       );
       const data = await response.json();
 
-      // if the postal code is valid, set the city name and set the isValid state to true
+      // if the postal code is valid, set the city name and set the validZip state to true
       if (data.nr === zipCode) {
-        setIsValid(true);
         const cityInput = document.getElementById("city") as HTMLInputElement;
         const deliveryCity = document.getElementById(
           "deliveryCity"
@@ -26,21 +26,29 @@ function ZipCodeChecker() {
         if (cityInput) {
           if (id === "zip") {
             cityInput.value = data.navn;
+            setValidZip(true);
           }
           if (id === "deliveryZip") {
             deliveryCity.value = data.navn;
+            setValidDeliveryZip(true);
           }
         }
       } else {
-        setIsValid(false);
+        if (id === "zip") {
+          setValidZip(false);
+        }
+        if (id === "deliveryZip") {
+          setValidDeliveryZip(false);
+        }
       }
     } catch (error) {
       console.error("Error validating postal code", error);
-      setIsValid(false);
+      setValidZip(false);
+      setValidDeliveryZip(false);
     }
   };
 
-  return { isValid, handleZipCode };
+  return { validZip, validDeliveryZip, handleZipCode };
 }
 
 export default ZipCodeChecker;

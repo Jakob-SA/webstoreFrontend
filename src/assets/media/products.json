@@ -44,7 +44,7 @@
       "name": "Leather Shoe Care Kit",
       "price": 19.99,
       "currency": "USD",
-      "rebateQuantity": 0,
+      "rebateQuantity": 9999,
       "rebatePercent": 0,
       "upsellProductId": 0,
       "amountInStock": 100
@@ -94,7 +94,7 @@
       "name": "Suede Shoe Brush",
       "price": 9.99,
       "currency": "USD",
-      "rebateQuantity": 0,
+      "rebateQuantity": 9999,
       "rebatePercent": 0,
       "upsellProductId": 0,
       "amountInStock": 120
