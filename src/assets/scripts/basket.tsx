@@ -1,5 +1,5 @@
 import { useState } from "react";
-import productArray from "./product";
+import productArray, { Product } from "./product";
 import { ProductLine } from "./productLine";
 
 function Basket() {
@@ -24,10 +24,24 @@ function Basket() {
       setTotalPrice(tempTotalPrice);
     }
   };
+  const calculateDiscount = (totalPrice: number) => {
+    let discount = false;
+    if (totalPrice > 300) {
+      discount = true;
+    }
+    if (discount === true) {
+      return (
+        "With a 10% discount that means you have saved " +
+        (totalPrice * 0.1).toFixed(2)
+      );
+    } else {
+      return "You have not reached the 300 limit for a discount yet.";
+    }
+  };
 
   return (
     <>
-      <div className="basket">
+      <div>
         {basketItems.length > 0 && (
           <table className="shoppingCart">
             <tbody>
@@ -37,7 +51,7 @@ function Basket() {
                 <th>Price per unit</th>
                 <th>Quantity</th>
                 <th>Total </th>
-                <th></th>
+                <th> </th>
                 <th></th>
               </tr>
               {basketItems.map((product) => {
@@ -60,8 +74,8 @@ function Basket() {
           </p>
         )}
         <div>
-          <h3>Total price: {totalPrice.toFixed(2)}</h3> {/*Should be moved*/}{" "}
-          This price is discounted
+          <h3>Total price: {totalPrice.toFixed(2)} </h3>
+          <h3>{calculateDiscount(totalPrice)}</h3> {/*Should be moved*/}
         </div>
       </div>
     </>
