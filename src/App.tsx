@@ -14,7 +14,6 @@ function App() {
         <Header />
         <div className="frontPage">
           <Basket />
-          <Basket />
           <UpsellItem />
           <button onClick={() => setCurrentStep(Steps.Checkout)}>
             Checkout
