@@ -1,5 +1,5 @@
 import { useState } from "react";
-import productArray from "./product";
+import productArray, { Product } from "./product";
 import { ProductLine } from "./productLine";
 
 function Basket() {
@@ -24,7 +24,7 @@ function Basket() {
       setTotalPrice(tempTotalPrice);
     }
   };
-  const calculateRebate = (totalPrice: number) => {
+  const calculateDiscount = (totalPrice: number) => {
     let discount = false;
     if (totalPrice > 300) {
       discount = true;
@@ -37,18 +37,21 @@ function Basket() {
   }
   }
 
+  
   return (
     <>
       {basketItems.length > 0 && (
         <table className="shoppingCart">
           <tbody>
+            
             <tr>
+              
               <th></th>
               <th>Product</th>
               <th>Price per unit</th>
               <th>Quantity</th>
               <th>Total </th>
-              <th></th>
+              <th> Total price: {totalPrice.toFixed(2)}. {calculateDiscount(totalPrice)}</th>
               <th></th>
             </tr>
             {basketItems.map((product) => {
@@ -62,6 +65,7 @@ function Basket() {
               );
             })}
           </tbody>
+          
         </table>
       )}
 
@@ -71,7 +75,7 @@ function Basket() {
         </p>
       )}
       <div>
-        <h3>Total price: {totalPrice.toFixed(2)}. {calculateRebate(totalPrice)}</h3> {/*Should be moved*/} 
+        <h3></h3> {/*Should be moved*/} 
       </div>
     </>
   );
