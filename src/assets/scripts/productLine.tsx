@@ -1,56 +1,90 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "./product";
-
-
+import { RemoveButton } from "./removeButton";
+import { QuantityInput } from "./quantityInput";
 interface productLineProps {
-    quantity: number;
-    product: Product;
-    handleRemoveItem: (id: number) => void;
+  product: Product;
+  handleRemoveItem: (id: number) => void;
+  updateTotalPrice: (id: number, price: number) => void;
 }
 
+export function ProductLine({
+  product,
+  handleRemoveItem,
+  updateTotalPrice,
+}: productLineProps) {
+  const [giftwrapping, setGiftwrapping] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  giftwrapping.valueOf(); // to be deleted
 
+  var totalLinePrice =
+    quantity >= product.rebateQuantity
+      ? product.price * quantity * (1 - product.rebatePercent / 100)
+      : product.price * quantity;
 
-export function ProductLine({ quantity, product , handleRemoveItem }: productLineProps) {
-    const [totalPrice, setTotalPrice] = useState(product.price * quantity);
-    const [giftwrapping, setGiftwrapping] = useState(false);
-    giftwrapping.valueOf();
-    
+  useEffect(() => {
+    updateTotalPrice(product.id, totalLinePrice);
+  }, [totalLinePrice]);
 
-    const onQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTotalPrice(product.price * parseInt(event.target.value));
-    }
-    const onGiftwrappingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setGiftwrapping(event.target.checked);
-    }
+  const onQuantityChange = (quantity: number) => {
+    //not used
+    setQuantity(quantity);
+  };
+  onQuantityChange //Remove
 
-    return (
-        <tr>  
-            <td>
-                <div><img src={"productPics/product" + product.id + ".jpg"} className = "productImages" width="150" height="150" /></div>
-            </td> 
-            <td>
-                <div>{product.name}</div>
-            </td>
-            <td>
-            <div>{product.price}</div>
-            </td>
-            <td>
-            <div><input type="number" id={`Quantity-${product.id.toString()}`} defaultValue={1} onChange={onQuantityChange}/></div>
-            </td>
-            <td>
-            <div>{totalPrice.toFixed(2)}</div>
-            </td>
-            <td>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>        {/*shoukd be moved*/}
-                <input type="checkbox" id={`Giftwrapping-${product.id.toString()}`} onChange={onGiftwrappingChange} />
-                <label htmlFor={`Giftwrapping-${product.id.toString()}`}>Giftwrapping</label>
-                </div>
-            </td>
-            <td>
-                <div><button onClick={() => handleRemoveItem(product.id)}>Remove</button></div>
-            </td>
-        </tr>
-        
-    )
+  const onGiftwrappingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGiftwrapping(event.target.checked);
+  };
+
+  return (
+    <tr>
+      <td>
+        <div className="lineItemFirst">
+          <img
+            src={"productPics/product" + product.id + ".jpg"}
+            className="productImages"
+            width="150"
+            height="150"
+          />
+        </div>
+      </td>
+      <td>
+        <div>{product.name}</div>
+      </td>
+      <td>
+        <div>{product.price}</div>
+      </td>
+      <td>
+        <div>
+          <QuantityInput
+            quantity={quantity}
+            setQuantity={setQuantity}
+            product={product}
+          />
+        </div>
+      </td>
+      <td>
+        <div>{totalLinePrice.toFixed(2)}</div>
+      </td>
+      <td>
+        <div className="lineItemGiftwrapping">
+          <input
+            className="giftwrappingCheckbox"
+            type="checkbox"
+            id={`Giftwrapping-${product.id.toString()}`}
+            onChange={onGiftwrappingChange}
+          />
+          <label htmlFor={`Giftwrapping-${product.id.toString()}`}>
+            Giftwrapping
+          </label>
+        </div>
+      </td>
+
+      <td>
+        <div className="lineItemLast">
+          <RemoveButton onClick={() => handleRemoveItem(product.id)} />
+        </div>
+      </td>
+    </tr>
+  );
 }
-
