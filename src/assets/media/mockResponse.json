@@ -1,0 +1,32 @@
+{
+  "href": "https://api.dataforsyningen.dk/postnumre/2200",
+  "nr": "2200",
+  "navn": "København N",
+  "stormodtageradresser": null,
+  "bbox": [
+    12.5248903,
+    55.6816636,
+    12.57220713,
+    55.71214273
+  ],
+  "visueltcenter": [
+    12.54914572,
+    55.6940569
+  ],
+  "kommuner": [
+    {
+      "href": "https://api.dataforsyningen.dk/kommuner/0101",
+      "kode": "0101",
+      "navn": "København"
+    },
+    {
+      "href": "https://api.dataforsyningen.dk/kommuner/0147",
+      "kode": "0147",
+      "navn": "Frederiksberg"
+    }
+  ],
+  "ændret": "2023-03-24T22:28:38.837Z",
+  "geo_ændret": "2023-03-24T22:28:38.837Z",
+  "geo_version": 10,
+  "dagi_id": "192200"
+}
