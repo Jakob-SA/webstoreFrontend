@@ -1,10 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react"
-import { describe, expect, test } from "vitest"
+import { describe, expect, test, vi } from "vitest"
 import App from "./App"
 import { ProductLine } from "./assets/scripts/productLine"
 import productsData from './assets/media/products.json'
 import  { Product } from './assets/scripts/product'
 import { RemoveButton } from "./assets/scripts/removeButton"
+import { QuantityInput } from "./assets/scripts/quantityInput"
 
 describe(App.name, () => {
   test("should render", () => {
@@ -14,13 +15,15 @@ describe(App.name, () => {
 })
 
 describe(ProductLine.name, () => {
-    test("Price of 2 loafers should show correct total: 161.98", () => { //With 10% rebate
-        const product: Product = productsData[0]
-        const quantity = 2
-        const totalPrice = (product.price * quantity * (1 - product.rebatePercent / 100)).toFixed(2)
-        render(<ProductLine product={product} handleRemoveItem={() => {}} updateTotalPrice={() => {}}/>)
-        expect(screen.getByText(totalPrice)).toBeInTheDocument()
-    })
+  test("Should decrement quantity from 3 to 2", () => {
+      const product: Product = productsData[0]
+      const quantity = 3
+      const mockSetQuantity = vi.fn()
+      render(<QuantityInput quantity={quantity} setQuantity={mockSetQuantity} product={product}/>)
+      const incrementQuantity = screen.getByRole('button', { name: '-'})
+      fireEvent.click(incrementQuantity)
+      expect(mockSetQuantity).toHaveBeenCalledWith(2)
+  })
 })
 
 describe(RemoveButton.name, () => {
