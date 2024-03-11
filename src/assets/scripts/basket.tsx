@@ -24,6 +24,18 @@ function Basket() {
       setTotalPrice(tempTotalPrice);
     }
   };
+  const calculateRebate = (totalPrice: number) => {
+    let discount = false;
+    if (totalPrice > 300) {
+      discount = true;
+    }
+    if(discount === true) {
+    return 'With a 10% discount that means you have saved ' + (totalPrice * 0.1).toFixed(2)
+  }
+  else {
+    return 'You have not reached the 300 limit for a discount yet.'
+  }
+  }
 
   return (
     <>
@@ -59,8 +71,7 @@ function Basket() {
         </p>
       )}
       <div>
-        <h3>Total price: {totalPrice.toFixed(2)}</h3> {/*Should be moved*/} This
-        price is discounted
+        <h3>Total price: {totalPrice.toFixed(2)}. {calculateRebate(totalPrice)}</h3> {/*Should be moved*/} 
       </div>
     </>
   );
