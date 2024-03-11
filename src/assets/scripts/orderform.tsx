@@ -210,6 +210,7 @@ function Orderform() {
               required
               pattern="^(?:\+45|0045)?\s?\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}$" // This is a pattern to validate the phone number to the danish format
               name="user_telephoneNumber"
+              title="Please enter a valid danish phone number"
             />
           </div>
         </section>
