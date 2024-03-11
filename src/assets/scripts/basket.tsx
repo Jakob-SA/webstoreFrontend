@@ -12,6 +12,7 @@ function Basket() {
   };
 
   const updateTotalPrice = (productID: number, price: number) => {
+    //would like this to not be stateful
     setPrices(prices.set(productID, price));
     var tempTotalPrice = 0;
     Array.from(prices.values()).forEach((price) => {

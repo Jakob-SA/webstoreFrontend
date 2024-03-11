@@ -4,7 +4,23 @@
   padding: 0rem;
   text-align: center;
 }
-
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+}
+body {
+  --outside-color: #e61919;  ;
+  --background-color: #f5f5f5;
+  --brand-color: #3b4538;
+  --primary-color: #ff6600;
+  margin: 0;
+}
+main {
+  background-color: var(--background-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 0.4em;
+  padding: 1em;
+}
 
 
 .productImages:hover {
@@ -12,9 +28,10 @@
   transition: transform 0.5s;
 }
 .productImages {
+  width: 7em ;
+  height: 7em;
+  object-fit: cover;
   border-radius: 15px;
-  width: 100px;
-  height: 100px;
 }
 
 .shoppingCart {
@@ -97,6 +114,7 @@
 }
 .button:hover {
   background-color: whitesmoke;
+  border-color: black;
 }
 input [type="number"] {
   width: 100px;
@@ -137,15 +155,7 @@ input [type="number"] {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .logo-spin{
+    animation: logo-spin infinite 5s linear;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
