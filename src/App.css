@@ -1,21 +1,15 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: auto;
+  padding: 0rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+
+.productImages:hover {
+  transform: scale(1.5);
+  transition: transform 0.5s;
 }
 .productImages {
   border-radius: 15px;
@@ -23,23 +17,92 @@
   height: 100px;
 }
 
-.lineItem {
-  display: flex;
-  align-items: center; /* optional, aligns items vertically in the middle */
-  justify-content: space-between; /* optional, adds equal space between items */
-}
-
 .shoppingCart {
-  background-color: rgb(66, 43, 233);
+  background-color: rgb(142, 168, 204);
   border-radius: 15px;
-  width: auto;
+  border-collapse: collapse;
+  width: 100%;
   height: auto;
+  justify-content: space-between;
 }
 
-th{
-  padding-left: 5px;
-  padding-right: 5px;
+.upsellItems{
+  background-color: rgb(117, 115, 221);
+  border-radius: 15px ;
+  width: auto;
+  height: 400px;
+
 }
+.frontPage {
+  display: flex;
+  justify-content: space-between;
+  align-items: default ;
+  padding: 2em;
+}
+.shoppingCart td, .shoppingCart th {
+  padding: 10px;  /* Adjust as needed */
+  border-bottom: 1px solid black;
+}
+
+.shoppingCart td:after, .shoppingCart th:after {
+  content: "";
+  display: block;
+  width: 0.5cm;  /* Adjust as needed */
+}
+
+.lineItemFirst {
+  padding-left: 20px;
+  border-bottom: 0px;
+}
+.lineItemLast {
+  padding-right: 20px;
+}
+.lineItemGiftwrapping {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.giftwrappingCheckbox {
+  transform: scale(2);
+
+}
+.button {
+  background-color: orange;
+}
+.button:hover {
+  background-color: whitesmoke;
+}
+input [type="number"] {
+  width: 100px;
+}
+.quantityInput {
+  display: flex;
+  height:fit-content;
+  align-items: center;
+
+}
+.quantityButton {
+  background-color: orange;
+  border-radius: 8px;
+  margin: 5px;
+}
+.quantityButton:active {
+  background-color: whitesmoke; /* Change the color to your desired color */
+}
+.quantityBox {
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  padding-left: 11px;
+  padding-right: 0;
+
+}
+
+
+
+
 
 @keyframes logo-spin {
   from {

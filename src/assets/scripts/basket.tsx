@@ -4,38 +4,64 @@ import { ProductLine } from "./productLine";
 
 function Basket() {
   const [basketItems, setBasketItems] = useState(productArray);
-
+  const [prices, setPrices] = useState(new Map<number, number>());
   const handleRemoveItem = (id: number) => {
     setBasketItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
+  const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
+
+  const updateTotalPrice = (productID: number, price: number) => {
+    setPrices(prices.set(productID, price));
+    var tempTotalPrice = 0;
+    Array.from(prices.values()).forEach((price) => {
+      tempTotalPrice += price;
+    });
+    if (tempTotalPrice > 300) {
+      /*Here discount if the total price is over 300*/
+      setTotalPrice(tempTotalPrice * 0.9);
+    } else {
+      setTotalPrice(tempTotalPrice);
+    }
+  };
+
   return (
     <>
-      <h1>Checkout</h1>
-      <h2>Shopping cart</h2>
-      <table className="shoppingCart">
-        <tbody>
-          <tr>
-            <th>imgplaceholder</th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-            <th></th>
-          </tr>
-          {basketItems.map((product) => {
-            return (
-              <ProductLine
-                key={product.id}
-                quantity={1} // replace with actual quantity
-                product={product}
-                handleRemoveItem={handleRemoveItem}
-              />
-            );
-          })}
-        </tbody>
-      </table>
-      <p />
+      {basketItems.length > 0 && (
+        <table className="shoppingCart">
+          <tbody>
+            <tr>
+              <th></th>
+              <th>Product</th>
+              <th>Price per unit</th>
+              <th>Quantity</th>
+              <th>Total </th>
+              <th></th>
+              <th></th>
+            </tr>
+            {basketItems.map((product) => {
+              return (
+                <ProductLine
+                  key={product.id}
+                  product={product}
+                  handleRemoveItem={handleRemoveItem}
+                  updateTotalPrice={updateTotalPrice}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+      )}
+
+      {basketItems.length === 0 && (
+        <p>
+          No items in basket. Reload the page <a href=".">here</a> to restore
+        </p>
+      )}
+      <div>
+        <h3>Total price: {totalPrice}</h3> {/*Should be moved*/} This price is
+        discounted
+      </div>
     </>
   );
 }
