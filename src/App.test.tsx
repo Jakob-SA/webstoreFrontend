@@ -6,11 +6,13 @@ import productsData from './assets/media/products.json'
 import  { Product } from './assets/scripts/product'
 import { RemoveButton } from "./assets/scripts/removeButton"
 import { QuantityInput } from "./assets/scripts/quantityInput"
+import ZipCodeChecker from "./assets/scripts/zipCodeChecker"
+import Orderform from "./assets/scripts/orderform"
 
 describe(App.name, () => {
   test("should render", () => {
     render(<App />)
-    expect(screen.getByText("Checkout")).toBeInTheDocument()
+    expect(screen.getByText("Basket")).toBeInTheDocument
   })
 })
 
@@ -33,5 +35,18 @@ describe(RemoveButton.name, () => {
     const openTrashcanImage  = screen.getByRole('img') as HTMLImageElement
     fireEvent.mouseOver(button)
     expect(openTrashcanImage.src).toContain('openTrashcan.png')
+  })
+})
+
+describe(ZipCodeChecker.name, async () => {
+  test.skip("Should return as valid zipcode", () => {
+    const mockFetch = vi.spyOn(window, "fetch").mockImplementation(async () => {
+      return {
+        json: async () => Response,
+      } as Response
+    })
+    render(<Orderform/>)
+    const form =  screen.getByTestId("zip")
+    fireEvent.submit(form)
   })
 })
