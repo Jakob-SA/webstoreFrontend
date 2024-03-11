@@ -17,20 +17,16 @@ export function ProductLine({
   const [quantity, setQuantity] = useState(1);
   giftwrapping.valueOf(); // to be deleted
 
+  var originalLinePrice = product.price * quantity;
+
   var totalLinePrice =
     quantity >= product.rebateQuantity
-      ? product.price * quantity * (1 - product.rebatePercent / 100)
-      : product.price * quantity;
+      ? originalLinePrice * (1 - product.rebatePercent / 100)
+      : originalLinePrice;
 
   useEffect(() => {
     updateTotalPrice(product.id, totalLinePrice);
   }, [totalLinePrice]);
-
-  const onQuantityChange = (quantity: number) => {
-    //not used
-    setQuantity(quantity);
-  };
-  onQuantityChange //Remove
 
   const onGiftwrappingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGiftwrapping(event.target.checked);
@@ -64,7 +60,14 @@ export function ProductLine({
         </div>
       </td>
       <td>
-        <div>{totalLinePrice.toFixed(2)}</div>
+        {quantity >= product.rebateQuantity ? (
+          <div className="twoLinePrice">
+            <div className="oldPrice">{originalLinePrice.toFixed(2)}</div>
+            {totalLinePrice.toFixed(2)}
+          </div>
+        ) : (
+          <div className="oneLinePrice">{totalLinePrice.toFixed(2)}</div>
+        )}
       </td>
       <td>
         <div className="lineItemGiftwrapping">

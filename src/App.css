@@ -39,6 +39,20 @@
   align-items: default ;
   padding: 2em;
 }
+.basket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+
+}
+.rightCollumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+
+}
 .shoppingCart td, .shoppingCart th {
   padding: 10px;  /* Adjust as needed */
   border-bottom: 1px solid black;
@@ -61,6 +75,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.twoLinePrice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.oldPrice {
+  text-decoration: line-through;
+  color: red;
 }
 
 
@@ -97,7 +121,6 @@ input [type="number"] {
   text-align: center;
   padding-left: 11px;
   padding-right: 0;
-
 }
 
 
