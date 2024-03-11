@@ -1,5 +1,4 @@
 import productArray from "./product";
-import { ProductLine } from "./productLine";
 import { useState } from "react";
 
 
@@ -14,6 +13,8 @@ export function UpsellItem() {
         let i = upsellItems[id].upsellProductId
         return upsellItems[i].name;
     }
+    setUpsellItems//Remove
+    getUpsellItemsName // Remove
     return ( //should not return static information
         <>
             <section className="upsellItems">

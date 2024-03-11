@@ -30,6 +30,7 @@ export function ProductLine({
     //not used
     setQuantity(quantity);
   };
+  onQuantityChange //Remove
 
   const onGiftwrappingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGiftwrapping(event.target.checked);
