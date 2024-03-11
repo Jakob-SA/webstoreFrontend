@@ -67,3 +67,21 @@ describe(Orderform.name, () => {
     )
   })
 })
+
+describe(ProductLine.name, () => {
+  test("Should remove the item", () => {
+    let mockBasketItems = [
+      {id: 1, name: 'produc1', price: 100}, 
+      {id: 2, name: 'produc2', price: 100}
+    ]
+    const product: Product = productsData[0]
+    const handleRemoveItem = (productId: number) => {
+      mockBasketItems = mockBasketItems.filter(item => item.id !== productId);
+    };
+    render(<ProductLine product={product} handleRemoveItem={() => handleRemoveItem(product.id)} updateTotalPrice={() => {}}/>);
+    const removeIcon = screen.getByAltText('Remove icon');
+    const button = removeIcon.closest('button');
+    if (button) fireEvent.click(button);
+    expect(mockBasketItems.length).toBe(1);
+  });
+})
