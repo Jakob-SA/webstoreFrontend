@@ -26,7 +26,7 @@ function App() {
     return (
       <div>
         <Orderform />
-        <button onClick={() => setCurrentStep(Steps.Basket)}>Checkout</button>
+        <button onClick={() => setCurrentStep(Steps.Basket)}>Basket</button>
       </div>
     );
   }
