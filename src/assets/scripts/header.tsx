@@ -1,9 +1,19 @@
+import "./header.css";
+
 function Header() {
   return (
-    <div>
-      <h1 className="logo-spin">Checkout</h1>
+    <header>
+      <div className="header">
+        <h1>Checkout</h1>
+        <img
+          className="storeLogo"
+          src="store-logo.png"
+          alt="Store logo"
+          width="150em"
+        />
+      </div>
       <h2> Basket</h2>
-    </div>
+    </header>
   );
 }
 export default Header;
