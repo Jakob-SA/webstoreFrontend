@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-import { fireEvent, getByTestId, render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { afterEach, describe, expect, test, vi } from "vitest"
 import App from "./App"
@@ -40,21 +39,15 @@ describe(ProductLine.name, () => {
     vi.restoreAllMocks();
   });
   test("Should decrement quantity from 3 to 2", () => {
-    const product: Product = productsData[0];
-    const quantity = 3;
-    const mockSetQuantity = vi.fn();
-    render(
-      <QuantityInput
-        quantity={quantity}
-        setQuantity={mockSetQuantity}
-        product={product}
-      />
-    );
-    const incrementQuantity = screen.getByRole("button", { name: "-" });
-    fireEvent.click(incrementQuantity);
-    expect(mockSetQuantity).toHaveBeenCalledWith(2);
-  });
-});
+      const product: Product = productsData[0]
+      const quantity = 3
+      const mockSetQuantity = vi.fn()
+      render(<QuantityInput quantity={quantity} setQuantity={mockSetQuantity} product={product}/>)
+      const incrementQuantity = screen.getByRole('button', { name: '-'})
+      fireEvent.click(incrementQuantity)
+      expect(mockSetQuantity).toHaveBeenCalledWith(2)
+  })
+})
 
 describe(RemoveButton.name, () => {
   test("Should change the basketicon on hover", () => {
