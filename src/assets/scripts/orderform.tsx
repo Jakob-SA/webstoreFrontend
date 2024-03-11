@@ -222,7 +222,7 @@ function Orderform() {
             <input
               type="tel"
               required
-              pattern="^(?:\+45|0045)?\s?\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}$" // This is a pattern to validate the phone number to the danish format
+              pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
               name="user_telephoneNumber"
               id="telephoneNumber"
             ></input>
