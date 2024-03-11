@@ -81,6 +81,7 @@ function Orderform() {
                         id="VAT"
                         name="user_VAT"
                         pattern="^\d{8}$" // This is a pattern to validate the VAT number to the danish format
+                        title="Please enter a valid danish VAT number"
                       />
                     </div>
                   </div>
@@ -254,6 +255,7 @@ function Orderform() {
               pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
               name="user_telephoneNumber"
               id="telephoneNumber"
+              title="Please enter a valid danish phone number"
             ></input>
           </div>
         </section>
