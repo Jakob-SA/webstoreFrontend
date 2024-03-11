@@ -29,7 +29,7 @@ function Orderform() {
   };
 
   // This is a custom hook that checks if the postal code is valid and fills in the city name
-  const { isValid, handleZipCode } = ZipCodeChecker(); // @Joes use isValid to show error message if postal code is invalid
+  const { validZip, validDeliveryZip, handleZipCode } = ZipCodeChecker(); // @Joes use isValid to show error message if postal code is invalid
 
   const [zipTouched, setZipTouched] = useState(false);
   const [deliveryZipTouched, setDeliveryZipTouched] = useState(false);
@@ -130,7 +130,7 @@ function Orderform() {
                 handleZipCodeSubmit(e.target.value, e.target.id);
               }}
             />
-            {zipTouched && !isValid && (
+            {zipTouched && !validZip && (
               <p className="zip-error-message">Postal code is invalid</p>
             )}
           </div>
@@ -197,7 +197,7 @@ function Orderform() {
                       handleZipCodeSubmit(e.target.value, e.target.id);
                     }}
                   />
-                  {deliveryZipTouched && !isValid && (
+                  {deliveryZipTouched && !validDeliveryZip && (
                     <p className="zip-error-message">Postal code is invalid</p>
                   )}
                 </div>
