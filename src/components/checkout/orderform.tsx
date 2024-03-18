@@ -3,11 +3,12 @@ import { useState } from "react";
 import ZipCodeChecker from "./zipCodeChecker";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
-// Throughout the development of this form LLM has been used to debugging, sparring and pair programming. However no code has been copied from LLM's
+// Throughout the development of this form LLM has been used to debugging, sparring and pair programming. However no code has been copied from LLMs
 // GitHub copilot has been used to generate some of the comments.
 
 function Orderform() {
   const [zipCode, setZipCode] = useState("");
+
   const [deliveryZip, setDeliveryZip] = useState("");
 
   const [isBusiness, setIsBusiness] = useState(false);
@@ -28,7 +29,11 @@ function Orderform() {
   };
 
   // This is a custom hook that checks if the postal code is valid and fills in the city name
-  const { isValid, handleZipCode } = ZipCodeChecker(); // @Joes use isValid to show error message if postal code is invalid
+  const { validZip, validDeliveryZip, handleZipCode } = ZipCodeChecker(); // @Joes use isValid to show error message if postal code is invalid
+
+  // This is a state that checks if the zip code input fields has been touched and is used to only show the error message if the input field has been touched
+  const [zipTouched, setZipTouched] = useState(false);
+  const [deliveryZipTouched, setDeliveryZipTouched] = useState(false);
 
   return (
     <form action="/shipping-information" method="post">
@@ -36,6 +41,9 @@ function Orderform() {
 
       <h2>Shipping</h2>
       <legend>Enter your shipping details</legend>
+      <p className="required-note">
+        Fields marked with<span className="required">*</span> are required.
+      </p>
       <ul>
         <section>
           <div>
@@ -73,6 +81,7 @@ function Orderform() {
                         id="VAT"
                         name="user_VAT"
                         pattern="^\d{8}$" // This is a pattern to validate the VAT number to the danish format
+                        title="Please enter a valid danish VAT number"
                       />
                     </div>
                   </div>
@@ -80,21 +89,28 @@ function Orderform() {
               </div>
             </div>
             <div className="input-group">
-              <label htmlFor="first-name">First Name:</label>
+              <label htmlFor="first-name">
+                First Name:<span className="required">*</span>
+              </label>
               <input
                 type="text"
                 required
                 id="first-name"
                 name="user_first_name"
+                autoFocus
               />
             </div>
           </div>
           <div className="input-group">
-            <label htmlFor="last-name">Last Name:</label>
+            <label htmlFor="last-name">
+              Last Name:<span className="required">*</span>
+            </label>
             <input type="text" required id="last-name" name="user_last_name" />
           </div>
           <div className="input-group">
-            <label htmlFor="Country">Country:</label>
+            <label htmlFor="Country">
+              Country: <span className="required">*</span>
+            </label>
             <input
               type="text"
               required
@@ -105,7 +121,9 @@ function Orderform() {
             />
           </div>
           <div className="input-group">
-            <label htmlFor="adress1">Adress:</label>
+            <label htmlFor="adress1">
+              Adress:<span className="required">*</span>
+            </label>
             <input type="text" required id="adress1" name="user_adress1" />
           </div>
           <div className="input-group">
@@ -113,7 +131,9 @@ function Orderform() {
             <input type="text" id="adress2" name="user_adress2" />
           </div>
           <div className="input-group">
-            <label htmlFor="zip">Zip Code:</label>
+            <label htmlFor="zip">
+              Zip Code:<span className="required">*</span>
+            </label>
             <input
               type="text"
               required
@@ -121,11 +141,19 @@ function Orderform() {
               name="user_zip"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-              onBlur={(e) => handleZipCodeSubmit(e.target.value, e.target.id)}
+              onBlur={(e) => {
+                setZipTouched(true);
+                handleZipCodeSubmit(e.target.value, e.target.id);
+              }}
             />
+            {zipTouched && !validZip && (
+              <p className="zip-error-message">Postal code is invalid</p>
+            )}
           </div>
           <div className="input-group">
-            <label htmlFor="city">City:</label>
+            <label htmlFor="city">
+              City:<span className="required">*</span>
+            </label>
             <input type="text" required id="city" name="user_city" />
           </div>
           <div>
@@ -144,7 +172,9 @@ function Orderform() {
             {isDiliveryAdress && (
               <div>
                 <div className="input-group">
-                  <label htmlFor="deliveryCountry">Country:</label>
+                  <label htmlFor="deliveryCountry">
+                    Country:<span className="required">*</span>
+                  </label>
                   <input
                     type="text"
                     required
@@ -155,7 +185,9 @@ function Orderform() {
                   />
                 </div>
                 <div className="input-group">
-                  <label htmlFor="deliveryAdress1">Adress:</label>
+                  <label htmlFor="deliveryAdress1">
+                    Adress:<span className="required">*</span>
+                  </label>
                   <input
                     type="text"
                     required
@@ -174,7 +206,9 @@ function Orderform() {
                   />
                 </div>
                 <div className="input-group">
-                  <label htmlFor="deliveryZip">Zip Code:</label>
+                  <label htmlFor="deliveryZip">
+                    Zip Code:<span className="required">*</span>
+                  </label>
                   <input
                     type="text"
                     required
@@ -182,13 +216,19 @@ function Orderform() {
                     name="user_deliveryZip"
                     value={deliveryZip}
                     onChange={(e) => setDeliveryZip(e.target.value)}
-                    onBlur={(e) =>
-                      handleZipCodeSubmit(e.target.value, e.target.id)
-                    }
+                    onBlur={(e) => {
+                      setDeliveryZipTouched(true);
+                      handleZipCodeSubmit(e.target.value, e.target.id);
+                    }}
                   />
+                  {deliveryZipTouched && !validDeliveryZip && (
+                    <p className="zip-error-message">Postal code is invalid</p>
+                  )}
                 </div>
                 <div className="input-group">
-                  <label htmlFor="deliveryCity">City:</label>
+                  <label htmlFor="deliveryCity">
+                    City:<span className="required">*</span>
+                  </label>
                   <input
                     type="text"
                     required
@@ -200,18 +240,23 @@ function Orderform() {
             )}
           </div>
           <div className="input-group">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">
+              Email:<span className="required">*</span>
+            </label>
             <input type="email" required id="email" name="user_email" />
           </div>
           <div className="input-group">
-            <label htmlFor="tel">Phonenumber:</label>
+            <label htmlFor="telephoneNumber">
+              Phonenumber:<span className="required">*</span>
+            </label>
             <input
               type="tel"
               required
-              pattern="^(?:\+45|0045)?\s?\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}(?:\s?|\-?)\d{2}$" // This is a pattern to validate the phone number to the danish format
+              pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
               name="user_telephoneNumber"
+              id="telephoneNumber"
               title="Please enter a valid danish phone number"
-            />
+            ></input>
           </div>
         </section>
         <section>

@@ -16,7 +16,9 @@ function App() {
           <Basket />
           <div className="rightCollumn">
             <UpsellItem />
-            <button onClick={() => setCurrentStep(Steps.Checkout)}>
+            <button onClick={() => {alert("are you sure you want to checkout?");
+            setCurrentStep(Steps.Checkout);
+            }}>
               Checkout
             </button>
           </div>
@@ -28,7 +30,7 @@ function App() {
     return (
       <div>
         <Orderform />
-        <button onClick={() => setCurrentStep(Steps.Basket)}>Checkout</button>
+        <button onClick={() => setCurrentStep(Steps.Basket)}>Basket</button>
       </div>
     );
   }
