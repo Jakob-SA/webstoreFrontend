@@ -1,6 +1,6 @@
 import { useState } from "react";
 import productArray, { Product } from "./product";
-import { ProductLine } from "./productLine";
+import { ProductLine } from "../productLine/productLine";
 
 function Basket() {
   const [basketItems, setBasketItems] = useState(productArray);

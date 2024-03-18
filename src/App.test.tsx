@@ -3,7 +3,7 @@ import { describe, expect, test, vi } from "vitest";
 import App from "./App";
 import { ProductLine } from "./assets/scripts/productLine";
 import productsData from "./assets/media/products.json";
-import { Product } from "./assets/scripts/product";
+import { Product } from "./components/basket/product";
 import { RemoveButton } from "./assets/scripts/removeButton";
 import { QuantityInput } from "./assets/scripts/quantityInput";
 

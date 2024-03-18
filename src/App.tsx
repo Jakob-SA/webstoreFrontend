@@ -1,10 +1,10 @@
 import "./App.css";
-import Basket from "./assets/scripts/basket";
-import UpsellItem from "./assets/scripts/upsellItem";
-import Header from "./assets/scripts/header";
+import Basket from "./components/basket/basket";
+import UpsellItem from "./components/basket/upsellItem";
+import Header from "./components/header";
 import { useState } from "react";
 import { Steps } from "./Steps";
-import Orderform from "./assets/scripts/orderform";
+import Orderform from "./components/checkout/orderform";
 
 function App() {
   const [currentStep, setCurrentStep] = useState<Steps>(Steps.Basket);
