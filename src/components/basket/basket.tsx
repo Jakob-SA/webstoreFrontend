@@ -1,5 +1,5 @@
 import { useState } from "react";
-import productArray, { Product } from "./product";
+import productArray from "./product";
 import { ProductLine } from "../productLine/productLine";
 
 function Basket() {
