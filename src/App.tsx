@@ -3,7 +3,7 @@ import Basket from "./components/basket/basket";
 import UpsellItem from "./components/basket/upsellItem";
 import Header from "./components/header";
 import { useState } from "react";
-import { Steps } from "./Steps";
+import { Steps } from "./steps";
 import Orderform from "./components/checkout/orderform";
 
 function App() {
@@ -16,9 +16,12 @@ function App() {
           <Basket />
           <div className="rightCollumn">
             <UpsellItem />
-            <button onClick={() => {alert("are you sure you want to checkout?");
-            setCurrentStep(Steps.Checkout);
-            }}>
+            <button
+              onClick={() => {
+                alert("are you sure you want to checkout?");
+                setCurrentStep(Steps.Checkout);
+              }}
+            >
               Checkout
             </button>
           </div>
