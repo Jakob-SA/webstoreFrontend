@@ -9,21 +9,19 @@ export interface Product {
     amountInStock: number;
 }
 
-import products from '../../assets/media/products.json';
 import { getProducts } from '../../assets/API';
-import exp from 'constants';
 
 
 
-export function productArray() {
+
+
 let productArray: Product[] = [];
-getProducts().then(product => {
+
+await getProducts().then(product => {
   productArray = product;
-  console.log(productArray);
 }).catch(error => {
   console.error('Error:', error);
 });
-return productArray;
-}
-
 export default productArray;
+
+

@@ -13,7 +13,6 @@ export async function fetchData(url: any) {
   }
 
 
-
 export async function getProducts() {
     
   try {

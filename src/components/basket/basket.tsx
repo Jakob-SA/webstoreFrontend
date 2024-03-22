@@ -1,9 +1,10 @@
-import { useState } from "react";
-import productArray, { Product } from "./product";
+import { useState, useEffect } from "react";
+import productArray from "./product";
 import { ProductLine } from "../productLine/productLine";
 
 function Basket() {
   const [basketItems, setBasketItems] = useState(productArray);
+ 
   const [prices, setPrices] = useState(new Map<number, number>());
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
   const handleRemoveItem = (id: number) => {
