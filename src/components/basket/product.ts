@@ -17,7 +17,7 @@ import { getProducts } from '../../assets/API';
 
 let productArray: Product[] = [];
 
-await getProducts().then(product => {
+await getProducts().then(product => { //Copilot has helped here
   productArray = product;
 }).catch(error => {
   console.error('Error:', error);
