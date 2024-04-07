@@ -1,4 +1,4 @@
-import { Product } from "./product";
+import { Product } from "../basket/product";
 
 interface QuantityInputProps {
   quantity: number;

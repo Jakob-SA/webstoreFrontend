@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Product } from "./product";
+import { Product } from "../basket/product";
 import { RemoveButton } from "./removeButton";
 import { QuantityInput } from "./quantityInput";
 interface productLineProps {
