@@ -1,4 +1,4 @@
-import productArray from "./product";
+import productArray from "../../assets/media/products.json";
 import { useState } from "react";
 import "./basket.css";
 

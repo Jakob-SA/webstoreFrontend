@@ -11,17 +11,22 @@ export interface Product {
 
 import { getProducts } from '../../assets/API';
 
+export function fetchProducts() {
+  return getProducts();
+}
 
 
 
 
-let productArray: Product[] = [];
+//const productArray: Product[] = await getProducts();
 
+/* There is problem with this code. Top level await
 await getProducts().then(product => { //Copilot has helped here
   productArray = product;
 }).catch(error => {
   console.error('Error:', error);
 });
 export default productArray;
+*/
 
 

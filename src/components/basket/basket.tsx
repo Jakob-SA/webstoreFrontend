@@ -1,12 +1,19 @@
-import { useState } from "react";
-import productArray from "./product";
+import { useEffect, useState } from "react";
+import { Product, fetchProducts } from "./product";
 import { ProductLine } from "../productLine/productLine";
 var basketDiscounted = false;
 
 function Basket() {
-  const [basketItems, setBasketItems] = useState(productArray);
+  const [basketItems, setBasketItems] = useState<Product[]>([]);
   const [prices, setPrices] = useState(new Map<number, number>());
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
+
+  useEffect(() => {
+    //copilot told me this was a fix. @Esben may find alternative fix
+    fetchProducts().then((products) => {
+      setBasketItems(products);
+    }); //maybe need error handling
+  }, []); // Empty array ensures this effect runs only once after initial render
 
   const handleRemoveItem = (id: number) => {
     setBasketItems((prevItems) => prevItems.filter((item) => item.id !== id));

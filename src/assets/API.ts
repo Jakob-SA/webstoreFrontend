@@ -1,5 +1,5 @@
 
-export async function fetchData(url: any) {
+async function fetchData(url: any) {
     const response = await fetch(url);
 
     if (!response.ok) {
