@@ -1,17 +1,17 @@
 import { useState } from "react";
 import productArray from "./product";
 import { ProductLine } from "../productLine/productLine";
+var basketDiscounted = false;
 
 function Basket() {
   const [basketItems, setBasketItems] = useState(productArray);
- 
   const [prices, setPrices] = useState(new Map<number, number>());
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
+
   const handleRemoveItem = (id: number) => {
     setBasketItems((prevItems) => prevItems.filter((item) => item.id !== id));
     updateTotalPrice(id, 0);
   };
-
   const updateTotalPrice = (productID: number, price: number) => {
     //would like this to not be stateful
     setPrices(prices.set(productID, price));
@@ -19,27 +19,31 @@ function Basket() {
     Array.from(prices.values()).forEach((price) => {
       tempTotalPrice += price;
     });
-    if (tempTotalPrice > 300) {
-      /*Here discount if the total price is over 300*/
-      setTotalPrice(tempTotalPrice * 0.9);
-    } else {
-      setTotalPrice(tempTotalPrice);
-    }
+    setTotalPrice(calculateDiscount(tempTotalPrice));
   };
-  const calculateDiscount = (totalPrice: number) => {
-    let discount = false;
-    if (totalPrice > 300) {
-      discount = true;
-    }
-    if (discount === true) {
+
+  const displayTotalPrice = () => {
+    //Should be made to actually display the whole price and not just the discount
+    if (basketDiscounted) {
       return (
         "With a 10% discount that means you have saved " +
-        (totalPrice * 0.1).toFixed(2)
+        (totalPrice / 0.9 - totalPrice).toFixed(2)
       );
     } else {
       return "You have not reached the 300 limit for a discount yet.";
     }
   };
+
+  const basketLines = basketItems.map((product) => {
+    return (
+      <ProductLine
+        key={product.id}
+        product={product}
+        handleRemoveItem={handleRemoveItem}
+        updateTotalPrice={updateTotalPrice}
+      />
+    );
+  });
 
   return (
     <>
@@ -56,16 +60,7 @@ function Basket() {
                 <th> </th>
                 <th></th>
               </tr>
-              {basketItems.map((product) => {
-                return (
-                  <ProductLine
-                    key={product.id}
-                    product={product}
-                    handleRemoveItem={handleRemoveItem}
-                    updateTotalPrice={updateTotalPrice}
-                  />
-                );
-              })}
+              {basketLines}
             </tbody>
           </table>
         )}
@@ -77,11 +72,21 @@ function Basket() {
         )}
         <div>
           <h3>Total price: {totalPrice.toFixed(2)} </h3>
-          <h3>{calculateDiscount(totalPrice)}</h3> {/*Should be moved*/}
+          <h3>{displayTotalPrice()}</h3> {/*Should be moved*/}
         </div>
       </div>
     </>
   );
+}
+
+function calculateDiscount(totalPrice: number): number {
+  if (totalPrice > 300) {
+    basketDiscounted = true;
+    return totalPrice * 0.9;
+  } else {
+    basketDiscounted = false;
+    return totalPrice;
+  }
 }
 
 export default Basket;
