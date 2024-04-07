@@ -4,7 +4,7 @@ import { ProductLine } from "../productLine/productLine";
 var basketDiscounted = false;
 
 function Basket() {
-  const [basketItems, setBasketItems] = useState<Product[]>([]);
+  const [basketItems, setBasketItems] = useState<Product[]>([]); //maybe parameterize this
   const [prices, setPrices] = useState(new Map<number, number>());
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
 
