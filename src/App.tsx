@@ -16,7 +16,7 @@ function App() {
           <Basket />
           <div className="rightCollumn">
             <UpsellItem />
-            <button
+            <button className="checkoutButton"
               onClick={() => {
                 alert("are you sure you want to checkout?");
                 setCurrentStep(Steps.Checkout);

@@ -1,5 +1,6 @@
 import productArray from "./product";
 import { useState } from "react";
+import './basket.css';
 
 function handleClick() {
   alert("Taking you back to the shop!");
@@ -31,7 +32,7 @@ export function UpsellItem() {
           <ul>
             <b>Price {upsellItems[4].price}</b>
           </ul>
-          <button onClick={() => { handleClick() }}>
+          <button className="continueShoppingButton" onClick={() => { handleClick() }}>
             {" "}
             Continue Shopping
             <a href="."></a>{" "}
