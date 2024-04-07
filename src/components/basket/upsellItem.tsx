@@ -1,16 +1,14 @@
 import productArray from "./product";
 import { useState } from "react";
-import './basket.css';
+import "./basket.css";
 
 function handleClick() {
   alert("Taking you back to the shop!");
 }
 export function UpsellItem() {
-  const [upsellItems, setUpsellItems] = useState(productArray);
-  
+  const [upsellItems] = useState(productArray);
 
-  
- if (upsellItems.length === 0) {
+  if (upsellItems.length === 0) {
     return <div>Loading...</div>;
   }
   return (
@@ -32,7 +30,12 @@ export function UpsellItem() {
           <ul>
             <b>Price {upsellItems[4].price}</b>
           </ul>
-          <button className="continueShoppingButton" onClick={() => { handleClick() }}>
+          <button
+            className="continueShoppingButton"
+            onClick={() => {
+              handleClick();
+            }}
+          >
             {" "}
             Continue Shopping
             <a href="."></a>{" "}
