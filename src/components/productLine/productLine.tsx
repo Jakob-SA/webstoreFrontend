@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Product } from "../basket/product";
 import { RemoveButton } from "./removeButton";
 import { QuantityInput } from "./quantityInput";
+import "./productLine.css";
+
 interface productLineProps {
   product: Product;
   handleRemoveItem: (id: number) => void;
@@ -16,6 +18,12 @@ export function ProductLine({
   const [giftwrapping, setGiftwrapping] = useState(false);
   const [quantity, setQuantity] = useState(1);
   giftwrapping.valueOf(); // to be deleted
+  const [isRemoving, setIsRemoving] = useState(false);
+
+  const handleRemove = () => {
+    setIsRemoving(true);
+    setTimeout(() => handleRemoveItem(product.id), 1000); // Adjust this to match your animation duration
+  };
 
   var originalLinePrice = product.price * quantity;
 
@@ -33,7 +41,7 @@ export function ProductLine({
   };
 
   return (
-    <tr>
+    <tr className={`productLine ${isRemoving ? "removing" : ""}`}>
       <td>
         <div className="lineItemFirst">
           <img
@@ -85,7 +93,7 @@ export function ProductLine({
 
       <td>
         <div className="lineItemLast">
-          <RemoveButton onClick={() => handleRemoveItem(product.id)} />
+          <RemoveButton onClick={() => handleRemove()} />
         </div>
       </td>
     </tr>

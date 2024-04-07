@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import productArray from "./product";
 import { ProductLine } from "../productLine/productLine";
 
