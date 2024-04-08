@@ -2,24 +2,27 @@ import { useState, useEffect } from "react";
 import { Product, fetchProducts } from "./product";
 import "./basket.css";
 
+
 function handleClick() {
   alert("Taking you back to the shop!");
 }
 export function UpsellItem() {
   const [upsellItems, setUpsellItems] = useState<Product[]>([]);
   useEffect(() => {
-    //copilot told me this was a fix.
+    //Would rather have the state of the Basket, however, we are not using Context API
     fetchProducts().then((products) => {
       setUpsellItems(products);
     }); //maybe need error handling
   }, []); // Empty array ensures this effect runs only once after initial render
+  
 
   if (upsellItems.length === 0) {
     return <div>Loading...</div>;
   }
   
+  
   return (
-    //should not return static information
+    //TODO: vary the displayed upsellProduct, based on the context of the basket.
     <>
       <section className="upsellItems">
         <h2>Products you might also like!</h2>
