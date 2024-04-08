@@ -1,23 +1,30 @@
-import productArray from "../../assets/media/products.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Product, fetchProducts } from "./product";
 import "./basket.css";
 
 function handleClick() {
   alert("Taking you back to the shop!");
 }
 export function UpsellItem() {
-  const [upsellItems] = useState(productArray);
+  const [upsellItems, setUpsellItems] = useState<Product[]>([]);
+  useEffect(() => {
+    //copilot told me this was a fix.
+    fetchProducts().then((products) => {
+      setUpsellItems(products);
+    }); //maybe need error handling
+  }, []); // Empty array ensures this effect runs only once after initial render
 
   if (upsellItems.length === 0) {
     return <div>Loading...</div>;
   }
+  
   return (
     //should not return static information
     <>
       <section className="upsellItems">
         <h2>Products you might also like!</h2>
         <img
-          src={"productPics/product" + upsellItems[0].id + ".jpg"}
+          src={"productPics/product" + upsellItems[0].upsellProductId + ".jpg"}
           className="productImages"
           width="150"
           height="150"
