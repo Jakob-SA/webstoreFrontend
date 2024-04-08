@@ -15,7 +15,7 @@ export function RemoveButton({ onClick }: RemoveButtonProps) {
       onClick={onClick}
     >
       <img
-        src={isHovered ? "openTrashcan.png" : "trashcan.png"}
+        src={isHovered ? "/openTrashcan.png" : "/trashcan.png"}
         alt="Remove icon"
         width="25px"
       />

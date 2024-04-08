@@ -10,7 +10,7 @@ function App() {
   const [currentStep, setCurrentStep] = useState<Steps>(Steps.Basket);
   if (currentStep === Steps.Basket) {
     return (
-      <div>
+      <div className="app-content">
         <Header />
         <div className="frontPage">
           <Suspense fallback={<div>BASKET HERE</div>}>

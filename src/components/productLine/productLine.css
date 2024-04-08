@@ -1,11 +1,16 @@
 .productLine.removing {
-    animation: fadeOut 1s ease-out forwards;
-  }
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.productLine {
+  opacity: 1;
+}
 
+/*
   @keyframes fadeOut {
     from { opacity: 1; }
     to { opacity: 0; }
-  }
+  }*/
 
 .productImages:hover {
   transform: scale(1.5);
@@ -52,7 +57,7 @@
   border-radius: 50%;
   margin: 5px;
   width: 20px;
-  height: 40px; 
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
