@@ -15,12 +15,18 @@ function App() {
         <div className="frontPage">
           <Basket />
           <div className="rightCollumn">
-            <UpsellItem />
-            <button onClick={() => {alert("are you sure you want to checkout?");
-            setCurrentStep(Steps.Checkout);
-            }}>
-              Checkout
-            </button>
+            <div className="upsellItemContainer">
+              <UpsellItem />
+              <button
+                className="checkoutButton"
+                onClick={() => {
+                  alert("are you sure you want to checkout?");
+                  setCurrentStep(Steps.Checkout);
+                }}
+              >
+                Checkout
+              </button>
+            </div>
           </div>
         </div>
       </div>
