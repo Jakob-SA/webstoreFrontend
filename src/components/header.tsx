@@ -14,7 +14,6 @@ function Header() {
           />
         </a>
       </div>
-      <h2>My Cart</h2>
     </header>
   );
 }

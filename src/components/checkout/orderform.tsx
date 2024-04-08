@@ -1,7 +1,6 @@
 import "./orderform.css";
 import { FormEvent, useState } from "react";
 import ZipCodeChecker from "./zipCodeChecker";
-import { i } from "vitest/dist/reporters-MmQN-57K.js";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
 // Throughout the development of this form LLM has been used to debugging, sparring and pair programming. However no code has been copied from LLMs
