@@ -2,8 +2,8 @@ import "./App.css";
 import Basket from "./components/basket/basket";
 import UpsellItem from "./components/basket/upsellItem";
 import Header from "./components/header";
-import { useState } from "react";
-import { Steps } from "./Steps";
+import { Suspense, useState } from "react";
+import { Steps } from "./steps";
 import Orderform from "./components/checkout/orderform";
 
 function App() {
@@ -13,20 +13,19 @@ function App() {
       <div>
         <Header />
         <div className="frontPage">
-          <Basket />
+          <Suspense fallback={<div>BASKET HERE</div>}>
+            <Basket />
+          </Suspense>
           <div className="rightCollumn">
-            <div className="upsellItemContainer">
-              <UpsellItem />
-              <button
-                className="checkoutButton"
-                onClick={() => {
-                  alert("are you sure you want to checkout?");
-                  setCurrentStep(Steps.Checkout);
-                }}
-              >
-                Checkout
-              </button>
-            </div>
+            <UpsellItem />
+            <button className="checkoutButton"
+              onClick={() => {
+                alert("are you sure you want to checkout?");
+                setCurrentStep(Steps.Checkout);
+              }}
+            >
+              Checkout
+            </button>
           </div>
         </div>
       </div>

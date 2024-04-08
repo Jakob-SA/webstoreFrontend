@@ -1,27 +1,33 @@
-import productArray from "./product";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Product, fetchProducts } from "./product";
+import "./basket.css";
+
 
 function handleClick() {
-  alert("Are you sure you want to checkout?");
+  alert("Taking you back to the shop!");
 }
 export function UpsellItem() {
-  const [upsellItems, setUpsellItems] = useState(productArray);
+  const [upsellItems, setUpsellItems] = useState<Product[]>([]);
+  useEffect(() => {
+    //Would rather have the state of the Basket, however, we are not using Context API
+    fetchProducts().then((products) => {
+      setUpsellItems(products);
+    }); //maybe need error handling
+  }, []); // Empty array ensures this effect runs only once after initial render
+  
 
-  const getUpsellItemsName = (id: number) => {
-    //to use later?
-    upsellItems.sort((a, b) => a.id - b.id);
-    let i = upsellItems[id].upsellProductId;
-    return upsellItems[i].name;
-  };
-  setUpsellItems; //Remove
-  getUpsellItemsName; // Remove
+  if (upsellItems.length === 0) {
+    return <div>Loading...</div>;
+  }
+  
+  
   return (
-    //should not return static information
+    //TODO: vary the displayed upsellProduct, based on the context of the basket.
     <>
       <section className="upsellItems">
         <h2>Products you might also like!</h2>
         <img
-          src={"productPics/product" + upsellItems[4].id + ".jpg"}
+          src={"productPics/product" + upsellItems[0].upsellProductId + ".jpg"}
           className="productImages"
           width="150"
           height="150"
@@ -34,9 +40,14 @@ export function UpsellItem() {
           <ul>
             <b>Price {upsellItems[4].price}</b>
           </ul>
-          <button onClick={handleClick}>
+          <button
+            className="continueShoppingButton"
+            onClick={() => {
+              handleClick();
+            }}
+          >
             {" "}
-            Contiue Shopping
+            Continue Shopping
             <a href="."></a>{" "}
           </button>
         </ul>
