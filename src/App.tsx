@@ -3,7 +3,7 @@ import Basket from "./components/basket/basket";
 import UpsellItem from "./components/basket/upsellItem";
 import Header from "./components/header";
 import { useState } from "react";
-import { Steps } from "./Steps";
+import { Steps } from "./steps";
 import Orderform from "./components/checkout/orderform";
 
 function App() {
