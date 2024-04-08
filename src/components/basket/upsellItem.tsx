@@ -25,7 +25,7 @@ export function UpsellItem() {
     //TODO: vary the displayed upsellProduct, based on the context of the basket.
     <>
       <section className="upsellItems">
-        <h2>Products you might also like!</h2>
+        <h3>Products you might also like!</h3>
         <img
           src={"productPics/product" + upsellItems[0].upsellProductId + ".jpg"}
           className="productImages"
