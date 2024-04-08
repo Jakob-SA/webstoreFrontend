@@ -1,6 +1,7 @@
 import "./orderform.css";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import ZipCodeChecker from "./zipCodeChecker";
+import { i } from "vitest/dist/reporters-MmQN-57K.js";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
 // Throughout the development of this form LLM has been used to debugging, sparring and pair programming. However no code has been copied from LLMs
@@ -35,8 +36,142 @@ function Orderform() {
   const [zipTouched, setZipTouched] = useState(false);
   const [deliveryZipTouched, setDeliveryZipTouched] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    var response;
+
+    if (response === undefined) {
+      setLoading(true);
+    }
+
+    const orderForm = e.currentTarget as HTMLFormElement;
+    const orderformElements =
+      orderForm.elements as typeof orderForm.elements & {
+        firstName: HTMLInputElement;
+        lastName: HTMLInputElement;
+        country: HTMLInputElement;
+        adress1: HTMLInputElement;
+        adress2: HTMLInputElement;
+        zip: HTMLInputElement;
+        city: HTMLInputElement;
+        deliveryCountry: HTMLInputElement;
+        deliveryAdress1: HTMLInputElement;
+        deliveryAdress2: HTMLInputElement;
+        deliveryZip: HTMLInputElement;
+        deliveryCity: HTMLInputElement;
+        email: HTMLInputElement;
+        telephoneNumber: HTMLInputElement;
+        businessName: HTMLInputElement;
+        VAT: HTMLInputElement;
+      };
+    if (isBusiness && isDiliveryAdress) {
+      response = await fetch("https://eoi9wdj8cv1ukqb.m.pipedream.net", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          firstName: orderformElements.firstName.value,
+          lastName: orderformElements.lastName.value,
+          country: orderformElements.country.value,
+          adress1: orderformElements.adress1.value,
+          adress2: orderformElements.adress2.value,
+          zip: orderformElements.zip.value,
+          city: orderformElements.city.value,
+          deliveryCountry: orderformElements.deliveryCountry.value,
+          deliveryAdress1: orderformElements.deliveryAdress1.value,
+          deliveryAdress2: orderformElements.deliveryAdress2.value,
+          deliveryZip: orderformElements.deliveryZip.value,
+          deliveryCity: orderformElements.deliveryCity.value,
+          email: orderformElements.email.value,
+          telephoneNumber: orderformElements.telephoneNumber.value,
+          businessName: orderformElements.businessName.value,
+          VAT: orderformElements.VAT.value,
+        }),
+      });
+    }
+    if (isBusiness && !isDiliveryAdress) {
+      response = await fetch("https://eoi9wdj8cv1ukqb.m.pipedream.net", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          firstName: orderformElements.firstName.value,
+          lastName: orderformElements.lastName.value,
+          country: orderformElements.country.value,
+          adress1: orderformElements.adress1.value,
+          adress2: orderformElements.adress2.value,
+          zip: orderformElements.zip.value,
+          city: orderformElements.city.value,
+          email: orderformElements.email.value,
+          telephoneNumber: orderformElements.telephoneNumber.value,
+          businessName: orderformElements.businessName.value,
+          VAT: orderformElements.VAT.value,
+        }),
+      });
+    }
+    if (!isBusiness && isDiliveryAdress) {
+      response = await fetch("https://eoi9wdj8cv1ukqb.m.pipedream.net", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          firstName: orderformElements.firstName.value,
+          lastName: orderformElements.lastName.value,
+          country: orderformElements.country.value,
+          adress1: orderformElements.adress1.value,
+          adress2: orderformElements.adress2.value,
+          zip: orderformElements.zip.value,
+          city: orderformElements.city.value,
+          deliveryCountry: orderformElements.deliveryCountry.value,
+          deliveryAdress1: orderformElements.deliveryAdress1.value,
+          deliveryAdress2: orderformElements.deliveryAdress2.value,
+          deliveryZip: orderformElements.deliveryZip.value,
+          deliveryCity: orderformElements.deliveryCity.value,
+          email: orderformElements.email.value,
+          telephoneNumber: orderformElements.telephoneNumber.value,
+        }),
+      });
+    } else {
+      response = await fetch("https://eoi9wdj8cv1ukqb.m.pipedream.net", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          firstName: orderformElements.firstName.value,
+          lastName: orderformElements.lastName.value,
+          country: orderformElements.country.value,
+          adress1: orderformElements.adress1.value,
+          adress2: orderformElements.adress2.value,
+          zip: orderformElements.zip.value,
+          city: orderformElements.city.value,
+          email: orderformElements.email.value,
+          telephoneNumber: orderformElements.telephoneNumber.value,
+        }),
+      });
+    }
+
+    if (response.ok) {
+      setLoading(false);
+      alert("Order submitted, thank you for your purchase!");
+    }
+    if (!response.ok) {
+      setLoading(false);
+      alert("Order failed, please try again later");
+    }
+  }
+
   return (
-    <form action="/shipping-information" method="post">
+    <form onSubmit={handleSubmit}>
       <h1>Checkout</h1>
 
       <h2>Shipping</h2>
@@ -89,33 +224,33 @@ function Orderform() {
               </div>
             </div>
             <div className="input-group">
-              <label htmlFor="first-name">
+              <label htmlFor="firstName">
                 First Name:<span className="required">*</span>
               </label>
               <input
                 type="text"
                 required
-                id="first-name"
-                name="user_first_name"
+                id="firstName"
+                name="userFirstName"
                 autoFocus
               />
             </div>
           </div>
           <div className="input-group">
-            <label htmlFor="last-name">
+            <label htmlFor="lastName">
               Last Name:<span className="required">*</span>
             </label>
-            <input type="text" required id="last-name" name="user_last_name" />
+            <input type="text" required id="lastName" name="userLastName" />
           </div>
           <div className="input-group">
-            <label htmlFor="Country">
+            <label htmlFor="country">
               Country: <span className="required">*</span>
             </label>
             <input
               type="text"
               required
               id="country"
-              name="user_country"
+              name="userCountry"
               value={"Denmark"}
               readOnly
             />
@@ -135,7 +270,7 @@ function Orderform() {
               Zip Code:<span className="required">*</span>
             </label>
             <input
-              type="text"
+              type="number"
               required
               id="zip"
               name="user_zip"
@@ -210,7 +345,7 @@ function Orderform() {
                     Zip Code:<span className="required">*</span>
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     required
                     id="deliveryZip"
                     name="user_deliveryZip"
@@ -243,7 +378,13 @@ function Orderform() {
             <label htmlFor="email">
               Email:<span className="required">*</span>
             </label>
-            <input type="email" required id="email" name="user_email" />
+            <input
+              type="email"
+              required
+              id="email"
+              name="user_email"
+              autoComplete="email"
+            />
           </div>
           <div className="input-group">
             <label htmlFor="telephoneNumber">
@@ -260,8 +401,9 @@ function Orderform() {
           </div>
         </section>
         <section>
-          <div className="submit-button">
-            <input type="submit" value="Place order" />
+          {loading && <p>Loading...</p>}
+          <div>
+            <button onSubmit={handleSubmit}>Submit order</button>
           </div>
         </section>
       </ul>
