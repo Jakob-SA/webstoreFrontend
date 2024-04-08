@@ -1,27 +1,23 @@
-import productArray from "./product";
+import productArray from "../../assets/media/products.json";
 import { useState } from "react";
+import "./basket.css";
 
 function handleClick() {
   alert("Taking you back to the shop!");
 }
 export function UpsellItem() {
-  const [upsellItems, setUpsellItems] = useState(productArray);
+  const [upsellItems] = useState(productArray);
 
-  const getUpsellItemsName = (id: number) => {
-    //to use later?
-    upsellItems.sort((a, b) => a.id - b.id);
-    let i = upsellItems[id].upsellProductId;
-    return upsellItems[i].name;
-  };
-  setUpsellItems; //Remove
-  getUpsellItemsName; // Remove
+  if (upsellItems.length === 0) {
+    return <div>Loading...</div>;
+  }
   return (
     //should not return static information
     <>
       <section className="upsellItems">
         <h2>Products you might also like!</h2>
         <img
-          src={"productPics/product" + upsellItems[4].id + ".jpg"}
+          src={"productPics/product" + upsellItems[0].id + ".jpg"}
           className="productImages"
           width="150"
           height="150"
@@ -34,9 +30,14 @@ export function UpsellItem() {
           <ul>
             <b>Price {upsellItems[4].price}</b>
           </ul>
-          <button onClick={handleClick}>
+          <button
+            className="continueShoppingButton"
+            onClick={() => {
+              handleClick();
+            }}
+          >
             {" "}
-            Contiue Shopping
+            Continue Shopping
             <a href="."></a>{" "}
           </button>
         </ul>
