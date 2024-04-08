@@ -13,7 +13,10 @@ body {
   --background-color: #f5f5f5;
   --brand-color: #3b4538;
   --primary-color: #ff6600;
-  margin: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 main {
   background-color: var(--background-color);
@@ -24,17 +27,17 @@ main {
 
 .productImages:hover {
   transform: scale(1.5);
-  transition: transform 0.5s;
 }
 .productImages {
   width: 7em;
   height: 7em;
   object-fit: cover;
   border-radius: 15px;
+  transition: transform 0.5s ease-out;
 }
 
 .shoppingCart {
-  background-color: rgb(142, 168, 204);
+  background-color: rgb(248, 248, 248);
   border-radius: 15px;
   border-collapse: collapse;
   width: 100%;
@@ -107,10 +110,9 @@ main {
   transform: scale(2);
 }
 .button {
-  background-color: orange;
+  background-color: rgb(212, 226, 243);
 }
 .button:hover {
-  background-color: whitesmoke;
   border-color: black;
 }
 input [type="number"] {
@@ -122,9 +124,14 @@ input [type="number"] {
   align-items: center;
 }
 .quantityButton {
-  background-color: orange;
-  border-radius: 8px;
+  background-color: rgb(212, 226, 243);
+  border-radius: 50%;
   margin: 5px;
+  width: 20px;
+  height: 40px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .quantityButton:hover {
   background-color: whitesmoke;
@@ -137,6 +144,11 @@ input [type="number"] {
   text-align: center;
   padding-left: 11px;
   padding-right: 0;
+}
+.checkoutButton {
+  background-color: orange;
+  border-radius: 8px;
+  margin: 5px;
 }
 
 .upsellItemContainer {
