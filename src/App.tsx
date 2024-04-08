@@ -18,7 +18,8 @@ function App() {
           </Suspense>
           <div className="rightCollumn">
             <UpsellItem />
-            <button className="checkoutButton"
+            <button
+              className="checkoutButton"
               onClick={() => {
                 alert("are you sure you want to checkout?");
                 setCurrentStep(Steps.Checkout);
