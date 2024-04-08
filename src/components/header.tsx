@@ -12,7 +12,7 @@ function Header() {
           width="150em"
         />
       </div>
-      <h2> Basket</h2>
+      <h2>My Cart</h2>
     </header>
   );
 }
