@@ -29,3 +29,31 @@ main {
   width: 18em;
   height: 20em;
 }
+.frontPage {
+  display: flex;
+  justify-content: space-between;
+  align-items: default;
+  padding: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+}
+
+@media (max-width: 768px) {
+  .frontPage {
+    flex-direction: column;
+    align-items: center; 
+    text-align: center; 
+  }
+  
+  .rightCollumn {
+    width: 100%; 
+    max-width: 400px;
+    margin: auto; 
+    display: block; 
+  }
+
+  .rightCollumn > * {
+    margin: 0 auto; 
+  }
+}

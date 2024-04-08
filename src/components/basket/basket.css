@@ -46,13 +46,6 @@
   border-radius: 8px;
   margin: 5px;
 }
-.frontPage {
-  display: flex;
-  justify-content: space-between;
-  align-items: default;
-  padding: 2em;
-}
-
 
 .shoppingCart td,
 .shoppingCart th {
