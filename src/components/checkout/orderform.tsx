@@ -1,6 +1,7 @@
 import "./orderform.css";
 import { FormEvent, useState } from "react";
 import ZipCodeChecker from "./zipCodeChecker";
+import NavigationBar from "../../NavigationBar";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
 // Throughout the development of this form LLM has been used to debugging, sparring and pair programming. However no code has been copied from LLMs
@@ -170,243 +171,250 @@ function Orderform() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Checkout</h1>
+    <>
+      <NavigationBar />
+      <form onSubmit={handleSubmit}>
+        <h1>Checkout</h1>
 
-      <h2>Shipping</h2>
-      <legend>Enter your shipping details</legend>
-      <p className="required-note">
-        Fields marked with<span className="required">*</span> are required.
-      </p>
-      <ul>
-        <section>
-          <div>
+        <h2>Shipping</h2>
+        <legend>Enter your shipping details</legend>
+        <p className="required-note">
+          Fields marked with<span className="required">*</span> are required.
+        </p>
+        <ul>
+          <section>
             <div>
-              {" "}
-              {/* -- This is a checkbox to toggle the business name and VAT number fields */}
               <div>
                 {" "}
-                <div className="business-checkbox">
-                  <label htmlFor="businessOrder">Business order:</label>
-                  <input
-                    type="checkbox"
-                    id="businessOrder"
-                    name="user_businessOrder"
-                    checked={isBusiness}
-                    onChange={handleBusinessChange}
-                  />
-                </div>
-                {isBusiness && (
-                  <div>
-                    <div className="input-group">
-                      <label htmlFor="businessName">Business Name:</label>
-                      <input
-                        type="text"
-                        required
-                        id="businessName"
-                        name="user_businessName"
-                      />
-                    </div>
-                    <div className="input-group">
-                      <label htmlFor="VAT">Vat Number:</label>
-                      <input
-                        type="text"
-                        required
-                        id="VAT"
-                        name="user_VAT"
-                        pattern="^\d{8}$" // This is a pattern to validate the VAT number to the danish format
-                        title="Please enter a valid danish VAT number"
-                      />
-                    </div>
+                {/* -- This is a checkbox to toggle the business name and VAT number fields */}
+                <div>
+                  {" "}
+                  <div className="business-checkbox">
+                    <label htmlFor="businessOrder">Business order:</label>
+                    <input
+                      type="checkbox"
+                      id="businessOrder"
+                      name="user_businessOrder"
+                      checked={isBusiness}
+                      onChange={handleBusinessChange}
+                    />
                   </div>
-                )}
+                  {isBusiness && (
+                    <div>
+                      <div className="input-group">
+                        <label htmlFor="businessName">Business Name:</label>
+                        <input
+                          type="text"
+                          required
+                          id="businessName"
+                          name="user_businessName"
+                        />
+                      </div>
+                      <div className="input-group">
+                        <label htmlFor="VAT">Vat Number:</label>
+                        <input
+                          type="text"
+                          required
+                          id="VAT"
+                          name="user_VAT"
+                          pattern="^\d{8}$" // This is a pattern to validate the VAT number to the danish format
+                          title="Please enter a valid danish VAT number"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="input-group">
+                <label htmlFor="firstName">
+                  First Name:<span className="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  id="firstName"
+                  name="userFirstName"
+                  autoFocus
+                />
               </div>
             </div>
             <div className="input-group">
-              <label htmlFor="firstName">
-                First Name:<span className="required">*</span>
+              <label htmlFor="lastName">
+                Last Name:<span className="required">*</span>
+              </label>
+              <input type="text" required id="lastName" name="userLastName" />
+            </div>
+            <div className="input-group">
+              <label htmlFor="country">
+                Country: <span className="required">*</span>
               </label>
               <input
                 type="text"
                 required
-                id="firstName"
-                name="userFirstName"
-                autoFocus
+                id="country"
+                name="userCountry"
+                value={"Denmark"}
+                readOnly
               />
             </div>
-          </div>
-          <div className="input-group">
-            <label htmlFor="lastName">
-              Last Name:<span className="required">*</span>
-            </label>
-            <input type="text" required id="lastName" name="userLastName" />
-          </div>
-          <div className="input-group">
-            <label htmlFor="country">
-              Country: <span className="required">*</span>
-            </label>
-            <input
-              type="text"
-              required
-              id="country"
-              name="userCountry"
-              value={"Denmark"}
-              readOnly
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="adress1">
-              Adress:<span className="required">*</span>
-            </label>
-            <input type="text" required id="adress1" name="user_adress1" />
-          </div>
-          <div className="input-group">
-            <label htmlFor="adress2">Appartment, suite etc.:</label>
-            <input type="text" id="adress2" name="user_adress2" />
-          </div>
-          <div className="input-group">
-            <label htmlFor="zip">
-              Zip Code:<span className="required">*</span>
-            </label>
-            <input
-              type="number"
-              required
-              id="zip"
-              name="user_zip"
-              value={zipCode}
-              onChange={(e) => setZipCode(e.target.value)}
-              onBlur={(e) => {
-                setZipTouched(true);
-                handleZipCodeSubmit(e.target.value, e.target.id);
-              }}
-            />
-            {zipTouched && !validZip && (
-              <p className="zip-error-message">Postal code is invalid</p>
-            )}
-          </div>
-          <div className="input-group">
-            <label htmlFor="city">
-              City:<span className="required">*</span>
-            </label>
-            <input type="text" required id="city" name="user_city" />
-          </div>
-          <div>
-            {" "}
-            {/* -- This is a checkbox to toggle the delivery adress fields */}
-            <div className="address-checkbox">
-              <label htmlFor="deliveryAdress">Different delivery adress:</label>
+            <div className="input-group">
+              <label htmlFor="adress1">
+                Adress:<span className="required">*</span>
+              </label>
+              <input type="text" required id="adress1" name="user_adress1" />
+            </div>
+            <div className="input-group">
+              <label htmlFor="adress2">Appartment, suite etc.:</label>
+              <input type="text" id="adress2" name="user_adress2" />
+            </div>
+            <div className="input-group">
+              <label htmlFor="zip">
+                Zip Code:<span className="required">*</span>
+              </label>
               <input
-                type="checkbox"
-                id="deliveryAdress"
-                name="user_deliveryAdress"
-                checked={isDiliveryAdress}
-                onChange={handleDeliveryAdressChange}
+                type="number"
+                required
+                id="zip"
+                name="user_zip"
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
+                onBlur={(e) => {
+                  setZipTouched(true);
+                  handleZipCodeSubmit(e.target.value, e.target.id);
+                }}
+              />
+              {zipTouched && !validZip && (
+                <p className="zip-error-message">Postal code is invalid</p>
+              )}
+            </div>
+            <div className="input-group">
+              <label htmlFor="city">
+                City:<span className="required">*</span>
+              </label>
+              <input type="text" required id="city" name="user_city" />
+            </div>
+            <div>
+              {" "}
+              {/* -- This is a checkbox to toggle the delivery adress fields */}
+              <div className="address-checkbox">
+                <label htmlFor="deliveryAdress">
+                  Different delivery adress:
+                </label>
+                <input
+                  type="checkbox"
+                  id="deliveryAdress"
+                  name="user_deliveryAdress"
+                  checked={isDiliveryAdress}
+                  onChange={handleDeliveryAdressChange}
+                />
+              </div>
+              {isDiliveryAdress && (
+                <div>
+                  <div className="input-group">
+                    <label htmlFor="deliveryCountry">
+                      Country:<span className="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      id="deliveryCountry"
+                      name="user_deliveryCountry"
+                      value={"Denmark"}
+                      readOnly
+                    />
+                  </div>
+                  <div className="input-group">
+                    <label htmlFor="deliveryAdress1">
+                      Adress:<span className="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      id="deliveryAdress1"
+                      name="user_deliveryAdress1"
+                    />
+                  </div>
+                  <div className="input-group">
+                    <label htmlFor="deliveryAdress2">
+                      Appartment, suite etc.:
+                    </label>
+                    <input
+                      type="text"
+                      id="deliveryAdress2"
+                      name="user_deliveryAdress2"
+                    />
+                  </div>
+                  <div className="input-group">
+                    <label htmlFor="deliveryZip">
+                      Zip Code:<span className="required">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      required
+                      id="deliveryZip"
+                      name="user_deliveryZip"
+                      value={deliveryZip}
+                      onChange={(e) => setDeliveryZip(e.target.value)}
+                      onBlur={(e) => {
+                        setDeliveryZipTouched(true);
+                        handleZipCodeSubmit(e.target.value, e.target.id);
+                      }}
+                    />
+                    {deliveryZipTouched && !validDeliveryZip && (
+                      <p className="zip-error-message">
+                        Postal code is invalid
+                      </p>
+                    )}
+                  </div>
+                  <div className="input-group">
+                    <label htmlFor="deliveryCity">
+                      City:<span className="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      id="deliveryCity"
+                      name="user_deliveryCity"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="input-group">
+              <label htmlFor="email">
+                Email:<span className="required">*</span>
+              </label>
+              <input
+                type="email"
+                required
+                id="email"
+                name="user_email"
+                autoComplete="email"
               />
             </div>
-            {isDiliveryAdress && (
-              <div>
-                <div className="input-group">
-                  <label htmlFor="deliveryCountry">
-                    Country:<span className="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    id="deliveryCountry"
-                    name="user_deliveryCountry"
-                    value={"Denmark"}
-                    readOnly
-                  />
-                </div>
-                <div className="input-group">
-                  <label htmlFor="deliveryAdress1">
-                    Adress:<span className="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    id="deliveryAdress1"
-                    name="user_deliveryAdress1"
-                  />
-                </div>
-                <div className="input-group">
-                  <label htmlFor="deliveryAdress2">
-                    Appartment, suite etc.:
-                  </label>
-                  <input
-                    type="text"
-                    id="deliveryAdress2"
-                    name="user_deliveryAdress2"
-                  />
-                </div>
-                <div className="input-group">
-                  <label htmlFor="deliveryZip">
-                    Zip Code:<span className="required">*</span>
-                  </label>
-                  <input
-                    type="number"
-                    required
-                    id="deliveryZip"
-                    name="user_deliveryZip"
-                    value={deliveryZip}
-                    onChange={(e) => setDeliveryZip(e.target.value)}
-                    onBlur={(e) => {
-                      setDeliveryZipTouched(true);
-                      handleZipCodeSubmit(e.target.value, e.target.id);
-                    }}
-                  />
-                  {deliveryZipTouched && !validDeliveryZip && (
-                    <p className="zip-error-message">Postal code is invalid</p>
-                  )}
-                </div>
-                <div className="input-group">
-                  <label htmlFor="deliveryCity">
-                    City:<span className="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    id="deliveryCity"
-                    name="user_deliveryCity"
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="input-group">
-            <label htmlFor="email">
-              Email:<span className="required">*</span>
-            </label>
-            <input
-              type="email"
-              required
-              id="email"
-              name="user_email"
-              autoComplete="email"
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="telephoneNumber">
-              Phonenumber:<span className="required">*</span>
-            </label>
-            <input
-              type="tel"
-              required
-              pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
-              name="user_telephoneNumber"
-              id="telephoneNumber"
-              title="Please enter a valid danish phone number"
-            ></input>
-          </div>
-        </section>
-        <section>
-          {loading && <p>Loading...</p>}
-          <div>
-            <button onSubmit={handleSubmit}>Submit order</button>
-          </div>
-        </section>
-      </ul>
-    </form>
+            <div className="input-group">
+              <label htmlFor="telephoneNumber">
+                Phonenumber:<span className="required">*</span>
+              </label>
+              <input
+                type="tel"
+                required
+                pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
+                name="user_telephoneNumber"
+                id="telephoneNumber"
+                title="Please enter a valid danish phone number"
+              ></input>
+            </div>
+          </section>
+          <section>
+            {loading && <p>Loading...</p>}
+            <div>
+              <button onSubmit={handleSubmit}>Submit order</button>
+            </div>
+          </section>
+        </ul>
+      </form>
+    </>
   );
 }
 

@@ -1,0 +1,14 @@
+nav {
+  display: flex; /* Arranges items horizontally */
+  justify-content: space-between; /* Spreads items evenly */
+  align-items: center; /* Vertically aligns items */
+  background-color: #eee; /* Light background color */
+  padding: 10px 20px; /* Adds padding for spacing */
+}
+nav li {
+  list-style: none; /* Removes default bullet points */
+  padding: 5px 10px; /* Adds padding for each step */
+  border: 1px solid #ddd; /* Adds a border for separation */
+  margin-right: 10px; /* Adds margin between steps */
+  text-align: center; /* Centers text within each step */
+}
