@@ -3,7 +3,6 @@ import Basket from "./components/basket/basket";
 import UpsellItem from "./components/basket/upsellItem";
 import Header from "./components/header";
 import { Suspense, useState } from "react";
-import Orderform from "./components/checkout/orderform";
 import NavigationBar from "./NavigationBar";
 
 function App() {

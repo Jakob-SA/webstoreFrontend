@@ -1,14 +1,36 @@
 nav {
-  display: flex; /* Arranges items horizontally */
-  justify-content: space-between; /* Spreads items evenly */
-  align-items: center; /* Vertically aligns items */
-  background-color: #eee; /* Light background color */
-  padding: 10px 20px; /* Adds padding for spacing */
+  display: flex;
+  justify-content: center;
+  width: 20rem;
+  margin: 1.5rem auto;
 }
+
+nav ul {
+  display: flex; /* Added for centering */
+}
+
+.checkout-steps {
+}
+
 nav li {
-  list-style: none; /* Removes default bullet points */
-  padding: 5px 10px; /* Adds padding for each step */
-  border: 1px solid #ddd; /* Adds a border for separation */
-  margin-right: 10px; /* Adds margin between steps */
-  text-align: center; /* Centers text within each step */
+  display: flex; /* Added for centering */
+  align-items: center; /* Added for centering */
+  justify-content: center; /* Optional, centers content horizontally */
+}
+
+nav li.active a {
+  color: #f08000; /* Change this to your desired active link color */
+  border-top: 0.3rem #f08000 solid;
+  text-decoration: inherit;
+}
+
+nav a {
+  color: #c0c0c0; /* Change this to your desired default link color */
+  border-top: 0.3rem #c0c0c0 solid;
+  padding: 0 4rem;
+}
+nav a:hover {
+  color: #e2630258; /* Change this to your desired hover link color */
+  border-top: 0.3rem #e2630258 solid;
+  text-decoration: inherit;
 }

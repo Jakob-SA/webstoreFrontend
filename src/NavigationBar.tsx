@@ -1,3 +1,32 @@
+import { Link, useLocation } from "react-router-dom";
+import "./NavigationBar.css";
+
+export default function NavigationBar() {
+  const location = useLocation();
+
+  return (
+    <nav>
+      <ul>
+        <li
+          className={
+            location.pathname === "/"
+              ? "active"
+              : location.pathname === "/orderform"
+              ? "active"
+              : ""
+          }
+        >
+          <Link to="/">Basket</Link>
+        </li>
+        <li className={location.pathname === "/orderform" ? "active" : ""}>
+          <Link to="/orderform">Delivery</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+}
+
+/*
 import { Link } from "react-router-dom";
 
 export default function NavigationBar() {
@@ -14,18 +43,4 @@ export default function NavigationBar() {
     </nav>
   );
 }
-
-/*
-export default function NavigationBar() {
-    return (
-      <div className="checkout-steps">
-        <div className="basket">
-          <Link to="/">Basket</Link>{" "}
-        </div>
-        <div className="orderForm">
-          <Link to="/orderform">Delivery</Link>
-        </div>
-      </div>
-    );
-  }
-  */
+*/
