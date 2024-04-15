@@ -11,11 +11,12 @@
   width: 100%;
   height: auto;
   justify-content: space-between;
-
+  display: flex;
+  flex-wrap: wrap;
 }
 .shoppingCart p {
   color: black;
-
+  font-display: flex;
 }
 .upsellItems {
   background-color: rgb(248, 248, 248);
@@ -36,13 +37,14 @@
   content: "";
   display: block;
   width: 0.5cm; /* Adjust as needed */
+  font-display: flex;
 }
 .upsellItemContainer {
   position: fixed;
   right: inherit;
 }
 .checkoutButton {
-  background-color: rgb(255, 198, 94);
+  background-color: rgba(247, 180, 56, 0.66);
   border-radius: 8px;
   margin: 5px;
 }
@@ -52,4 +54,38 @@
   padding: 10px; /* Adjust as needed */
   border-bottom: 1px solid black;
   color:black;
+}
+
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+  .shoppingCart, .shoppingCart thead, .shoppingCart tbody, .shoppingCart th, .shoppingCart td, .shoppingCart tr {
+    display: block;
+  }
+
+  /* Hide table headers (optionally) */
+  .shoppingCart thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .shoppingCart tr {
+    margin: 0 0 1rem 0;
+  }
+
+  /* Behave like "rows" */
+  .shoppingCart td {
+    /* Each cell is now a full-width row */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 0.625em;
+  }
+
+  /* Replicate horizontal lines between rows */
+  .shoppingCart td:before {
+    content: attr(data-label); /* Use data-label to create "fake headers" for each cell */
+    font-weight: bold;
+    text-transform: uppercase;
+    float: left;
+  }
 }
