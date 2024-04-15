@@ -22,7 +22,7 @@ export function ProductLine({
 
   const handleRemove = () => {
     setIsRemoving(true);
-    setTimeout(() => handleRemoveItem(product.id), 1000); // Animation duration
+    setTimeout(() => handleRemoveItem(product.id), 300); // Animation duration
   };
 
   var originalLinePrice = product.price * quantity;
