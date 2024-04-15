@@ -9,9 +9,6 @@ nav ul {
   display: flex; /* Added for centering */
 }
 
-.checkout-steps {
-}
-
 nav li {
   display: flex; /* Added for centering */
   align-items: center; /* Added for centering */
