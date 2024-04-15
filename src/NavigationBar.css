@@ -6,28 +6,28 @@ nav {
 }
 
 nav ul {
-  display: flex; /* Added for centering */
+  display: flex;
 }
 
 nav li {
-  display: flex; /* Added for centering */
-  align-items: center; /* Added for centering */
-  justify-content: center; /* Optional, centers content horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 nav li.active a {
-  color: #f08000; /* Change this to your desired active link color */
+  color: #f08000;
   border-top: 0.3rem #f08000 solid;
   text-decoration: inherit;
 }
 
 nav a {
-  color: #c0c0c0; /* Change this to your desired default link color */
+  color: #c0c0c0;
   border-top: 0.3rem #c0c0c0 solid;
   padding: 0 4rem;
 }
 nav a:hover {
-  color: #e2630258; /* Change this to your desired hover link color */
+  color: #e2630258;
   border-top: 0.3rem #e2630258 solid;
   text-decoration: inherit;
 }
