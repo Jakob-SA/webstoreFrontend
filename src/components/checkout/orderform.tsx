@@ -85,134 +85,142 @@ function Orderform() {
         <h1>Checkout</h1>
         <h2>Shipping</h2>
         <legend>Enter your shipping details</legend>
-        <p className="required-note">
-          Fields marked with<span className="required">*</span> are required.
-        </p>
-        <div className="business-checkbox">
-          <label htmlFor="businessOrder">Business order:</label>
-          <input
-            type="checkbox"
-            id="businessOrder"
-            name="user_businessOrder"
-            checked={isBusiness}
-            onChange={handleBusinessChange}
-          />
-        </div>
+        <p>Fields marked with * are required.</p>
+        <label htmlFor="businessOrder" hidden>
+          Business order:
+        </label>
+        <input
+          type="checkbox"
+          id="businessOrder"
+          name="user_businessOrder"
+          checked={isBusiness}
+          onChange={handleBusinessChange}
+        />
         {isBusiness && (
           <div>
-            <div className="input-group">
-              <label htmlFor="businessName">Business Name:</label>
-              <input
-                type="text"
-                required
-                id="businessName"
-                name="user_businessName"
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="VAT">Vat Number:</label>
-              <input
-                type="text"
-                required
-                id="VAT"
-                name="user_VAT"
-                pattern="^\d{8}$" // This is a pattern to validate the VAT number to the danish format
-                title="Please enter a valid danish VAT number"
-              />
-            </div>
+            <label htmlFor="businessName" hidden>
+              Business Name:
+            </label>
+            <input
+              placeholder="Enter your business name *"
+              type="text"
+              required
+              id="businessName"
+              name="user_businessName"
+            />
+            <label htmlFor="VAT" hidden>
+              Vat Number:
+            </label>
+            <input
+              placeholder="Enter your VAT number *"
+              type="text"
+              required
+              id="VAT"
+              name="user_VAT"
+              pattern="^\d{8}$" // This is a pattern to validate the VAT number to the danish format
+              title="Please enter a valid danish VAT number"
+            />
           </div>
         )}
-        <div className="input-group">
-          <label htmlFor="firstName">
-            First Name:<span className="required">*</span>
-          </label>
-          <input
-            type="text"
-            required
-            id="firstName"
-            name="userFirstName"
-            autoFocus
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="lastName">
-            Last Name:<span className="required">*</span>
-          </label>
-          <input type="text" required id="lastName" name="userLastName" />
-        </div>
-        <div className="input-group">
-          <label htmlFor="country">
-            Country: <span className="required">*</span>
-          </label>
-          <input
-            type="text"
-            required
-            id="country"
-            name="userCountry"
-            value={"Denmark"}
-            readOnly
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="adress1">
-            Adress:<span className="required">*</span>
-          </label>
-          <input type="text" required id="adress1" name="user_adress1" />
-        </div>
-        <div className="input-group">
-          <label htmlFor="adress2">Appartment, suite etc.:</label>
-          <input type="text" id="adress2" name="user_adress2" />
-        </div>
+        <label htmlFor="firstName" hidden>
+          First Name:<span className="required">*</span>
+        </label>
+        <input
+          placeholder="Enter your first name *"
+          type="text"
+          required
+          id="firstName"
+          name="userFirstName"
+          autoFocus
+        />
+        <label htmlFor="lastName" hidden>
+          Last Name:<span className="required">*</span>
+        </label>
+        <input
+          placeholder="Enter you last name *"
+          type="text"
+          required
+          id="lastName"
+          name="userLastName"
+        />
+        <label htmlFor="country" hidden>
+          Country: <span className="required">*</span>
+        </label>
+        <input
+          type="text"
+          required
+          id="country"
+          name="userCountry"
+          value={"Denmark"}
+          readOnly
+        />
+        <label htmlFor="adress1" hidden>
+          Adress:<span className="required">*</span>
+        </label>
+        <input
+          placeholder="Enter your Adress *"
+          type="text"
+          required
+          id="adress1"
+          name="user_adress1"
+        />
+        <label htmlFor="adress2" hidden>
+          Appartment, suite etc.:
+        </label>
+        <input
+          placeholder="Enter appartment, suite etc."
+          type="text"
+          id="adress2"
+          name="user_adress2"
+        />
         <ZipCodeChecker2
           zipCode={zipCode}
           onZipChange={setZipCode}
           city={city}
           onCityChange={setCity}
         />
-        <div className="address-checkbox">
-          <label htmlFor="deliveryAdress">Different delivery adress:</label>
-          <input
-            type="checkbox"
-            id="deliveryAdress"
-            name="user_deliveryAdress"
-            checked={isDeliveryAddress}
-            onChange={handleDeliveryAdressChange}
-          />
-        </div>
+        <label htmlFor="deliveryAdress" hidden>
+          Different delivery adress:
+        </label>
+        <input
+          type="checkbox"
+          id="deliveryAdress"
+          name="user_deliveryAdress"
+          checked={isDeliveryAddress}
+          onChange={handleDeliveryAdressChange}
+        />
         {isDeliveryAddress && (
           <div>
-            <div className="input-group">
-              <label htmlFor="deliveryCountry">
-                Country:<span className="required">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                id="deliveryCountry"
-                name="user_deliveryCountry"
-                value={"Denmark"}
-                readOnly
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="deliveryAdress1">
-                Adress:<span className="required">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                id="deliveryAdress1"
-                name="user_deliveryAdress1"
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="deliveryAdress2">Appartment, suite etc.:</label>
-              <input
-                type="text"
-                id="deliveryAdress2"
-                name="user_deliveryAdress2"
-              />
-            </div>
+            <label htmlFor="deliveryCountry" hidden>
+              Country:<span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              required
+              id="deliveryCountry"
+              name="user_deliveryCountry"
+              value={"Denmark"}
+              readOnly
+            />
+            <label htmlFor="deliveryAdress1" hidden>
+              Adress:<span className="required">*</span>
+            </label>
+            <input
+              placeholder="Enter your requested delivery Address *"
+              type="text"
+              required
+              id="deliveryAdress1"
+              name="user_deliveryAdress1"
+            />
+            <label htmlFor="deliveryAdress2" hidden>
+              Appartment, suite etc.:
+            </label>
+            <input
+              placeholder="Enter appartment, suite etc."
+              type="text"
+              id="deliveryAdress2"
+              name="user_deliveryAdress2"
+            />
             <ZipCodeChecker2
               zipCode={deliveryZipCode}
               onZipChange={setDeliveryZipCode}
@@ -221,34 +229,34 @@ function Orderform() {
             />
           </div>
         )}
-        <div className="input-group">
-          <label htmlFor="email">
-            Email:<span className="required">*</span>
-          </label>
-          <input
-            type="email"
-            required
-            id="email"
-            name="user_email"
-            autoComplete="email"
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="telephoneNumber">
-            Phonenumber:<span className="required">*</span>
-          </label>
-          <input
-            type="tel"
-            required
-            pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
-            name="user_telephoneNumber"
-            id="telephoneNumber"
-            title="Please enter a valid danish phone number"
-          ></input>
-        </div>
+        <label htmlFor="email" hidden>
+          Email:<span className="required">*</span>
+        </label>
+        <input
+          placeholder="Enter your email *"
+          type="email"
+          required
+          id="email"
+          name="user_email"
+          autoComplete="email"
+        />
+        <label htmlFor="telephoneNumber" hidden>
+          Phonenumber:<span className="required">*</span>
+        </label>
+        <input
+          placeholder="Enter your phone number *"
+          type="tel"
+          required
+          pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
+          name="user_telephoneNumber"
+          id="telephoneNumber"
+          title="Please enter a valid danish phone number"
+        ></input>
         {loading && <p>Loading...</p>}
         <div>
-          <button type="submit">Submit order</button>
+          <button type="submit" className="acceptButton">
+            Submit order
+          </button>
         </div>
       </form>
     </>

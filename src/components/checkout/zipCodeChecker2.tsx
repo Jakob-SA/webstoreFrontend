@@ -39,32 +39,36 @@ export const ZipCodeChecker2: React.FC<ZipCodeCheckerProps> = ({
 
   return (
     <div>
-      <div className="input-group">
-        <label htmlFor="zip">
-          Zip Code:<span className="required">*</span>
-        </label>
-        <input
-          type="number"
-          required
-          id="zip"
-          name="user_zip"
-          value={zipCode}
-          onChange={(e) => onZipChange(e.target.value)}
-          onBlur={(e) => {
-            setZipTouched(true);
-            handleZipCode(e.target.value);
-          }}
-        />
-        {zipTouched && !validZip && (
-          <p className="zip-error-message">Postal code is invalid</p>
-        )}
-      </div>
-      <div className="input-group">
-        <label htmlFor="city">
-          City:<span className="required">*</span>
-        </label>
-        <input type="text" required id="city" name="user_city" value={city} />
-      </div>
+      <label htmlFor="zip" hidden>
+        Zip Code:<span className="required">*</span>
+      </label>
+      <input
+        placeholder="Enter your postal code *"
+        type="number"
+        required
+        id="zip"
+        name="user_zip"
+        value={zipCode}
+        onChange={(e) => onZipChange(e.target.value)}
+        onBlur={(e) => {
+          setZipTouched(true);
+          handleZipCode(e.target.value);
+        }}
+      />
+      {zipTouched && !validZip && (
+        <p className="zip-error-message">Postal code is invalid</p>
+      )}
+      <label htmlFor="city" hidden>
+        City:<span className="required">*</span>
+      </label>
+      <input
+        placeholder="Enter your city, or let us set it for you *"
+        type="text"
+        required
+        id="city"
+        name="user_city"
+        value={city}
+      />
     </div>
   );
 };
