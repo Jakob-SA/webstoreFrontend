@@ -24,14 +24,14 @@ export function QuantityTooltip(product: Product) {
         width="20"
         height="20"
       />
-      {showTooltip && (
-        <div
-          className="tooltip"
-          style={{ left: `${coords.x}px`, top: `${coords.y}px` }}
-        >
-          {"Buy at least " + product.rebateQuantity + " pairs to get a rebate"}
-        </div>
-      )}
+      {showTooltip ? null : null}
+
+      <div
+        className="tooltip"
+        style={{ left: `${coords.x}px`, top: `${coords.y}px` }}
+      >
+        {"Buy at least " + product.rebateQuantity + " pairs to get a rebate"}
+      </div>
     </div>
   );
 }
