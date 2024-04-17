@@ -7,7 +7,7 @@ interface ZipCodeCheckerProps {
   onCityChange: (city: string) => void;
 }
 
-export const ZipCodeChecker2: React.FC<ZipCodeCheckerProps> = ({
+export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
   zipCode,
   onZipChange,
   city,

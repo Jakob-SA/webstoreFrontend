@@ -1,7 +1,7 @@
 import "./orderform.css";
 import { FormEvent, useState } from "react";
 import NavigationBar from "../../NavigationBar";
-import { ZipCodeChecker2 } from "./zipCodeChecker2";
+import { ZipCodeChecker } from "./zipCodeChecker";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
 // Throughout the development of this form LLM has been used to debugging, sparring and pair programming. However no code has been copied from LLMs
@@ -173,7 +173,7 @@ function Orderform() {
           id="adress2"
           name="user_adress2"
         />
-        <ZipCodeChecker2
+        <ZipCodeChecker
           zipCode={zipCode}
           onZipChange={setZipCode}
           city={city}
@@ -221,7 +221,7 @@ function Orderform() {
               id="deliveryAdress2"
               name="user_deliveryAdress2"
             />
-            <ZipCodeChecker2
+            <ZipCodeChecker
               zipCode={deliveryZipCode}
               onZipChange={setDeliveryZipCode}
               city={deliveryCity}
