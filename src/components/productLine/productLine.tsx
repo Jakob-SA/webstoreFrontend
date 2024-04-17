@@ -3,6 +3,7 @@ import { Product } from "../basket/product";
 import { RemoveButton } from "./removeButton";
 import { QuantityInput } from "./quantityInput";
 import "./productLine.css";
+import { QuantityTooltip } from "./quantityTooltip";
 
 interface productLineProps {
   product: Product;
@@ -65,6 +66,9 @@ export function ProductLine({
             setQuantity={setQuantity}
             product={product}
           />
+          {quantity >= product.rebateQuantity ? null : (
+            <QuantityTooltip {...product} />
+          )}
         </div>
       </td>
       <td>
