@@ -1,6 +1,6 @@
 import "./orderform.css";
 import { FormEvent, useState } from "react";
-import NavigationBar from "../../NavigationBar";
+import NavigationBar from "../header/NavigationBar";
 import { ZipCodeChecker } from "./zipCodeChecker";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.

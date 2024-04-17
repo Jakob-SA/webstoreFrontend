@@ -2,19 +2,24 @@ import "./header.css";
 
 function Header() {
   return (
-    <header>
-      <div className="header">
+    <>
+      <header>
         <h1>Checkout</h1>
         <a href=".">
           <img
             className="storeLogo"
             src="store-logo.png"
             alt="Store logo"
-            width="150em"
+            width="150rem"
           />
         </a>
-      </div>
-    </header>
+      </header>
+      <nav>
+        {
+          //HERE JOES MAKES THE NAVBAR
+        }
+      </nav>
+    </>
   );
 }
 export default Header;

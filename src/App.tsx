@@ -1,9 +1,8 @@
 import "./App.css";
 import Basket from "./components/basket/basket";
 import UpsellItem from "./components/basket/upsellItem";
-import Header from "./components/header";
-import { Suspense, useState } from "react";
-import NavigationBar from "./NavigationBar";
+import Header from "./components/header/header";
+import NavigationBar from "./components/header/NavigationBar";
 
 function App() {
   return (
@@ -12,9 +11,7 @@ function App() {
       <div>
         <Header />
         <div className="frontPage">
-          <Suspense fallback={<div>BASKET HERE</div>}>
-            <Basket />
-          </Suspense>
+          <Basket />
           <div className="rightCollumn">
             <UpsellItem />
           </div>
