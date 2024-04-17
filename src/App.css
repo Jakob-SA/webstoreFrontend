@@ -19,7 +19,7 @@ main {
   border-radius: 1em;
   padding: 1em;
   margin: auto;
-  max-width: 800px;
+  max-width: 80dvw;
   display: flex;
   align-items: default;
   flex-direction: row;

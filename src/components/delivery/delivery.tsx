@@ -6,9 +6,7 @@ function Delivery() {
   return (
     <>
       <Header />
-      <nav>
-        <NavigationBar />
-      </nav>
+      <NavigationBar />
       <main>
         <Orderform />
       </main>

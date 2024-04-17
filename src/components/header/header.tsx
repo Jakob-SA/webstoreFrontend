@@ -14,11 +14,6 @@ function Header() {
           />
         </a>
       </header>
-      <nav>
-        {
-          //HERE JOES MAKES THE NAVBAR
-        }
-      </nav>
     </>
   );
 }

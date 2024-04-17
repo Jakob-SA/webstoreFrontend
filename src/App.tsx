@@ -8,9 +8,7 @@ function App() {
   return (
     <>
       <Header />
-      <nav>
-        <NavigationBar />
-      </nav>
+      <NavigationBar />
       <main>
         <Basket />
         <aside className="rightCollumn">
