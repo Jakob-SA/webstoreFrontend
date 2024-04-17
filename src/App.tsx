@@ -7,16 +7,16 @@ import NavigationBar from "./components/header/NavigationBar";
 function App() {
   return (
     <>
-      <NavigationBar />
-      <div>
-        <Header />
-        <div className="frontPage">
-          <Basket />
-          <div className="rightCollumn">
-            <UpsellItem />
-          </div>
-        </div>
-      </div>
+      <Header />
+      <nav>
+        <NavigationBar />
+      </nav>
+      <main>
+        <Basket />
+        <aside className="rightCollumn">
+          <UpsellItem />
+        </aside>
+      </main>
     </>
   );
 }

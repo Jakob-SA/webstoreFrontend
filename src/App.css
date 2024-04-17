@@ -16,19 +16,51 @@ body {
 main {
   background-color: var(--background-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 0.4em;
+  border-radius: 1em;
   padding: 1em;
+  margin: auto;
+  max-width: 800px;
+  display: flex;
+  align-items: default;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .rightCollumn {
   display: inline-block;
   flex-direction: column;
-  position:sticky;
+  position: sticky;
   top: 0;
   padding-left: 2rem;
   border-radius: 15px;
   width: 15em;
   height: 20em;
+}
+.frontPage {
+  display: flex;
+  justify-content: space-between;
+  align-items: default;
+  padding: 2em;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
+@media (max-width: 768px) {
+  .frontPage {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .rightCollumn {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    display: block;
+  }
+
+  .rightCollumn > * {
+    margin: 0 auto;
+  }
 }
 .frontPage {
   display: flex;
@@ -37,52 +69,24 @@ main {
   padding: 2em;
   display: flex;
   flex-direction: row;
-  justify-content: space-between; 
-}
-
-@media (max-width: 768px) {
-  .frontPage {
-    flex-direction: column;
-    align-items: center; 
-    text-align: center; 
-  }
-  
-  .rightCollumn {
-    width: 100%; 
-    max-width: 400px;
-    margin: auto; 
-    display: block; 
-  }
-
-  .rightCollumn > * {
-    margin: 0 auto; 
-  }
-}
-.frontPage {
-  display: flex;
   justify-content: space-between;
-  align-items: default;
-  padding: 2em;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; 
 }
 
 @media (max-width: 768px) {
   .frontPage {
     flex-direction: column;
-    align-items: center; 
-    text-align: center; 
+    align-items: center;
+    text-align: center;
   }
-  
+
   .rightCollumn {
-    width: 100%; 
+    width: 100%;
     max-width: 400px;
-    margin: auto; 
-    display: block; 
+    margin: auto;
+    display: block;
   }
 
   .rightCollumn > * {
-    margin: 0 auto; 
+    margin: 0 auto;
   }
 }
