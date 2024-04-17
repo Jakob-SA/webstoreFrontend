@@ -1,6 +1,6 @@
 import { RouteObject } from "react-router-dom";
 import App from "./App";
-import Orderform from "./components/checkout/orderform";
+import Delivery from "./components/delivery/delivery";
 
 export const routes: RouteObject[] = [
   {
@@ -8,7 +8,7 @@ export const routes: RouteObject[] = [
     element: <App />,
   },
   {
-    path: "/orderform",
-    element: <Orderform />,
+    path: "/delivery",
+    element: <Delivery />,
   },
 ];
