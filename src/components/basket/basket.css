@@ -49,6 +49,11 @@
   margin: 5px;
 }
 
+.shoppingCart tr:not(:last-child) td,
+.shoppingCart tr:not(:last-child) th{
+  border-bottom: 1px solid black;
+}
+
 .shoppingCart td,
 .shoppingCart th {
   padding: 10px; /* Adjust as needed */
