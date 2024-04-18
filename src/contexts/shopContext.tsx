@@ -7,41 +7,64 @@ import { Product, fetchProducts } from '../components/basket/product';
 interface ShopState {
     products: Product[];
     basketItems: Product[];
-    handleRemoveItem: (id: number) => void; 
-    updateTotalPrice: (productID: number, price: number) => void;
-    addToBasket: (productID: number) => void;
-
 }
+
 //inital state
 const initialState: ShopState = {
-    products: [],
-    basketItems: [],
-    handleRemoveItem: () => {},
-    updateTotalPrice: () => {},
-    addToBasket: () => {},
-  };
+  products: [],
+  basketItems: [],
 
-  const ShopContext = React.createContext<ShopState>(initialState);
+};
+
+// Type of actions
+ type ShopAction =
+| { type: 'SET_PRODUCTS'; products: Product[] }
+| { type: 'REMOVE_FROM_BASKET'; productId: number }
+| { type: 'UPDATE_TOTAL_PRICE'; productId: number; price: number };
 
 
-  //Dispacth context 
+//Reducer
+  function shopReducer(state: ShopState, action: ShopAction): ShopState {
+    switch (action.type) {
+      case 'SET_PRODUCTS':
+        return { ...state, products: action.products };
+      case 'REMOVE_FROM_BASKET':
+        return { ...state, basketItems: state.basketItems.filter(item => item.id !== action.productId) };
+      case 'UPDATE_TOTAL_PRICE':
+        // Implement logic to update total price
+      default:
+        return state;
+    }
+  }
+//Shop context
+ export const ShopContext = React.createContext<ShopState>(initialState);
+
+//Dispatch context (colipot suggested this)
+ export  const DispatchShopContext = React.createContext<React.Dispatch<ShopAction>|null>(null)
+ 
+
+  
+  
 
 
   //ShopContextProvider. 
   type MyProviderProps = React.PropsWithChildren<{state?:ShopState }>
 
   export function ShopContextProvider({children}:MyProviderProps) {
+    const [state, dispatch] = React.useReducer(shopReducer, initialState);
     const [products, setProducts] = useState<Product[]>([]);
     const [basketItems, setBasketItems] = useState<Product[]>([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [prices, setPrices] = useState(new Map<number, number>());
+    var basketDiscounted = false;
 
-    
-    useEffect(() => {
-      fetchProducts().then((products) => {
-        setProducts(products);
-      });
-    }, []);
+    //default product array. Idk if this should happen in the shopXontextProvider?
+  useEffect(() => {
+    fetchProducts().then((products) => {
+      setProducts(products);
+    dispatch({type :'SET_PRODUCTS',products});
+  });
+}, []);
 
     const updateTotalPrice = (productID: number, price: number) => {
         //would like this to not be stateful
@@ -50,7 +73,7 @@ const initialState: ShopState = {
         Array.from(prices.values()).forEach((price) => {
           tempTotalPrice += price;
         });
-        setTotalPrice((tempTotalPrice));
+        setTotalPrice((calculateDiscount(tempTotalPrice)));
       };
 
 
@@ -69,14 +92,39 @@ const initialState: ShopState = {
         setBasketItems((prev)=> ({...prev, [productID]:prev[productID-1]}) );
         
       }
+      function calculateDiscount(totalPrice: number): number {
+        
+        if (totalPrice > 300) {
+          basketDiscounted = true;
+          return totalPrice * 0.9;
+        } else {
+          basketDiscounted = false;
+          return totalPrice;
+        }
+      }
     
 
     return (
-        <ShopContext.Provider value = {{products,basketItems,handleRemoveItem,updateTotalPrice,addToBasket}}>
+        <ShopContext.Provider value = {state}>
+          <DispatchShopContext.Provider value = {dispatch}>
             {children}
-        </ShopContext.Provider>
+            </DispatchShopContext.Provider>
+        </ShopContext.Provider>)
+  }
 
 
+  export function useShopContext() {
+    const context = React.useContext(ShopContext);
+    if (!context) {
+      throw new Error('useShopContext must be used within a ShopContextProvider');
+    }
+    return context;
+  }
 
-    )
+  export function useDispatchShopContext() {
+    const dispatch = React.useContext(DispatchShopContext);
+    if (!dispatch) {
+      throw new Error('useDispatchShopContext must be used within a ShopContextProvider');
+    }
+    return dispatch;
   }

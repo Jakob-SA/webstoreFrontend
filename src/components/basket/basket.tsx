@@ -1,33 +1,19 @@
-import { useEffect, useState } from "react";
-import { Product, fetchProducts } from "./product";
+import { useContext, useEffect, useState } from "react";
 import { ProductLine } from "../productLine/productLine";
-var basketDiscounted = false;
+import { ShopContext, useDispatchShopContext } from "../../contexts/shopContext";
+import { useShopContext } from "../../contexts/shopContext";
+import { fetchProducts } from "../basket/product.ts";
+
+
 
 function Basket() {
-  const [basketItems, setBasketItems] = useState<Product[]>([]); //maybe parameterize this
-  const [prices, setPrices] = useState(new Map<number, number>());
+  const context = useShopContext();
+  const dispatch = useDispatchShopContext()//this is a fix. @Esben may find alternative fix
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
-
-  useEffect(() => {
-    //copilot told me this was a fix. @Esben may find alternative fix
-    fetchProducts().then((products) => {
-      setBasketItems(products);
-    }); //maybe need error handling
-  }, []); // Empty array ensures this effect runs only once after initial render
-
-  const handleRemoveItem = (id: number) => {
-    setBasketItems((prevItems) => prevItems.filter((item) => item.id !== id));
-    updateTotalPrice(id, 0);
-  };
-  const updateTotalPrice = (productID: number, price: number) => {
-    //would like this to not be stateful
-    setPrices(prices.set(productID, price));
-    var tempTotalPrice = 0;
-    Array.from(prices.values()).forEach((price) => {
-      tempTotalPrice += price;
-    });
-    setTotalPrice(calculateDiscount(tempTotalPrice));
-  };
+  var basketDiscounted = false;
+  
+  //fetching products
+  const basketItems = context.products
 
   const displayTotalPrice = () => {
     //Should be made to actually display the whole price and not just the discount
@@ -41,13 +27,13 @@ function Basket() {
     }
   };
 
-  const basketLines = basketItems.map((product) => {
+  const basketLines = basketItems.map((products) => { //TODO make tge updatePricework. Also handleRemoveItem
     return (
       <ProductLine
-        key={product.id}
-        product={product}
-        handleRemoveItem={handleRemoveItem}
-        updateTotalPrice={updateTotalPrice}
+        key={products.id}
+        product={products}
+        handleRemoveItem={ ()=> dispatch({type: 'REMOVE_FROM_BASKET', productId: products.id})} 
+        updateTotalPrice={()=> dispatch({type: 'UPDATE_TOTAL_PRICE', productId: products.id, price: 0})} 
       />
     );
   });
@@ -86,14 +72,6 @@ function Basket() {
   );
 }
 
-function calculateDiscount(totalPrice: number): number {
-  if (totalPrice > 300) {
-    basketDiscounted = true;
-    return totalPrice * 0.9;
-  } else {
-    basketDiscounted = false;
-    return totalPrice;
-  }
-}
+
 
 export default Basket;
