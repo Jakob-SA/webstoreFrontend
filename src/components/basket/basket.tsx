@@ -40,7 +40,7 @@ function Basket() {
       return "You have not reached the 300 limit for a discount yet.";
     }
   };
-
+  displayTotalPrice(); //REMOVE
   const basketLines = basketItems.map((product) => {
     return (
       <ProductLine
