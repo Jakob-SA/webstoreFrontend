@@ -29,8 +29,7 @@ table {
   display: block;
   width: 0.5cm; /* Adjust as needed */
 }
-.upsellItemContainer {
-}
+
 .checkoutButton {
   background-color: rgb(255, 198, 94);
   border-radius: 8px;
