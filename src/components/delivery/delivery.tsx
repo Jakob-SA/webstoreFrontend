@@ -1,4 +1,5 @@
 import NavigationBar from "../header/NavigationBar";
+import Footer from "../header/footer";
 import Header from "../header/header";
 import Orderform from "./orderform";
 
@@ -11,6 +12,7 @@ function Delivery() {
         <Orderform />
       </main>
       <aside></aside>
+      <Footer />
     </>
   );
 }
