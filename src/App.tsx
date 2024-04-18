@@ -14,7 +14,7 @@ function App() {
         <main>
           <Basket />
         </main>
-        <aside className="rightCollumn">
+        <aside>
           <UpsellItem />
           <OrderSummary />
         </aside>

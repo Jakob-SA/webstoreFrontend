@@ -1,9 +1,9 @@
 function OrderSummary() {
   return (
-    <>
-      <h1>Order Summary</h1>
+    <div className="orderSummary">
+      <h2>Order Summary</h2>
       <p>Subtotal: $100</p>
-    </>
+    </div>
   );
 }
 

@@ -12,7 +12,8 @@ body {
 
 .frontPage {
   display: grid;
-  grid-template-columns: 20vw 60vw 20vw;
+  grid-template-columns: 0.9fr 2.5fr 0.9fr;
+  grid-column-gap: 1.5em;
   justify-items: center;
 }
 
@@ -25,8 +26,19 @@ main {
   align-self: start;
 }
 
-aside {
+aside > * {
   grid-column: 3;
+  background-color: var(--background-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 1em;
+  color: black;
+  width: 100%;
+  padding: 1em;
+}
+aside > :nth-child(2) {
+  position: sticky;
+  top: 1em;
+  right: 1em;
 }
 
 /*
