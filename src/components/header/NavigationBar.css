@@ -1,0 +1,33 @@
+nav {
+  display: flex;
+  justify-content: center;
+  width: 20rem;
+  margin: 1.5rem auto;
+}
+
+nav ul {
+  display: flex;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav li.active a {
+  color: #f08000;
+  border-top: 0.3rem #f08000 solid;
+  text-decoration: inherit;
+}
+
+nav a {
+  color: #c0c0c0;
+  border-top: 0.3rem #c0c0c0 solid;
+  padding: 0 4rem;
+}
+nav a:hover {
+  color: #e2630258;
+  border-top: 0.3rem #e2630258 solid;
+  text-decoration: inherit;
+}

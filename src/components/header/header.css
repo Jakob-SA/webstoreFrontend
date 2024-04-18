@@ -1,0 +1,42 @@
+header {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  grid-column: 2;
+}
+
+.header h1 {
+  grid-column: 2;
+  text-align: center;
+}
+
+.header a {
+  grid-column: 3;
+  justify-self: center;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .storeLogo {
+    animation: logo-spin infinite 7s linear;
+    grid-column: 3;
+    grid-column: 3;
+  }
+  .storeLogo:hover {
+    animation-play-state: paused;
+  }
+}

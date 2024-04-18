@@ -43,10 +43,6 @@
   text-decoration: line-through;
   color: red;
 }
-
-.giftwrappingCheckbox {
-  transform: scale(2);
-}
 .quantityInput {
   display: flex;
   height: fit-content;
@@ -82,4 +78,14 @@
 }
 input [type="number"] {
   width: 100px;
+}
+.tooltip {
+  position: fixed;
+  z-index: 9999;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 20px;
+  width: 150px;
+  text-align: center;
 }
