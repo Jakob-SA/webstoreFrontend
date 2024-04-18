@@ -10,14 +10,7 @@ header {
   align-items: center;
   grid-column: 2;
 }
-.header h1 {
-  grid-column: 2;
-.header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  grid-column: 2;
-}
+
 .header h1 {
   grid-column: 2;
   text-align: center;
