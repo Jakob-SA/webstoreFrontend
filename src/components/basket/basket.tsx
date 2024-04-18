@@ -54,34 +54,28 @@ function Basket() {
 
   return (
     <>
-      <div>
-        {basketItems.length > 0 && (
-          <table className="shoppingCart">
-            <tbody>
-              <tr>
-                <th></th>
-                <th>Product</th>
-                <th>Price per unit</th>
-                <th>Quantity</th>
-                <th>Total </th>
-                <th> </th>
-                <th></th>
-              </tr>
-              {basketLines}
-            </tbody>
-          </table>
-        )}
+      {basketItems.length > 0 && (
+        <table className="shoppingCart">
+          <tbody>
+            <tr>
+              <th></th>
+              <th>Product</th>
+              <th>Price per unit</th>
+              <th>Quantity</th>
+              <th>Total </th>
+              <th> </th>
+              <th></th>
+            </tr>
+            {basketLines}
+          </tbody>
+        </table>
+      )}
 
-        {basketItems.length === 0 && (
-          <p>
-            No items in basket. Reload the page <a href=".">here</a> to restore
-          </p>
-        )}
-        <div>
-          <h3>Total price: {totalPrice.toFixed(2)} </h3>
-          <h3>{displayTotalPrice()}</h3> {/*Should be moved*/}
-        </div>
-      </div>
+      {basketItems.length === 0 && (
+        <p>
+          No items in basket. Reload the page <a href=".">here</a> to restore
+        </p>
+      )}
     </>
   );
 }

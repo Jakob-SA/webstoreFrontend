@@ -11,10 +11,10 @@ function App() {
       <NavigationBar />
       <main>
         <Basket />
-        <aside className="rightCollumn">
-          <UpsellItem />
-        </aside>
       </main>
+      <aside className="rightCollumn">
+        <UpsellItem />
+      </aside>
     </>
   );
 }

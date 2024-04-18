@@ -11,4 +11,13 @@ export const routes: RouteObject[] = [
     path: "/delivery",
     element: <Delivery />,
   },
+  /*
+  {
+    path: "/payment",
+    element: <Payment />,
+  },
+  {
+    path: "/confirmation",
+    element: <Confirmation />,
+  },*/
 ];

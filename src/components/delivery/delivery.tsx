@@ -10,6 +10,7 @@ function Delivery() {
       <main>
         <Orderform />
       </main>
+      <aside></aside>
     </>
   );
 }

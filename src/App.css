@@ -21,25 +21,6 @@ main {
   margin: auto;
   max-width: 80dvw;
   display: flex;
-  align-items: default;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.rightCollumn {
-  display: inline-block;
-  flex-direction: column;
-  position: sticky;
-  top: 0;
-  padding-left: 2rem;
-  border-radius: 15px;
-  width: 15em;
-  height: 20em;
-}
-.frontPage {
-  display: flex;
-  justify-content: space-between;
-  align-items: default;
-  padding: 2em;
   flex-direction: row;
   justify-content: space-between;
 }
@@ -62,16 +43,8 @@ main {
     margin: 0 auto;
   }
 }
-.frontPage {
-  display: flex;
-  justify-content: space-between;
-  align-items: default;
-  padding: 2em;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 
+/*
 @media (max-width: 768px) {
   .frontPage {
     flex-direction: column;
@@ -90,3 +63,4 @@ main {
     margin: 0 auto;
   }
 }
+*/
