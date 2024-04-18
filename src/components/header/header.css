@@ -4,13 +4,20 @@ header {
   justify-content: center;
   align-items: center;
 }
-
-h1,
-h2,
-h3 {
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  grid-column: 2;
+}
+.header h1 {
+  grid-column: 2;
   text-align: center;
-  margin: 10px 0;
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header a {
+  grid-column: 3;
+  justify-self: end;
 }
 
 @keyframes logo-spin {
@@ -25,6 +32,7 @@ h3 {
 @media (prefers-reduced-motion: no-preference) {
   .storeLogo {
     animation: logo-spin infinite 7s linear;
+    grid-column: 3;
   }
   .storeLogo:hover {
     animation-play-state: paused;
