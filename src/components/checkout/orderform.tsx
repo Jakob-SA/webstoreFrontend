@@ -86,9 +86,7 @@ function Orderform() {
         <h2>Shipping</h2>
         <legend>Enter your shipping details</legend>
         <p>Fields marked with * are required.</p>
-        <label htmlFor="businessOrder" hidden>
-          Business order:
-        </label>
+        <label htmlFor="businessOrder">Business order:</label>
         <input
           type="checkbox"
           id="businessOrder"
@@ -179,9 +177,7 @@ function Orderform() {
           city={city}
           onCityChange={setCity}
         />
-        <label htmlFor="deliveryAdress" hidden>
-          Different delivery adress:
-        </label>
+        <label htmlFor="deliveryAdress">Different delivery adress:</label>
         <input
           type="checkbox"
           id="deliveryAdress"
@@ -252,12 +248,17 @@ function Orderform() {
           id="telephoneNumber"
           title="Please enter a valid danish phone number"
         ></input>
+        <label htmlFor="a">
+          Agree to{" "}
+          <a href="/terms-and-conditions" target="_blank">
+            terms & conditions
+          </a>
+        </label>
+        <input type="checkbox" id="termsAndConditions" required />
         {loading && <p>Loading...</p>}
-        <div>
-          <button type="submit" className="acceptButton">
-            Submit order
-          </button>
-        </div>
+        <button type="submit" className="acceptButton">
+          Submit order
+        </button>
       </form>
     </>
   );
