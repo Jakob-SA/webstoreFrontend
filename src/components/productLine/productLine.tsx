@@ -80,7 +80,6 @@ export function ProductLine({
       <td>
         <div className="lineItemGiftwrapping">
           <input
-            className="giftwrappingCheckbox"
             type="checkbox"
             id={`Giftwrapping-${product.id.toString()}`}
             onChange={onGiftwrappingChange}

@@ -9,12 +9,14 @@ function App() {
     <>
       <Header />
       <NavigationBar />
-      <main>
-        <Basket />
-      </main>
-      <aside className="rightCollumn">
-        <UpsellItem />
-      </aside>
+      <div className="frontPage">
+        <main>
+          <Basket />
+        </main>
+        <aside className="rightCollumn">
+          <div className="test">test</div>
+        </aside>
+      </div>
     </>
   );
 }

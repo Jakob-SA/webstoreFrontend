@@ -55,7 +55,7 @@ function Basket() {
   return (
     <>
       {basketItems.length > 0 && (
-        <table className="shoppingCart">
+        <table>
           <tbody>
             <tr>
               <th></th>

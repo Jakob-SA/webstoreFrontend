@@ -11,11 +11,9 @@
   width: 100%;
   height: auto;
   justify-content: space-between;
-
 }
 .shoppingCart p {
   color: black;
-
 }
 .upsellItems {
   background-color: rgb(248, 248, 248);
@@ -51,5 +49,5 @@
 .shoppingCart th {
   padding: 10px; /* Adjust as needed */
   border-bottom: 1px solid black;
-  color:black;
+  color: black;
 }
