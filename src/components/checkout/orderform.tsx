@@ -36,6 +36,7 @@ function Orderform() {
     city: elements.city.value,
     email: elements.email.value,
     telephoneNumber: elements.telephoneNumber.value,
+    orderComment: elements.orderComment.value,
     businessName: isBusiness ? elements.businessName.value : undefined,
     VAT: isBusiness ? elements.VAT.value : undefined,
     deliveryCountry: isDeliveryAddress
@@ -248,6 +249,12 @@ function Orderform() {
           id="telephoneNumber"
           title="Please enter a valid danish phone number"
         ></input>
+        <label htmlFor="orderComment"></label>
+        <textarea
+          placeholder="Here you can leave a comment for your order"
+          name="orderComment"
+          id="orderComment"
+        />
         <label htmlFor="a">
           Agree to{" "}
           <a href="/terms-and-conditions" target="_blank">
