@@ -1,45 +1,28 @@
 import "./App.css";
 import Basket from "./components/basket/basket";
+import OrderSummary from "./components/basket/orderSummary";
 import UpsellItem from "./components/basket/upsellItem";
-import Header from "./components/header";
-import { Suspense, useState } from "react";
-import { Steps } from "./steps";
-import Orderform from "./components/checkout/orderform";
+import Footer from "./components/header/footer";
+import Header from "./components/header/header";
+import NavigationBar from "./components/header/NavigationBar";
 
 function App() {
-  const [currentStep, setCurrentStep] = useState<Steps>(Steps.Basket);
-  if (currentStep === Steps.Basket) {
-    return (
-      <div className="app-content">
-        <Header />
-        <div className="frontPage">
-          <Suspense fallback={<div>BASKET HERE</div>}>
-            <Basket />
-          </Suspense>
-          <div className="rightCollumn">
-            <UpsellItem />
-            <button
-              className="checkoutButton"
-              onClick={() => {
-                alert("are you sure you want to checkout?");
-                setCurrentStep(Steps.Checkout);
-              }}
-            >
-              Checkout
-            </button>
-          </div>
-        </div>
+  return (
+    <>
+      <Header />
+      <NavigationBar />
+      <div className="frontPage">
+        <main>
+          <Basket />
+        </main>
+        <aside>
+          <UpsellItem />
+          <OrderSummary />
+        </aside>
       </div>
-    );
-  }
-  if (currentStep === Steps.Checkout) {
-    return (
-      <div>
-        <Orderform />
-        <button onClick={() => setCurrentStep(Steps.Basket)}>Basket</button>
-      </div>
-    );
-  }
+      <Footer />
+    </>
+  );
 }
 
 export default App;
