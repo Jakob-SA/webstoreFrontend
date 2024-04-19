@@ -3,15 +3,15 @@
   line-height: 1.5;
   font-weight: 400;
 
-  /*
+  
   color-scheme: light dark;
   color: rgb(255, 255, 255);
   background-color: #404040;
-  */
 
-  --color-background: #121212; 
+  --color-background: #1d1d1d; 
   --color-primary: #f8f8f8; 
   --color-secondary: #343A40; 
+  --color-primary-dark: #5b5a5a;
 
   --color-button: #d4e2f3;
   --color-button-secondary: #007BFF;

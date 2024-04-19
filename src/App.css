@@ -3,7 +3,7 @@
   margin: 0px auto 0px auto;
 }
 body {
-  --background-color: var(--color-primary);
+  --background-color: var(--color-primary-dark);
   --brand-color: var(--color-text);
   margin: 0 auto;
 }
@@ -43,6 +43,11 @@ aside > *:not(:first-child) {
   margin-top: 1em;
 }
 
+@media (prefers-color-scheme: light) {
+  body{
+    --background-color: var(--color-primary);
+  }
+}
 /*
 @media (max-width: 768px) {
   .frontPage {
