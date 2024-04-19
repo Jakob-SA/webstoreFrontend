@@ -60,11 +60,14 @@ function Orderform() {
     const formData = getFormData(form.elements);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/create/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://dtu62597.eduhost.dk:10271/api/create/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         alert("Order submitted, thank you for your purchase!");
