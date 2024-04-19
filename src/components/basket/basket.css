@@ -1,6 +1,6 @@
 .continueShoppingButton {
-  background-color: var(--color-button);
-  color: var(--color-button-text);
+  background-color: var(--color-button-secondary);
+  color: var(--color-primary);
   margin-right: 10px;
 }
 
