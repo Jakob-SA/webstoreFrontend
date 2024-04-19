@@ -27,29 +27,29 @@ function Orderform() {
   };
 
   const getFormData = (elements: any) => ({
-    firstName: elements.firstName.value,
-    lastName: elements.lastName.value,
+    first_name: elements.firstName.value,
+    last_name: elements.lastName.value,
     country: elements.country.value,
-    adress1: elements.adress1.value,
-    adress2: elements.adress2.value,
-    zip: elements.zip.value,
+    address1: elements.adress1.value,
+    address2: elements.adress2.value,
+    zip_code: elements.zip.value,
     city: elements.city.value,
     email: elements.email.value,
-    telephoneNumber: elements.telephoneNumber.value,
-    orderComment: elements.orderComment.value,
-    businessName: isBusiness ? elements.businessName.value : undefined,
-    VAT: isBusiness ? elements.VAT.value : undefined,
-    deliveryCountry: isDeliveryAddress
+    telephone_number: elements.telephoneNumber.value,
+    order_comment: elements.orderComment.value,
+    business_name: isBusiness ? elements.businessName.value : undefined,
+    vat: isBusiness ? elements.VAT.value : undefined,
+    delivery_country: isDeliveryAddress
       ? elements.deliveryCountry.value
       : undefined,
-    deliveryAdress1: isDeliveryAddress
+    delivery_address1: isDeliveryAddress
       ? elements.deliveryAdress1.value
       : undefined,
-    deliveryAdress2: isDeliveryAddress
+    delivery_address2: isDeliveryAddress
       ? elements.deliveryAdress2.value
       : undefined,
-    deliveryZip: isDeliveryAddress ? elements.deliveryZip.value : undefined,
-    deliveryCity: isDeliveryAddress ? elements.deliveryCity.value : undefined,
+    delivery_zip: isDeliveryAddress ? elements.deliveryZip.value : undefined,
+    delivery_city: isDeliveryAddress ? elements.deliveryCity.value : undefined,
   });
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -60,7 +60,7 @@ function Orderform() {
     const formData = getFormData(form.elements);
 
     try {
-      const response = await fetch("https://eoi9wdj8cv1ukqb.m.pipedream.net", {
+      const response = await fetch("http://127.0.0.1:8000/api/create/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
