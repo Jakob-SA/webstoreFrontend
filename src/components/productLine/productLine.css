@@ -43,10 +43,6 @@
   text-decoration: line-through;
   color: red;
 }
-
-.giftwrappingCheckbox {
-  transform: scale(2);
-}
 .quantityInput {
   display: flex;
   height: fit-content;

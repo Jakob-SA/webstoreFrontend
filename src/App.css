@@ -8,81 +8,80 @@ body {
   --brand-color: #3b4538;
   --primary-color: #ff6600;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+}
+
+.frontPage {
+  display: grid;
+  grid-template-columns: 0.95fr 2.5fr 0.95fr;
+  grid-column-gap: 1.5em;
+  justify-items: center;
 }
 
 main {
   background-color: var(--background-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 0.4em;
+  border-radius: 1em;
+  grid-column: 2;
+  color: black;
+  align-self: start;
+}
+
+aside > * {
+  grid-column: 3;
+  background-color: var(--background-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 1em;
+  color: black;
+  width: 21em;
   padding: 1em;
+  justify-self: center;
 }
-.rightCollumn {
-  display: inline-block;
-  flex-direction: column;
-  position:sticky;
-  top: 0;
-  padding-left: 2rem;
-  border-radius: 15px;
-  width: 15em;
-  height: 20em;
-
+aside > :nth-child(2) {
+  position: sticky;
+  top: 1em;
+  right: 1em;
 }
-.frontPage {
-  display: flex;
-  justify-content: space-between;
-  align-items: default;
-  padding: 2em;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; 
+aside > *:not(:first-child) {
+  margin-top: 1em;
 }
 
+/*
 @media (max-width: 768px) {
   .frontPage {
     flex-direction: column;
-    align-items: center; 
-    text-align: center; 
+    align-items: center;
+    text-align: center;
   }
-  
+
   .rightCollumn {
-    width: 100%; 
+    width: 100%;
     max-width: 400px;
-    margin: auto; 
-    display: block; 
+    margin: auto;
+    display: block;
   }
 
   .rightCollumn > * {
-    margin: 0 auto; 
+    margin: 0 auto;
   }
 }
-.frontPage {
-  display: flex;
-  justify-content: space-between;
-  align-items: default;
-  padding: 2em;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; 
-}
 
+/*
 @media (max-width: 768px) {
   .frontPage {
     flex-direction: column;
-    align-items: center; 
-    text-align: center; 
+    align-items: center;
+    text-align: center;
   }
-  
+
   .rightCollumn {
-    width: 100%; 
+    width: 100%;
     max-width: 400px;
-    margin: auto; 
-    display: block; 
+    margin: auto;
+    display: block;
   }
 
   .rightCollumn > * {
-    margin: 0 auto; 
+    margin: 0 auto;
   }
 }
+*/

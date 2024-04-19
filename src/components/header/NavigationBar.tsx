@@ -11,15 +11,15 @@ export default function NavigationBar() {
           className={
             location.pathname === "/"
               ? "active"
-              : location.pathname === "/orderform"
+              : location.pathname === "/delivery"
               ? "active"
               : ""
           }
         >
           <Link to="/">Basket</Link>
         </li>
-        <li className={location.pathname === "/orderform" ? "active" : ""}>
-          <Link to="/orderform">Delivery</Link>
+        <li className={location.pathname === "/delivery" ? "active" : ""}>
+          <Link to="/delivery">Delivery</Link>
         </li>
       </ul>
     </nav>

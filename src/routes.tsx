@@ -1,7 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import App from "./App";
-import Orderform from "./components/checkout/orderform";
-import { TermsAndConditions } from "./components/checkout/termsAndConditions";
+import Delivery from "./components/delivery/delivery";
+import { TermsAndConditions } from "./components/delivery/termsAndConditions";
 
 export const routes: RouteObject[] = [
   {
@@ -9,9 +9,18 @@ export const routes: RouteObject[] = [
     element: <App />,
   },
   {
-    path: "/orderform",
-    element: <Orderform />,
+    path: "/delivery",
+    element: <Delivery />,
   },
+  /*
+  {
+    path: "/payment",
+    element: <Payment />,
+  },
+  {
+    path: "/confirmation",
+    element: <Confirmation />,
+  },*/
   {
     path: "/terms-and-conditions",
     element: <TermsAndConditions />,
