@@ -3,9 +3,25 @@
   line-height: 1.5;
   font-weight: 400;
 
+  /*
   color-scheme: light dark;
   color: rgb(255, 255, 255);
   background-color: #404040;
+  */
+
+  --color-background: #121212; 
+  --color-primary: #f8f8f8; 
+  --color-secondary: #343A40; 
+
+  --color-button: #d4e2f3;
+  --color-button-secondary: #007BFF;
+  --color-button-tertiary: #f08000;
+  --color-button-quaternary: #e2630258;
+
+  --color-text: #000000; 
+  --color-text-secondary: #c0c0c0;
+  --color-text-tertiary: red;
+  --color-text-inverse: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -42,13 +58,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-background);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: rgb(0, 0, 0);
+  border-color: var(--color-button-secondary);
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

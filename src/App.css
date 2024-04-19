@@ -3,10 +3,8 @@
   margin: 0px auto 0px auto;
 }
 body {
-  --outside-color: #e61919;
-  --background-color: #f5f5f5;
-  --brand-color: #3b4538;
-  --primary-color: #ff6600;
+  --background-color: var(--color-primary);
+  --brand-color: var(--color-text);
   margin: 0 auto;
 }
 

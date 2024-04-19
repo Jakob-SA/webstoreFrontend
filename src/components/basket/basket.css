@@ -1,11 +1,11 @@
 .continueShoppingButton {
-  background-color: rgb(212, 226, 243);
-
+  background-color: var(--color-button);
+  color: var(--color-button-text);
   margin-right: 10px;
 }
 
 .shoppingCart {
-  background-color: rgb(248, 248, 248);
+  background-color: var(--color-primary);
   border-radius: 15px;
   border-collapse: collapse;
   width: 100%;
@@ -13,7 +13,7 @@
   justify-content: space-between;
 }
 .shoppingCart p {
-  color: black;
+  color: var(--color-text);
 }
 
 table {
@@ -27,24 +27,26 @@ table {
 .shoppingCart th:after {
   content: "";
   display: block;
-  width: 0.5cm; /* Adjust as needed */
+  width: 0.5cm;
   font-display: flex;
 }
 
+/* tror ikke der er brug for denne mere 
 .checkoutButton {
-  background-color: rgba(247, 180, 56, 0.66);
+  background-color: black;
   border-radius: 8px;
   margin: 5px;
 }
+*/
 
 .shoppingCart tr:not(:last-child) td,
 .shoppingCart tr:not(:last-child) th{
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--color-text);
 }
 
 .shoppingCart td,
 .shoppingCart th {
   padding: 10px; /* Adjust as needed */
-  border-bottom: 1px solid black;
-  color: black;
+  border-bottom: 1px solid var(--color-text);
+  color: var(--color-text);
 }
