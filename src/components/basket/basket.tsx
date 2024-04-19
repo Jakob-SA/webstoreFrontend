@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Product, fetchProducts } from "./product";
 import { ProductLine } from "../productLine/productLine";
+import useMediaQuery from "../../mediaQuery";
 var basketDiscounted = false;
 
 function Basket() {
   const [basketItems, setBasketItems] = useState<Product[]>([]); //maybe parameterize this
   const [prices, setPrices] = useState(new Map<number, number>());
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
+  const { big, small } = useMediaQueries();
 
   useEffect(() => {
     //copilot told me this was a fix. @Esben may find alternative fix
@@ -54,6 +56,7 @@ function Basket() {
 
   return (
     <>
+      {console.log(big, small)}
       {basketItems.length > 0 && (
         <table>
           <tbody>
@@ -70,7 +73,6 @@ function Basket() {
           </tbody>
         </table>
       )}
-
       {basketItems.length === 0 && (
         <p>
           No items in basket. Reload the page <a href=".">here</a> to restore
@@ -88,6 +90,13 @@ function calculateDiscount(totalPrice: number): number {
     basketDiscounted = false;
     return totalPrice;
   }
+}
+
+function useMediaQueries() {
+  const big = useMediaQuery("(max-width: 1100px)");
+  const small = useMediaQuery("(max-width: 700px)");
+
+  return { big, small };
 }
 
 export default Basket;
