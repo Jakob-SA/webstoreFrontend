@@ -18,7 +18,8 @@ const initialState: ShopState = {
 
 // Type of actions
  type ShopAction =
-| { type: 'SET_PRODUCTS'; products: Product[] }
+ { type: 'SET_PRODUCTS'; products: Product[] }
+| { type: 'SET_BASKET_ITEMS'; basketItems: Product[] }
 | { type: 'REMOVE_FROM_BASKET'; productId: number }
 | { type: 'UPDATE_TOTAL_PRICE'; productId: number; price: number };
 
@@ -27,7 +28,10 @@ const initialState: ShopState = {
   function shopReducer(state: ShopState, action: ShopAction): ShopState {
     switch (action.type) {
       case 'SET_PRODUCTS':
-        return { ...state, products: action.products };
+        return {...state, products: action.products.slice(0,5)}
+      case 'SET_BASKET_ITEMS':
+        const indices = [0, 3, 4, 7, 8, 9]; // indices of the items you want to select
+        return { ...state, products: indices.map(index => action.basketItems[index]) };
       case 'REMOVE_FROM_BASKET':
         return { ...state, basketItems: state.basketItems.filter(item => item.id !== action.productId) };
       case 'UPDATE_TOTAL_PRICE':
@@ -52,19 +56,25 @@ const initialState: ShopState = {
 
   export function ShopContextProvider({children}:MyProviderProps) {
     const [state, dispatch] = React.useReducer(shopReducer, initialState);
-    const [products, setProducts] = useState<Product[]>([]);
-    const [basketItems, setBasketItems] = useState<Product[]>([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [prices, setPrices] = useState(new Map<number, number>());
     var basketDiscounted = false;
 
-    //default product array. Idk if this should happen in the shopXontextProvider?
-  useEffect(() => {
-    fetchProducts().then((products) => {
-      setProducts(products);
-    dispatch({type :'SET_PRODUCTS',products});
-  });
-}, []);
+
+    useEffect(() => {
+      fetchProducts().then((products) => {
+        dispatch({type: 'SET_PRODUCTS', products});
+        //dispatch({type: 'SET_BASKET_ITEMS', basketItems: state.products});
+       });
+    }, []);
+
+    
+  
+
+ 
+
+
+
 
     const updateTotalPrice = (productID: number, price: number) => {
         //would like this to not be stateful
@@ -78,7 +88,7 @@ const initialState: ShopState = {
 
 
 
-    const handleRemoveItem = (id: number) => {
+   /* const handleRemoveItem = (id: number) => {
         setBasketItems((prevItems) => prevItems.filter((item) => item.id !== id));
         updateTotalPrice(id, 0);
       };
@@ -91,7 +101,7 @@ const initialState: ShopState = {
       const removeFromBasket =(productID:number) => {
         setBasketItems((prev)=> ({...prev, [productID]:prev[productID-1]}) );
         
-      }
+      }*/
       function calculateDiscount(totalPrice: number): number {
         
         if (totalPrice > 300) {

@@ -12,8 +12,12 @@ function Basket() {
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
   var basketDiscounted = false;
   
-  //fetching products
+  //Making it so the basketItems are the first 10 products
+  
+  //Getting basketItems. TODO: make it random and not all products.
   const basketItems = context.products
+
+  
 
   const displayTotalPrice = () => {
     //Should be made to actually display the whole price and not just the discount
@@ -27,7 +31,7 @@ function Basket() {
     }
   };
 
-  const basketLines = basketItems.map((products) => { //TODO make tge updatePricework. Also handleRemoveItem
+  const basketLines = basketItems.map((products) => { //TODO make  updatePricework. Also handleRemoveItem
     return (
       <ProductLine
         key={products.id}
