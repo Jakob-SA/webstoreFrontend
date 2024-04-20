@@ -59,8 +59,12 @@ function Basket() {
 
   return (
     <>
-      {small && <PhoneBasket basketLines={basketLines} />}
-      {basketItems.length > 0 && <NormalBasket basketLines={basketLines} />}
+      {small ? (
+        <PhoneBasket basketItems={basketItems} />
+      ) : (
+        <NormalBasket basketLines={basketLines} />
+      )}
+      {basketItems.length > 0}
       {basketItems.length === 0 && <EmptyBasket />}
     </>
   );

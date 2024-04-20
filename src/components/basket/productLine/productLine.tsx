@@ -4,7 +4,7 @@ import { RemoveButton } from "./removeButton";
 import { QuantityInput } from "./quantityInput";
 import "./productLine.css";
 
-interface productLineProps {
+export interface productLineProps {
   product: Product;
   handleRemoveItem: (id: number) => void;
   updateTotalPrice: (id: number, price: number) => void;
