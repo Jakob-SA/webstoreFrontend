@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { Product, fetchProducts } from "./product";
-import { ProductLine } from "../productLine/productLine";
-import useMediaQuery from "../../mediaQuery";
+import { ProductLine } from "./productLine/productLine";
+import useMediaQuery from "../utils/mediaQuery";
+import PhoneBasket from "./phoneBasket";
+import EmptyBasket from "./emptyBasket";
+import NormalBasket from "./normalBasket";
 var basketDiscounted = false;
 
 function Basket() {
   const [basketItems, setBasketItems] = useState<Product[]>([]); //maybe parameterize this
   const [prices, setPrices] = useState(new Map<number, number>());
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
-  const { big, small } = useMediaQueries();
+  const { medium, small } = useMediaQueries();
 
   useEffect(() => {
     //copilot told me this was a fix. @Esben may find alternative fix
@@ -56,28 +59,9 @@ function Basket() {
 
   return (
     <>
-      {console.log(big, small)}
-      {basketItems.length > 0 && (
-        <table>
-          <tbody>
-            <tr>
-              <th></th>
-              <th>Product</th>
-              <th>Price per unit</th>
-              <th>Quantity</th>
-              <th>Total </th>
-              <th> </th>
-              <th></th>
-            </tr>
-            {basketLines}
-          </tbody>
-        </table>
-      )}
-      {basketItems.length === 0 && (
-        <p>
-          No items in basket. Reload the page <a href=".">here</a> to restore
-        </p>
-      )}
+      {small && <PhoneBasket basketLines={basketLines} />}
+      {basketItems.length > 0 && <NormalBasket basketLines={basketLines} />}
+      {basketItems.length === 0 && <EmptyBasket />}
     </>
   );
 }
@@ -93,10 +77,10 @@ function calculateDiscount(totalPrice: number): number {
 }
 
 function useMediaQueries() {
-  const big = useMediaQuery("(max-width: 1100px)");
+  const medium = useMediaQuery("(max-width: 1100px)");
   const small = useMediaQuery("(max-width: 700px)");
 
-  return { big, small };
+  return { medium, small };
 }
 
 export default Basket;

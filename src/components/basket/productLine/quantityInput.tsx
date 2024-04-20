@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Product } from "../basket/product";
+import { Product } from "../product";
 
 interface QuantityInputProps {
   quantity: number;
