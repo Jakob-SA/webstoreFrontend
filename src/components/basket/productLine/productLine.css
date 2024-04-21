@@ -41,49 +41,38 @@
 }
 .oldPrice {
   text-decoration: line-through;
-  color: red;
+  color: var(--color-text-tertiary);
 }
 .quantityInput {
   display: flex;
-  height: fit-content;
   align-items: center;
+  justify-content: center;
+}
+.quantityInput > * {
+  margin: 2px;
 }
 .quantityButton {
-  background-color: rgb(212, 226, 243);
+  --quantitybuttonSize: 20px;
   border-radius: 50%;
-  margin: 5px;
-  width: 20px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.quantityButton:hover {
-  background-color: whitesmoke;
-  border-color: black;
-  color: black;
 }
 .quantityBox {
-  width: 40px;
-  height: 30px;
+  --numberBoxSize: 35px;
+  width: var(--numberBoxSize);
+  height: var(--numberBoxSize);
+  line-height: var(--numberBoxSize);
   text-align: center;
-  padding-left: 11px;
-  padding-right: 0;
-}
-.button {
-  background-color: rgb(212, 226, 243);
-}
-.button:hover {
-  border-color: black;
-}
-input [type="number"] {
-  width: 100px;
+  border: 1px solid var(--color-button);
+  border-radius: 25%;
+  background-color: var(--color-button-secondary);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-left: 0.4em;
+  margin-right: 0.4em;
 }
 .tooltip {
   position: fixed;
   z-index: 9999;
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
+  background-color: var(--color-primary);
+  border: 1px solid var(--brand-color);
   padding: 8px;
   border-radius: 20px;
   width: 150px;

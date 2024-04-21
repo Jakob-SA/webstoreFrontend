@@ -4,7 +4,7 @@ function Header() {
   return (
     <>
       <header>
-        <div className="header">
+        <div>
           <h1>Checkout</h1>
           <a href=".">
             <img

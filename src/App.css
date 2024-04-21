@@ -3,10 +3,8 @@
   margin: 0px auto 0px auto;
 }
 body {
-  --outside-color: #e61919;
-  --background-color: #f5f5f5;
-  --brand-color: #3b4538;
-  --primary-color: #ff6600;
+  --background-color: var(--color-primary-dark);
+  --brand-color: var(--color-text);
   margin: 0 auto;
 }
 
@@ -16,6 +14,23 @@ body {
   grid-column-gap: 1.5em;
   justify-items: center;
 }
+@media (max-width: 1100px) {
+  .frontPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  aside > * {
+    width: 100vw;
+    margin-top: 1em;
+  }
+}
+@media (max-width: 700px) {
+  main {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+}
 
 main {
   background-color: var(--background-color);
@@ -23,7 +38,7 @@ main {
   border-radius: 1em;
   grid-column: 2;
   color: black;
-  align-self: start;
+  align-self: center;
 }
 
 aside > * {
@@ -44,44 +59,3 @@ aside > :nth-child(2) {
 aside > *:not(:first-child) {
   margin-top: 1em;
 }
-
-/*
-@media (max-width: 768px) {
-  .frontPage {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .rightCollumn {
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
-    display: block;
-  }
-
-  .rightCollumn > * {
-    margin: 0 auto;
-  }
-}
-
-/*
-@media (max-width: 768px) {
-  .frontPage {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .rightCollumn {
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
-    display: block;
-  }
-
-  .rightCollumn > * {
-    margin: 0 auto;
-  }
-}
-*/

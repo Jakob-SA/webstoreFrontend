@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Product } from "../basket/product";
+import { Product } from "../product";
 
 interface QuantityInputProps {
   quantity: number;
@@ -42,17 +42,7 @@ export function QuantityInput({
       <button className="quantityButton" onClick={decrementQuantity}>
         <b>-</b>
       </button>
-      <input
-        className="quantityBox"
-        type="number"
-        min="1"
-        id={`Quantity-${product.id.toString()}`}
-        value={quantity}
-        readOnly={true} //Dont know if we want this
-        /*onChange={(e) => {
-          setQuantity(parseInt(e.target.value));
-        }}*/
-      />
+      <div className="quantityBox">{quantity}</div>
       <button className="quantityButton" onClick={incrementQuantity}>
         <b>+</b>
       </button>

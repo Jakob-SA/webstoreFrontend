@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { ProductLine } from "./productLine";
-import { Product } from "../basket/product";
-import productArray from "../../assets/media/products.json";
+import { Product } from "../product";
+import productArray from "../../../assets/media/products.json";
 import { QuantityInput } from "./quantityInput";
 import { RemoveButton } from "./removeButton";
 
