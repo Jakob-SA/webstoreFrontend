@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function OrderSummary() {
   return (
     <div className="orderSummary">
@@ -21,9 +23,12 @@ function OrderSummary() {
           <b>Price</b>
         </div>
       </div>
-      <button>
-        Proceed to delivery <p style={{ fontSize: "4em" }}>&#187;</p>
-      </button>
+      <Link to="/delivery">
+        {" "}
+        <button>
+          Proceed to delivery <p style={{ fontSize: "4em" }}>&#187;</p>
+        </button>
+      </Link>
     </div>
   );
 }

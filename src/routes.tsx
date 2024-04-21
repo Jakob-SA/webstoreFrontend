@@ -22,7 +22,7 @@ export const routes: RouteObject[] = [
   {
     path: "/confirmation",
     element: <Confirmation />,
-  },*/
+  },
   {
     path: "/terms-and-conditions",
     element: <TermsAndConditions />,
