@@ -85,7 +85,7 @@ function calculateDiscount(totalPrice: number): number {
 
 //This function is used to make changes in jsx based on css media queries
 function useMediaQueries() {
-  const small = useMediaQuery("(max-width: 700px)");
+  const small = useMediaQuery("(max-width: 880px)");
 
   return { small };
 }
