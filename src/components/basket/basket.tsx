@@ -61,6 +61,7 @@ function Basket() {
 
   return (
     <>
+      <h2>Your basket</h2>
       {small ? (
         <PhoneBasket basketItems={basketItems} />
       ) : (

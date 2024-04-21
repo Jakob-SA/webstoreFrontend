@@ -43,14 +43,12 @@ export function ProductLine({
   return (
     <tr className={`productLine ${isRemoving ? "removing" : ""}`}>
       <td>
-        <div className="lineItemFirst">
-          <img
-            src={"productPics/product" + product.id + ".jpg"}
-            className="productImages"
-            width="150"
-            height="150"
-          />
-        </div>
+        <img
+          src={"productPics/product" + product.id + ".jpg"}
+          className="productImages"
+          width="150"
+          height="150"
+        />
       </td>
       <td>{product.name}</td>
       <td>{product.price}</td>
@@ -83,11 +81,8 @@ export function ProductLine({
           </label>
         </div>
       </td>
-
       <td>
-        <div className="lineItemLast">
-          <RemoveButton onClick={() => handleRemove()} />
-        </div>
+        <RemoveButton onClick={() => handleRemove()} />
       </td>
     </tr>
   );
