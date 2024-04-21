@@ -21,6 +21,9 @@ function OrderSummary() {
           <b>Price</b>
         </div>
       </div>
+      <button>
+        Proceed to delivery <p style={{ fontSize: "4em" }}>&#187;</p>
+      </button>
     </div>
   );
 }

@@ -5,7 +5,7 @@ function NormalBasket({ basketLines }: { basketLines: any }) {
         <tr>
           <th></th>
           <th>
-            <p>Product</p>
+            <p id="name">Product</p>
           </th>
           <th>
             <p>Price per unit</p>

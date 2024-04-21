@@ -15,6 +15,10 @@ body {
   margin-left: 1em;
   margin-right: 1em;
 }
+.frontPage h2,
+h3 {
+  margin-top: 0;
+}
 @media (min-width: 1500px) {
   td {
     white-space: nowrap;
@@ -30,9 +34,10 @@ body {
   aside > * {
     width: 100vw;
     margin-top: 1em;
+    width: 50em;
   }
   td > :nth-child(2) {
-    width: 10em;
+    width: 100em;
   }
 }
 @media (max-width: 880px) {

@@ -15,6 +15,9 @@ td {
   padding: 1em 0em;
   min-width: 5em;
 }
+#name {
+  min-width: 10em;
+}
 
 th {
   white-space: nowrap;
