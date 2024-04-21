@@ -10,24 +10,36 @@ nav ul {
 }
 
 nav li {
+  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 nav li.active a {
+  text-align: center;
+  justify-content: center;
+  display: flex;
   color: #f08000;
   border-top: 0.3rem #f08000 solid;
   text-decoration: inherit;
+  width: 4rem;
 }
 
-nav a {
+nav li a {
+  text-align: center;
+  justify-content: center;
+  display: flex;
   color: #c0c0c0;
   border-top: 0.3rem #c0c0c0 solid;
   padding: 0 4rem;
+  width: 4rem;
+  text-align: center;
 }
-nav a:hover {
+
+nav li a:hover {
   color: #e2630258;
   border-top: 0.3rem #e2630258 solid;
   text-decoration: inherit;
+  font-size: 110%;
 }

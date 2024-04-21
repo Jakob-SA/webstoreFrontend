@@ -13,13 +13,26 @@ export default function NavigationBar() {
               ? "active"
               : location.pathname === "/delivery"
               ? "active"
+              : location.pathname === "/confirmation"
+              ? "active"
               : ""
           }
         >
           <Link to="/">Basket</Link>
         </li>
-        <li className={location.pathname === "/delivery" ? "active" : ""}>
+        <li
+          className={
+            location.pathname === "/delivery"
+              ? "active"
+              : location.pathname === "/confirmation"
+              ? "active"
+              : ""
+          }
+        >
           <Link to="/delivery">Delivery</Link>
+        </li>
+        <li className={location.pathname === "/confirmation" ? "active" : ""}>
+          <Link to="/confirmation">Confirmation</Link>
         </li>
       </ul>
     </nav>
