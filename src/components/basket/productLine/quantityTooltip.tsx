@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Product } from "../basket/product";
+import { Product } from "../product";
 
 export function QuantityTooltip(product: Product) {
   const [showTooltip, setShowTooltip] = useState(false);

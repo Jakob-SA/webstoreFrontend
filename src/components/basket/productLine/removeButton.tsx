@@ -9,7 +9,7 @@ export function RemoveButton({ onClick }: RemoveButtonProps) {
 
   return (
     <button
-      className="button"
+      className="removeButton"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}

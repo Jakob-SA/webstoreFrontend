@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { Product, fetchProducts } from "./product";
-import { ProductLine } from "../productLine/productLine";
+import { ProductLine } from "./productLine/productLine";
+import useMediaQuery from "../utils/mediaQuery";
+import PhoneBasket from "./phoneBasket";
+import EmptyBasket from "./emptyBasket";
+import NormalBasket from "./normalBasket";
+import "./basket.css";
+
 var basketDiscounted = false;
 
 function Basket() {
   const [basketItems, setBasketItems] = useState<Product[]>([]); //maybe parameterize this
   const [prices, setPrices] = useState(new Map<number, number>());
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
+  const { small } = useMediaQueries();
 
   useEffect(() => {
     //copilot told me this was a fix. @Esben may find alternative fix
@@ -54,28 +61,14 @@ function Basket() {
 
   return (
     <>
-      {basketItems.length > 0 && (
-        <table>
-          <tbody>
-            <tr>
-              <th></th>
-              <th>Product</th>
-              <th>Price per unit</th>
-              <th>Quantity</th>
-              <th>Total </th>
-              <th> </th>
-              <th></th>
-            </tr>
-            {basketLines}
-          </tbody>
-        </table>
+      <h2>Your basket</h2>
+      {small ? (
+        <PhoneBasket basketItems={basketItems} />
+      ) : (
+        <NormalBasket basketLines={basketLines} />
       )}
-
-      {basketItems.length === 0 && (
-        <p>
-          No items in basket. Reload the page <a href=".">here</a> to restore
-        </p>
-      )}
+      {basketItems.length > 0}
+      {basketItems.length === 0 && <EmptyBasket />}
     </>
   );
 }
@@ -88,6 +81,13 @@ function calculateDiscount(totalPrice: number): number {
     basketDiscounted = false;
     return totalPrice;
   }
+}
+
+//This function is used to make changes in jsx based on css media queries
+function useMediaQueries() {
+  const small = useMediaQuery("(max-width: 970px)");
+
+  return { small };
 }
 
 export default Basket;

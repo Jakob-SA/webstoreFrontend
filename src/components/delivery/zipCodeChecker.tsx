@@ -43,8 +43,8 @@ export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
         Zip Code:<span className="required">*</span>
       </label>
       <input
+        type="text"
         placeholder="Enter your postal code *"
-        type="number"
         required
         id="zip"
         name="user_zip"

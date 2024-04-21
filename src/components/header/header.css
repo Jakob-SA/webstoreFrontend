@@ -4,19 +4,19 @@ header {
   justify-content: center;
   align-items: center;
 }
-.header {
+header div {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   grid-column: 2;
 }
 
-.header h1 {
+header h1 {
   grid-column: 2;
   text-align: center;
 }
 
-.header a {
+header a {
   grid-column: 3;
   justify-self: center;
 }
@@ -33,7 +33,6 @@ header {
 @media (prefers-reduced-motion: no-preference) {
   .storeLogo {
     animation: logo-spin infinite 7s linear;
-    grid-column: 3;
     grid-column: 3;
   }
   .storeLogo:hover {

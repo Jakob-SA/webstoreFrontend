@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Product } from "../basket/product";
+import { Product } from "../product";
 import { RemoveButton } from "./removeButton";
 import { QuantityInput } from "./quantityInput";
 import "./productLine.css";
 
-interface productLineProps {
+export interface productLineProps {
   product: Product;
   handleRemoveItem: (id: number) => void;
   updateTotalPrice: (id: number, price: number) => void;
@@ -43,38 +43,36 @@ export function ProductLine({
   return (
     <tr className={`productLine ${isRemoving ? "removing" : ""}`}>
       <td>
-        <div className="lineItemFirst">
-          <img
-            src={"productPics/product" + product.id + ".jpg"}
-            className="productImages"
-            width="150"
-            height="150"
-          />
-        </div>
+        <img
+          src={"productPics/product" + product.id + ".jpg"}
+          className="productImages"
+        />
       </td>
       <td>
-        <div>{product.name}</div>
+        <p>{product.name}</p>
       </td>
       <td>
-        <div>{product.price}</div>
+        <p>{product.price}</p>
       </td>
       <td>
-        <div>
-          <QuantityInput
-            quantity={quantity}
-            setQuantity={setQuantity}
-            product={product}
-          />
-        </div>
+        <QuantityInput
+          quantity={quantity}
+          setQuantity={setQuantity}
+          product={product}
+        />
       </td>
       <td>
         {quantity >= product.rebateQuantity ? (
           <div className="twoLinePrice">
-            <div className="oldPrice">{originalLinePrice.toFixed(2)}</div>
-            {totalLinePrice.toFixed(2)}
+            <div className="oldPrice">
+              <p>{originalLinePrice.toFixed(2)}</p>
+            </div>
+            <p>{totalLinePrice.toFixed(2)}</p>
           </div>
         ) : (
-          <div className="oneLinePrice">{totalLinePrice.toFixed(2)}</div>
+          <div className="oneLinePrice">
+            <p>{totalLinePrice.toFixed(2)}</p>
+          </div>
         )}
       </td>
       <td>
@@ -89,11 +87,8 @@ export function ProductLine({
           </label>
         </div>
       </td>
-
       <td>
-        <div className="lineItemLast">
-          <RemoveButton onClick={() => handleRemove()} />
-        </div>
+        <RemoveButton onClick={() => handleRemove()} />
       </td>
     </tr>
   );
