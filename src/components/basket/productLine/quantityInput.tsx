@@ -40,11 +40,11 @@ export function QuantityInput({
       onMouseLeave={handleMouseLeave}
     >
       <button className="quantityButton" onClick={decrementQuantity}>
-        <b>-</b>
+        <p>-</p>
       </button>
       <div className="quantityBox">{quantity}</div>
       <button className="quantityButton" onClick={incrementQuantity}>
-        <b>+</b>
+        <p>+</p>
       </button>
 
       {quantity < product.rebateQuantity && showTooltip && (

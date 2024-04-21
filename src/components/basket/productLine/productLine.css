@@ -10,11 +10,12 @@
   transform: scale(1.5);
 }
 .productImages {
-  width: 7em;
-  height: 7em;
+  width: 8em;
+  height: 8em;
   object-fit: cover;
   border-radius: 15px;
   transition: transform 0.5s ease-out;
+  vertical-align: middle;
 }
 .lineItemFirst {
   padding-left: 20px;
@@ -45,9 +46,19 @@
 .quantityInput > * {
   margin: 2px;
 }
+.quantityInput p {
+  font-size: 3em;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -0.1em;
+}
 .quantityButton {
-  --quantitybuttonSize: 20px;
+  width: 3em;
+  height: 3em;
+  padding: 0;
   border-radius: 50%;
+  line-height: 2em;
 }
 .quantityBox {
   --numberBoxSize: 35px;
@@ -71,4 +82,11 @@
   border-radius: 20px;
   width: 150px;
   text-align: center;
+  white-space: normal;
+}
+.removeButton:hover {
+  background-color: rgb(255, 71, 71);
+}
+td p {
+  font-size: 1.3em;
 }
