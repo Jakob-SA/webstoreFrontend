@@ -53,17 +53,18 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid black;
+  border: 1px solid var(--color-button-secondary);
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
+  color: var(--color-text-secondary);
   background-color: var(--color-button);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: var(--color-button-secondary);
+  border-color: var(--color-secondary);
 }
 button:active {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
@@ -81,8 +82,8 @@ button:focus-visible {
     --color-primary: #F7ECE1;
     --color-secondary: #343a40;
   
-    --color-button: #CAC4CE;
-    --color-button-secondary: #9B90A2;
+    --color-button: #B2D8E6;
+    --color-button-secondary: #63B0CD; 
     --color-button-tertiary: #c59966;
     --color-button-quaternary: #e2630258;
     --color-button-delete: #B71901;

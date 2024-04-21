@@ -73,13 +73,14 @@
 .tooltip {
   position: fixed;
   z-index: 9999;
-  background-color: var(--color-primary);
+  color: var(--color-text-secondary);
+  background-color: var(--color-button);
   border: 1px solid var(--brand-color);
   padding: 8px;
   border-radius: 20px;
   width: 150px;
   text-align: center;
 }
-.removeButton :hover{
+.removeButton:hover{
   background-color: var(--color-button-delete);
 }
