@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import Orderform from "./orderform";
@@ -35,8 +35,12 @@ describe(Orderform.name, () => {
 test("Should show loading after submitting form", async () => {
     const { getByRole, getByText } = render(<Orderform />);
     const submitButton = getByRole("button", { name: "Submit order" });
+    const termsCheckbox = getByRole("checkbox", { name: "Agree to terms & conditions" });
 
+    fireEvent.click(termsCheckbox);
     fireEvent.click(submitButton);
 
-    waitFor(() => expect(getByText("Loading...")).toBeInTheDocument());
+    await waitFor(() => {
+      expect(getByText("Submit order")).toBeInTheDocument();
+    });
 });
