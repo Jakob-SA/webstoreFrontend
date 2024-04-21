@@ -16,18 +16,18 @@ nav li {
 }
 
 nav li.active a {
-  color: var(--color-button-tertiary);
-  border-top: 0.3rem var(--color-button-tertiary) solid;
+  color: var(--color-button-secondary);
+  border-top: 0.3rem var(--color-button-secondary) solid;
   text-decoration: inherit;
 }
 
 nav a {
-  color: var(--color-text-secondary);
-  border-top: 0.3rem var(--color-text-secondary) solid;
+  color: var(--color-button);
+  border-top: 0.3rem var(--color-button) solid;
   padding: 0 4rem;
 }
 nav a:hover {
-  color: var(--color-button-quaternary);
-  border-top: 0.3rem var(--color-button-quaternary) solid;
+  color: var(--color-button-secondary);
+  border-top: 0.3rem var(--color-button-secondary) solid;
   text-decoration: inherit;
 }

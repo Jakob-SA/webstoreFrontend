@@ -3,8 +3,6 @@
   margin: 0px auto 0px auto;
 }
 body {
-  --background-color: var(--color-primary-dark);
-  --brand-color: var(--color-text);
   margin: 0 auto;
 }
 
@@ -33,20 +31,20 @@ body {
 }
 
 main {
-  background-color: var(--background-color);
+  background-color: var(--background-color-secondary);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 1em;
   grid-column: 2;
-  color: black;
+  color: var(--color-text);
   align-self: center;
 }
 
 aside > * {
   grid-column: 3;
-  background-color: var(--background-color);
+  background-color: var(--background-color-secondary);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 1em;
-  color: black;
+  color: var(--color-text);
   width: 21em;
   padding: 1em;
   justify-self: center;
