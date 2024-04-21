@@ -45,38 +45,34 @@
 }
 .quantityInput {
   display: flex;
-  height: fit-content;
   align-items: center;
+  justify-content: center;
 }
+.quantityInput > * {
+  margin: 2px;
+}
+
 .quantityButton {
+  --quantitybuttonSize: 20px;
   color: var(--color-button-secondary);
   background-color: var(--color-button);
   border-radius: 50%;
-  margin: 5px;
-  width: 20px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .quantityButton:hover {
   border-color: var(--color-button-secondary);
 }
 .quantityBox {
-  width: 40px;
-  height: 30px;
+  --numberBoxSize: 35px;
+  width: var(--numberBoxSize);
+  height: var(--numberBoxSize);
+  line-height: var(--numberBoxSize);
   text-align: center;
-  padding-left: 11px;
-  padding-right: 0;
-}
-.button {
-  background-color: var(--color-button);
-}
-.button:hover {
-  border-color: var(--color-button-secondary);
-}
-input [type="number"] {
-  width: 100px;
+  border: 1px solid var(--color-button);
+  border-radius: 25%;
+  background-color: var(--color-button-secondary);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-left: 0.4em;
+  margin-right: 0.4em;
 }
 .tooltip {
   position: fixed;
