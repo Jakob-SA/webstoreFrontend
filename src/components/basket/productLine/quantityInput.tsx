@@ -14,6 +14,9 @@ export function QuantityInput({
 }: QuantityInputProps) {
   const [showTooltip, setShowTooltip] = useState(false);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const toolTipMessage =
+    "Buy at least " + product.rebateQuantity + " pairs to get a rebate";
+  const [illigalQuantity, setIlligalQuantity] = useState(false);
 
   const handleMouseMove = (e: { clientX: any; clientY: any }) => {
     setCoords({ x: e.clientX, y: e.clientY });
@@ -27,9 +30,13 @@ export function QuantityInput({
     setQuantity(quantity + 1);
   };
 
-  const decrementQuantity = () => {
+  const decrementQuantity = async () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
+    } else {
+      setIlligalQuantity(true);
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+      setIlligalQuantity(false);
     }
   };
 
@@ -40,11 +47,11 @@ export function QuantityInput({
       onMouseLeave={handleMouseLeave}
     >
       <button className="quantityButton" onClick={decrementQuantity}>
-        <b>-</b>
+        <p>-</p>
       </button>
       <div className="quantityBox">{quantity}</div>
       <button className="quantityButton" onClick={incrementQuantity}>
-        <b>+</b>
+        <p>+</p>
       </button>
 
       {quantity < product.rebateQuantity && showTooltip && (
@@ -52,7 +59,9 @@ export function QuantityInput({
           className="tooltip"
           style={{ left: `${coords.x}px`, top: `${coords.y}px` }}
         >
-          {"Buy at least " + product.rebateQuantity + " pairs to get a rebate"}
+          {illigalQuantity
+            ? "Use the trashbin to remove the product."
+            : toolTipMessage}
         </div>
       )}
     </div>

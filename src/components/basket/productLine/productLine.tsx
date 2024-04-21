@@ -43,17 +43,17 @@ export function ProductLine({
   return (
     <tr className={`productLine ${isRemoving ? "removing" : ""}`}>
       <td>
-        <div className="lineItemFirst">
-          <img
-            src={"productPics/product" + product.id + ".jpg"}
-            className="productImages"
-            width="150"
-            height="150"
-          />
-        </div>
+        <img
+          src={"productPics/product" + product.id + ".jpg"}
+          className="productImages"
+        />
       </td>
-      <td>{product.name}</td>
-      <td>{product.price}</td>
+      <td>
+        <p>{product.name}</p>
+      </td>
+      <td>
+        <p>{product.price}</p>
+      </td>
       <td>
         <QuantityInput
           quantity={quantity}
@@ -64,11 +64,15 @@ export function ProductLine({
       <td>
         {quantity >= product.rebateQuantity ? (
           <div className="twoLinePrice">
-            <div className="oldPrice">{originalLinePrice.toFixed(2)}</div>
-            {totalLinePrice.toFixed(2)}
+            <div className="oldPrice">
+              <p>{originalLinePrice.toFixed(2)}</p>
+            </div>
+            <p>{totalLinePrice.toFixed(2)}</p>
           </div>
         ) : (
-          <div className="oneLinePrice">{totalLinePrice.toFixed(2)}</div>
+          <div className="oneLinePrice">
+            <p>{totalLinePrice.toFixed(2)}</p>
+          </div>
         )}
       </td>
       <td>
@@ -83,11 +87,8 @@ export function ProductLine({
           </label>
         </div>
       </td>
-
       <td>
-        <div className="lineItemLast">
-          <RemoveButton onClick={() => handleRemove()} />
-        </div>
+        <RemoveButton onClick={() => handleRemove()} />
       </td>
     </tr>
   );

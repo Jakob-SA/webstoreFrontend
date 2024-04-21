@@ -4,10 +4,18 @@ function NormalBasket({ basketLines }: { basketLines: any }) {
       <tbody>
         <tr>
           <th></th>
-          <th>Product</th>
-          <th>Price per unit</th>
-          <th>Quantity</th>
-          <th>Total </th>
+          <th>
+            <p>Product</p>
+          </th>
+          <th>
+            <p>Price per unit</p>
+          </th>
+          <th>
+            <p>Quantity</p>
+          </th>
+          <th>
+            <p>Total</p>
+          </th>
           <th> </th>
           <th></th>
         </tr>
