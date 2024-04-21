@@ -257,7 +257,7 @@ function Orderform() {
           name="orderComment"
           id="orderComment"
         />
-        <label htmlFor="a">
+        <label htmlFor="termsAndConditions">
           Agree to{" "}
           <a href="/terms-and-conditions" target="_blank">
             terms & conditions
