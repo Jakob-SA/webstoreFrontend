@@ -31,7 +31,7 @@ table {
   font-display: flex;
 }
 
-/* tror ikke der er brug for denne mere 
+/* tror ikke der er brug for denne mere
 .checkoutButton {
   background-color: black;
   border-radius: 8px;
@@ -40,7 +40,7 @@ table {
 */
 
 .shoppingCart tr:not(:last-child) td,
-.shoppingCart tr:not(:last-child) th{
+.shoppingCart tr:not(:last-child) th {
   border-bottom: 1px solid var(--color-text);
 }
 
@@ -49,4 +49,21 @@ table {
   padding: 10px; /* Adjust as needed */
   border-bottom: 1px solid var(--color-text);
   color: var(--color-text);
+}
+
+.phoneBasket h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+}
+.phoneBasket > *:not(:last-child) {
+  border-bottom: 1px solid var(--color-text);
+}
+.phoneBasket > * {
+  margin-left: 1em;
+  margin-right: 1em;
 }

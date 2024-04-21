@@ -1,5 +1,4 @@
 import { Product } from "../product";
-import { productLineProps } from "./productLine";
 import "./phoneProductLine.css";
 import { QuantityInput } from "./quantityInput";
 import { RemoveButton } from "./removeButton";

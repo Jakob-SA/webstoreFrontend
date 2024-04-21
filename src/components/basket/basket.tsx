@@ -5,13 +5,14 @@ import useMediaQuery from "../utils/mediaQuery";
 import PhoneBasket from "./phoneBasket";
 import EmptyBasket from "./emptyBasket";
 import NormalBasket from "./normalBasket";
+
 var basketDiscounted = false;
 
 function Basket() {
   const [basketItems, setBasketItems] = useState<Product[]>([]); //maybe parameterize this
   const [prices, setPrices] = useState(new Map<number, number>());
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
-  const { medium, small } = useMediaQueries();
+  const { small } = useMediaQueries();
 
   useEffect(() => {
     //copilot told me this was a fix. @Esben may find alternative fix
@@ -80,11 +81,11 @@ function calculateDiscount(totalPrice: number): number {
   }
 }
 
+//This function is used to make changes in jsx based on css media queries
 function useMediaQueries() {
-  const medium = useMediaQuery("(max-width: 1100px)");
   const small = useMediaQuery("(max-width: 700px)");
 
-  return { medium, small };
+  return { small };
 }
 
 export default Basket;

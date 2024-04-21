@@ -26,6 +26,12 @@ body {
 
   }
 }
+@media (max-width: 700px) {
+  main {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+}
 
 main {
   background-color: var(--background-color);
@@ -33,7 +39,8 @@ main {
   border-radius: 1em;
   grid-column: 2;
   color: black;
-  align-self: start;
+  align-self: center;
+
 }
 
 aside > * {

@@ -1,7 +1,7 @@
 .phoneProductLine {
   display: flex;
   flex-direction: row;
-  margin: 2em;
+  padding: 2em;
 }
 .phoneProductLine > div {
   display: flex;
@@ -17,4 +17,7 @@
 .phoneProductLine h3,
 p {
   margin: 0.1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
