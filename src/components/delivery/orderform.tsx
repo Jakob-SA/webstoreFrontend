@@ -1,8 +1,8 @@
 import "./orderform.css";
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { ZipCodeChecker } from "./zipCodeChecker";
-import { Link } from "react-router-dom";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
 // Throughout the development of this form LLM has been used to debugging, sparring and pair programming. However no code has been copied from LLMs
@@ -16,6 +16,7 @@ function Orderform() {
   const [deliveryZipCode, setDeliveryZipCode] = useState("");
   const [deliveryCity, setDeliveryCity] = useState("");
   const [isDeliveryAddress, setIsDeliveryAddress] = useState(false);
+  const navigate = useNavigate();
 
   // This function is used to toggle the business name and VAT number fields
   const handleBusinessChange = () => {
@@ -72,6 +73,7 @@ function Orderform() {
 
       if (response.ok) {
         alert("Order submitted, thank you for your purchase!");
+        navigate("/confirmation"); // Navigate on successful submit
       } else {
         alert("Order failed, please try again later");
       }
@@ -266,11 +268,9 @@ function Orderform() {
         </label>
         <input type="checkbox" id="termsAndConditions" required />
         {loading && <p>Loading...</p>}
-        <Link to="/confirmation">
-          <button type="submit" className="acceptButton">
-            Submit order
-          </button>
-        </Link>
+        <button type="submit" className="acceptButton">
+          Submit order
+        </button>
       </form>
     </>
   );
