@@ -51,15 +51,9 @@
 .quantityInput > * {
   margin: 2px;
 }
-
 .quantityButton {
   --quantitybuttonSize: 20px;
-  color: var(--color-button-secondary);
-  background-color: var(--color-button);
   border-radius: 50%;
-}
-.quantityButton:hover {
-  border-color: var(--color-button-secondary);
 }
 .quantityBox {
   --numberBoxSize: 35px;

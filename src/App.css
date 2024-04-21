@@ -23,7 +23,6 @@ body {
   aside > * {
     width: 100vw;
     margin-top: 1em;
-
   }
 }
 @media (max-width: 700px) {
@@ -40,7 +39,6 @@ main {
   grid-column: 2;
   color: black;
   align-self: center;
-
 }
 
 aside > * {
@@ -61,18 +59,3 @@ aside > :nth-child(2) {
 aside > *:not(:first-child) {
   margin-top: 1em;
 }
-
-@media (prefers-color-scheme: light) {
-  body {
-    --background-color: var(--color-primary);
-  }
-}
-/*
-@media (max-width: 768px) {
-  .frontPage {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-}
-

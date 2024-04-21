@@ -5,6 +5,7 @@ import useMediaQuery from "../utils/mediaQuery";
 import PhoneBasket from "./phoneBasket";
 import EmptyBasket from "./emptyBasket";
 import NormalBasket from "./normalBasket";
+import "./basket.css";
 
 var basketDiscounted = false;
 
