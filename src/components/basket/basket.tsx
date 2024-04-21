@@ -5,23 +5,14 @@ import { useShopContext } from "../../contexts/shopContext";
 import { fetchProducts } from "../basket/product.ts";
 
 
-
 function Basket() {
-  const context = useShopContext();
+  const {basketItems,totalPrice} = useShopContext();
   const dispatch = useDispatchShopContext()//this is a fix. @Esben may find alternative fix
-  const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
-  var basketDiscounted = false;
+  //const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
   
-  //Making it so the basketItems are the first 10 products
-  
-  //Getting basketItems. TODO: make it random and not all products.
-  const basketItems = context.products
-
-  
-
   const displayTotalPrice = () => {
     //Should be made to actually display the whole price and not just the discount
-    if (basketDiscounted) {
+    if (totalPrice>300) {
       return (
         "With a 10% discount that means you have saved " +
         (totalPrice / 0.9 - totalPrice).toFixed(2)
@@ -36,8 +27,8 @@ function Basket() {
       <ProductLine
         key={products.id}
         product={products}
-        handleRemoveItem={ ()=> dispatch({type: 'REMOVE_FROM_BASKET', productId: products.id})} 
-        updateTotalPrice={()=> dispatch({type: 'UPDATE_TOTAL_PRICE', productId: products.id, price: 0})} 
+        handleRemoveItem={()=> dispatch({type: 'REMOVE_FROM_BASKET', productId: products.id})} 
+        updateTotalPrice={()=> dispatch({type: 'UPDATE_TOTAL_PRICE',productId: products.id, price: products.price})} 
       />
     );
   });
