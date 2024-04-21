@@ -18,6 +18,10 @@ td {
 th {
   white-space: nowrap;
   padding-bottom: 1em;
+  font-size: 1.2em;
+}
+td p {
+  font-size: 1.3em;
 }
 
 .phoneBasket > *:not(:last-child) {
