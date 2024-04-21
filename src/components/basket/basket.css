@@ -31,3 +31,12 @@ td p {
   margin-left: 1em;
   margin-right: 1em;
 }
+.orderSummary {
+  display: flex;
+  flex-direction: column;
+}
+.orderSummary > div {
+  display: flex;
+
+  justify-content: space-between;
+}
