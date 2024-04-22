@@ -4,6 +4,7 @@ function Header() {
   return (
     <>
       <header>
+        <link rel="stylesheet" href="src\index.css" />
         <div>
           <h1>Checkout</h1>
           <a href=".">

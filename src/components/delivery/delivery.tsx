@@ -8,12 +8,13 @@ function Delivery() {
     <>
       <Header />
       <NavigationBar />
-      <div className="deliveryPage">
-        <main>
+      <main>
+        <div className="deliveryPage">
           <Orderform />
-        </main>
+        </div>
+
         <aside></aside>
-      </div>
+      </main>
       <Footer />
     </>
   );

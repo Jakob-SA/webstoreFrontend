@@ -1,34 +1,31 @@
-form {
-}
 .deliveryPage {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  text-align: center;
+  background-color: var(--background-color-secondary);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 1em;
+  grid-column: 2;
+  color: var(--color-text);
+  width: 80%;
 }
 
 input {
-  font-size: 1em sans-serif;
-  height: 25px;
+  font-size: 2em sans-serif;
+  height: 2em;
+  padding: 1em;
   margin: 1em;
-  position: relative;
   width: 100%;
   border: 0;
-  border-bottom: 2px solid #dfdfdf;
   outline: none;
 }
 
 input:focus {
-  border-bottom: 2px solid #413f3f;
+  border: 1px solid var(--color-button-secondary);
 }
 
 input::placeholder {
-  font-size: medium;
+  font-size: 1.5em;
   color: #575757;
 }
 
