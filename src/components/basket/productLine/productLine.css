@@ -12,6 +12,7 @@
 .productImages {
   width: 8em;
   height: 8em;
+  min-width: 8em;
   object-fit: cover;
   border-radius: 15px;
   transition: transform 0.5s ease-out;
@@ -90,4 +91,7 @@
 
 .removeButton:hover {
   background-color: var(--color-button-delete);
+}
+.removeButton {
+  margin-left: 5px;
 }

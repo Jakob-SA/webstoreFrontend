@@ -16,7 +16,7 @@
   --color-button-secondary: #9b90a2;
   --color-button-tertiary: #c59966;
   --color-button-quaternary: #e2630258;
-  --color-button-delete: #b71901;
+  --color-button-delete: #ff5137;
 
   --color-text: #000000;
   --color-text-secondary: #49414e;
@@ -85,7 +85,7 @@ button:focus-visible {
     --color-button-secondary: #63b0cd;
     --color-button-tertiary: #c59966;
     --color-button-quaternary: #e2630258;
-    --color-button-delete: #b71901;
+    --color-button-delete: #ff5137;
 
     --color-text: #f7ece1;
     --color-text-secondary: #49414e;

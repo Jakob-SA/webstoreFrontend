@@ -85,7 +85,6 @@ function Orderform() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h1>Checkout</h1>
         <h2>Shipping</h2>
         <legend>Enter your shipping details</legend>
         <p>Fields marked with * are required.</p>

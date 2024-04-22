@@ -18,7 +18,7 @@
 .phoneProductLine h3,
 p {
   margin: 0.1em;
-  white-space: nowrap;
+  white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
 }
