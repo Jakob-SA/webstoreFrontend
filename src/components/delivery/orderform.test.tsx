@@ -16,10 +16,10 @@ describe(Orderform.name, () => {
       } as Response;
     });
 
-    const { getByPlaceholderText} = render(<Orderform />);
+    const { getByLabelText } = render(<Orderform />);
 
-    const zipCodeInput = getByPlaceholderText("Enter your postal code *");
-    const cityInput = getByPlaceholderText("Enter your city, or let us set it for you *");
+    const zipCodeInput = getByLabelText("Zip Code:*");
+    const cityInput = getByLabelText("City:*");
     await user.type(zipCodeInput, "2200");
     fireEvent.blur(zipCodeInput);
 
@@ -66,7 +66,7 @@ test("Should show loading after submitting form", async () => {
 
     fireEvent.change(emailInput, { target: { value: "JohnDoe@gmail.com" } });
     expect(emailInput).toHaveValue("JohnDoe@gmail.com");
-    
+
     fireEvent.change(phoneNumberInput, { target: { value: "12345678" } });
     expect(phoneNumberInput).toHaveValue("12345678");
     
