@@ -4,8 +4,24 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgb(255, 255, 255);
-  background-color: #242424;
+  color: var(--color-primary);
+  background-color: var(--background-color-primary);
+
+  --background-color-primary: #f3f4f6;
+  --background-color-secondary: #d0d4dc;
+  --color-primary: #d4995e;
+  --color-secondary: #343a40;
+
+  --color-button: #cac4ce;
+  --color-button-secondary: #9b90a2;
+  --color-button-tertiary: #c59966;
+  --color-button-quaternary: #e2630258;
+  --color-button-delete: #b71901;
+
+  --color-text: #000000;
+  --color-text-secondary: #49414e;
+  --color-text-tertiary: #b71901;
+  --color-text-inverse: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +31,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-button-tertiary);
   text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+  color: var(--color-button-quaternary);
 }
 
 body {
@@ -36,32 +53,46 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid var(--color-button-secondary);
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  color: var(--color-text-secondary);
+  background-color: var(--color-button);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: rgb(0, 0, 0);
+  border-color: var(--color-secondary);
 }
+button:active {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --background-color-primary: #1a1d23;
+    --background-color-secondary: #2b303a;
+    --color-primary: #f7ece1;
+    --color-secondary: #343a40;
+
+    --color-button: #b2d8e6;
+    --color-button-secondary: #63b0cd;
+    --color-button-tertiary: #c59966;
+    --color-button-quaternary: #e2630258;
+    --color-button-delete: #b71901;
+
+    --color-text: #f7ece1;
+    --color-text-secondary: #49414e;
+    --color-text-tertiary: #b71901;
+    --color-text-inverse: #ffffff;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  button:active {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   }
 }

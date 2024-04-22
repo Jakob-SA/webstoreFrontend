@@ -1,6 +1,6 @@
 import "./orderform.css";
 import { FormEvent, useState } from "react";
-import NavigationBar from "../header/NavigationBar";
+
 import { ZipCodeChecker } from "./zipCodeChecker";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
@@ -27,28 +27,29 @@ function Orderform() {
   };
 
   const getFormData = (elements: any) => ({
-    firstName: elements.firstName.value,
-    lastName: elements.lastName.value,
+    first_name: elements.firstName.value,
+    last_name: elements.lastName.value,
     country: elements.country.value,
-    adress1: elements.adress1.value,
-    adress2: elements.adress2.value,
-    zip: elements.zip.value,
+    address1: elements.adress1.value,
+    address2: elements.adress2.value,
+    zip_code: elements.zip.value,
     city: elements.city.value,
     email: elements.email.value,
-    telephoneNumber: elements.telephoneNumber.value,
-    businessName: isBusiness ? elements.businessName.value : undefined,
-    VAT: isBusiness ? elements.VAT.value : undefined,
-    deliveryCountry: isDeliveryAddress
+    telephone_number: elements.telephoneNumber.value,
+    order_comment: elements.orderComment.value,
+    business_name: isBusiness ? elements.businessName.value : undefined,
+    vat: isBusiness ? elements.VAT.value : undefined,
+    delivery_country: isDeliveryAddress
       ? elements.deliveryCountry.value
       : undefined,
-    deliveryAdress1: isDeliveryAddress
+    delivery_address1: isDeliveryAddress
       ? elements.deliveryAdress1.value
       : undefined,
-    deliveryAdress2: isDeliveryAddress
+    delivery_address2: isDeliveryAddress
       ? elements.deliveryAdress2.value
       : undefined,
-    deliveryZip: isDeliveryAddress ? elements.deliveryZip.value : undefined,
-    deliveryCity: isDeliveryAddress ? elements.deliveryCity.value : undefined,
+    delivery_zip: isDeliveryAddress ? elements.deliveryZip.value : undefined,
+    delivery_city: isDeliveryAddress ? elements.deliveryCity.value : undefined,
   });
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -59,11 +60,14 @@ function Orderform() {
     const formData = getFormData(form.elements);
 
     try {
-      const response = await fetch("https://eoi9wdj8cv1ukqb.m.pipedream.net", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://dtu62597.eduhost.dk:10271/api/create/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         alert("Order submitted, thank you for your purchase!");
@@ -80,15 +84,12 @@ function Orderform() {
 
   return (
     <>
-      <NavigationBar />
       <form onSubmit={handleSubmit}>
         <h1>Checkout</h1>
         <h2>Shipping</h2>
         <legend>Enter your shipping details</legend>
         <p>Fields marked with * are required.</p>
-        <label htmlFor="businessOrder" hidden>
-          Business order:
-        </label>
+        <label htmlFor="businessOrder">Business order:</label>
         <input
           type="checkbox"
           id="businessOrder"
@@ -179,9 +180,7 @@ function Orderform() {
           city={city}
           onCityChange={setCity}
         />
-        <label htmlFor="deliveryAdress" hidden>
-          Different delivery adress:
-        </label>
+        <label htmlFor="deliveryAdress">Different delivery adress:</label>
         <input
           type="checkbox"
           id="deliveryAdress"
@@ -252,12 +251,23 @@ function Orderform() {
           id="telephoneNumber"
           title="Please enter a valid danish phone number"
         ></input>
+        <label htmlFor="orderComment"></label>
+        <textarea
+          placeholder="Here you can leave a comment for your order"
+          name="orderComment"
+          id="orderComment"
+        />
+        <label htmlFor="a">
+          Agree to{" "}
+          <a href="/terms-and-conditions" target="_blank">
+            terms & conditions
+          </a>
+        </label>
+        <input type="checkbox" id="termsAndConditions" required />
         {loading && <p>Loading...</p>}
-        <div>
-          <button type="submit" className="acceptButton">
-            Submit order
-          </button>
-        </div>
+        <button type="submit" className="acceptButton">
+          Submit order
+        </button>
       </form>
     </>
   );

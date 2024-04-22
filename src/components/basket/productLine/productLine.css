@@ -6,21 +6,16 @@
   opacity: 1;
 }
 
-/*
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }*/
-
 .productImages:hover {
   transform: scale(1.5);
 }
 .productImages {
-  width: 7em;
-  height: 7em;
+  width: 8em;
+  height: 8em;
   object-fit: cover;
   border-radius: 15px;
   transition: transform 0.5s ease-out;
+  vertical-align: middle;
 }
 .lineItemFirst {
   padding-left: 20px;
@@ -45,46 +40,54 @@
 }
 .quantityInput {
   display: flex;
-  height: fit-content;
   align-items: center;
+  justify-content: center;
+}
+.quantityInput > * {
+  margin: 2px;
+}
+.quantityInput p {
+  font-size: 3em;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -0.1em;
 }
 .quantityButton {
-  color: var(--color-button-secondary);
-  background-color: var(--color-button);
+  width: 3em;
+  height: 3em;
+  padding: 0;
   border-radius: 50%;
-  margin: 5px;
-  width: 20px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.quantityButton:hover {
-  border-color: var(--color-button-secondary);
+  line-height: 2em;
+  color: var(--color-text-secondary);
 }
 .quantityBox {
-  width: 40px;
-  height: 30px;
+  --numberBoxSize: 35px;
+  width: var(--numberBoxSize);
+  height: var(--numberBoxSize);
+  line-height: var(--numberBoxSize);
   text-align: center;
-  padding-left: 11px;
-  padding-right: 0;
-}
-.button {
+  border: 1px solid var(--color-button);
+  border-radius: 25%;
   background-color: var(--color-button);
-}
-.button:hover {
-  border-color: var(--color-button-secondary);
-}
-input [type="number"] {
-  width: 100px;
+  color: var(--color-text-secondary);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-left: 0.4em;
+  margin-right: 0.4em;
 }
 .tooltip {
   position: fixed;
   z-index: 9999;
-  background-color: var(--color-primary);
+  color: var(--color-text-secondary);
+  background-color: var(--color-button);
   border: 1px solid var(--brand-color);
   padding: 8px;
   border-radius: 20px;
   width: 150px;
   text-align: center;
+  white-space: normal;
+}
+
+.removeButton:hover {
+  background-color: var(--color-button-delete);
 }
