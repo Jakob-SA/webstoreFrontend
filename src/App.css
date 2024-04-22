@@ -1,6 +1,7 @@
 #root {
   padding: 0rem;
   margin: 0px auto 0px auto;
+  width: 100%;
 }
 body {
   margin: 0 auto;
@@ -13,6 +14,10 @@ body {
   justify-items: center;
   margin-left: 1em;
   margin-right: 1em;
+}
+.frontPage h2,
+h3 {
+  margin-top: 0;
 }
 @media (min-width: 1500px) {
   td {
@@ -29,9 +34,10 @@ body {
   aside > * {
     width: 100vw;
     margin-top: 1em;
+    width: 50em;
   }
   td > :nth-child(2) {
-    width: 10em;
+    width: 100em;
   }
 }
 @media (max-width: 880px) {
