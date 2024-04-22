@@ -1,4 +1,4 @@
-function OrderConfirmation({ orderNumber }) {
+function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
   return (
     <div>
       <h2>Order Confirmation</h2>

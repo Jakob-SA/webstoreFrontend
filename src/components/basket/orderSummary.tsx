@@ -24,8 +24,7 @@ function OrderSummary() {
         </div>
       </div>
       <Link to="/delivery">
-        {" "}
-        <button>
+        <button className="summary-button">
           Proceed to delivery <p style={{ fontSize: "4em" }}>&#187;</p>
         </button>
       </Link>

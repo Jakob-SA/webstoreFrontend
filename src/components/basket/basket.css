@@ -44,3 +44,9 @@ td p {
 
   justify-content: space-between;
 }
+.summary-button {
+  margin-top: 1em;
+  display: inline-block;
+  justify-content: center;
+  width: 100%;
+}
