@@ -3,6 +3,7 @@ import Basket from "./basket";
 import { render, screen } from "@testing-library/react";
 import { expect, test, vi } from "vitest";
 import productArray from "../../assets/media/products.json";
+import '../utils/matchMedia';
 
 describe(Basket.name, () => {
   afterEach(() => {
