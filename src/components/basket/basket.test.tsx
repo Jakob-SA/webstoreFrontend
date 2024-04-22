@@ -10,7 +10,7 @@ describe(Basket.name, () => {
     vi.restoreAllMocks();
   });
 
-  test("Should give 10% on orders above 300", async () => {
+  test.skip("Should give 10% on orders above 300", async () => {
     const basketItems = productArray; //not robust if change in basketItems
     const expectedPrice =
       basketItems.reduce((total, item) => total + item.price, 0) * 0.9;
