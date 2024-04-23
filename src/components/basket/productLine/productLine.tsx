@@ -3,6 +3,7 @@ import { Product } from "../product";
 import { RemoveButton } from "./removeButton";
 import { QuantityInput } from "./quantityInput";
 import "./productLine.css";
+import { useDispatchShopContext } from "../../../contexts/shopContext";
 
 export interface productLineProps {
   product: Product;
@@ -15,6 +16,7 @@ export function ProductLine({
   handleRemoveItem,
   updateTotalPrice,
 }: productLineProps) {
+  const dispatch = useDispatchShopContext();
   const [giftwrapping, setGiftwrapping] = useState(false);
   const [quantity, setQuantity] = useState(1);
   giftwrapping.valueOf(); // to be deleted
@@ -40,6 +42,16 @@ export function ProductLine({
     setGiftwrapping(event.target.checked);
   };
 
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+    // Dispatch the UPDATE_QUANTITY action
+    dispatch({
+      type: "UPDATE_QUANTITY",
+      productId: product.id,
+      quantity: newQuantity,
+    });
+  };
+
   return (
     <tr className={`productLine ${isRemoving ? "removing" : ""}`}>
       <td>
@@ -57,7 +69,7 @@ export function ProductLine({
       <td>
         <QuantityInput
           quantity={quantity}
-          setQuantity={setQuantity}
+          setQuantity={handleQuantityChange}
           product={product}
         />
       </td>

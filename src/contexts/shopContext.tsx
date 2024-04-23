@@ -14,12 +14,14 @@ interface productLine {
 interface ShopState {
   products: Product[];
   basketItems: productLine[];
+  subtotal: number;
 }
 
 //inital state
 const initialState: ShopState = {
   products: [],
   basketItems: [],
+  subtotal: 0,
 };
 
 // Type of actions
@@ -27,7 +29,8 @@ type ShopAction =
   | { type: "SET_PRODUCTS"; products: Product[] }
   | { type: "SET_BASKET_ITEMS"; basketItems: Product[] }
   | { type: "REMOVE_FROM_BASKET"; productId: number }
-  | { type: "UPDATE_TOTAL_PRICE"; productId: number; price: number };
+  | { type: "UPDATE_TOTAL_PRICE"; productId: number; price: number }
+  | { type: "UPDATE_QUANTITY"; productId: number; quantity: number };
 
 //Reducer. co pilot helped here.
 function shopReducer(state: ShopState, action: ShopAction): ShopState {
@@ -63,6 +66,21 @@ function shopReducer(state: ShopState, action: ShopAction): ShopState {
         basketItems: updatedItems,
         totalPrice: updatedItems.reduce((acc, item) => acc + item.price, 0)
       };*/
+
+    case "UPDATE_QUANTITY":
+      const updatedItems = state.basketItems.map((item) =>
+        item.product.id === action.productId
+          ? {
+              ...item,
+              quantity: action.quantity,
+              totalLinePrice: item.product.price * action.quantity,
+            }
+          : item
+      );
+      return {
+        ...state,
+        basketItems: updatedItems,
+      };
     default:
       return state;
   }
@@ -84,6 +102,16 @@ export function ShopContextProvider({ children }: MyProviderProps) {
   //const [totalPrice, setTotalPrice] = useState(0);
   //const [prices, setPrices] = useState(new Map<number, number>());
   //var basketDiscounted = false;
+  const [subtotal, setSubtotal] = useState(0); // Add subtotal state
+
+  useEffect(() => {
+    // Calculate subtotal whenever basketItems change
+    const subtotalAmount = state.basketItems.reduce(
+      (total, item) => total + item.totalLinePrice,
+      0
+    );
+    setSubtotal(subtotalAmount);
+  }, [state.basketItems]);
 
   // fetches all the products and sets them to the basketItems.
 
@@ -139,7 +167,7 @@ export function ShopContextProvider({ children }: MyProviderProps) {
       }*/
 
   return (
-    <ShopContext.Provider value={state}>
+    <ShopContext.Provider value={{ ...state, subtotal }}>
       <DispatchShopContext.Provider value={dispatch}>
         {children}
       </DispatchShopContext.Provider>

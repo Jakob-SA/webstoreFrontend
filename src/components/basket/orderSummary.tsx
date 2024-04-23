@@ -1,12 +1,16 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { ShopContext } from "../../contexts/shopContext";
 
 function OrderSummary() {
+  const { subtotal } = useContext(ShopContext);
+
   return (
     <div className="orderSummary">
       <h2>Order Summary</h2>
       <div>
         <p>Subtotal</p>
-        <p>100 $</p>
+        <p>{`$${subtotal.toFixed(2)}`}</p>
       </div>
       <div>
         <p>Shipping</p>

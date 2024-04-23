@@ -8,27 +8,20 @@ import NormalBasket from "../basket/normalBasket";
 
 function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
   const { basketItems } = useShopContext();
-  const dispatch = useDispatchShopContext();
 
-  const basketLines = basketItems.map((items) => {
-    //TODO make  updatePricework. Also handleRemoveItem
-    return (
-      <ProductLine
-        key={items.product.id}
-        product={items.product}
-        handleRemoveItem={() =>
-          dispatch({ type: "REMOVE_FROM_BASKET", productId: items.product.id })
-        }
-        updateTotalPrice={() =>
-          dispatch({
-            type: "UPDATE_TOTAL_PRICE",
-            productId: items.product.id,
-            price: items.product.price,
-          })
-        }
-      />
-    );
-  });
+  const basketLines = basketItems.map((item) => (
+    <tr key={item.product.id}>
+      <td>
+        <p>{item.product.name}</p>
+      </td>
+      <td>
+        <p>{item.product.price}</p>
+      </td>
+      <td>
+        <p>{item.quantity}</p>
+      </td>
+    </tr>
+  ));
 
   return (
     <div>
@@ -37,8 +30,16 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
         <p>Thank you for your order!</p>
         <p>Your order number is: #{orderNumber}</p>
         <p>Your order details:</p>
-        <NormalBasket basketLines={basketLines} />
-
+        <table>
+          <tbody>
+            <tr>
+              <th>Product</th>
+              <th>Price per unit</th>
+              <th>Quantity</th>
+            </tr>
+            {basketLines}
+          </tbody>
+        </table>
         <p>Your order details have been sent to your email.</p>
       </div>
     </div>
