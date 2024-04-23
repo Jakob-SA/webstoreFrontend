@@ -1,6 +1,6 @@
 import React, { useReducer, useState, useEffect } from "react";
-import { Product, fetchProducts } from '../components/basket/product';
- 
+import { Product, fetchProducts } from "../components/basket/product";
+
 //productLine type
 interface productLine {
   product: Product;
@@ -12,8 +12,8 @@ interface productLine {
 //type of state
 
 interface ShopState {
-    products: Product[];
-    basketItems: productLine[];
+  products: Product[];
+  basketItems: productLine[];
 }
 
 //inital state
@@ -23,78 +23,85 @@ const initialState: ShopState = {
 };
 
 // Type of actions
- type ShopAction =
- { type: 'SET_PRODUCTS'; products: Product[] }
-| { type: 'SET_BASKET_ITEMS'; basketItems: Product[] }
-| { type: 'REMOVE_FROM_BASKET'; productId: number }
-| { type: 'UPDATE_TOTAL_PRICE'; productId: number; price: number };
-
+type ShopAction =
+  | { type: "SET_PRODUCTS"; products: Product[] }
+  | { type: "SET_BASKET_ITEMS"; basketItems: Product[] }
+  | { type: "REMOVE_FROM_BASKET"; productId: number }
+  | { type: "UPDATE_TOTAL_PRICE"; productId: number; price: number };
 
 //Reducer. co pilot helped here.
-  function  shopReducer(state: ShopState, action: ShopAction): ShopState {
-    switch (action.type) {
-      case 'SET_PRODUCTS':
-        return {...state, products: action.products}
-      case 'SET_BASKET_ITEMS':
-        const indices = [0, 1 , 2, 3, 4, 7, 8, 9]; // indices of the items you want to select
-       // return { ...state, basketItems: indices.map(index => action.basketItems[index]) };
-       return {...state,
-        basketItems: action.basketItems.map(item => ({
-        product: item,
-        quantity: 1,
-        totalLinePrice: item.price* 1, 
-        rebatePrice: item.rebatePercent * item.price}))}
-
-      case 'REMOVE_FROM_BASKET': //copilot solution
-        const updatedBasketItems = state.basketItems.filter(item => item.product.id !== action.productId);
-      return { 
-        ...state, 
-        basketItems: updatedBasketItems,  
+function shopReducer(state: ShopState, action: ShopAction): ShopState {
+  switch (action.type) {
+    case "SET_PRODUCTS":
+      return { ...state, products: action.products };
+    case "SET_BASKET_ITEMS":
+      const indices = [0, 1, 2, 3, 4, 7, 8, 9]; // indices of the items you want to select
+      // return { ...state, basketItems: indices.map(index => action.basketItems[index]) };
+      return {
+        ...state,
+        basketItems: action.basketItems.map((item) => ({
+          product: item,
+          quantity: 1,
+          totalLinePrice: item.price * 1,
+          rebatePrice: item.rebatePercent * item.price,
+        })),
       };
-      case 'UPDATE_TOTAL_PRICE': //copilot solution
-      return{...state}
-       /* const updatedItems = state.basketItems.map(item => item.id === action.productId ? { ...item, price: action.price } : item);
+
+    case "REMOVE_FROM_BASKET": //copilot solution
+      const updatedBasketItems = state.basketItems.filter(
+        (item) => item.product.id !== action.productId
+      );
+      return {
+        ...state,
+        basketItems: updatedBasketItems,
+      };
+    case "UPDATE_TOTAL_PRICE": //copilot solution
+      return { ...state };
+    /* const updatedItems = state.basketItems.map(item => item.id === action.productId ? { ...item, price: action.price } : item);
       return { 
         ...state, 
         basketItems: updatedItems,
         totalPrice: updatedItems.reduce((acc, item) => acc + item.price, 0)
       };*/
-      default:
-        return state;
-    }
+    default:
+      return state;
   }
+}
 
 //Shop context
- export const ShopContext = React.createContext<ShopState>(initialState);
+export const ShopContext = React.createContext<ShopState>(initialState);
 
 //Dispatch context (colipot suggested this)
- export  const DispatchShopContext = React.createContext<React.Dispatch<ShopAction>|null>(null)
- 
+export const DispatchShopContext =
+  React.createContext<React.Dispatch<ShopAction> | null>(null);
 
-  //ShopContextProvider. 
-  type MyProviderProps = React.PropsWithChildren<{state?:ShopState }>
+//ShopContextProvider.
+type MyProviderProps = React.PropsWithChildren<{ state?: ShopState }>;
 
-  export function ShopContextProvider({children}:MyProviderProps) {
-    const [state, dispatch] = useReducer(shopReducer, initialState);
-    //const [totalPrice, setTotalPrice] = useState(0);
-    //const [prices, setPrices] = useState(new Map<number, number>());
-    //var basketDiscounted = false;
+export function ShopContextProvider({ children }: MyProviderProps) {
+  console.log("ShopContextProvider mounted");
+  const [state, dispatch] = useReducer(shopReducer, initialState);
+  //const [totalPrice, setTotalPrice] = useState(0);
+  //const [prices, setPrices] = useState(new Map<number, number>());
+  //var basketDiscounted = false;
 
-// fetches all the products and sets them to the basketItems. 
-    useEffect(() => {
-      fetchProducts().then((products) => {
-        //dispatch({type: 'SET_PRODUCTS', products});
-        dispatch({type: 'SET_BASKET_ITEMS', basketItems: products});
-        console.log(products);
-       });
-    }, []);
+  // fetches all the products and sets them to the basketItems.
 
-   
+  useEffect(() => {
+    fetchProducts().then((products) => {
+      //dispatch({type: 'SET_PRODUCTS', products});
+      dispatch({ type: "SET_BASKET_ITEMS", basketItems: products });
+      console.log(products);
+      console.log("hej");
+    });
+    return () => {
+      console.log("ShopContextProvider unmounted");
+    };
+  }, []);
 
-  
- //Might need some of the logic later. 
+  //Might need some of the logic later.
 
-    /*const updateTotalPrice = (productID: number, price: number) => {
+  /*const updateTotalPrice = (productID: number, price: number) => {
         //would like this to not be stateful
         setPrices(prices.set(productID, price));
         var tempTotalPrice = 0;
@@ -130,29 +137,30 @@ const initialState: ShopState = {
           return totalPrice;
         }
       }*/
-    
 
-    return (
-        <ShopContext.Provider value = {state}>
-          <DispatchShopContext.Provider value = {dispatch}>
-            {children}
-            </DispatchShopContext.Provider>
-        </ShopContext.Provider>)
+  return (
+    <ShopContext.Provider value={state}>
+      <DispatchShopContext.Provider value={dispatch}>
+        {children}
+      </DispatchShopContext.Provider>
+    </ShopContext.Provider>
+  );
+}
+
+export function useShopContext() {
+  const context = React.useContext(ShopContext);
+  if (!context) {
+    throw new Error("useShopContext must be used within a ShopContextProvider");
   }
+  return context;
+}
 
-
-  export function useShopContext() {
-    const context = React.useContext(ShopContext);
-    if (!context) {
-      throw new Error('useShopContext must be used within a ShopContextProvider');
-    }
-    return context;
+export function useDispatchShopContext() {
+  const dispatch = React.useContext(DispatchShopContext);
+  if (!dispatch) {
+    throw new Error(
+      "useDispatchShopContext must be used within a ShopContextProvider"
+    );
   }
-
-  export function useDispatchShopContext() {
-    const dispatch = React.useContext(DispatchShopContext);
-    if (!dispatch) {
-      throw new Error('useDispatchShopContext must be used within a ShopContextProvider');
-    }
-    return dispatch;
-  }
+  return dispatch;
+}
