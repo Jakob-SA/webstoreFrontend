@@ -1,21 +1,25 @@
 import React, { useReducer, useState, useEffect } from "react";
 import { Product, fetchProducts } from '../components/basket/product';
-
+ 
+//productLine type
+interface productLine {
+  product: Product;
+  quantity: number;
+  totalLinePrice: number;
+  rebatePrice: number;
+}
 
 //type of state
 
 interface ShopState {
     products: Product[];
-    basketItems: Product[];
-    totalPrice: number
+    basketItems: productLine[];
 }
 
 //inital state
 const initialState: ShopState = {
   products: [],
   basketItems: [],
-  totalPrice: 0
-
 };
 
 // Type of actions
@@ -27,27 +31,34 @@ const initialState: ShopState = {
 
 
 //Reducer. co pilot helped here.
-  function shopReducer(state: ShopState, action: ShopAction): ShopState {
+  function  shopReducer(state: ShopState, action: ShopAction): ShopState {
     switch (action.type) {
       case 'SET_PRODUCTS':
         return {...state, products: action.products}
       case 'SET_BASKET_ITEMS':
         const indices = [0, 1 , 2, 3, 4, 7, 8, 9]; // indices of the items you want to select
-        return { ...state, basketItems: indices.map(index => action.basketItems[index]) };
+       // return { ...state, basketItems: indices.map(index => action.basketItems[index]) };
+       return {...state,
+        basketItems: action.basketItems.map(item => ({
+        product: item,
+        quantity: 1,
+        totalLinePrice: item.price* 1, 
+        rebatePrice: item.rebatePercent * item.price}))}
+
       case 'REMOVE_FROM_BASKET': //copilot solution
-        const updatedBasketItems = state.basketItems.filter(item => item.id !== action.productId);
+        const updatedBasketItems = state.basketItems.filter(item => item.product.id !== action.productId);
       return { 
         ...state, 
-        basketItems: updatedBasketItems,
-        totalPrice: updatedBasketItems.reduce((acc, item) => acc + item.price, 0)
+        basketItems: updatedBasketItems,  
       };
       case 'UPDATE_TOTAL_PRICE': //copilot solution
-        const updatedItems = state.basketItems.map(item => item.id === action.productId ? { ...item, price: action.price } : item);
+      return{...state}
+       /* const updatedItems = state.basketItems.map(item => item.id === action.productId ? { ...item, price: action.price } : item);
       return { 
         ...state, 
         basketItems: updatedItems,
         totalPrice: updatedItems.reduce((acc, item) => acc + item.price, 0)
-      };
+      };*/
       default:
         return state;
     }
@@ -69,7 +80,7 @@ const initialState: ShopState = {
     //const [prices, setPrices] = useState(new Map<number, number>());
     //var basketDiscounted = false;
 
-// fetches the products and sets them to the basketItems
+// fetches all the products and sets them to the basketItems. 
     useEffect(() => {
       fetchProducts().then((products) => {
         //dispatch({type: 'SET_PRODUCTS', products});
@@ -78,6 +89,7 @@ const initialState: ShopState = {
        });
     }, []);
 
+   
 
   
  //Might need some of the logic later. 

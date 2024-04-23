@@ -10,13 +10,14 @@ import {ShopContextProvider} from "./contexts/shopContext";
 function App() {
   return (
     <>
+    <ShopContextProvider>
       <Header />
       <NavigationBar />
       <div className="frontPage">
         <main>
-          <ShopContextProvider>
+          
           <Basket />
-          </ShopContextProvider>
+          
         </main>
         <aside>
           <UpsellItem />
@@ -24,6 +25,7 @@ function App() {
         </aside>
       </div>
       <Footer />
+      </ShopContextProvider>
     </>
   );
 }

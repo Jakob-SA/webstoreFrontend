@@ -10,12 +10,15 @@ import { useShopContext, useDispatchShopContext } from "../../contexts/shopConte
 
 
 function Basket() {
-  const {basketItems,totalPrice} = useShopContext();
+  const {basketItems} = useShopContext();
   const dispatch = useDispatchShopContext()//this is a fix. @Esben may find alternative fix
   //const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
   const { small } = useMediaQueries();
+ 
+  
 
 
+/*
   const displayTotalPrice = () => {
     //Should be made to actually display the whole price and not just the discount
     if (totalPrice>300) {
@@ -27,26 +30,28 @@ function Basket() {
       return "You have not reached the 300 limit for a discount yet.";
     }
   };
-  displayTotalPrice(); //REMOVE
-  const basketLines = basketItems.map((products) => { //TODO make  updatePricework. Also handleRemoveItem
+  displayTotalPrice();*/
+  
+  const basketLines = basketItems.map((items) => { //TODO make  updatePricework. Also handleRemoveItem
     return (
       <ProductLine
-        key={products.id}
-        product={products}
-        handleRemoveItem={()=> dispatch({type: 'REMOVE_FROM_BASKET', productId: products.id})} 
-        updateTotalPrice={()=> dispatch({type: 'UPDATE_TOTAL_PRICE',productId: products.id, price: products.price})} 
+        key={items.product.id}
+        product={items.product}
+        handleRemoveItem={()=> dispatch({type: 'REMOVE_FROM_BASKET', productId: items.product.id})} 
+        updateTotalPrice={()=> dispatch({type: 'UPDATE_TOTAL_PRICE',productId: items.product.id, price: items.product.price})} 
       />
     );
   });
 
   return (
     <>
-      <h2>Your basket</h2>
+      <h2>Your basket</h2>{/* 
       {small ? (
-        <PhoneBasket basketItems={basketItems} />
+        <PhoneBasket basketItems={basketItems} /> <--FIX THIS
       ) : (
-        <NormalBasket basketLines={basketLines} />
-      )}
+        <NormalBasket basketLines={basketLines} /> 
+      )} */}
+      <NormalBasket basketLines={basketLines} />
       {basketItems.length > 0}
       {basketItems.length === 0 && <EmptyBasket />}
     </>
