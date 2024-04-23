@@ -36,6 +36,8 @@ function Basket() {
       <ProductLine
         key={items.product.id}
         product={items.product}
+        quantity={items.quantity}
+        rebatePrice={items.rebatePrice}
         handleRemoveItem={() =>
           dispatch({ type: "REMOVE_FROM_BASKET", productId: items.product.id })
         }

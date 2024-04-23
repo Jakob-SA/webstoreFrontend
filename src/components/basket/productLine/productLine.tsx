@@ -7,18 +7,21 @@ import { useDispatchShopContext } from "../../../contexts/shopContext";
 
 export interface productLineProps {
   product: Product;
+  quantity: number;
+  rebatePrice: number;
   handleRemoveItem: (id: number) => void;
   updateTotalPrice: (id: number, price: number) => void;
 }
 
 export function ProductLine({
   product,
+  quantity,
+  rebatePrice,
   handleRemoveItem,
   updateTotalPrice,
 }: productLineProps) {
   const dispatch = useDispatchShopContext();
   const [giftwrapping, setGiftwrapping] = useState(false);
-  const [quantity, setQuantity] = useState(1);
   giftwrapping.valueOf(); // to be deleted
   const [isRemoving, setIsRemoving] = useState(false);
 
@@ -43,7 +46,6 @@ export function ProductLine({
   };
 
   const handleQuantityChange = (newQuantity: number) => {
-    setQuantity(newQuantity);
     // Dispatch the UPDATE_QUANTITY action
     dispatch({
       type: "UPDATE_QUANTITY",
