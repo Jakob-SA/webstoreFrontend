@@ -27,7 +27,9 @@ const initialState: ShopState = {
  { type: 'SET_PRODUCTS'; products: Product[] }
 | { type: 'SET_BASKET_ITEMS'; basketItems: Product[] }
 | { type: 'REMOVE_FROM_BASKET'; productId: number }
-| { type: 'UPDATE_TOTAL_PRICE'; productId: number; price: number };
+| { type: 'UPDATE_ITEM_QUANTITY'; productId: number; quantity: number }
+| { type: 'UPDATE_TOTAL_PRICE'; totalPrice: number}
+ 
 
 
 //Reducer. co pilot helped here.
@@ -42,17 +44,27 @@ const initialState: ShopState = {
         basketItems: action.basketItems.map(item => ({
         product: item,
         quantity: 1,
-        totalLinePrice: item.price* 1, 
+        totalLinePrice: item.price*1,
         rebatePrice: item.rebatePercent * item.price}))}
 
-      case 'REMOVE_FROM_BASKET': //copilot solution
+      case 'REMOVE_FROM_BASKET': //copilot suggested this
         const updatedBasketItems = state.basketItems.filter(item => item.product.id !== action.productId);
       return { 
         ...state, 
         basketItems: updatedBasketItems,  
-      };
+      }
       case 'UPDATE_TOTAL_PRICE': //copilot solution
-      return{...state}
+      const totalPrice = state.basketItems.reduce((acc, item) => acc + item.totalLinePrice, 0);
+      return{...state,
+      }
+
+      case 'UPDATE_ITEM_QUANTITY': 
+      const updatedBasketItems1 = state.basketItems.map(item => 
+        item.product.id === action.productId
+          ? { ...item, quantity: action.quantity, totalLinePrice: item.product.price * action.quantity } 
+          : item
+      );
+      return { ...state, basketItems: updatedBasketItems1 };
        /* const updatedItems = state.basketItems.map(item => item.id === action.productId ? { ...item, price: action.price } : item);
       return { 
         ...state, 
@@ -67,7 +79,7 @@ const initialState: ShopState = {
 //Shop context
  export const ShopContext = React.createContext<ShopState>(initialState);
 
-//Dispatch context (colipot suggested this)
+//Dispatch context 
  export  const DispatchShopContext = React.createContext<React.Dispatch<ShopAction>|null>(null)
  
 

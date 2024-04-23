@@ -12,13 +12,14 @@ import { useShopContext, useDispatchShopContext } from "../../contexts/shopConte
 function Basket() {
   const {basketItems} = useShopContext();
   const dispatch = useDispatchShopContext()//this is a fix. @Esben may find alternative fix
-  //const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
+  const totalPrice = basketItems.reduce((sum, item) => sum + item.totalLinePrice, 0);
   const { small } = useMediaQueries();
+
  
   
 
 
-/*
+
   const displayTotalPrice = () => {
     //Should be made to actually display the whole price and not just the discount
     if (totalPrice>300) {
@@ -30,7 +31,7 @@ function Basket() {
       return "You have not reached the 300 limit for a discount yet.";
     }
   };
-  displayTotalPrice();*/
+  displayTotalPrice();
   
   const basketLines = basketItems.map((items) => { //TODO make  updatePricework. Also handleRemoveItem
     return (
@@ -38,14 +39,14 @@ function Basket() {
         key={items.product.id}
         product={items.product}
         handleRemoveItem={()=> dispatch({type: 'REMOVE_FROM_BASKET', productId: items.product.id})} 
-        updateTotalPrice={()=> dispatch({type: 'UPDATE_TOTAL_PRICE',productId: items.product.id, price: items.product.price})} 
+        updateTotalPrice={()=> dispatch({type: 'UPDATE_ITEM_QUANTITY',productId: items.product.id, quantity: items.quantity})} 
       />
     );
   });
 
   return (
     <>
-      <h2>Your basket</h2>{/* 
+      <h2>Your basket {totalPrice}</h2>{/* 
       {small ? (
         <PhoneBasket basketItems={basketItems} /> <--FIX THIS
       ) : (
