@@ -5,15 +5,19 @@ import UpsellItem from "./components/basket/upsellItem";
 import Footer from "./components/header/footer";
 import Header from "./components/header/header";
 import NavigationBar from "./components/header/NavigationBar";
+import {ShopContextProvider} from "./contexts/shopContext";
 
 function App() {
   return (
     <>
+    <ShopContextProvider>
       <Header />
       <NavigationBar />
       <div className="frontPage">
         <main>
+          
           <Basket />
+          
         </main>
         <aside>
           <UpsellItem />
@@ -21,6 +25,7 @@ function App() {
         </aside>
       </div>
       <Footer />
+      </ShopContextProvider>
     </>
   );
 }
