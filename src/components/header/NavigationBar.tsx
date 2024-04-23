@@ -12,7 +12,7 @@ export default function NavigationBar() {
             location.pathname === "/"
               ? "active"
               : location.pathname === "/delivery"
-              ? "active"
+              ? "past"
               : ""
           }
         >

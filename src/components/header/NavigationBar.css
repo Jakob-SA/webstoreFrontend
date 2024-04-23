@@ -16,6 +16,8 @@ nav li {
 }
 
 nav li.active a {
+}
+nav li.past a {
   color: var(--color-button-secondary);
   border-top: 0.3rem var(--color-button-secondary) solid;
   text-decoration: inherit;

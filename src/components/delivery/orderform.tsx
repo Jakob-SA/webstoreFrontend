@@ -116,9 +116,7 @@ function Orderform() {
               id="businessName"
               name="user_businessName"
             />
-            <label htmlFor="VAT" hidden>
-              Vat Number:
-            </label>
+            <label htmlFor="VAT">Vat Number:</label>
             <input
               placeholder="Enter your VAT number *"
               type="text"
@@ -131,7 +129,7 @@ function Orderform() {
           </div>
         )}
         <div className="duoBox">
-          <label htmlFor="firstName" hidden>
+          <label htmlFor="firstName">
             First Name:<span className="required">*</span>
           </label>
           <div className="input-wrapper" data-required>
@@ -157,30 +155,25 @@ function Orderform() {
             />
           </div>
         </div>
-        <label htmlFor="email" hidden>
-          Email:<span className="required">*</span>
-        </label>
         <div className="input-wrapper" data-required>
           <input
-            placeholder="Enter your email *"
             type="email"
             required
             id="email"
             name="user_email"
             autoComplete="email"
           />
+          <label htmlFor="email">
+            Email:<span className="required">*</span>
+          </label>
         </div>
         <div className="duoBox">
-          <label htmlFor="address1" hidden>
-            Adress:<span className="required">*</span>
-          </label>
-          <input
-            placeholder="Enter your Address *"
-            type="text"
-            required
-            id="address1"
-            name="user_address1"
-          />
+          <div className="input-wrapper" data-required>
+            <input type="text" required id="address1" name="user_address1" />
+            <label htmlFor="address1" hidden>
+              Adress:<span className="required">*</span>
+            </label>
+          </div>
 
           <label htmlFor="adress2" hidden>
             Appartment, suite etc.:
