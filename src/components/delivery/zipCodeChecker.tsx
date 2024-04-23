@@ -38,13 +38,13 @@ export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
   };
 
   return (
-    <div>
+    <div className="duoBox">
       <label htmlFor="zip" hidden>
         Zip Code:<span className="required">*</span>
       </label>
       <input
         type="text"
-        placeholder="Enter your postal code *"
+        placeholder="Enter your zip code *"
         required
         id="zip"
         name="user_zip"
@@ -56,13 +56,13 @@ export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
         }}
       />
       {zipTouched && !validZip && (
-        <p className="zip-error-message">Postal code is invalid</p>
+        <p className="zip-error-message">Invalid zip</p>
       )}
       <label htmlFor="city" hidden>
         City:<span className="required">*</span>
       </label>
       <input
-        placeholder="Enter your city, or let us set it for you *"
+        placeholder="City"
         type="text"
         required
         id="city"

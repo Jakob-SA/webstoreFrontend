@@ -81,13 +81,13 @@ function Orderform() {
       setLoading(false);
     }
   }
-
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <h2>Shipping</h2>
-        <legend>Enter your shipping details</legend>
-        <p>Fields marked with * are required.</p>
+  const FormHeader = () => {
+    return (
+      <>
+        <h3>Please enter your delivery information</h3>
+        <p>
+          Fields marked with <p className="asterisk">*</p> are required.
+        </p>
         <label htmlFor="businessOrder">Business order:</label>
         <input
           type="checkbox"
@@ -96,6 +96,14 @@ function Orderform() {
           checked={isBusiness}
           onChange={handleBusinessChange}
         />
+      </>
+    );
+  };
+
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <FormHeader />
         {isBusiness && (
           <div>
             <label htmlFor="businessName" hidden>
@@ -122,63 +130,100 @@ function Orderform() {
             />
           </div>
         )}
-        <label htmlFor="firstName" hidden>
-          First Name:<span className="required">*</span>
+        <div className="duoBox">
+          <label htmlFor="firstName" hidden>
+            First Name:<span className="required">*</span>
+          </label>
+          <div className="input-wrapper" data-required>
+            <input
+              placeholder="Enter your first name *"
+              type="text"
+              required
+              id="firstName"
+              name="userFirstName"
+              autoFocus
+            />
+          </div>
+          <label htmlFor="lastName" hidden>
+            Last Name:<span className="required">*</span>
+          </label>
+          <div className="input-wrapper" data-required>
+            <input
+              placeholder="Enter your last name *"
+              type="text"
+              required
+              id="lastName"
+              name="userLastName"
+            />
+          </div>
+        </div>
+        <label htmlFor="email" hidden>
+          Email:<span className="required">*</span>
         </label>
-        <input
-          placeholder="Enter your first name *"
-          type="text"
-          required
-          id="firstName"
-          name="userFirstName"
-          autoFocus
-        />
-        <label htmlFor="lastName" hidden>
-          Last Name:<span className="required">*</span>
-        </label>
-        <input
-          placeholder="Enter you last name *"
-          type="text"
-          required
-          id="lastName"
-          name="userLastName"
-        />
-        <label htmlFor="country" hidden>
-          Country: <span className="required">*</span>
-        </label>
-        <input
-          type="text"
-          required
-          id="country"
-          name="userCountry"
-          value={"Denmark"}
-          readOnly
-        />
-        <label htmlFor="adress1" hidden>
-          Adress:<span className="required">*</span>
-        </label>
-        <input
-          placeholder="Enter your Adress *"
-          type="text"
-          required
-          id="adress1"
-          name="user_adress1"
-        />
-        <label htmlFor="adress2" hidden>
-          Appartment, suite etc.:
-        </label>
-        <input
-          placeholder="Enter appartment, suite etc."
-          type="text"
-          id="adress2"
-          name="user_adress2"
-        />
+        <div className="input-wrapper" data-required>
+          <input
+            placeholder="Enter your email *"
+            type="email"
+            required
+            id="email"
+            name="user_email"
+            autoComplete="email"
+          />
+        </div>
+        <div className="duoBox">
+          <label htmlFor="address1" hidden>
+            Adress:<span className="required">*</span>
+          </label>
+          <input
+            placeholder="Enter your Address *"
+            type="text"
+            required
+            id="address1"
+            name="user_address1"
+          />
+
+          <label htmlFor="adress2" hidden>
+            Appartment, suite etc.:
+          </label>
+          <input
+            placeholder="Enter appartment, suite etc."
+            type="text"
+            id="adress2"
+            name="user_adress2"
+          />
+        </div>
+
         <ZipCodeChecker
           zipCode={zipCode}
           onZipChange={setZipCode}
           city={city}
           onCityChange={setCity}
         />
+        <div className="duoBox">
+          <label htmlFor="telephoneNumber" hidden>
+            Phonenumber:<span className="required">*</span>
+          </label>
+          <input
+            placeholder="Enter your phone number *"
+            type="tel"
+            required
+            pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
+            name="user_telephoneNumber"
+            id="telephoneNumber"
+            title="Please enter a valid danish phone number"
+          ></input>
+          <label htmlFor="country" hidden>
+            Country: <span className="required">*</span>
+          </label>
+          <input
+            type="text"
+            required
+            id="country"
+            name="userCountry"
+            value={"Denmark"}
+            readOnly
+          />
+        </div>
         <label htmlFor="deliveryAdress">Different delivery adress:</label>
         <input
           type="checkbox"
@@ -227,29 +272,7 @@ function Orderform() {
             />
           </div>
         )}
-        <label htmlFor="email" hidden>
-          Email:<span className="required">*</span>
-        </label>
-        <input
-          placeholder="Enter your email *"
-          type="email"
-          required
-          id="email"
-          name="user_email"
-          autoComplete="email"
-        />
-        <label htmlFor="telephoneNumber" hidden>
-          Phonenumber:<span className="required">*</span>
-        </label>
-        <input
-          placeholder="Enter your phone number *"
-          type="tel"
-          required
-          pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
-          name="user_telephoneNumber"
-          id="telephoneNumber"
-          title="Please enter a valid danish phone number"
-        ></input>
+
         <label htmlFor="orderComment"></label>
         <textarea
           placeholder="Here you can leave a comment for your order"

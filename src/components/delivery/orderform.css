@@ -7,17 +7,42 @@
   border-radius: 1em;
   grid-column: 2;
   color: var(--color-text);
-  width: 80%;
+  width: 40em;
+  padding: 1em;
 }
 
-input {
-  font-size: 2em sans-serif;
-  height: 2em;
-  padding: 1em;
-  margin: 1em;
+.deliveryPage input {
+  position: relative;
+  box-sizing: border-box;
+  font-size: 1em;
+  height: 1.5em;
+  padding: 1.2em 0.8em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   width: 100%;
   border: 0;
   outline: none;
+  border-radius: 1em;
+  border: 1px solid transparent;
+}
+/* Maybe we dont want this design decision */
+.input-wrapper[data-required]::after {
+  content: "*";
+  color: red;
+  font-size: 3em;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-45%);
+}
+/* Maybe we dont want this */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+.asterisk {
+  color: red;
+  font-size: 3em;
 }
 
 input:focus {
@@ -25,8 +50,21 @@ input:focus {
 }
 
 input::placeholder {
-  font-size: 1.5em;
+  font-size: 1em;
   color: #575757;
+}
+.duoBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.duoBox > :first-child {
+  margin-right: 1em;
+}
+.duoBox > :last-child {
+  margin-left: 1em;
 }
 
 .address-checkbox {
@@ -79,6 +117,9 @@ input::placeholder {
 }
 
 .zip-error-message {
+  position: absolute;
+  left: 56em;
+  white-space: normal;
   color: red;
   font-size: 0.8em;
   margin: 0;

@@ -6,12 +6,6 @@
   opacity: 1;
 }
 
-/*
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }*/
-
 .productImages:hover {
   transform: scale(1.5);
 }
@@ -75,9 +69,7 @@
 .button:hover {
   border-color: var(--color-button-secondary);
 }
-input [type="number"] {
-  width: 100px;
-}
+
 .tooltip {
   position: fixed;
   z-index: 9999;
