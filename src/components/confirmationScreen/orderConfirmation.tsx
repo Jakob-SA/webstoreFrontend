@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   useShopContext,
   useDispatchShopContext,
+  ShopContext,
 } from "../../contexts/shopContext";
 import { ProductLine } from "../basket/productLine/productLine";
 import NormalBasket from "../basket/normalBasket";
+import { s } from "vitest/dist/reporters-MmQN-57K.js";
 
 function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
   const { basketItems } = useShopContext();
+  const { subtotal } = useContext(ShopContext);
 
   const basketLines = basketItems.map((item) => (
     <tr key={item.product.id}>
@@ -39,6 +42,7 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
             </tr>
             {basketLines}
           </tbody>
+          <p>Subtotal: ${subtotal.toFixed(2)}</p>
         </table>
         <p>Your order details have been sent to your email.</p>
       </div>
