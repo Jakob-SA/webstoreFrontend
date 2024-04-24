@@ -22,6 +22,7 @@ nav .past .bubble {
 nav ul div {
   width: 4em;
   height: 7px;
+  height: 7px;
   justify-items: center;
   position: relative;
 }
@@ -49,9 +50,14 @@ nav .bubble {
   border-radius: 50%;
   width: 7.5rem;
   height: 7.5rem;
+  width: 7.5rem;
+  height: 7.5rem;
   font-size: 1.1em;
   color: var(--color-text);
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+nav .bubble:hover {
+  color: var(--color-text);
 }
 nav .bubble:hover {
   color: var(--color-text);
