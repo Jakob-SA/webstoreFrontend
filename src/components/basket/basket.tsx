@@ -31,7 +31,6 @@ function Basket() {
       ) : (
         <NormalBasket basketLines={basketLines} /> 
       )}
-      <NormalBasket basketLines={basketLines} />
       {basketItems.length > 0}
       {basketItems.length === 0 && <EmptyBasket />}
     </>
