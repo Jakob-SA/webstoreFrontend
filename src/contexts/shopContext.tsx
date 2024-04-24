@@ -2,11 +2,11 @@ import React, { useReducer, useState, useEffect } from "react";
 import { Product, fetchProducts } from '../components/basket/product';
  
 //productLine type
-interface productLine {
+export interface productLine {
   product: Product;
   quantity: number;
   totalLinePrice: number;
-  rebatePrice: number;
+  rebatePercent: number;
 }
 
 //type of state
@@ -45,7 +45,7 @@ const initialState: ShopState = {
         product: item,
         quantity: 1,
         totalLinePrice: item.price*1,
-        rebatePrice: item.rebatePercent * item.price}))}
+        rebatePercent: item.rebatePercent}))}
 
       case 'REMOVE_FROM_BASKET': //copilot suggested this
         const updatedBasketItems = state.basketItems.filter(item => item.product.id !== action.productId);
@@ -101,6 +101,8 @@ const initialState: ShopState = {
        });
     }, []);
 
+    
+
    
 
   
@@ -132,16 +134,7 @@ const initialState: ShopState = {
         setBasketItems((prev)=> ({...prev, [productID]:prev[productID-1]}) );
         
       }
-      function calculateDiscount(totalPrice: number): number {
-        
-        if (totalPrice > 300) {
-          basketDiscounted = true;
-          return totalPrice * 0.9;
-        } else {
-          basketDiscounted = false;
-          return totalPrice;
-        }
-      }*/
+     */
     
 
     return (

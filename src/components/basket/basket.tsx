@@ -6,15 +6,16 @@ import EmptyBasket from "./emptyBasket";
 import NormalBasket from "./normalBasket";
 import "./basket.css";
 import { useShopContext, useDispatchShopContext } from "../../contexts/shopContext";
+import { getTotalPrice } from "./totalPrice";
 
 
 
 function Basket() {
   const {basketItems} = useShopContext();
   const dispatch = useDispatchShopContext()//this is a fix. @Esben may find alternative fix
-  const totalPrice = basketItems.reduce((sum, item) => sum + item.totalLinePrice, 0);
+  //const totalPrice = basketItems.reduce((sum, item) => sum + item.totalLinePrice, 0);
   const { small } = useMediaQueries();
-
+  const totalPrice = getTotalPrice();
  
   
 
@@ -37,9 +38,9 @@ function Basket() {
     return (
       <ProductLine
         key={items.product.id}
+        quantity={items.quantity}
         product={items.product}
-        handleRemoveItem={()=> dispatch({type: 'REMOVE_FROM_BASKET', productId: items.product.id})} 
-        updateTotalPrice={()=> dispatch({type: 'UPDATE_ITEM_QUANTITY',productId: items.product.id, quantity: items.quantity})} 
+      
       />
     );
   });
