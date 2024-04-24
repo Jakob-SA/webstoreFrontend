@@ -13,7 +13,6 @@ export interface productLine {
 interface ShopState {
   products: Product[];
   basketItems: productLine[];
-  subtotal: number;
 }
 
 //inital state
