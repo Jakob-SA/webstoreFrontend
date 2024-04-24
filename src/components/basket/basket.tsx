@@ -25,7 +25,7 @@ function Basket() {
     <>
       <h2>Your basket </h2>
       {small ? (
-        <PhoneBasket basketItems={basketItems} /> //TODO: make this work! Phonebasket should take a productLine array (Jakob)
+        <PhoneBasket basketItems={basketItems} />
       ) : (
         <NormalBasket basketLines={basketLines} />
       )}
