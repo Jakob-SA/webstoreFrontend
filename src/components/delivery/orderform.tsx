@@ -100,34 +100,44 @@ function Orderform() {
     );
   };
 
+  const BusinessOrder = () => {
+    return (
+      <>
+        {isBusiness && (
+          <div className="duoBox">
+            <div className="input-wrapper" data-required>
+              <input
+                type="text"
+                required
+                id="businessName"
+                name="user_businessName"
+              />
+              <label htmlFor="businessName">
+                Business Name
+              </label>
+            </div>
+            <div className="input-wrapper" data-required>
+              <input
+                type="text"
+                required
+                id="VAT"
+                name="user_VAT"
+                pattern="^\d{8}$" // This is a pattern to validate the VAT number to the danish format
+                title="Please enter a valid danish VAT number"
+              />
+              <label htmlFor="VAT">Vat Number</label>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <FormHeader />
-        {isBusiness && (
-          <div>
-            <label htmlFor="businessName" hidden>
-              Business Name:
-            </label>
-            <input
-              placeholder="Enter your business name *"
-              type="text"
-              required
-              id="businessName"
-              name="user_businessName"
-            />
-            <label htmlFor="VAT">Vat Number:</label>
-            <input
-              placeholder="Enter your VAT number *"
-              type="text"
-              required
-              id="VAT"
-              name="user_VAT"
-              pattern="^\d{8}$" // This is a pattern to validate the VAT number to the danish format
-              title="Please enter a valid danish VAT number"
-            />
-          </div>
-        )}
+        <BusinessOrder />
         <div className="duoBox">
           <div className="input-wrapper" data-required>
             <input
@@ -137,9 +147,9 @@ function Orderform() {
               name="userFirstName"
               autoFocus
             />
-          <label htmlFor="firstName">
-            First Name<span className="required"></span>
-          </label>
+            <label htmlFor="firstName">
+              First Name<span className="required"></span>
+            </label>
           </div>
           <div className="input-wrapper" data-required>
             <input
@@ -149,8 +159,8 @@ function Orderform() {
               name="userLastName"
             />
             <label htmlFor="lastName" hidden>
-            Last Name<span className="required"></span>
-          </label>
+              Last Name<span className="required"></span>
+            </label>
           </div>
         </div>
         <div className="input-wrapper" data-required>
@@ -185,18 +195,18 @@ function Orderform() {
           onCityChange={setCity}
         />
         <div className="duoBox">
-        <div className="input-wrapper" data-required>
-          <input
-            type="tel"
-            required
-            pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
-            name="user_telephoneNumber"
-            id="telephoneNumber"
-            title="Please enter a valid danish phone number"
-          ></input>
-          <label htmlFor="telephoneNumber">
-            Phone Number<span className="required"></span>
-          </label>
+          <div className="input-wrapper" data-required>
+            <input
+              type="tel"
+              required
+              pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
+              name="user_telephoneNumber"
+              id="telephoneNumber"
+              title="Please enter a valid danish phone number"
+            ></input>
+            <label htmlFor="telephoneNumber">
+              Phone Number<span className="required"></span>
+            </label>
           </div>
           <label htmlFor="country" hidden>
             Country: <span className="required">*</span>
