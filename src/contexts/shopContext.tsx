@@ -10,7 +10,6 @@ export interface productLine {
 }
 
 //type of state
-
 interface ShopState {
     products: Product[];
     basketItems: productLine[];
@@ -28,17 +27,18 @@ const initialState: ShopState = {
 | { type: 'SET_BASKET_ITEMS'; basketItems: Product[] }
 | { type: 'REMOVE_FROM_BASKET'; productId: number }
 | { type: 'UPDATE_ITEM_QUANTITY'; productId: number; quantity: number }
-| { type: 'UPDATE_TOTAL_PRICE'; totalPrice: number}
+
  
-
-
 //Reducer. co pilot helped here.
   function  shopReducer(state: ShopState, action: ShopAction): ShopState {
     switch (action.type) {
+
       case 'SET_PRODUCTS':
-        return {...state, products: action.products}
+        return {...state, 
+          products: action.products}
+
       case 'SET_BASKET_ITEMS':
-        const indices = [0, 1 , 2, 3, 4, 7, 8, 9]; // indices of the items you want to select
+        const indices = [0, 1 , 2, 3, 4, 7, 8, 9]; // indices of items to select. might need later.
        // return { ...state, basketItems: indices.map(index => action.basketItems[index]) };
        return {...state,
         basketItems: action.basketItems.map(item => ({
@@ -47,30 +47,21 @@ const initialState: ShopState = {
         totalLinePrice: item.price*1,
         rebatePercent: item.rebatePercent}))}
 
-      case 'REMOVE_FROM_BASKET': //copilot suggested this
+      case 'REMOVE_FROM_BASKET': //copilot suggested this. Returns a new state with the item removed.
         const updatedBasketItems = state.basketItems.filter(item => item.product.id !== action.productId);
       return { 
         ...state, 
-        basketItems: updatedBasketItems,  
-      }
-      case 'UPDATE_TOTAL_PRICE': //copilot solution
-      const totalPrice = state.basketItems.reduce((acc, item) => acc + item.totalLinePrice, 0);
-      return{...state,
-      }
-
-      case 'UPDATE_ITEM_QUANTITY': 
+        basketItems: updatedBasketItems}
+      
+      case 'UPDATE_ITEM_QUANTITY': // Copilot suggested this. Returns a new state with the quantity of the item updated if the product id matches the action product id.
       const updatedBasketItems1 = state.basketItems.map(item => 
         item.product.id === action.productId
-          ? { ...item, quantity: action.quantity, totalLinePrice: item.product.price * action.quantity } 
-          : item
+          ? { ...item, 
+            quantity: action.quantity,
+             totalLinePrice: item.product.price * action.quantity } : item
       );
       return { ...state, basketItems: updatedBasketItems1 };
-       /* const updatedItems = state.basketItems.map(item => item.id === action.productId ? { ...item, price: action.price } : item);
-      return { 
-        ...state, 
-        basketItems: updatedItems,
-        totalPrice: updatedItems.reduce((acc, item) => acc + item.price, 0)
-      };*/
+       
       default:
         return state;
     }
@@ -83,16 +74,14 @@ const initialState: ShopState = {
  export  const DispatchShopContext = React.createContext<React.Dispatch<ShopAction>|null>(null)
  
 
-  //ShopContextProvider. 
-  type MyProviderProps = React.PropsWithChildren<{state?:ShopState }>
+//ShopContextProvider. 
+type MyProviderProps = React.PropsWithChildren<{state?:ShopState }>
 
-  export function ShopContextProvider({children}:MyProviderProps) {
+export function ShopContextProvider({children}:MyProviderProps) {
     const [state, dispatch] = useReducer(shopReducer, initialState);
-    //const [totalPrice, setTotalPrice] = useState(0);
-    //const [prices, setPrices] = useState(new Map<number, number>());
-    //var basketDiscounted = false;
+    
 
-// fetches all the products and sets them to the basketItems. 
+// fetches all the products and sets them to the basketItems. Maybe not the best way to do it but cant find better.
     useEffect(() => {
       fetchProducts().then((products) => {
         //dispatch({type: 'SET_PRODUCTS', products});
@@ -101,13 +90,7 @@ const initialState: ShopState = {
        });
     }, []);
 
-    
-
-   
-
-  
  //Might need some of the logic later. 
-
     /*const updateTotalPrice = (productID: number, price: number) => {
         //would like this to not be stateful
         setPrices(prices.set(productID, price));
@@ -117,26 +100,8 @@ const initialState: ShopState = {
         });
         setTotalPrice((calculateDiscount(tempTotalPrice)));
       };
-
-
-
-   const handleRemoveItem = (id: number) => {
-        setBasketItems((prevItems) => prevItems.filter((item) => item.id !== id));
-        updateTotalPrice(id, 0);
-      };
-
-      const addToBasket = (productID: number) => {
-        setBasketItems((prev)=> ({...prev, [productID]:prev[productID+1]}) );
-      }
-
-
-      const removeFromBasket =(productID:number) => {
-        setBasketItems((prev)=> ({...prev, [productID]:prev[productID-1]}) );
-        
-      }
-     */
+   */
     
-
     return (
         <ShopContext.Provider value = {state}>
           <DispatchShopContext.Provider value = {dispatch}>
@@ -145,7 +110,7 @@ const initialState: ShopState = {
         </ShopContext.Provider>)
   }
 
-
+//Hook to use the shop context
   export function useShopContext() {
     const context = React.useContext(ShopContext);
     if (!context) {
@@ -153,7 +118,7 @@ const initialState: ShopState = {
     }
     return context;
   }
-
+// Hook to use the dispatch context
   export function useDispatchShopContext() {
     const dispatch = React.useContext(DispatchShopContext);
     if (!dispatch) {
