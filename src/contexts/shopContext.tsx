@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
 import { Product, fetchProducts } from '../components/basket/product';
  
 //productLine type
@@ -38,7 +38,7 @@ const initialState: ShopState = {
           products: action.products}
 
       case 'SET_BASKET_ITEMS':
-        const indices = [0, 1 , 2, 3, 4, 7, 8, 9]; // indices of items to select. might need later.
+       // const indices = [0, 1 , 2, 3, 4, 7, 8, 9]; indices of items to select. might need later.
        // return { ...state, basketItems: indices.map(index => action.basketItems[index]) };
        return {...state,
         basketItems: action.basketItems.map(item => ({

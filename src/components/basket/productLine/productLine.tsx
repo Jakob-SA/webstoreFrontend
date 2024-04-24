@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { Product } from "../product";
 import { RemoveButton } from "./removeButton";
 import { QuantityInput } from "./quantityInput";
 import "./productLine.css";
-import { useDispatchShopContext, useShopContext } from "../../../contexts/shopContext";
+import { useDispatchShopContext } from "../../../contexts/shopContext";
 
 export interface productLineProps {
   product: Product;
