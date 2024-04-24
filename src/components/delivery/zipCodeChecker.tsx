@@ -13,7 +13,7 @@ export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
   city,
   onCityChange,
 }) => {
-  const [validZip, setValidZip] = useState(false);
+  const [validZip, setValidZip] = useState(true);
   const [zipTouched, setZipTouched] = useState(false);
 
   // submits the postal code to the custom hook below and then opens async function to fetch the data from the api
@@ -27,7 +27,7 @@ export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
       // if the postal code is valid, set the city name and set the validZip state to true
       if (data.nr === zipCode) {
         onCityChange(data.navn);
-        setValidZip(true);
+        // setValidZip(true);
       } else {
         setValidZip(false);
       }
