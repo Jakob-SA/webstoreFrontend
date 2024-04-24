@@ -35,17 +35,19 @@ function shopReducer(state: ShopState, action: ShopAction): ShopState {
       return { ...state, products: action.products };
 
     case "SET_BASKET_ITEMS":
-      // const indices = [0, 1 , 2, 3, 4, 7, 8, 9]; indices of items to select. might need later.
-      // return { ...state, basketItems: indices.map(index => action.basketItems[index]) };
+      const indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; //indices of items to select. might need later.
+      const shuffledIndices = [...indices].sort(() => Math.random() - 0.5);
+      const usedIndices = shuffledIndices.slice(0, 7); //selects 7 random indices from the shuffled indices.
       return {
         ...state,
-        basketItems: action.basketItems.map((item) => ({
-          product: item,
+        basketItems: usedIndices.map((item) => ({
+          product: state.products[item], // Fix: Assign the product as a Product type
           quantity: 1,
-          totalLinePrice: item.price * 1,
-          rebatePercent: item.rebatePercent,
+          totalLinePrice: state.products[item].price * 1, // Fix: Access the corresponding product's price
+          rebatePercent: state.products[item].rebatePercent || 0, // Fix: Provide a valid value for rebatePercent
         })),
       };
+    // return { ...state, basketItems: indices.map(index => action.basketItems[index]) };
 
     case "REMOVE_FROM_BASKET": //copilot suggested this. Returns a new state with the item removed.
       const updatedBasketItems = state.basketItems.filter(
@@ -89,9 +91,8 @@ export function ShopContextProvider({ children }: MyProviderProps) {
   // fetches all the products and sets them to the basketItems. Maybe not the best way to do it but cant find better.
   useEffect(() => {
     fetchProducts().then((products) => {
-      //dispatch({type: 'SET_PRODUCTS', products});
+      dispatch({ type: "SET_PRODUCTS", products });
       dispatch({ type: "SET_BASKET_ITEMS", basketItems: products });
-      console.log(products);
     });
   }, []);
 
