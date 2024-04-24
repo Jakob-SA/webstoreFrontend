@@ -8,6 +8,7 @@ export default function NavigationBar() {
   const [step, setStep] = useState<Steps>();
 
   useEffect(() => {
+    console.log(location.pathname);
     switch (location.pathname) {
       case "/":
         setStep(Steps.Basket);
@@ -17,7 +18,9 @@ export default function NavigationBar() {
         break;
       case "/confirmation":
         setStep(Steps.Confirmation);
+        break;
       // Add more cases as needed...
+
       default:
         setStep(Steps.Basket);
     }
@@ -28,6 +31,8 @@ export default function NavigationBar() {
       return "active";
     } else if (step && step > thisStep) {
       return "past";
+    } else if (step && step === thisStep - 1) {
+      return "previous";
     } else {
       return "future";
     }
@@ -47,8 +52,11 @@ export default function NavigationBar() {
             Delivery
           </Link>
         </li>
-        <li className={location.pathname === "/confirmation" ? "active" : ""}>
-          <Link to="/confirmation">Confirmation</Link>
+        <div className={decideClass(Steps.Delivery) + "divider"}></div>
+        <li className={decideClass(Steps.Confirmation)}>
+          <Link className="bubble" to="/confirmation">
+            Confirmation
+          </Link>
         </li>
       </ul>
     </nav>
