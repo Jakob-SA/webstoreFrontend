@@ -19,7 +19,6 @@ interface ShopState {
 const initialState: ShopState = {
   products: [],
   basketItems: [],
-  subtotal: 0,
 };
 
 // Type of actions

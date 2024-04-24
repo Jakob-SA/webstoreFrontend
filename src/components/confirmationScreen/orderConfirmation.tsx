@@ -10,7 +10,6 @@ import { s } from "vitest/dist/reporters-MmQN-57K.js";
 
 function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
   const { basketItems } = useShopContext();
-  const { subtotal } = useContext(ShopContext);
 
   const basketLines = basketItems.map((item) => (
     <tr key={item.product.id}>
@@ -42,7 +41,7 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
             </tr>
             {basketLines}
           </tbody>
-          <p>Subtotal: ${subtotal.toFixed(2)}</p>
+          <p>Subtotal: $</p>
         </table>
         <p>Your order details have been sent to your email.</p>
       </div>
