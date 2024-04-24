@@ -49,7 +49,6 @@ h3 {
   border-radius: 1em;
   grid-column: 1/3;
   color: var(--color-text);
-
   width: 100%;
 }
 .frontPage h2 {

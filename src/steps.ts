@@ -1,5 +1,5 @@
 export enum Steps {
   Basket,
-  Checkout,
-  Overview,
+  Delivery,
+  Confirmation,
 }

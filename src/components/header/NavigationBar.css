@@ -7,29 +7,69 @@ nav {
 
 nav ul {
   display: flex;
+  align-items: center;
 }
 
 nav li {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--background-color-secondary);
+  border-radius: 50%;
+}
+nav .past .bubble {
+  background-color: green;
+}
+nav ul div {
+  width: 2em;
+  height: 6px;
+  background-color: var(--color-text);
+  justify-items: center;
+}
+nav .pastdivider:last-of-type {
+  background: linear-gradient(to right, green, var(--color-button));
+}
+nav .futuredivider,
+.activedivider {
+  background-color: var(--background-color-secondary);
+}
+nav .bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  font-size: 1.1em;
+  color: var(--color-text);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-nav li.active a {
+nav .active {
+  z-index: 999;
+  animation: glow 2s infinite;
+  background-color: var(--color-button);
 }
-nav li.past a {
-  color: var(--color-button-secondary);
-  border-top: 0.3rem var(--color-button-secondary) solid;
-  text-decoration: inherit;
+nav .active .divider {
+  background-color: var(--color-button);
 }
-
-nav a {
-  color: var(--color-button);
-  border-top: 0.3rem var(--color-button) solid;
-  padding: 0 4rem;
-}
-nav a:hover {
-  color: var(--color-button-secondary);
-  border-top: 0.3rem var(--color-button-secondary) solid;
-  text-decoration: inherit;
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px var(--color-button-secondary),
+      0 0 10px var(--color-button-secondary),
+      0 0 15px var(--color-button-secondary),
+      0 0 20px var(--color-button-secondary);
+  }
+  50% {
+    box-shadow: 0 0 10px var(--color-button-secondary),
+      0 0 20px var(--color-button-secondary),
+      0 0 30px var(--color-button-secondary),
+      0 0 40px var(--color-button-secondary);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--color-button-secondary),
+      0 0 10px var(--color-button-secondary),
+      0 0 15px var(--color-button-secondary),
+      0 0 20px var(--color-button-secondary);
+  }
 }
