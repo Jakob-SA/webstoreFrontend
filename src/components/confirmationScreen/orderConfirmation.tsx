@@ -1,12 +1,4 @@
-import React, { useContext } from "react";
-import {
-  useShopContext,
-  useDispatchShopContext,
-  ShopContext,
-} from "../../contexts/shopContext";
-import { ProductLine } from "../basket/productLine/productLine";
-import NormalBasket from "../basket/normalBasket";
-import { s } from "vitest/dist/reporters-MmQN-57K.js";
+import { useShopContext } from "../../contexts/shopContext";
 
 function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
   const { basketItems } = useShopContext();
