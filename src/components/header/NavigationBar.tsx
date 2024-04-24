@@ -47,6 +47,9 @@ export default function NavigationBar() {
             Delivery
           </Link>
         </li>
+        <li className={location.pathname === "/confirmation" ? "active" : ""}>
+          <Link to="/confirmation">Confirmation</Link>
+        </li>
       </ul>
     </nav>
   );

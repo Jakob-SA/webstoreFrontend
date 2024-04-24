@@ -1,28 +1,45 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Product } from "../product";
 import { RemoveButton } from "./removeButton";
 import { QuantityInput } from "./quantityInput";
 import "./productLine.css";
+import { useDispatchShopContext } from "../../../contexts/shopContext";
 
 export interface productLineProps {
   product: Product;
-  handleRemoveItem: (id: number) => void;
-  updateTotalPrice: (id: number, price: number) => void;
+  quantity: number;
 }
 
 export function ProductLine({
   product,
-  handleRemoveItem,
-  updateTotalPrice,
-}: productLineProps) {
+  quantity,
+}: //updateTotalPrice,
+productLineProps) {
   const [giftwrapping, setGiftwrapping] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  //const [quantity, setQuantity] = useState(1);
+  //const quantity = basketItems.find(item => item.product.id === product.id)?.quantity || 1;
   giftwrapping.valueOf(); // to be deleted
   const [isRemoving, setIsRemoving] = useState(false);
+  const dispatch = useDispatchShopContext();
 
   const handleRemove = () => {
     setIsRemoving(true);
-    setTimeout(() => handleRemoveItem(product.id), 300); // Animation duration
+    setTimeout(
+      () =>
+        dispatch({
+          type: "REMOVE_FROM_BASKET",
+          productId: product.id,
+        }),
+      300
+    ); // Animation duration
+    console.log("Removing item");
+  };
+  const updateQuantity = (newQuantity: number) => {
+    dispatch({
+      type: "UPDATE_ITEM_QUANTITY",
+      productId: product.id,
+      quantity: newQuantity,
+    });
   };
 
   var originalLinePrice = product.price * quantity;
@@ -32,9 +49,11 @@ export function ProductLine({
       ? originalLinePrice * (1 - product.rebatePercent / 100)
       : originalLinePrice;
 
-  useEffect(() => {
+  /* useEffect(() => {
     updateTotalPrice(product.id, totalLinePrice);
+    console.log("Total price updated" + totalLinePrice);
   }, [totalLinePrice]);
+*/
 
   const onGiftwrappingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGiftwrapping(event.target.checked);
@@ -57,7 +76,7 @@ export function ProductLine({
       <td>
         <QuantityInput
           quantity={quantity}
-          setQuantity={setQuantity}
+          setQuantity={updateQuantity}
           product={product}
         />
       </td>

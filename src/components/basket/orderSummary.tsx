@@ -1,10 +1,14 @@
+import { Link } from "react-router-dom";
+
+import { getTotalPrice } from "./totalPrice";
 function OrderSummary() {
+  const totalPrice = getTotalPrice();
   return (
     <div className="orderSummary">
       <h2>Order Summary</h2>
       <div>
         <p>Subtotal</p>
-        <p>100 $</p>
+        <p>{totalPrice.toFixed(2)}</p>
       </div>
       <div>
         <p>Shipping</p>
@@ -18,12 +22,14 @@ function OrderSummary() {
         </p>
         <div style={{ display: "flex" }}>
           <p>USD </p>
-          <b>Price</b>
+          <b>{totalPrice.toFixed(2)}</b>
         </div>
       </div>
-      <button>
-        Proceed to delivery <p style={{ fontSize: "4em" }}>&#187;</p>
-      </button>
+      <Link to="/delivery">
+        <button className="summary-button">
+          Proceed to delivery <p style={{ fontSize: "4em" }}>&#187;</p>
+        </button>
+      </Link>
     </div>
   );
 }

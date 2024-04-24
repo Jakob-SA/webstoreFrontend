@@ -1,5 +1,6 @@
 import "./orderform.css";
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { ZipCodeChecker } from "./zipCodeChecker";
 
@@ -15,6 +16,7 @@ function Orderform() {
   const [deliveryZipCode, setDeliveryZipCode] = useState("");
   const [deliveryCity, setDeliveryCity] = useState("");
   const [isDeliveryAddress, setIsDeliveryAddress] = useState(false);
+  const navigate = useNavigate();
 
   // This function is used to toggle the business name and VAT number fields
   const handleBusinessChange = () => {
@@ -71,6 +73,7 @@ function Orderform() {
 
       if (response.ok) {
         alert("Order submitted, thank you for your purchase!");
+        navigate("/confirmation"); // Navigate on successful submit
       } else {
         alert("Order failed, please try again later");
       }
@@ -275,7 +278,7 @@ function Orderform() {
           name="orderComment"
           id="orderComment"
         />
-        <label htmlFor="a">
+        <label htmlFor="termsAndConditions">
           Agree to{" "}
           <a href="/terms-and-conditions" target="_blank">
             terms & conditions
