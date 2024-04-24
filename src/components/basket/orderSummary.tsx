@@ -1,16 +1,14 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { ShopContext } from "../../contexts/shopContext";
 
+import { getTotalPrice } from "./totalPrice";
 function OrderSummary() {
-  const { subtotal } = useContext(ShopContext);
-
+  const totalPrice = getTotalPrice();
   return (
     <div className="orderSummary">
       <h2>Order Summary</h2>
       <div>
         <p>Subtotal</p>
-        <p>{`$${subtotal.toFixed(2)}`}</p>
+        <p>{totalPrice.toFixed(2)}</p>
       </div>
       <div>
         <p>Shipping</p>
@@ -24,7 +22,7 @@ function OrderSummary() {
         </p>
         <div style={{ display: "flex" }}>
           <p>USD </p>
-          <b>Price</b>
+          <b>{totalPrice.toFixed(2)}</b>
         </div>
       </div>
       <Link to="/delivery">

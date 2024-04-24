@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { ProductLine } from "./productLine";
 import { Product } from "../product";
@@ -17,9 +18,9 @@ describe(ProductLine.name, () => {
     const mockSetQuantity = vi.fn();
     render(
       <QuantityInput
-        quantity={quantity}
-        setQuantity={mockSetQuantity}
-        product={product}
+      quantity={quantity}
+      setQuantity={mockSetQuantity}
+      product={product}
       />
     );
     const incrementQuantity = screen.getByRole("button", { name: "-" });
@@ -38,26 +39,36 @@ describe(RemoveButton.name, () => {
   });
 });
 
+vi.useFakeTimers();
 describe(ProductLine.name, () => {
-  test("Should remove the item", () => {
-    let mockBasketItems = [
-      { id: 1, name: "produc1", price: 100 },
-      { id: 2, name: "produc2", price: 100 },
-    ];
-    const product: Product = productArray[0];
-    const handleRemoveItem = (productId: number) => {
-      mockBasketItems = mockBasketItems.filter((item) => item.id !== productId);
+  test("Should use handleRemoveItem with correct product when remove button is clicked", () => {
+    const handleRemoveItem = vi.fn();
+    const updateTotalPrice = vi.fn();
+    const product: Product = {
+      id: 1,
+      name: "TestProduct",
+      price: 100,
+      rebateQuantity: 2,
+      rebatePercent: 50,
+      currency: "USD",
+      upsellProductId: 2,
+      amountInStock: 10,
     };
-    render(
+    
+    const { getByRole } = render(
       <ProductLine
-        product={product}
-        handleRemoveItem={() => handleRemoveItem(product.id)}
-        updateTotalPrice={() => {}}
+      product={product}
+      handleRemoveItem={handleRemoveItem}
+      updateTotalPrice={updateTotalPrice}
       />
     );
-    const removeIcon = screen.getByAltText("Remove icon");
-    const button = removeIcon.closest("button");
-    if (button) fireEvent.click(button);
-    expect(mockBasketItems.length).toBe(1);
-  });
+    
+    fireEvent.click(getByRole("button", { name: "Remove icon" }));
+    
+    act(() => {
+      vi.advanceTimersByTime(300);
+    });
+    
+    expect(handleRemoveItem).toHaveBeenCalledWith(product.id);
+  })
 });
