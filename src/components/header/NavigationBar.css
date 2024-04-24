@@ -27,11 +27,15 @@ nav ul div {
   justify-items: center;
 }
 nav .pastdivider:last-of-type {
-  background: linear-gradient(to right, green, var(--color-button));
+  background: linear-gradient(to right, green, var(--color-button-secondary));
 }
-nav .futuredivider,
-.activedivider {
-  background-color: var(--background-color-secondary);
+nav .futuredivider:first-of-type,
+nav .activedivider:first-of-type {
+  background: linear-gradient(
+    to right,
+    var(--color-button-secondary),
+    var(--background-color-secondary)
+  );
 }
 nav .bubble {
   display: flex;
@@ -48,10 +52,10 @@ nav .bubble {
 nav .active {
   z-index: 999;
   animation: glow 2s infinite;
-  background-color: var(--color-button);
+  background-color: var(--color-button-secondary);
 }
 nav .active .divider {
-  background-color: var(--color-button);
+  background-color: var(--color-button-secondary);
 }
 @keyframes glow {
   0% {

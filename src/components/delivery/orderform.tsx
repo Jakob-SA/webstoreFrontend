@@ -174,16 +174,10 @@ function Orderform() {
               Adress:<span className="required">*</span>
             </label>
           </div>
-
-          <label htmlFor="adress2" hidden>
-            Appartment, suite etc.:
-          </label>
-          <input
-            placeholder="Enter appartment, suite etc."
-            type="text"
-            id="adress2"
-            name="user_adress2"
-          />
+          <div className="input-wrapper">
+            <input type="text" id="adress2" name="user_adress2" />
+            <label htmlFor="adress2">Appartment, suite etc.:</label>
+          </div>
         </div>
 
         <ZipCodeChecker
