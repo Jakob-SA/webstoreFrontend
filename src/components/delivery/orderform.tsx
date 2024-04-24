@@ -129,30 +129,28 @@ function Orderform() {
           </div>
         )}
         <div className="duoBox">
-          <label htmlFor="firstName">
-            First Name:<span className="required">*</span>
-          </label>
           <div className="input-wrapper" data-required>
             <input
-              placeholder="Enter your first name *"
               type="text"
               required
               id="firstName"
               name="userFirstName"
               autoFocus
             />
-          </div>
-          <label htmlFor="lastName" hidden>
-            Last Name:<span className="required">*</span>
+          <label htmlFor="firstName">
+            First Name<span className="required"></span>
           </label>
+          </div>
           <div className="input-wrapper" data-required>
             <input
-              placeholder="Enter your last name *"
               type="text"
               required
               id="lastName"
               name="userLastName"
             />
+            <label htmlFor="lastName" hidden>
+            Last Name<span className="required"></span>
+          </label>
           </div>
         </div>
         <div className="input-wrapper" data-required>
@@ -164,19 +162,19 @@ function Orderform() {
             autoComplete="email"
           />
           <label htmlFor="email">
-            Email:<span className="required">*</span>
+            Email<span className="required"></span>
           </label>
         </div>
         <div className="duoBox">
           <div className="input-wrapper" data-required>
             <input type="text" required id="address1" name="user_address1" />
             <label htmlFor="address1" hidden>
-              Adress:<span className="required">*</span>
+              Address<span className="required"></span>
             </label>
           </div>
           <div className="input-wrapper">
             <input type="text" id="adress2" name="user_adress2" />
-            <label htmlFor="adress2">Appartment, suite etc.:</label>
+            <label htmlFor="adress2">Appartment, suite etc.</label>
           </div>
         </div>
 
@@ -187,11 +185,8 @@ function Orderform() {
           onCityChange={setCity}
         />
         <div className="duoBox">
-          <label htmlFor="telephoneNumber" hidden>
-            Phonenumber:<span className="required">*</span>
-          </label>
+        <div className="input-wrapper" data-required>
           <input
-            placeholder="Enter your phone number *"
             type="tel"
             required
             pattern="^(\+45|0045)?\s?(\d{2}\s?){3}\d{2}$" // This is a pattern to validate the phone number to the danish format
@@ -199,6 +194,10 @@ function Orderform() {
             id="telephoneNumber"
             title="Please enter a valid danish phone number"
           ></input>
+          <label htmlFor="telephoneNumber">
+            Phone Number<span className="required"></span>
+          </label>
+          </div>
           <label htmlFor="country" hidden>
             Country: <span className="required">*</span>
           </label>

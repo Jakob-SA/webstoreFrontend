@@ -39,36 +39,39 @@ export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
 
   return (
     <div className="duoBox">
-      <label htmlFor="zip" hidden>
-        Zip Code:<span className="required">*</span>
+      <div className="input-wrapper" data-required>
+        <input
+          type="text"
+          required
+          id="zip"
+          name="user_zip"
+          value={zipCode}
+          onChange={(e) => onZipChange(e.target.value)}
+          onBlur={(e) => {
+            setZipTouched(true);
+            handleZipCode(e.target.value);
+          }}
+        />
+      <label htmlFor="zip">
+        Zip Code<span className="required"></span>
       </label>
-      <input
-        type="text"
-        placeholder="Enter your zip code *"
-        required
-        id="zip"
-        name="user_zip"
-        value={zipCode}
-        onChange={(e) => onZipChange(e.target.value)}
-        onBlur={(e) => {
-          setZipTouched(true);
-          handleZipCode(e.target.value);
-        }}
-      />
+      </div>
       {zipTouched && !validZip && (
-        <p className="zip-error-message">Invalid zip</p>
+        <p className="zip-error-message"></p>
       )}
-      <label htmlFor="city" hidden>
-        City:<span className="required">*</span>
+      <div className="input-wrapper" data-required>
+        <input
+          type="text"
+          required
+          id="city"
+          name="user_city"
+          value={city}
+          onChange={(e) => onCityChange(e.target.value)}
+        />
+      <label htmlFor="city">
+        City<span className="required"></span>
       </label>
-      <input
-        placeholder="City"
-        type="text"
-        required
-        id="city"
-        name="user_city"
-        value={city}
-      />
+      </div>
     </div>
   );
 };
