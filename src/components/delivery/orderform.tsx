@@ -1,7 +1,7 @@
 import "./orderform.css";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useShopContext } from "../../contexts/shopContext";
 import { ZipCodeChecker } from "./zipCodeChecker";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
@@ -54,6 +54,8 @@ function Orderform() {
     delivery_city: isDeliveryAddress ? elements.deliveryCity.value : undefined,
   });
 
+  const { basketItems } = useShopContext();
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
@@ -61,13 +63,18 @@ function Orderform() {
     const form = e.currentTarget;
     const formData = getFormData(form.elements);
 
+    const payload = {
+      customerInfo: formData,
+      basketItems: basketItems,
+    };
+
     try {
       const response = await fetch(
         "https://dtu62597.eduhost.dk:10272/api/create/",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(payload),
         }
       );
 
@@ -115,9 +122,7 @@ function Orderform() {
                 id="businessName"
                 name="user_businessName"
               />
-              <label htmlFor="businessName">
-                Business Name
-              </label>
+              <label htmlFor="businessName">Business Name</label>
             </div>
             <div className="input-wrapper" data-required>
               <input
@@ -136,11 +141,7 @@ function Orderform() {
     );
   };
   const Address = () => {
-    return (
-      <>
-
-      </>
-    );
+    return <></>;
   };
 
   return (
@@ -162,12 +163,7 @@ function Orderform() {
             </label>
           </div>
           <div className="input-wrapper" data-required>
-            <input
-              type="text"
-              required
-              id="lastName"
-              name="userLastName"
-            />
+            <input type="text" required id="lastName" name="userLastName" />
             <label htmlFor="lastName" hidden>
               Last Name<span className="required"></span>
             </label>
@@ -251,7 +247,8 @@ function Orderform() {
               readOnly
             />
             <label htmlFor="deliveryCountry">
-              <span hidden>Country</span><span className="required"></span>
+              <span hidden>Country</span>
+              <span className="required"></span>
             </label>
             <div className="duoBox">
               <div className="input-wrapper" data-required>
@@ -271,9 +268,7 @@ function Orderform() {
                   id="deliveryAdress2"
                   name="user_deliveryAdress2"
                 />
-                <label htmlFor="deliveryAdress2">
-                  Appartment, suite etc.:
-                </label>
+                <label htmlFor="deliveryAdress2">Appartment, suite etc.:</label>
               </div>
             </div>
             <ZipCodeChecker
