@@ -89,7 +89,7 @@ function Orderform() {
       <>
         <h3>Please enter your delivery information</h3>
         <p>
-          Fields marked with <p className="asterisk">*</p> are required.
+          Fields marked with <div className="asterisk">*</div> are required.
         </p>
         <label htmlFor="businessOrder">Business order:</label>
         <input
@@ -115,9 +115,7 @@ function Orderform() {
                 id="businessName"
                 name="user_businessName"
               />
-              <label htmlFor="businessName">
-                Business Name
-              </label>
+              <label htmlFor="businessName">Business Name</label>
             </div>
             <div className="input-wrapper" data-required>
               <input
@@ -136,11 +134,7 @@ function Orderform() {
     );
   };
   const Address = () => {
-    return (
-      <>
-
-      </>
-    );
+    return <></>;
   };
 
   return (
@@ -162,12 +156,7 @@ function Orderform() {
             </label>
           </div>
           <div className="input-wrapper" data-required>
-            <input
-              type="text"
-              required
-              id="lastName"
-              name="userLastName"
-            />
+            <input type="text" required id="lastName" name="userLastName" />
             <label htmlFor="lastName" hidden>
               Last Name<span className="required"></span>
             </label>
@@ -251,7 +240,8 @@ function Orderform() {
               readOnly
             />
             <label htmlFor="deliveryCountry">
-              <span hidden>Country</span><span className="required"></span>
+              <span hidden>Country</span>
+              <span className="required"></span>
             </label>
             <div className="duoBox">
               <div className="input-wrapper" data-required>
@@ -271,9 +261,7 @@ function Orderform() {
                   id="deliveryAdress2"
                   name="user_deliveryAdress2"
                 />
-                <label htmlFor="deliveryAdress2">
-                  Appartment, suite etc.:
-                </label>
+                <label htmlFor="deliveryAdress2">Appartment, suite etc.:</label>
               </div>
             </div>
             <ZipCodeChecker
