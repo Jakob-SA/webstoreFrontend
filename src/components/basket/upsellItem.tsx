@@ -1,17 +1,32 @@
 import "./basket.css";
-import { useShopContext } from "../../contexts/shopContext";
+import { ShopContext, useShopContext } from "../../contexts/shopContext";
 
 function handleClick() {
   alert("Taking you back to the shop!");
 }
+
 export function UpsellItem() {
-  const { basketItems } = useShopContext();
+  const { products ,basketItems } = useShopContext();
 
   const upsellItems = basketItems;
+  const basketItemIds = basketItems.map(item => item.product.id);
+  
+  const nums = products
+      .map((product, index) => (basketItemIds.includes(product.id) ? 0 : index))
+      .filter(index => index !== 0); //copilot helped 
+     
+      console.log(products)
+      console.log(nums)
 
-  if (upsellItems.length === 0) {
-    return <div>Loading...</div>;
+  if (upsellItems.length === 0 || products.length === 0) {
+    return <div>Loading... + </div>;
   }
+
+
+   let item1 = nums[0]
+   let item2 = nums[1]
+     
+
 
   return (
     //TODO: vary the displayed upsellProduct, based on the context of the basket.
@@ -22,7 +37,7 @@ export function UpsellItem() {
         <img
           src={
             "productPics/product" +
-            (upsellItems[0].product.id ? upsellItems[0].product.id : 0) +
+            item2 +
             ".jpg"
           }
           className="productImages"
@@ -37,9 +52,7 @@ export function UpsellItem() {
           <ul>
             <b>
               Price{" "}
-              {upsellItems[0].product.price
-                ? upsellItems[0].product.price
-                : upsellItems[0].product.price}
+              {products[item2].price ? products[item2].price : products[1].price}
             </b>
           </ul>
           <button
