@@ -32,8 +32,8 @@ function Orderform() {
     first_name: elements.firstName.value,
     last_name: elements.lastName.value,
     country: elements.country.value,
-    address1: elements.adress1.value,
-    address2: elements.adress2.value,
+    address1: elements.address1.value,
+    address2: elements.address2.value,
     zip_code: elements.zip.value,
     city: elements.city.value,
     email: elements.email.value,
@@ -193,8 +193,8 @@ function Orderform() {
             </label>
           </div>
           <div className="input-wrapper">
-            <input type="text" id="adress2" name="user_adress2" />
-            <label htmlFor="adress2">Appartment, suite etc.</label>
+            <input type="text" id="address2" name="user_address2" />
+            <label htmlFor="address2">Appartment, suite etc.</label>
           </div>
         </div>
         <Address />

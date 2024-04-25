@@ -21,9 +21,12 @@ nav .past .bubble {
 }
 nav ul div {
   width: 4em;
-  height: 6px;
+  height: 7px;
+  height: 7px;
   justify-items: center;
+  position: relative;
 }
+
 nav .previousdivider {
   background: linear-gradient(to right, green, var(--color-button-secondary));
 }
@@ -45,13 +48,20 @@ nav .bubble {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 7rem;
-  height: 7rem;
+  width: 7.5rem;
+  height: 7.5rem;
+  width: 7.5rem;
+  height: 7.5rem;
   font-size: 1.1em;
   color: var(--color-text);
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
-
+nav .bubble:hover {
+  color: var(--color-text);
+}
+nav .bubble:hover {
+  color: var(--color-text);
+}
 nav .active {
   z-index: 999;
   animation: glow 2s infinite;
