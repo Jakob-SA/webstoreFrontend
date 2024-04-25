@@ -1,7 +1,7 @@
-import { productLine } from "../../contexts/shopContext";
+import { ProductLine } from "../../contexts/shopContext";
 import PhoneProductLine from "./productLine/phoneProductLine";
 
-function PhoneBasket({ basketItems }: { basketItems: productLine[] }) {
+function PhoneBasket({ basketItems }: { basketItems: ProductLine[] }) {
   return (
     <div className="phoneBasket">
       {basketItems &&
@@ -9,7 +9,7 @@ function PhoneBasket({ basketItems }: { basketItems: productLine[] }) {
           return (
             <PhoneProductLine
               key={productLine.product.id}
-              product={productLine.product}
+              productLine={productLine}
             />
           );
         })}

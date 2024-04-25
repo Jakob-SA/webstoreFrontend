@@ -33,7 +33,6 @@ productLineProps) {
         }),
       300
     ); // Animation duration
-    console.log("Removing item");
   };
   const updateQuantity = (newQuantity: number) => {
     dispatch({
