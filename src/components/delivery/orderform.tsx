@@ -135,6 +135,13 @@ function Orderform() {
       </>
     );
   };
+  const Address = () => {
+    return (
+      <>
+
+      </>
+    );
+  };
 
   return (
     <>
@@ -190,11 +197,13 @@ function Orderform() {
             <label htmlFor="adress2">Appartment, suite etc.</label>
           </div>
         </div>
-
+        <Address />
         <ZipCodeChecker
           zipCode={zipCode}
+          zipId="zip"
           onZipChange={setZipCode}
           city={city}
+          cityId="city"
           onCityChange={setCity}
         />
         <div className="duoBox">
@@ -233,9 +242,6 @@ function Orderform() {
         />
         {isDeliveryAddress && (
           <div>
-            <label htmlFor="deliveryCountry" hidden>
-              Country:<span className="required">*</span>
-            </label>
             <input
               type="text"
               required
@@ -244,29 +250,38 @@ function Orderform() {
               value={"Denmark"}
               readOnly
             />
-            <label htmlFor="deliveryAdress1" hidden>
-              Adress:<span className="required">*</span>
+            <label htmlFor="deliveryCountry">
+              <span hidden>Country</span><span className="required"></span>
             </label>
-            <input
-              placeholder="Enter your requested delivery Address *"
-              type="text"
-              required
-              id="deliveryAdress1"
-              name="user_deliveryAdress1"
-            />
-            <label htmlFor="deliveryAdress2" hidden>
-              Appartment, suite etc.:
-            </label>
-            <input
-              placeholder="Enter appartment, suite etc."
-              type="text"
-              id="deliveryAdress2"
-              name="user_deliveryAdress2"
-            />
+            <div className="duoBox">
+              <div className="input-wrapper" data-required>
+                <input
+                  type="text"
+                  required
+                  id="deliveryAdress1"
+                  name="user_deliveryAdress1"
+                />
+                <label htmlFor="deliveryAdress1">
+                  Address<span className="required"></span>
+                </label>
+              </div>
+              <div className="input-wrapper">
+                <input
+                  type="text"
+                  id="deliveryAdress2"
+                  name="user_deliveryAdress2"
+                />
+                <label htmlFor="deliveryAdress2">
+                  Appartment, suite etc.:
+                </label>
+              </div>
+            </div>
             <ZipCodeChecker
               zipCode={deliveryZipCode}
+              zipId="deliveryZip"
               onZipChange={setDeliveryZipCode}
               city={deliveryCity}
+              cityId="deliveryCity"
               onCityChange={setDeliveryCity}
             />
           </div>
