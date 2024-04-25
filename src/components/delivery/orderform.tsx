@@ -96,7 +96,7 @@ function Orderform() {
       <>
         <h3>Please enter your delivery information</h3>
         <p>
-          Fields marked with <p className="asterisk">*</p> are required.
+          Fields marked with <div className="asterisk">*</div> are required.
         </p>
         <label htmlFor="businessOrder">Business order:</label>
         <input
