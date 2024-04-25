@@ -50,3 +50,10 @@ td p {
   justify-content: center;
   width: 100%;
 }
+
+.upsellItems{
+  flex-direction: column;
+  
+ 
+
+}

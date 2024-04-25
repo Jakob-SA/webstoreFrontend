@@ -27,6 +27,6 @@ export const getTotalPrice = () => {
     : originalLinePrice, 0);
 */
     const totalPrice = basketItems.reduce((sum, item) => 
-        sum + item.totalLinePrice, 0); 
+        sum + (item.totalLinePrice*1-(item.product.rebatePercent/100)), 0); // still not working 
     return(calculateDiscount(totalPrice))
 }
