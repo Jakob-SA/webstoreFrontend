@@ -11,15 +11,15 @@ function App() {
     <>
       <Header />
       <NavigationBar />
-      <div className="frontPage">
-        <main>
+      <main>
+        <div className="frontPage">
           <Basket />
-        </main>
+        </div>
         <aside>
           <UpsellItem />
           <OrderSummary />
         </aside>
-      </div>
+      </main>
       <Footer />
     </>
   );

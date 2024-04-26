@@ -1,33 +1,90 @@
 nav {
   display: flex;
   justify-content: center;
-  width: 20rem;
-  margin: 1.5rem auto;
 }
 
 nav ul {
   display: flex;
+  align-items: center;
+  padding: 0;
 }
 
 nav li {
   display: flex;
+  background-color: var(--background-color-secondary);
+  border-radius: 50%;
+}
+nav .past .bubble {
+  background-color: green;
+}
+nav ul div {
+  width: 4em;
+  height: 7px;
+}
+
+nav .previousdivider {
+  background: linear-gradient(to right, green, var(--color-button-secondary));
+}
+nav .pastdivider {
+  background-color: green;
+}
+nav .futuredivider {
+  background-color: var(--background-color-secondary);
+}
+nav .activedivider {
+  background: linear-gradient(
+    to right,
+    var(--color-button-secondary),
+    var(--background-color-secondary)
+  );
+}
+@media (max-width: 970px) {
+  nav ul div {
+    width: 1em;
+  }
+}
+nav .bubble {
+  display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  width: 7.5rem;
+  height: 7.5rem;
+  font-size: 1.1em;
+  color: var(--color-text);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
-
-nav li.active a {
-  color: var(--color-button-tertiary);
-  border-top: 0.3rem var(--color-button-tertiary) solid;
-  text-decoration: inherit;
+nav .bubble:hover {
+  color: var(--color-text);
 }
-
-nav a {
-  color: var(--color-text-secondary);
-  border-top: 0.3rem var(--color-text-secondary) solid;
-  padding: 0 4rem;
+nav .bubble:hover {
+  color: var(--color-text);
 }
-nav a:hover {
-  color: var(--color-button-quaternary);
-  border-top: 0.3rem var(--color-button-quaternary) solid;
-  text-decoration: inherit;
+nav .active {
+  z-index: 999;
+  animation: glow 2s infinite;
+  background-color: var(--color-button-secondary);
+}
+nav .active .divider {
+  background-color: var(--color-button-secondary);
+}
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px var(--color-button-secondary),
+      0 0 10px var(--color-button-secondary),
+      0 0 15px var(--color-button-secondary),
+      0 0 20px var(--color-button-secondary);
+  }
+  50% {
+    box-shadow: 0 0 10px var(--color-button-secondary),
+      0 0 20px var(--color-button-secondary),
+      0 0 30px var(--color-button-secondary),
+      0 0 40px var(--color-button-secondary);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--color-button-secondary),
+      0 0 10px var(--color-button-secondary),
+      0 0 15px var(--color-button-secondary),
+      0 0 20px var(--color-button-secondary);
+  }
 }

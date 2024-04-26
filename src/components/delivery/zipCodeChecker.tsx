@@ -2,18 +2,22 @@ import { useState } from "react";
 
 interface ZipCodeCheckerProps {
   zipCode: string;
+  zipId: string;
   onZipChange: (zipCode: string) => void;
   city: string;
+  cityId: string;
   onCityChange: (city: string) => void;
 }
 
 export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
   zipCode,
+  zipId,
   onZipChange,
   city,
+  cityId,
   onCityChange,
 }) => {
-  const [validZip, setValidZip] = useState(false);
+  const [validZip, setValidZip] = useState(true);
   const [zipTouched, setZipTouched] = useState(false);
 
   // submits the postal code to the custom hook below and then opens async function to fetch the data from the api
@@ -27,7 +31,7 @@ export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
       // if the postal code is valid, set the city name and set the validZip state to true
       if (data.nr === zipCode) {
         onCityChange(data.navn);
-        setValidZip(true);
+        // setValidZip(true);
       } else {
         setValidZip(false);
       }
@@ -38,37 +42,40 @@ export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
   };
 
   return (
-    <div>
-      <label htmlFor="zip" hidden>
-        Zip Code:<span className="required">*</span>
+    <div className="duoBox">
+      <div className="input-wrapper" data-required>
+        <input
+          type="text"
+          required
+          id={zipId}
+          name="user_zip"
+          value={zipCode}
+          onChange={(e) => onZipChange(e.target.value)}
+          onBlur={(e) => {
+            setZipTouched(true);
+            handleZipCode(e.target.value);
+          }}
+        />
+      <label htmlFor={zipId}>
+        Zip Code<span className="required"></span>
       </label>
-      <input
-        type="text"
-        placeholder="Enter your postal code *"
-        required
-        id="zip"
-        name="user_zip"
-        value={zipCode}
-        onChange={(e) => onZipChange(e.target.value)}
-        onBlur={(e) => {
-          setZipTouched(true);
-          handleZipCode(e.target.value);
-        }}
-      />
+      </div>
       {zipTouched && !validZip && (
-        <p className="zip-error-message">Postal code is invalid</p>
+        <p className="zip-error-message"></p>
       )}
-      <label htmlFor="city" hidden>
-        City:<span className="required">*</span>
+      <div className="input-wrapper" data-required>
+        <input
+          type="text"
+          required
+          id={cityId}
+          name="user_city"
+          value={city}
+          onChange={(e) => onCityChange(e.target.value)}
+        />
+      <label htmlFor={cityId}>
+        City<span className="required"></span>
       </label>
-      <input
-        placeholder="Enter your city, or let us set it for you *"
-        type="text"
-        required
-        id="city"
-        name="user_city"
-        value={city}
-      />
+      </div>
     </div>
   );
 };

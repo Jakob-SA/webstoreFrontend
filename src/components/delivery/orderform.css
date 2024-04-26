@@ -1,53 +1,127 @@
-form {
-  margin: 0 auto;
-  width: 400px;
-
-  padding: 1em;
-  border: 1px solid #ccc;
+.deliveryPage {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: var(--background-color-secondary);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 1em;
+  grid-column: 2;
+  color: var(--color-text);
+  width: 40em;
+  padding: 1em;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+@media (max-width: 970px) {
+  .deliveryPage {
+    width: 90%;
+  }
+
+  .duoBox {
+    flex-direction: column !important;
+  }
+
+  .duoBox> :first-child,
+  .duoBox> :last-child {
+    margin: 0em !important;
+  }
 }
 
-input {
-  font-size: 1em sans-serif;
-  height: 25px;
-  margin: 1em;
+.deliveryPage input {
+  position: relative;
+  box-sizing: border-box;
+  padding: 1.2em 0.8em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  width: 90%;
+  border: 0;
+  outline: none;
+  border-radius: 1em;
+  border: 1px solid transparent;
+}
+
+/* Maybe we dont want this design decision */
+.input-wrapper[data-required]::after {
+  content: "*";
+  color: red;
+  font-size: 3em;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-45%);
+}
+
+/* Maybe we dont want this */
+.input-wrapper {
   position: relative;
   width: 100%;
-  border: 0;
-  border-bottom: 2px solid #dfdfdf;
-  outline: none;
+}
+
+.asterisk {
+  color: red;
+  font-size: 1.5em;
+}
+
+.input-wrapper>label {
+  position: absolute;
+  top: 24px;
+  left: 14px;
+  color: #575757;
+  z-index: 997;
+  display: flex;
+  align-items: center;
+  cursor: text;
+  transition: 0.2s ease-in-out;
+}
+
+.input-wrapper input,
+label {
+  font-size: 1em;
+  width: 100%;
+  height: 1.5em;
+}
+
+.input-wrapper input:focus+label,
+.input-wrapper input:valid+label {
+  color: #ffffff;
+  font-size: 0.8em;
+  top: -5px;
+  pointer-events: none;
 }
 
 input:focus {
-  border-bottom: 2px solid #413f3f;
+  border: 1px solid var(--color-button-secondary);
 }
 
 input::placeholder {
-  font-size: medium;
+  font-size: 1em;
   color: #575757;
 }
 
-.address-checkbox {
-  text-align: left;
-  margin: 1em;
-  position: relative;
-  height: 50px;
+.duoBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.duoBox> :first-child {
+  margin-right: .5em;
+}
+
+.duoBox> :last-child {
+  margin-left: .5em;
 }
 
 .acceptButton {
   background: linear-gradient(to bottom right, #256818, #839e0a);
   border: 0;
   border-radius: 12px;
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 2.5;
@@ -55,7 +129,7 @@ input::placeholder {
   padding: 0 1rem;
   text-align: center;
   text-decoration: none;
-  transition: box-shadow .2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -63,21 +137,28 @@ input::placeholder {
 }
 
 .acceptButton:not([disabled]):focus {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(37, 223, 53, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+    -0.125rem -0.125rem 1rem rgba(37, 223, 53, 0.5),
+    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
 .acceptButton:not([disabled]):hover {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(37, 223, 53, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+    -0.125rem -0.125rem 1rem rgba(37, 223, 53, 0.5),
+    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
-.business-checkbox {
-  text-align: left;
-  margin: 1em;
-  position: relative;
-  height: 50px;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .zip-error-message {
+  position: absolute;
+  left: 56em;
+  white-space: normal;
   color: red;
   font-size: 0.8em;
   margin: 0;

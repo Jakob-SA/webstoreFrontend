@@ -6,22 +6,19 @@
   opacity: 1;
 }
 
-/*
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }*/
-
 .productImages:hover {
   transform: scale(1.5);
 }
 .productImages {
-  width: 7em;
-  height: 7em;
+  width: 8em;
+  height: 8em;
+  min-width: 8em;
   object-fit: cover;
   border-radius: 15px;
   transition: transform 0.5s ease-out;
+  vertical-align: middle;
 }
+
 .lineItemFirst {
   padding-left: 20px;
   border-bottom: 0px;
@@ -30,9 +27,22 @@
   padding-right: 20px;
 }
 .lineItemGiftwrapping {
+  height: 8em;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+}
+.lineItemGiftwrapping p {
+  font-size: 1em;
+  height: 3em;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.lineItemGiftwrapping span {
+  display: flex;
+  flex-direction: column;
 }
 .twoLinePrice {
   display: flex;
@@ -51,9 +61,20 @@
 .quantityInput > * {
   margin: 2px;
 }
+.quantityInput p {
+  font-size: 3em;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -0.1em;
+}
 .quantityButton {
-  --quantitybuttonSize: 20px;
+  width: 3em;
+  height: 3em;
+  padding: 0;
   border-radius: 50%;
+  line-height: 2em;
+  color: var(--color-text-secondary);
 }
 .quantityBox {
   --numberBoxSize: 35px;
@@ -63,7 +84,8 @@
   text-align: center;
   border: 1px solid var(--color-button);
   border-radius: 25%;
-  background-color: var(--color-button-secondary);
+  background-color: var(--color-button);
+  color: var(--color-text-secondary);
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
   margin-left: 0.4em;
   margin-right: 0.4em;
@@ -71,10 +93,48 @@
 .tooltip {
   position: fixed;
   z-index: 9999;
-  background-color: var(--color-primary);
+  color: var(--color-text-secondary);
+  background-color: var(--color-button);
   border: 1px solid var(--brand-color);
   padding: 8px;
   border-radius: 20px;
   width: 150px;
   text-align: center;
+  white-space: normal;
+}
+
+.removeButton:hover {
+  background-color: var(--color-button-delete);
+}
+
+.stockElementInStock::before {
+  content: "✓";
+  font-size: 1.1em;
+  display: inline-block;
+  padding: 0px 5px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: rgb(46, 153, 46);
+  transform: translateY(1px);
+}
+.stockElementOutOfStock::before,
+.stockElementNotEnoughStock::before {
+  content: "✗";
+  font-size: 1em;
+  display: inline-block;
+  padding: 0px 5px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: red;
+  transform: translateY(1px);
+}
+.stockElementLowStock::before {
+  content: "!";
+  font-size: 1.1em;
+  display: inline-block;
+  padding: 0px 5px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: rgb(227, 157, 26);
+  transform: translateY(1px);
 }

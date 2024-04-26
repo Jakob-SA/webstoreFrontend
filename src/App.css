@@ -1,21 +1,32 @@
 #root {
   padding: 0rem;
   margin: 0px auto 0px auto;
+  width: 100%;
 }
 body {
-  --background-color: var(--color-primary-dark);
-  --brand-color: var(--color-text);
   margin: 0 auto;
 }
 
-.frontPage {
+main {
   display: grid;
   grid-template-columns: 0.95fr 2.5fr 0.95fr;
   grid-column-gap: 1.5em;
   justify-items: center;
+  margin-left: 1em;
+  margin-right: 1em;
 }
-@media (max-width: 1100px) {
-  .frontPage {
+main h2,
+h3 {
+  margin-top: 0;
+}
+@media (min-width: 1500px) {
+  td {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1500px) {
+  main {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,30 +34,39 @@ body {
   aside > * {
     width: 100vw;
     margin-top: 1em;
+    width: 50em;
+  }
+  td > :nth-child(2) {
+    width: 100em;
   }
 }
-@media (max-width: 700px) {
-  main {
-    margin-left: 1em;
-    margin-right: 1em;
-  }
+@media (max-width: 970px) {
 }
 
-main {
-  background-color: var(--background-color);
+.frontPage {
+  background-color: var(--background-color-secondary);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 1em;
-  grid-column: 2;
-  color: black;
-  align-self: center;
+  grid-column: 1/3;
+  color: var(--color-text);
+  width: 100%;
+}
+.frontPage h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
 }
 
 aside > * {
   grid-column: 3;
-  background-color: var(--background-color);
+  background-color: var(--background-color-secondary);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 1em;
-  color: black;
+  color: var(--color-text);
   width: 21em;
   padding: 1em;
   justify-self: center;

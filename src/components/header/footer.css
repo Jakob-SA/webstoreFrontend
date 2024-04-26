@@ -1,5 +1,5 @@
 footer {
-  background-color: var(--color-primary);
+  background-color: var(--background-color-secondary);
   margin: 1em auto 0 auto;
   max-width: 50vw;
   text-align: center;

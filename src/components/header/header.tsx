@@ -4,6 +4,7 @@ function Header() {
   return (
     <>
       <header>
+        <link rel="stylesheet" href="src\index.css" />
         <div>
           <h1>Checkout</h1>
           <a href=".">
@@ -11,7 +12,7 @@ function Header() {
               className="storeLogo"
               src="store-logo.png"
               alt="Store logo"
-              width="150rem"
+              width="80rem"
             />
           </a>
         </div>

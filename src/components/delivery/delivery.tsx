@@ -9,9 +9,12 @@ function Delivery() {
       <Header />
       <NavigationBar />
       <main>
-        <Orderform />
+        <div className="deliveryPage">
+          <Orderform />
+        </div>
+
+        <aside></aside>
       </main>
-      <aside></aside>
       <Footer />
     </>
   );
