@@ -164,3 +164,7 @@ input::placeholder {
   margin: 0;
   padding: 0;
 }
+#orderComment {
+  width: 60%;
+  height: 5vh;
+}

@@ -293,8 +293,6 @@ function Orderform() {
           placeholder="Here you can leave a comment for your order"
           name="orderComment"
           id="orderComment"
-          rows={2}
-          cols={50}
         />
         <div className="container">
           <div>
