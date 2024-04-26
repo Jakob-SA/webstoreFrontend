@@ -106,9 +106,6 @@
 .removeButton:hover {
   background-color: var(--color-button-delete);
 }
-.removeButton {
-  margin-left: 5px;
-}
 
 .stockElementInStock::before {
   content: "✓";

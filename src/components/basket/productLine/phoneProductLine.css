@@ -31,8 +31,11 @@ p {
     font-size: 3vw;
   }
   .productImages {
-    width: 15vw;
-    height: 15vw;
+    width: 20vw;
+    height: 20vw;
     min-width: 0;
+  }
+  .removeButton {
+    font-size: 2vw;
   }
 }
