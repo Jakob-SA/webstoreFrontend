@@ -185,7 +185,7 @@ function Orderform() {
             </label>
           </div>
           <div className="input-wrapper">
-            <input type="text" id="address2" name="user_address2" />
+            <input type="text" id="address2" name="user_address2"/>
             <label htmlFor="address2">Appartment, suite etc.</label>
           </div>
         </div>
@@ -275,7 +275,7 @@ function Orderform() {
                   id="deliveryAdress2"
                   name="user_deliveryAdress2"
                 />
-                <label htmlFor="deliveryAdress2">Appartment, suite etc.:</label>
+                <label htmlFor="deliveryAdress2">Appartment, suite etc.</label>
               </div>
             </div>
             <ZipCodeChecker
