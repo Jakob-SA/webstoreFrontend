@@ -8,7 +8,6 @@ export default function NavigationBar() {
   const [step, setStep] = useState<Steps>();
 
   useEffect(() => {
-    console.log(location.pathname);
     switch (location.pathname) {
       case "/":
         setStep(Steps.Basket);

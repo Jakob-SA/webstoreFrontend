@@ -22,3 +22,20 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+@media (max-width: 970px) {
+  .phoneProductLine {
+    padding: 2vw;
+    align-items: center;
+  }
+  .phoneProductLine h3 {
+    font-size: 3vw;
+  }
+  .productImages {
+    width: 20vw;
+    height: 20vw;
+    min-width: 0;
+  }
+  .removeButton {
+    font-size: 2vw;
+  }
+}

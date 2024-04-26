@@ -2,7 +2,7 @@ import React, { useReducer, useEffect } from "react";
 import { Product, fetchProducts } from "../components/basket/product";
 
 //productLine type
-export interface productLine {
+export interface ProductLine {
   product: Product;
   quantity: number;
   totalLinePrice: number;
@@ -12,7 +12,7 @@ export interface productLine {
 //type of state
 interface ShopState {
   products: Product[];
-  basketItems: productLine[];
+  basketItems: ProductLine[];
 }
 
 //inital state
