@@ -1,18 +1,16 @@
 nav {
   display: flex;
   justify-content: center;
-  margin: 1.5rem auto;
 }
 
 nav ul {
   display: flex;
   align-items: center;
+  padding: 0;
 }
 
 nav li {
   display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: var(--background-color-secondary);
   border-radius: 50%;
 }
@@ -22,9 +20,11 @@ nav .past .bubble {
 nav ul div {
   width: 4em;
   height: 7px;
-  height: 7px;
-  justify-items: center;
-  position: relative;
+}
+@media (max-width: 970px) {
+  nav ul div {
+    width: 1em;
+  }
 }
 
 nav .previousdivider {
