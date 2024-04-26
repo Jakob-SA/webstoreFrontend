@@ -88,9 +88,9 @@ function Orderform() {
     return (
       <>
         <h3>Please enter your delivery information</h3>
-        <button className="basket-button">
-          <Link to="/">Back to Basket</Link>
-        </button>
+        <Link to="/" className="basket-button">
+          <button type="button">Back to Basket</button>
+        </Link>
         <p>
           Fields marked with <span className="asterisk">*</span> are required
         </p>
