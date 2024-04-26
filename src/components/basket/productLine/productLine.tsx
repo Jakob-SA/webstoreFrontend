@@ -4,6 +4,7 @@ import { RemoveButton } from "./removeButton";
 import { QuantityInput } from "./quantityInput";
 import "./productLine.css";
 import { useDispatchShopContext } from "../../../contexts/shopContext";
+import StockElement from "./stockElement";
 
 export interface productLineProps {
   product: Product;
@@ -32,7 +33,6 @@ productLineProps) {
         }),
       300
     ); // Animation duration
-    console.log("Removing item");
   };
   const updateQuantity = (newQuantity: number) => {
     dispatch({
@@ -96,14 +96,17 @@ productLineProps) {
       </td>
       <td>
         <div className="lineItemGiftwrapping">
-          <input
-            type="checkbox"
-            id={`Giftwrapping-${product.id.toString()}`}
-            onChange={onGiftwrappingChange}
-          />
-          <label htmlFor={`Giftwrapping-${product.id.toString()}`}>
-            Giftwrapping
-          </label>
+          <span>
+            <input
+              type="checkbox"
+              id={`Giftwrapping-${product.id.toString()}`}
+              onChange={onGiftwrappingChange}
+            />
+            <label htmlFor={`Giftwrapping-${product.id.toString()}`}>
+              Giftwrapping
+            </label>
+          </span>
+          <StockElement stock={product.amountInStock} quantity={quantity} />
         </div>
       </td>
       <td>
