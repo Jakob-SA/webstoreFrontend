@@ -133,9 +133,6 @@ function Orderform() {
       </>
     );
   };
-  const Address = () => {
-    return <></>;
-  };
 
   return (
     <>
@@ -186,7 +183,6 @@ function Orderform() {
             <label htmlFor="address2">Appartment, suite etc.</label>
           </div>
         </div>
-        <Address />
         <ZipCodeChecker
           zipCode={zipCode}
           zipId="zip"
@@ -209,17 +205,20 @@ function Orderform() {
               Phone Number<span className="required"></span>
             </label>
           </div>
-          <label htmlFor="country" hidden>
-            Country: <span className="required">*</span>
-          </label>
-          <input
-            type="text"
-            required
-            id="country"
-            name="userCountry"
-            value={"Denmark"}
-            readOnly
-          />
+          <div className="input-wrapper" data-required>
+            <input
+              type="text"
+              required
+              id="country"
+              name="userCountry"
+              value={"Denmark"}
+              readOnly
+            />
+            <label htmlFor="country">
+              <span hidden>Country</span>
+              <span className="required"></span>
+            </label>
+          </div>
         </div>
         <label htmlFor="deliveryAdress">Different delivery adress:</label>
         <input
@@ -231,18 +230,20 @@ function Orderform() {
         />
         {isDeliveryAddress && (
           <div>
-            <input
-              type="text"
-              required
-              id="deliveryCountry"
-              name="user_deliveryCountry"
-              value={"Denmark"}
-              readOnly
-            />
-            <label htmlFor="deliveryCountry">
-              <span hidden>Country</span>
-              <span className="required"></span>
-            </label>
+            <div className="input-wrapper" data-required>
+              <input
+                type="text"
+                required
+                id="deliveryCountry"
+                name="user_deliveryCountry"
+                value={"Denmark"}
+                readOnly
+              />
+              <label htmlFor="deliveryCountry">
+                <span hidden>Country</span>
+                <span className="required"></span>
+              </label>
+            </div>
             <div className="duoBox">
               <div className="input-wrapper" data-required>
                 <input
