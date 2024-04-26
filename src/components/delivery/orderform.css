@@ -20,8 +20,8 @@
     flex-direction: column !important;
   }
 
-  .duoBox> :first-child,
-  .duoBox> :last-child {
+  .duoBox > :first-child,
+  .duoBox > :last-child {
     margin: 0em !important;
   }
 }
@@ -61,7 +61,7 @@
   font-size: 1.5em;
 }
 
-.input-wrapper>label {
+.input-wrapper > label {
   position: absolute;
   top: 24px;
   left: 14px;
@@ -80,8 +80,8 @@ label {
   height: 1.5em;
 }
 
-.input-wrapper input:focus+label,
-.input-wrapper input:valid+label {
+.input-wrapper input:focus + label,
+.input-wrapper input:valid + label {
   color: #ffffff;
   font-size: 0.8em;
   top: -5px;
@@ -105,12 +105,12 @@ input::placeholder {
   width: 100%;
 }
 
-.duoBox> :first-child {
-  margin-right: .5em;
+.duoBox > :first-child {
+  margin-right: 0.5em;
 }
 
-.duoBox> :last-child {
-  margin-left: .5em;
+.duoBox > :last-child {
+  margin-left: 0.5em;
 }
 
 .acceptButton {
@@ -163,4 +163,8 @@ input::placeholder {
   font-size: 0.8em;
   margin: 0;
   padding: 0;
+}
+
+.basket-button a {
+  color: var(--color-button-secondary);
 }

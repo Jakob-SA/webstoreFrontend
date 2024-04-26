@@ -10,7 +10,7 @@ import { RemoveButton } from "./removeButton";
 function PhoneProductLine({ productLine }: { productLine: ProductLine }) {
   const [isRemoving, setIsRemoving] = useState(false);
   const dispatch = useDispatchShopContext();
-
+  isRemoving && console.log("Removing product", productLine.product.id);
   const handleRemove = () => {
     setIsRemoving(true);
     setTimeout(
