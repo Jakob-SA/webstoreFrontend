@@ -40,7 +40,7 @@
 }
 .asterisk {
   color: red;
-  font-size: 3em;
+  font-size: 1.5em;
 }
 .input-wrapper > label {
   position: absolute;
@@ -83,19 +83,11 @@ input::placeholder {
   width: 100%;
 }
 .duoBox > :first-child {
-  margin-right: 1em;
+  margin-right: .5em;
 }
 .duoBox > :last-child {
-  margin-left: 1em;
+  margin-left: .5em;
 }
-
-.address-checkbox {
-  text-align: left;
-  margin: 1em;
-  position: relative;
-  height: 50px;
-}
-
 .acceptButton {
   background: linear-gradient(to bottom right, #256818, #839e0a);
   border: 0;
@@ -131,11 +123,11 @@ input::placeholder {
     0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
-.business-checkbox {
-  text-align: left;
-  margin: 1em;
-  position: relative;
-  height: 50px;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .zip-error-message {

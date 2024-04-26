@@ -89,16 +89,22 @@ function Orderform() {
       <>
         <h3>Please enter your delivery information</h3>
         <p>
-          Fields marked with <div className="asterisk">*</div> are required.
+          Fields marked with <span className="asterisk">*</span> are required
         </p>
-        <label htmlFor="businessOrder">Business order:</label>
-        <input
-          type="checkbox"
-          id="businessOrder"
-          name="user_businessOrder"
-          checked={isBusiness}
-          onChange={handleBusinessChange}
-        />
+        <div className="container">
+          <div>
+            <label htmlFor="businessOrder">Business order?</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="businessOrder"
+              name="user_businessOrder"
+              checked={isBusiness}
+              onChange={handleBusinessChange}
+            />
+          </div>
+        </div>
       </>
     );
   };
@@ -132,9 +138,6 @@ function Orderform() {
         )}
       </>
     );
-  };
-  const Address = () => {
-    return <></>;
   };
 
   return (
@@ -182,11 +185,10 @@ function Orderform() {
             </label>
           </div>
           <div className="input-wrapper">
-            <input type="text" id="address2" name="user_address2" />
+            <input type="text" id="address2" name="user_address2"/>
             <label htmlFor="address2">Appartment, suite etc.</label>
           </div>
         </div>
-        <Address />
         <ZipCodeChecker
           zipCode={zipCode}
           zipId="zip"
@@ -209,40 +211,52 @@ function Orderform() {
               Phone Number<span className="required"></span>
             </label>
           </div>
-          <label htmlFor="country" hidden>
-            Country: <span className="required">*</span>
-          </label>
-          <input
-            type="text"
-            required
-            id="country"
-            name="userCountry"
-            value={"Denmark"}
-            readOnly
-          />
-        </div>
-        <label htmlFor="deliveryAdress">Different delivery adress:</label>
-        <input
-          type="checkbox"
-          id="deliveryAdress"
-          name="user_deliveryAdress"
-          checked={isDeliveryAddress}
-          onChange={handleDeliveryAdressChange}
-        />
-        {isDeliveryAddress && (
-          <div>
+          <div className="input-wrapper" data-required>
             <input
               type="text"
               required
-              id="deliveryCountry"
-              name="user_deliveryCountry"
+              id="country"
+              name="userCountry"
               value={"Denmark"}
               readOnly
             />
-            <label htmlFor="deliveryCountry">
+            <label htmlFor="country">
               <span hidden>Country</span>
               <span className="required"></span>
             </label>
+          </div>
+        </div>
+        <div className="container">
+          <div>
+            <label htmlFor="deliveryAdress">Different delivery address?</label>
+          </div>
+          <div>
+
+            <input
+              type="checkbox"
+              id="deliveryAdress"
+              name="user_deliveryAdress"
+              checked={isDeliveryAddress}
+              onChange={handleDeliveryAdressChange}
+            />
+          </div>
+        </div>
+        {isDeliveryAddress && (
+          <div>
+            <div className="input-wrapper" data-required>
+              <input
+                type="text"
+                required
+                id="deliveryCountry"
+                name="user_deliveryCountry"
+                value={"Denmark"}
+                readOnly
+              />
+              <label htmlFor="deliveryCountry">
+                <span hidden>Country</span>
+                <span className="required"></span>
+              </label>
+            </div>
             <div className="duoBox">
               <div className="input-wrapper" data-required>
                 <input
@@ -261,7 +275,7 @@ function Orderform() {
                   id="deliveryAdress2"
                   name="user_deliveryAdress2"
                 />
-                <label htmlFor="deliveryAdress2">Appartment, suite etc.:</label>
+                <label htmlFor="deliveryAdress2">Appartment, suite etc.</label>
               </div>
             </div>
             <ZipCodeChecker
@@ -274,20 +288,27 @@ function Orderform() {
             />
           </div>
         )}
-
         <label htmlFor="orderComment"></label>
         <textarea
           placeholder="Here you can leave a comment for your order"
           name="orderComment"
           id="orderComment"
+          rows={2}
+          cols={50}
         />
-        <label htmlFor="termsAndConditions">
-          Agree to{" "}
-          <a href="/terms-and-conditions" target="_blank">
-            terms & conditions
-          </a>
-        </label>
-        <input type="checkbox" id="termsAndConditions" required />
+        <div className="container">
+          <div>
+            <label htmlFor="termsAndConditions">
+              Agree to{" "}
+              <a href="/terms-and-conditions" target="_blank">
+                terms & conditions
+              </a>
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="termsAndConditions" required />
+          </div>
+        </div>
         {loading && <p>Loading...</p>}
         <button type="submit" className="acceptButton">
           Submit order
