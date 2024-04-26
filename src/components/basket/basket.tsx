@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { Product, fetchProducts } from "./product";
-import { ProductLine } from "../productLine/productLine";
+import { ProductLine } from "./productLine/productLine";
+import useMediaQuery from "../utils/mediaQuery";
+import PhoneBasket from "./phoneBasket";
+import EmptyBasket from "./emptyBasket";
+import NormalBasket from "./normalBasket";
+import "./basket.css";
+
 var basketDiscounted = false;
 
 function Basket() {
   const [basketItems, setBasketItems] = useState<Product[]>([]); //maybe parameterize this
   const [prices, setPrices] = useState(new Map<number, number>());
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice variable
+  const { small } = useMediaQueries();
 
   useEffect(() => {
     //copilot told me this was a fix. @Esben may find alternative fix
@@ -40,7 +47,7 @@ function Basket() {
       return "You have not reached the 300 limit for a discount yet.";
     }
   };
-
+  displayTotalPrice(); //REMOVE
   const basketLines = basketItems.map((product) => {
     return (
       <ProductLine
@@ -54,34 +61,13 @@ function Basket() {
 
   return (
     <>
-      <div>
-        {basketItems.length > 0 && (
-          <table className="shoppingCart">
-            <tbody>
-              <tr>
-                <th></th>
-                <th>Product</th>
-                <th>Price per unit</th>
-                <th>Quantity</th>
-                <th>Total </th>
-                <th> </th>
-                <th></th>
-              </tr>
-              {basketLines}
-            </tbody>
-          </table>
-        )}
-
-        {basketItems.length === 0 && (
-          <p>
-            No items in basket. Reload the page <a href=".">here</a> to restore
-          </p>
-        )}
-        <div>
-          <h3>Total price: {totalPrice.toFixed(2)} </h3>
-          <h3>{displayTotalPrice()}</h3> {/*Should be moved*/}
-        </div>
-      </div>
+      {small ? (
+        <PhoneBasket basketItems={basketItems} />
+      ) : (
+        <NormalBasket basketLines={basketLines} />
+      )}
+      {basketItems.length > 0}
+      {basketItems.length === 0 && <EmptyBasket />}
     </>
   );
 }
@@ -94,6 +80,13 @@ function calculateDiscount(totalPrice: number): number {
     basketDiscounted = false;
     return totalPrice;
   }
+}
+
+//This function is used to make changes in jsx based on css media queries
+function useMediaQueries() {
+  const small = useMediaQuery("(max-width: 700px)");
+
+  return { small };
 }
 
 export default Basket;

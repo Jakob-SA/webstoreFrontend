@@ -1,0 +1,24 @@
+.phoneProductLine {
+  display: flex;
+  flex-direction: row;
+  padding: 2em;
+}
+.phoneProductLine > div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 2em;
+}
+.phoneProductLine .spaceBetween {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.phoneProductLine h3,
+p {
+  margin: 0.1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,33 @@
+nav {
+  display: flex;
+  justify-content: center;
+  width: 20rem;
+  margin: 1.5rem auto;
+}
+
+nav ul {
+  display: flex;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav li.active a {
+  color: var(--color-button-tertiary);
+  border-top: 0.3rem var(--color-button-tertiary) solid;
+  text-decoration: inherit;
+}
+
+nav a {
+  color: var(--color-text-secondary);
+  border-top: 0.3rem var(--color-text-secondary) solid;
+  padding: 0 4rem;
+}
+nav a:hover {
+  color: var(--color-button-quaternary);
+  border-top: 0.3rem var(--color-button-quaternary) solid;
+  text-decoration: inherit;
+}

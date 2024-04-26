@@ -34,7 +34,7 @@
       "name": "Casual Canvas Sneakers - Black",
       "price": 59.99,
       "currency": "USD",
-      "rebateQuantity": 2,
+      "rebateQuantity": 4,
       "rebatePercent": 5,
       "upsellProductId": 9,
       "amountInStock": 60
@@ -44,7 +44,7 @@
       "name": "Leather Shoe Care Kit",
       "price": 19.99,
       "currency": "USD",
-      "rebateQuantity": 9999,
+      "rebateQuantity": 50,
       "rebatePercent": 0,
       "upsellProductId": 0,
       "amountInStock": 100
@@ -64,7 +64,7 @@
       "name": "Kids' Light-Up Sneakers - Pink",
       "price": 39.99,
       "currency": "USD",
-      "rebateQuantity": 2,
+      "rebateQuantity": 5,
       "rebatePercent": 10,
       "upsellProductId": 12,
       "amountInStock": 80
@@ -94,7 +94,7 @@
       "name": "Suede Shoe Brush",
       "price": 9.99,
       "currency": "USD",
-      "rebateQuantity": 9999,
+      "rebateQuantity": 50,
       "rebatePercent": 0,
       "upsellProductId": 0,
       "amountInStock": 120

@@ -1,0 +1,85 @@
+form {
+  margin: 0 auto;
+  width: 400px;
+
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 1em;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  font-size: 1em sans-serif;
+  height: 25px;
+  margin: 1em;
+  position: relative;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #dfdfdf;
+  outline: none;
+}
+
+input:focus {
+  border-bottom: 2px solid #413f3f;
+}
+
+input::placeholder {
+  font-size: medium;
+  color: #575757;
+}
+
+.address-checkbox {
+  text-align: left;
+  margin: 1em;
+  position: relative;
+  height: 50px;
+}
+
+.acceptButton {
+  background: linear-gradient(to bottom right, #256818, #839e0a);
+  border: 0;
+  border-radius: 12px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.acceptButton:not([disabled]):focus {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(37, 223, 53, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.acceptButton:not([disabled]):hover {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(37, 223, 53, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.business-checkbox {
+  text-align: left;
+  margin: 1em;
+  position: relative;
+  height: 50px;
+}
+
+.zip-error-message {
+  color: red;
+  font-size: 0.8em;
+  margin: 0;
+  padding: 0;
+}

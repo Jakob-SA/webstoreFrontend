@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Product } from "../basket/product";
+import { Product } from "../product";
 import { RemoveButton } from "./removeButton";
 import { QuantityInput } from "./quantityInput";
 import "./productLine.css";
 
-interface productLineProps {
+export interface productLineProps {
   product: Product;
   handleRemoveItem: (id: number) => void;
   updateTotalPrice: (id: number, price: number) => void;
@@ -52,20 +52,14 @@ export function ProductLine({
           />
         </div>
       </td>
+      <td>{product.name}</td>
+      <td>{product.price}</td>
       <td>
-        <div>{product.name}</div>
-      </td>
-      <td>
-        <div>{product.price}</div>
-      </td>
-      <td>
-        <div>
-          <QuantityInput
-            quantity={quantity}
-            setQuantity={setQuantity}
-            product={product}
-          />
-        </div>
+        <QuantityInput
+          quantity={quantity}
+          setQuantity={setQuantity}
+          product={product}
+        />
       </td>
       <td>
         {quantity >= product.rebateQuantity ? (
@@ -80,7 +74,6 @@ export function ProductLine({
       <td>
         <div className="lineItemGiftwrapping">
           <input
-            className="giftwrappingCheckbox"
             type="checkbox"
             id={`Giftwrapping-${product.id.toString()}`}
             onChange={onGiftwrappingChange}
