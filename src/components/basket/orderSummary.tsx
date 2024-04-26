@@ -21,18 +21,18 @@ function OrderSummary() {
         <b>Total</b>
         <p>${totalPrice.toFixed(2)}</p>
       </div>
-      <p>
-        {showWarning && (
-          <p
-            style={{
-              color: "red",
-              textAlign: "center",
-            }}
-          >
-            Free shipping for orders over $300!
-          </p>
-        )}
-      </p>
+
+      {showWarning && (
+        <p
+          style={{
+            color: "red",
+            textAlign: "center",
+          }}
+        >
+          Free shipping for orders over $300!
+        </p>
+      )}
+
       <Link to="/delivery">
         <button className="summary-button">
           Proceed to delivery <p style={{ fontSize: "4em" }}>&#187;</p>
