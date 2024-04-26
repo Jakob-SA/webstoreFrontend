@@ -288,12 +288,15 @@ function Orderform() {
             />
           </div>
         )}
-        <label htmlFor="orderComment"></label>
+        <div className="input-wrapper">
         <textarea
-          placeholder="Here you can leave a comment for your order"
+          placeholder="Add a comment to your order (optional)"
           name="orderComment"
           id="orderComment"
+          className="orderComment"
         />
+        </div>
+        <label htmlFor="orderComment"></label>
         <div className="container">
           <div>
             <label htmlFor="termsAndConditions">

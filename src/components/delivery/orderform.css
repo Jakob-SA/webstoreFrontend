@@ -26,7 +26,8 @@
   }
 }
 
-.deliveryPage input {
+.deliveryPage input,
+.deliveryPage textarea {
   position: relative;
   box-sizing: border-box;
   padding: 1.2em 0.8em;
@@ -35,7 +36,7 @@
   width: 90%;
   border: 0;
   outline: none;
-  border-radius: 1em;
+  border-radius: 8px;
   border: 1px solid transparent;
 }
 
@@ -164,7 +165,9 @@ input::placeholder {
   margin: 0;
   padding: 0;
 }
-#orderComment {
+.input-wrapper textarea {
+  font-size: .9em;
+  font-family: inherit;
+  height: 6em;
   width: 60%;
-  height: 5vh;
 }
