@@ -10,9 +10,19 @@
   width: 40em;
   padding: 1em;
 }
+
 @media (max-width: 970px) {
   .deliveryPage {
     width: 90%;
+  }
+
+  .duoBox {
+    flex-direction: column !important;
+  }
+
+  .duoBox> :first-child,
+  .duoBox> :last-child {
+    margin: 0em !important;
   }
 }
 
@@ -28,6 +38,7 @@
   border-radius: 1em;
   border: 1px solid transparent;
 }
+
 /* Maybe we dont want this design decision */
 .input-wrapper[data-required]::after {
   content: "*";
@@ -38,16 +49,19 @@
   right: 10px;
   transform: translateY(-45%);
 }
+
 /* Maybe we dont want this */
 .input-wrapper {
   position: relative;
   width: 100%;
 }
+
 .asterisk {
   color: red;
   font-size: 1.5em;
 }
-.input-wrapper > label {
+
+.input-wrapper>label {
   position: absolute;
   top: 24px;
   left: 14px;
@@ -58,14 +72,16 @@
   cursor: text;
   transition: 0.2s ease-in-out;
 }
+
 .input-wrapper input,
 label {
   font-size: 1em;
   width: 100%;
   height: 1.5em;
 }
-.input-wrapper input:focus + label,
-.input-wrapper input:valid + label {
+
+.input-wrapper input:focus+label,
+.input-wrapper input:valid+label {
   color: #ffffff;
   font-size: 0.8em;
   top: -5px;
@@ -80,6 +96,7 @@ input::placeholder {
   font-size: 1em;
   color: #575757;
 }
+
 .duoBox {
   display: flex;
   flex-direction: row;
@@ -87,12 +104,15 @@ input::placeholder {
   align-items: center;
   width: 100%;
 }
-.duoBox > :first-child {
+
+.duoBox> :first-child {
   margin-right: .5em;
 }
-.duoBox > :last-child {
+
+.duoBox> :last-child {
   margin-left: .5em;
 }
+
 .acceptButton {
   background: linear-gradient(to bottom right, #256818, #839e0a);
   border: 0;
