@@ -61,7 +61,7 @@ function Orderform() {
 
     try {
       const response = await fetch(
-        "https://dtu62597.eduhost.dk:10271/api/create/",
+        "https://dtu62597.eduhost.dk:10272/api/create/",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
