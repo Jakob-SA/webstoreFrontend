@@ -27,9 +27,22 @@
   padding-right: 20px;
 }
 .lineItemGiftwrapping {
+  height: 8em;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+}
+.lineItemGiftwrapping p {
+  font-size: 1em;
+  height: 3em;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.lineItemGiftwrapping span {
+  display: flex;
+  flex-direction: column;
 }
 .twoLinePrice {
   display: flex;
@@ -95,4 +108,36 @@
 }
 .removeButton {
   margin-left: 5px;
+}
+
+.stockElementInStock::before {
+  content: "✓";
+  font-size: 1.1em;
+  display: inline-block;
+  padding: 0px 5px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: rgb(46, 153, 46);
+  transform: translateY(1px);
+}
+.stockElementOutOfStock::before,
+.stockElementNotEnoughStock::before {
+  content: "✗";
+  font-size: 1em;
+  display: inline-block;
+  padding: 0px 5px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: red;
+  transform: translateY(1px);
+}
+.stockElementLowStock::before {
+  content: "!";
+  font-size: 1.1em;
+  display: inline-block;
+  padding: 0px 5px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: rgb(227, 157, 26);
+  transform: translateY(1px);
 }
