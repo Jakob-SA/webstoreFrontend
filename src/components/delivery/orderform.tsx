@@ -1,6 +1,6 @@
 import "./orderform.css";
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { ZipCodeChecker } from "./zipCodeChecker";
 
@@ -88,6 +88,9 @@ function Orderform() {
     return (
       <>
         <h3>Please enter your delivery information</h3>
+        <button className="basket-button">
+          <Link to="/">Back to Basket</Link>
+        </button>
         <p>
           Fields marked with <span className="asterisk">*</span> are required
         </p>
@@ -185,7 +188,7 @@ function Orderform() {
             </label>
           </div>
           <div className="input-wrapper">
-            <input type="text" id="address2" name="user_address2"/>
+            <input type="text" id="address2" name="user_address2" />
             <label htmlFor="address2">Appartment, suite etc.</label>
           </div>
         </div>
@@ -231,7 +234,6 @@ function Orderform() {
             <label htmlFor="deliveryAdress">Different delivery address?</label>
           </div>
           <div>
-
             <input
               type="checkbox"
               id="deliveryAdress"

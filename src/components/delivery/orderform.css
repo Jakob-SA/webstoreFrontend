@@ -83,10 +83,10 @@ input::placeholder {
   width: 100%;
 }
 .duoBox > :first-child {
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 .duoBox > :last-child {
-  margin-left: .5em;
+  margin-left: 0.5em;
 }
 .acceptButton {
   background: linear-gradient(to bottom right, #256818, #839e0a);
@@ -138,4 +138,8 @@ input::placeholder {
   font-size: 0.8em;
   margin: 0;
   padding: 0;
+}
+
+.basket-button a {
+  color: var(--color-button-secondary);
 }
