@@ -21,11 +21,6 @@ nav ul div {
   width: 4em;
   height: 7px;
 }
-@media (max-width: 970px) {
-  nav ul div {
-    width: 1em;
-  }
-}
 
 nav .previousdivider {
   background: linear-gradient(to right, green, var(--color-button-secondary));
@@ -43,13 +38,16 @@ nav .activedivider {
     var(--background-color-secondary)
   );
 }
+@media (max-width: 970px) {
+  nav ul div {
+    width: 1em;
+  }
+}
 nav .bubble {
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 7.5rem;
-  height: 7.5rem;
   width: 7.5rem;
   height: 7.5rem;
   font-size: 1.1em;
