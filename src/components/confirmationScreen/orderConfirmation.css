@@ -51,11 +51,13 @@ td {
   margin-left: auto;
 }
 
-.productImages {
+.product-images {
   transition: none;
-  border-radius: 0%;
+  border-radius: 5%;
+  width: 8em;
+  height: 8em;
 }
-.productImages:hover {
+.product-images:hover {
   transform: none;
 }
 

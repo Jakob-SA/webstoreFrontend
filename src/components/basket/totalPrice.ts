@@ -30,3 +30,11 @@ export const getTotalPrice = () => {
         sum + item.totalLinePrice, 0); 
     return(calculateDiscount(totalPrice))
 }
+
+export const getShippingCost = () => {
+
+  if (getTotalPrice() > 300) {
+    return 0.0;
+  }
+    return 10.0;
+}

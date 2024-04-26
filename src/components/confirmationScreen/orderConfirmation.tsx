@@ -1,12 +1,12 @@
 import { useShopContext } from "../../contexts/shopContext";
-import { getTotalPrice } from "../basket/totalPrice";
+import { getShippingCost, getTotalPrice } from "../basket/totalPrice";
 import "./orderConfirmation.css";
 
 function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
   const { basketItems } = useShopContext();
   const subtotalPrice = getTotalPrice();
   const currentDate = new Date();
-  const shippingCost = 10.0;
+  const shippingCost = getShippingCost();
   const totalPrice = subtotalPrice + shippingCost;
 
   const basketSummary = basketItems.map((item) => (
@@ -15,7 +15,7 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
         <div className="product-details">
           <img
             src={"productPics/product" + item.product.id + ".jpg"}
-            className="productImages"
+            className="product-images"
           />
           <div className="product-name-quantity">
             <p className="product-name">{item.product.name}</p>
