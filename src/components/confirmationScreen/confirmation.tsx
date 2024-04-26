@@ -11,7 +11,9 @@ function Confirmation() {
       <Header />
       <NavigationBar />
       <main>
-        <OrderConfirmation orderNumber={orderNumber} />
+        <div className="order-confirmation-page">
+          <OrderConfirmation orderNumber={orderNumber} />
+        </div>
       </main>
       <aside></aside>
       <Footer />
