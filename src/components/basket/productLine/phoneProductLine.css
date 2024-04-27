@@ -2,6 +2,11 @@
   display: flex;
   flex-direction: row;
   padding: 2em;
+  opacity: 1;
+}
+.phoneProductLine.removing {
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .phoneProductLine > div {
   display: flex;

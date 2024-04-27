@@ -21,7 +21,7 @@ function PhoneProductLine({ productLine }: { productLine: ProductLine }) {
     ); // Animation duration
   };
   return (
-    <section className="phoneProductLine">
+    <section className={`phoneProductLine ${isRemoving ? "removing" : ""}`}>
       <img
         src={"productPics/product" + productLine.product.id + ".jpg"}
         className="productImages"
