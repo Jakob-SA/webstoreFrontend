@@ -13,6 +13,8 @@
   width: 8em;
   height: 8em;
   min-width: 8em;
+  max-width: 10em;
+  max-height: 10em;
   object-fit: cover;
   border-radius: 15px;
   transition: transform 0.5s ease-out;
@@ -72,14 +74,17 @@
     width: 1vw;
     height: 1vw;
   }
+  .quantityBox {
+    width: 10vw;
+    height: 1vw;
+  }
 }
 .quantityButton {
-  font-size: 12vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 10vw;
-  height: 10vw;
+  width: 8vw;
+  height: 8vw;
   padding: 0;
   border-radius: 50%;
   color: var(--color-text-secondary);

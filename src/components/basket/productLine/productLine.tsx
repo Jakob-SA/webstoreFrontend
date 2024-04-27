@@ -63,7 +63,7 @@ export function ProductLine({ productLine }: { productLine: ProductLine }) {
         <QuantityInput
           quantity={productLine.quantity}
           setQuantity={updateQuantity}
-          product={productLine.product}
+          rebateQuantity={productLine.product.rebateQuantity}
         />
       </td>
       <td>

@@ -69,7 +69,6 @@ function PhoneProductLine({ productLine }: { productLine: ProductLine }) {
             quantity={productLine.quantity}
           />
           <RemoveButton onClick={handleRemove} />
-          {/* FIX ANIMATION IN CSS CLASS */}
         </div>
       </div>
     </section>
