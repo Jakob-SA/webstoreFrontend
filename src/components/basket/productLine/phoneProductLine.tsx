@@ -1,11 +1,9 @@
 import { useState } from "react";
-import {
-  ProductLine,
-  useDispatchShopContext,
-} from "../../../contexts/shopContext";
 import "./phoneProductLine.css";
 import { QuantityInput } from "./quantityInput";
 import { RemoveButton } from "./removeButton";
+import { ProductLine } from "../../../contexts/shopContext";
+import { useDispatchShopContext } from "../../../contexts/useDispatchShopContext";
 
 function PhoneProductLine({ productLine }: { productLine: ProductLine }) {
   const [isRemoving, setIsRemoving] = useState(false);
