@@ -61,20 +61,25 @@
 .quantityInput > * {
   margin: 2px;
 }
-.quantityInput p {
-  font-size: 3em;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  top: -10px;
-  margin-top: 10px;
+@media (max-width: 970px) {
+  .quantityInput {
+  }
+  .quantityInput > * {
+    margin: 1px;
+  }
+
+  .quantityButton {
+    width: 1vw;
+    height: 1vw;
+  }
 }
 .quantityButton {
+  font-size: 12vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3em;
-  height: 3em;
+  width: 10vw;
+  height: 10vw;
   padding: 0;
   border-radius: 50%;
   color: var(--color-text-secondary);
@@ -114,7 +119,7 @@
   content: "✓";
   font-size: 1.1em;
   display: inline-block;
-  padding: 0px 5px;
+  padding: 0px 7px;
   margin-right: 8px;
   border-radius: 50%;
   background-color: rgb(46, 153, 46);
@@ -125,7 +130,7 @@
   content: "✗";
   font-size: 1em;
   display: inline-block;
-  padding: 0px 5px;
+  padding: 0px 7px;
   margin-right: 8px;
   border-radius: 50%;
   background-color: red;
@@ -135,9 +140,28 @@
   content: "!";
   font-size: 1.1em;
   display: inline-block;
-  padding: 0px 5px;
+  padding: 0px 7px;
   margin-right: 8px;
   border-radius: 50%;
   background-color: rgb(227, 157, 26);
   transform: translateY(1px);
+}
+
+@media (max-width: 970px) {
+  .stockElementInStock {
+    width: 25px;
+    overflow: hidden;
+    color: transparent;
+  }
+  .stockElementLowStock {
+    width: 25px;
+    overflow: hidden;
+    color: transparent;
+  }
+  .stockElementOutOfStock,
+  .stockElementNotEnoughStock {
+    width: 25px;
+    overflow: hidden;
+    color: transparent;
+  }
 }

@@ -12,11 +12,7 @@ function PhoneBasket() {
     );
   });
 
-  return (
-    <div className="phoneBasket">
-      <ul>{phoneProductLines}</ul>
-    </div>
-  );
+  return <div className="phoneBasket">{phoneProductLines}</div>;
 }
 
 export default PhoneBasket;

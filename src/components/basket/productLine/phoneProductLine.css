@@ -19,6 +19,20 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  text-align: end;
+}
+.phoneProductLine .spaceBetween p {
+  white-space: nowrap;
+  overflow: visible;
+  font-size: 3.5vw;
+}
+.phoneProductLine .spaceBetween label {
+  display: flex;
+  flex-direction: row;
+  font-size: 3vw;
+  align-content: center;
+  justify-content: end;
+  align-items: center;
 }
 .phoneProductLine h3,
 p {
@@ -27,20 +41,23 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-@media (max-width: 970px) {
-  .phoneProductLine {
-    padding: 2vw;
-    align-items: center;
-  }
-  .phoneProductLine h3 {
-    font-size: 3vw;
-  }
-  .productImages {
-    width: 20vw;
-    height: 20vw;
-    min-width: 0;
-  }
-  .removeButton {
-    font-size: 2vw;
-  }
+
+.phoneProductLine {
+  padding: 2vw;
+  align-items: center;
+}
+.phoneProductLine h3 {
+  font-size: 3vw;
+}
+.phoneProductLine .productImages {
+  width: 20vw;
+  height: 20vw;
+  min-width: 0;
+}
+.phoneProductLine .removeButton {
+  font-size: 2vw;
+}
+.phoneProductLine input[type="checkbox"] {
+  width: 3vw;
+  height: 3vw;
 }
