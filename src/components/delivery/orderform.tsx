@@ -70,6 +70,14 @@ function Orderform() {
 
   const { basketLines } = useShopContext();
 
+  const basketItems = basketLines.map((line) => ({
+    productId: line.product.id,
+    quantity: line.quantity,
+    totalLinePrice: line.totalLinePrice,
+    rebatePercent: line.rebatePercent,
+    giftwrapping: line.giftwrapping,
+  }));
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
@@ -79,7 +87,7 @@ function Orderform() {
 
     const payload = {
       customerInfo: formData,
-      basketItems: basketLines,
+      basketItems: basketItems,
     };
 
     try {
@@ -369,12 +377,10 @@ function Orderform() {
         />
         <div className="container">
           <div>
-            <label htmlFor="termsAndConditions">
-              Agree to{" "}
-              <a href="/terms-and-conditions" target="_blank">
-                terms & conditions
-              </a>
-            </label>
+            <label htmlFor="termsAndConditions" />
+            <Link to="/terms-and-conditions" target="_blank">
+              <span id="termsAndConditions">Agree to terms & conditions</span>
+            </Link>
           </div>
           <div>
             <input type="checkbox" id="termsAndConditions" required />
