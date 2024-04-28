@@ -236,6 +236,9 @@ function Orderform() {
                 handleZipCode(e.target.value, "user_zip");
               }}
             />
+            <label htmlFor="user_zip">
+              Zip code<span className="required"></span>
+            </label>
             {zipTouched && !city && <div>Invalid zip code</div>}
           </div>
           <div className="input-wrapper" data-required>
@@ -347,6 +350,9 @@ function Orderform() {
                     handleZipCode(e.target.value, "user_deliveryZip");
                   }}
                 />
+                <label htmlFor="user_deliveryZip">
+                  Zip code<span className="required"></span>
+                </label>
                 {zipDeliveryTouched && !deliveryCity && (
                   <div>Invalid zip code</div>
                 )}
@@ -367,14 +373,15 @@ function Orderform() {
             </div>
           </div>
         )}
-        <label htmlFor="orderComment"></label>
+        <div className="input-wrapper">
         <textarea
-          placeholder="Here you can leave a comment for your order"
+          placeholder="Add a comment to your order (optional)"
           name="orderComment"
           id="orderComment"
-          rows={2}
-          cols={50}
+          className="orderComment"
         />
+        </div>
+        <label htmlFor="orderComment"></label>
         <div className="container">
           <div>
             <label htmlFor="termsAndConditions" />
