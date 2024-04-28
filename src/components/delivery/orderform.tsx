@@ -1,7 +1,7 @@
 import "./orderform.css";
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useShopContext } from "../../contexts/shopContext";
+import { useShopContext } from "../../contexts/useShopContext";
 import { ZipCodeChecker } from "./zipCodeChecker";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
@@ -13,6 +13,8 @@ function Orderform() {
   const [loading, setLoading] = useState(false);
   const [zipCode, setZipCode] = useState("");
   const [city, setCity] = useState("");
+  const [zipTouched, setZipTouched] = useState(false);
+  const [zipDeliveryTouched, setzipDeliveryTouched] = useState(false);
   const [deliveryZipCode, setDeliveryZipCode] = useState("");
   const [deliveryCity, setDeliveryCity] = useState("");
   const [isDeliveryAddress, setIsDeliveryAddress] = useState(false);
@@ -28,13 +30,23 @@ function Orderform() {
     setIsDeliveryAddress(!isDeliveryAddress);
   };
 
+  const handleZipCode = async (zip: string, zipId: string) => {
+    try {
+      const city = await ZipCodeChecker({ zipCode: zip });
+      if (zipId === "user_zip") setCity(city);
+      if (zipId === "user_deliveryZip") setDeliveryCity(city);
+    } catch (error) {
+      console.error("Invalid zip code", error);
+    }
+  };
+
   const getFormData = (elements: any) => ({
     first_name: elements.firstName.value,
     last_name: elements.lastName.value,
     country: elements.country.value,
     address1: elements.address1.value,
     address2: elements.address2.value,
-    zip_code: elements.zip.value,
+    zip_code: elements.user_zip.value,
     city: elements.city.value,
     email: elements.email.value,
     telephone_number: elements.telephoneNumber.value,
@@ -50,11 +62,13 @@ function Orderform() {
     delivery_address2: isDeliveryAddress
       ? elements.deliveryAdress2.value
       : undefined,
-    delivery_zip: isDeliveryAddress ? elements.deliveryZip.value : undefined,
+    delivery_zip: isDeliveryAddress
+      ? elements.user_deliveryZip.value
+      : undefined,
     delivery_city: isDeliveryAddress ? elements.deliveryCity.value : undefined,
   });
 
-  const { basketItems } = useShopContext();
+  const { basketLines } = useShopContext();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -65,7 +79,7 @@ function Orderform() {
 
     const payload = {
       customerInfo: formData,
-      basketItems: basketItems,
+      basketItems: basketLines,
     };
 
     try {
@@ -199,14 +213,37 @@ function Orderform() {
             <label htmlFor="address2">Appartment, suite etc.</label>
           </div>
         </div>
-        <ZipCodeChecker
-          zipCode={zipCode}
-          zipId="zip"
-          onZipChange={setZipCode}
-          city={city}
-          cityId="city"
-          onCityChange={setCity}
-        />
+        <div className="duoBox">
+          <div className="input-wrapper" data-required>
+            <input
+              type="text"
+              required
+              id="user_zip"
+              name="user_zip"
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
+              onBlur={(e) => {
+                setCity("");
+                setZipTouched(true);
+                handleZipCode(e.target.value, "user_zip");
+              }}
+            />
+            {zipTouched && !city && <div>Invalid zip code</div>}
+          </div>
+          <div className="input-wrapper" data-required>
+            <input
+              type="text"
+              required
+              id="city"
+              name="user_city"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <label htmlFor="deliveryCity">
+              City<span className="required"></span>
+            </label>
+          </div>
+        </div>
         <div className="duoBox">
           <div className="input-wrapper" data-required>
             <input
@@ -287,14 +324,39 @@ function Orderform() {
                 <label htmlFor="deliveryAdress2">Appartment, suite etc.</label>
               </div>
             </div>
-            <ZipCodeChecker
-              zipCode={deliveryZipCode}
-              zipId="deliveryZip"
-              onZipChange={setDeliveryZipCode}
-              city={deliveryCity}
-              cityId="deliveryCity"
-              onCityChange={setDeliveryCity}
-            />
+            <div className="duoBox">
+              <div className="input-wrapper" data-required>
+                <input
+                  type="text"
+                  required
+                  id="user_deliveryZip"
+                  name="user_deliveryZip"
+                  value={deliveryZipCode}
+                  onChange={(e) => setDeliveryZipCode(e.target.value)}
+                  onBlur={(e) => {
+                    setDeliveryCity("");
+                    setzipDeliveryTouched(true);
+                    handleZipCode(e.target.value, "user_deliveryZip");
+                  }}
+                />
+                {zipDeliveryTouched && !deliveryCity && (
+                  <div>Invalid zip code</div>
+                )}
+              </div>
+              <div className="input-wrapper" data-required>
+                <input
+                  type="text"
+                  required
+                  id="deliveryCity"
+                  name="user_deliveryCity"
+                  value={deliveryCity}
+                  onChange={(e) => setDeliveryCity(e.target.value)}
+                />
+                <label htmlFor="deliveryCity">
+                  City<span className="required"></span>
+                </label>
+              </div>
+            </div>
           </div>
         )}
         <label htmlFor="orderComment"></label>
@@ -318,7 +380,7 @@ function Orderform() {
             <input type="checkbox" id="termsAndConditions" required />
           </div>
         </div>
-        {loading && <p>Loading...</p>}
+        {loading && <p>Submitting order, please hold...</p>}
         <button type="submit" className="acceptButton">
           Submit order
         </button>
