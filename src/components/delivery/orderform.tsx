@@ -234,7 +234,7 @@ function Orderform() {
               }}
             />
             <label htmlFor="user_zip">
-              Zip code<span className="required"></span>
+              Zip Code<span className="required"></span>
             </label>
             {zipTouched && !city && <div>Invalid zip code</div>}
           </div>
@@ -381,13 +381,11 @@ function Orderform() {
         <label htmlFor="orderComment"></label>
         <div className="container">
           <div>
+            <input type="checkbox" id="termsAndConditions" required data-testid="termsAndConditions"/>
             <label htmlFor="termsAndConditions" />
             <Link to="/terms-and-conditions" target="_blank">
               <span id="termsAndConditions">Agree to terms & conditions</span>
             </Link>
-          </div>
-          <div>
-            <input type="checkbox" id="termsAndConditions" required />
           </div>
         </div>
         <div className="spacer">

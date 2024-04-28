@@ -40,7 +40,7 @@ describe(Orderform.name, () => {
 
 
 test("Should show loading after submitting form", async () => {
-  const { getByRole, getByLabelText, findByText } = render(
+  const { getByRole, getByLabelText, findByText, getByTestId } = render(
     <Router>
       <Orderform />
     </Router>
@@ -54,7 +54,7 @@ test("Should show loading after submitting form", async () => {
   const phoneNumberInput = getByLabelText("Phone Number");
 
   const submitButton = getByRole("button", { name: "Submit order" });
-  const termsCheckbox = getByRole("checkbox", { name: "Agree to terms & conditions" });
+  const termsCheckbox = getByTestId("termsAndConditions");
 
   fireEvent.change(firstNameInput, { target: { value: "John" } });
   expect(firstNameInput).toHaveValue("John");
@@ -82,5 +82,5 @@ test("Should show loading after submitting form", async () => {
   fireEvent.click(termsCheckbox);
   fireEvent.click(submitButton);
 
-  await findByText("Loading...");
+  await findByText("Submitting order, please hold...");
 });
