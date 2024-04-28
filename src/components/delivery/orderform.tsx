@@ -117,9 +117,6 @@ function Orderform() {
     return (
       <>
         <h3>Please enter your delivery information</h3>
-        <Link to="/" className="basket-button">
-          <button type="button">Back to Basket</button>
-        </Link>
         <p>
           Fields marked with <span className="asterisk">*</span> are required
         </p>
@@ -368,12 +365,12 @@ function Orderform() {
           </div>
         )}
         <div className="input-wrapper">
-        <textarea
-          placeholder="Add a comment to your order (optional)"
-          name="orderComment"
-          id="orderComment"
-          className="orderComment"
-        />
+          <textarea
+            placeholder="Add a comment to your order (optional)"
+            name="orderComment"
+            id="orderComment"
+            className="orderComment"
+          />
         </div>
         <label htmlFor="orderComment"></label>
         <div className="container">
@@ -387,10 +384,15 @@ function Orderform() {
             <input type="checkbox" id="termsAndConditions" required />
           </div>
         </div>
-        {loading && <p>Submitting order, please hold...</p>}
-        <button type="submit" className="acceptButton">
-          Submit order
-        </button>
+        <div className="spacer">
+          <Link to="/" className="backButton">
+            <button type="button">Back to Basket</button>
+          </Link>
+          {loading && <p>Submitting order, please hold...</p>}
+          <button type="submit" className="acceptButton">
+            Submit order
+          </button>
+        </div>
       </form>
     </>
   );

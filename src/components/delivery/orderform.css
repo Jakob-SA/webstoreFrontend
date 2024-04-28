@@ -122,13 +122,13 @@ input::placeholder {
   white-space: nowrap;
 }
 
-.acceptButton:not([disabled]):focus {
+.acceptButton:focus {
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
     -0.125rem -0.125rem 1rem rgba(37, 223, 53, 0.5),
     0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
-.acceptButton:not([disabled]):hover {
+.acceptButton:hover {
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
     -0.125rem -0.125rem 1rem rgba(37, 223, 53, 0.5),
     0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
@@ -151,17 +151,19 @@ input::placeholder {
   padding: 0;
 }
 .input-wrapper textarea {
-  font-size: .9em;
+  font-size: 0.9em;
   font-family: inherit;
   height: 6em;
   width: 60%;
 }
 
-.basket-button a {
-  color: var(--color-button-secondary);
+.spacer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 725px) {
   .deliveryPage {
     width: 90%;
   }
