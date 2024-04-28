@@ -1,9 +1,9 @@
-import { useShopContext } from "../../contexts/shopContext";
+import { useShopContext } from "../../contexts/useShopContext";
 import { getShippingCost, getTotalPrice } from "../basket/totalPrice";
 import "./orderConfirmation.css";
 
 function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
-  const { basketItems } = useShopContext();
+  const { basketLines: basketItems } = useShopContext();
   const subtotalPrice = getTotalPrice();
   const currentDate = new Date();
   const shippingCost = getShippingCost();
