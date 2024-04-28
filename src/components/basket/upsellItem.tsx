@@ -1,9 +1,5 @@
 import "./basket.css";
-import { ShopContext, useShopContext } from "../../contexts/shopContext";
-
-function handleClick() {
-  alert("Taking you back to the shop!");
-}
+import {useShopContext } from "../../contexts/shopContext"
 
 export function UpsellItem() {
   const { products ,basketItems } = useShopContext();
@@ -20,15 +16,15 @@ export function UpsellItem() {
     <>
       <section className="upsellItems">
         <h2>Products you might also like!</h2>
-        {upsellItems.slice(0,4).map((item, index) => (
+        {upsellItems.slice(0,3).map((item, index) => (
           <div key={index}>
             <img
               src={"productPics/product" + item.id + ".jpg"}
               className="productImages"
               width="150"
             />
-            <h3>{item.price ? item.price : 'finding price'}</h3>
-            <h4>{item.name}</h4>
+            <p>{item.price ? item.price : 'finding price'} $</p>
+            <p>{item.name}</p>
           </div>
         ))}
       </section>

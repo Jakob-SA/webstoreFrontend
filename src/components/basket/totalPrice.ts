@@ -1,23 +1,27 @@
 import {useShopContext } from "../../contexts/shopContext";
 
-
+var discounted = false;
 function calculateDiscount(totalPrice: number): number {
     if (totalPrice > 300) {
+      discounted = true;
       return totalPrice * 0.9;
     } else {
+      discounted = false;
       return totalPrice;
     }
   }
 
-  export const getDiscountAmount = () => {
-    const totalPrice = getTotalPrice();
-    return (totalPrice / 0.9 - totalPrice).toFixed(2)
+  export const useDiscountAmount = () => {
+    const totalPrice = useTotalPrice();
+    if (discounted)
+    return (totalPrice / 0.9 - totalPrice)
+  else return 0;
   }
 
   //TODO: also make a function to return the total discount amount.
   // 
 
-export const getTotalPrice = () => {
+export const useTotalPrice = () => {
 
     const {basketItems} = useShopContext();
    

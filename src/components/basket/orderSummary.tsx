@@ -1,28 +1,32 @@
 import { Link } from "react-router-dom";
-
-import { getTotalPrice } from "./totalPrice";
+import { useTotalPrice, useDiscountAmount } from "./totalPrice";
 function OrderSummary() {
-  const totalPrice = getTotalPrice();
+  const totalPrice = useTotalPrice();
+  const discountAmount = useDiscountAmount();
   return (
     <div className="orderSummary">
       <h2>Order Summary</h2>
       <div>
         <p>Subtotal</p>
-        <p>{totalPrice.toFixed(2)}</p>
+        <p>{totalPrice.toFixed(2)} $</p>
       </div>
       <div>
+      {totalPrice >= 300 
+        ? <p>Congratulations! You get a 10% discount! You have saved: {discountAmount.toFixed(2)}</p>
+        : <p>You are {(300 - totalPrice).toFixed(2)} $ away from getting a 10% discount!</p>}
+       </div>
+    <div>
         <p>Shipping</p>
         <p>
-          <i>calculated at next step</i>
+          <i>10 $</i>
         </p>
-      </div>
+      </div> 
       <div>
         <p>
           <b>Total</b>
         </p>
         <div style={{ display: "flex" }}>
-          <p>USD </p>
-          <b>{totalPrice.toFixed(2)}</b>
+          <b>{(10+totalPrice).toFixed(2)} $</b>
         </div>
       </div>
       <Link to="/delivery">
