@@ -15,13 +15,19 @@ function OrderSummary() {
       </div>
       <div>
       {totalPrice >= 300 
-        ? <p>Congratulations! You get a 10% discount! You have saved: {discountAmount.toFixed(2)}</p>
-        : <p>You are {(300 - totalPrice).toFixed(2)} $ away from getting a 10% discount!</p>}
+        ? <p style={{
+           color: "green",
+           textAlign: "center"}}>
+            Congratulations! You get a 10% discount! You have saved: {discountAmount.toFixed(2)}</p>
+
+        : <p style={{
+          color: "red",
+          textAlign: "center"}}>Buy for {(300 - totalPrice).toFixed(2)} $ more to get a 10% discount!</p>}
        </div>
     <div>
         <p>Shipping</p>
         <p>
-          <i>10 $</i>
+          <i>{shippingCost} $</i>
         </p>
       </div> 
       <div>
@@ -29,7 +35,7 @@ function OrderSummary() {
           <b>Total</b>
         </p>
         <div style={{ display: "flex" }}>
-          <b>{(10+totalPrice).toFixed(2)} $</b>
+          <b>{(shippingCost+totalPrice).toFixed(2)} $</b>
         </div>
       </div>
 

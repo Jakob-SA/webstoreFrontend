@@ -21,7 +21,7 @@ function calculateDiscount(totalPrice: number): number {
   //TODO: also make a function to return the total discount amount.
   // 
 
-export const useTotalPrice = () => {
+export function useTotalPrice () {
 
     const {basketItems} = useShopContext();
    
