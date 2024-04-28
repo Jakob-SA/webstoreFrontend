@@ -1,25 +1,42 @@
 import { Link } from "react-router-dom";
-
-import { getShippingCost, getTotalPrice } from "./totalPrice";
+import { getShippingCost, useTotalPrice, useDiscountAmount } from "./totalPrice";
 function OrderSummary() {
-  const totalPrice = getTotalPrice();
+  const totalPrice = useTotalPrice().totalPrice
   const shippingCost = getShippingCost();
   const showWarning = totalPrice < 300; // Check if total price is less than 300
 
+  const discountAmount = useDiscountAmount();
   return (
     <div className="orderSummary">
       <h2>Order Summary</h2>
       <div>
-        <b>Subtotal</b>
-        <p>${totalPrice.toFixed(2)}</p>
+        <p>Subtotal</p>
+        <p>{totalPrice.toFixed(2)} $</p>
       </div>
       <div>
-        <b>Shipping</b>
-        <p>${shippingCost.toFixed(2)}</p>
-      </div>
+      {totalPrice >= 300 
+        ? <p style={{
+           color: "green",
+           textAlign: "center"}}>
+            Congratulations! You get a 10% discount! You have saved: {discountAmount.toFixed(2)}</p>
+
+        : <p style={{
+          color: "red",
+          textAlign: "center"}}>Buy for {(300 - totalPrice).toFixed(2)} $ more to get a 10% discount!</p>}
+       </div>
+    <div>
+        <p>Shipping</p>
+        <p>
+          <i>{shippingCost} $</i>
+        </p>
+      </div> 
       <div>
-        <b>Total</b>
-        <p>${totalPrice.toFixed(2)}</p>
+        <p>
+          <b>Total</b>
+        </p>
+        <div style={{ display: "flex" }}>
+          <b>{(shippingCost+totalPrice).toFixed(2)} $</b>
+        </div>
       </div>
 
       {showWarning && (

@@ -9,6 +9,7 @@ body {
 
 main {
   display: grid;
+  align-items: start;
   grid-template-columns: 0.95fr 2.5fr 0.95fr;
   grid-column-gap: 1.5em;
   justify-items: center;
@@ -19,29 +20,7 @@ main {
 main h2,
 h3 {
   margin-top: 0;
-}
-@media (min-width: 1500px) {
-  td {
-    white-space: nowrap;
-  }
-}
-
-@media (max-width: 1500px) {
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  aside > * {
-    width: 100vw;
-    margin-top: 1em;
-    width: 50em;
-  }
-  td > :nth-child(2) {
-    width: 100em;
-  }
-}
-@media (max-width: 970px) {
+  text-align: center;
 }
 
 .frontPage {
@@ -70,6 +49,7 @@ aside > * {
   color: var(--color-text);
   width: 21em;
   padding: 1em;
+  box-sizing: border-box;
   justify-self: center;
 }
 aside > :nth-child(2) {
@@ -79,4 +59,39 @@ aside > :nth-child(2) {
 }
 aside > *:not(:first-child) {
   margin-top: 1em;
+}
+aside h2 {
+  font-size: 1.2em;
+  margin: 0;
+}
+@media (min-width: 1500px) {
+  td {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1500px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  aside {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  aside > * {
+    width: 100%;
+    margin-top: 1em;
+  }
+  aside > :nth-child(2) {
+    width: 50%;
+  }
+  td > :nth-child(2) {
+    width: 100em;
+  }
+}
+@media (max-width: 970px) {
 }
