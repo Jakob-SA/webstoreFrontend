@@ -1,25 +1,13 @@
 import { useState } from "react";
-import { Product } from "../product";
 import { RemoveButton } from "./removeButton";
 import { QuantityInput } from "./quantityInput";
 import "./productLine.css";
-import { useDispatchShopContext } from "../../../contexts/shopContext";
+import type { ProductLine } from "../../../contexts/shopContext";
+
 import StockElement from "./stockElement";
+import { useDispatchShopContext } from "../../../contexts/useDispatchShopContext";
 
-export interface productLineProps {
-  product: Product;
-  quantity: number;
-}
-
-export function ProductLine({
-  product,
-  quantity,
-}: //updateTotalPrice,
-productLineProps) {
-  const [giftwrapping, setGiftwrapping] = useState(false);
-  //const [quantity, setQuantity] = useState(1);
-  //const quantity = basketItems.find(item => item.product.id === product.id)?.quantity || 1;
-  giftwrapping.valueOf(); // to be deleted
+export function ProductLine({ productLine }: { productLine: ProductLine }) {
   const [isRemoving, setIsRemoving] = useState(false);
   const dispatch = useDispatchShopContext();
 
@@ -29,59 +17,57 @@ productLineProps) {
       () =>
         dispatch({
           type: "REMOVE_FROM_BASKET",
-          productId: product.id,
+          productId: productLine.product.id,
         }),
       300
     ); // Animation duration
   };
+
   const updateQuantity = (newQuantity: number) => {
     dispatch({
       type: "UPDATE_ITEM_QUANTITY",
-      productId: product.id,
+      productId: productLine.product.id,
       quantity: newQuantity,
     });
   };
-
-  var originalLinePrice = product.price * quantity;
-
-  var totalLinePrice =
-    quantity >= product.rebateQuantity
-      ? originalLinePrice * (1 - product.rebatePercent / 100)
-      : originalLinePrice;
-
-  /* useEffect(() => {
-    updateTotalPrice(product.id, totalLinePrice);
-    console.log("Total price updated" + totalLinePrice);
-  }, [totalLinePrice]);
-*/
-
-  const onGiftwrappingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGiftwrapping(event.target.checked);
+  const updateGiftwrapping = () => {
+    dispatch({
+      type: "UPDATE_GIFTWRAPPING",
+      productId: productLine.product.id,
+      giftwrapping: !productLine.giftwrapping,
+    });
   };
+
+  const originalLinePrice = productLine.product.price * productLine.quantity;
+
+  const totalLinePrice =
+    productLine.quantity >= productLine.product.rebateQuantity
+      ? originalLinePrice * (1 - productLine.product.rebatePercent / 100)
+      : originalLinePrice;
 
   return (
     <tr className={`productLine ${isRemoving ? "removing" : ""}`}>
       <td>
         <img
-          src={"productPics/product" + product.id + ".jpg"}
+          src={"productPics/product" + productLine.product.id + ".jpg"}
           className="productImages"
         />
       </td>
       <td>
-        <p>{product.name}</p>
+        <p>{productLine.product.name}</p>
       </td>
       <td>
-        <p>{product.price}</p>
+        <p>{productLine.product.price}</p>
       </td>
       <td>
         <QuantityInput
-          quantity={quantity}
+          quantity={productLine.quantity}
           setQuantity={updateQuantity}
-          product={product}
+          rebateQuantity={productLine.product.rebateQuantity}
         />
       </td>
       <td>
-        {quantity >= product.rebateQuantity ? (
+        {productLine.quantity >= productLine.product.rebateQuantity ? (
           <div className="twoLinePrice">
             <div className="oldPrice">
               <p>{originalLinePrice.toFixed(2)}</p>
@@ -99,14 +85,20 @@ productLineProps) {
           <span>
             <input
               type="checkbox"
-              id={`Giftwrapping-${product.id.toString()}`}
-              onChange={onGiftwrappingChange}
+              id={`Giftwrapping-${productLine.product.id.toString()}`}
+              onChange={updateGiftwrapping}
+              checked={productLine.giftwrapping}
             />
-            <label htmlFor={`Giftwrapping-${product.id.toString()}`}>
+            <label
+              htmlFor={`Giftwrapping-${productLine.product.id.toString()}`}
+            >
               Giftwrapping
             </label>
           </span>
-          <StockElement stock={product.amountInStock} quantity={quantity} />
+          <StockElement
+            stock={productLine.product.amountInStock}
+            quantity={productLine.quantity}
+          />
         </div>
       </td>
       <td>

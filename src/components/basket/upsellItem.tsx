@@ -1,5 +1,5 @@
 import "./basket.css";
-import {useShopContext } from "../../contexts/shopContext"
+import { useShopContext } from "../../contexts/useShopContext";
 
 export function UpsellItem() {
   const { products ,basketItems } = useShopContext();

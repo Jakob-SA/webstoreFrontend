@@ -1,4 +1,4 @@
-import {useShopContext } from "../../contexts/shopContext";
+import {useShopContext } from "../../contexts/useShopContext";
 
 var discounted = false;
 function calculateDiscount(totalPrice: number): number {

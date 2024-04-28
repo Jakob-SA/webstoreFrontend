@@ -22,10 +22,13 @@ td {
 th {
   white-space: nowrap;
   padding-bottom: 1em;
-  font-size: 1.2em;
+  font-size: 1em;
+}
+th p {
+  white-space: inherit;
 }
 td p {
-  font-size: 1.3em;
+  font-size: 1.1em;
 }
 
 .phoneBasket > *:not(:last-child) {
