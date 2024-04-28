@@ -10,7 +10,7 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
   const totalPrice = subtotalPrice + shippingCost;
 
   const basketSummary = basketItems.map((item) => (
-    <tr key={item.product.id}>
+    <tr key={item.product.id} className="confirmation-basket-row">
       <td>
         <div className="product-details">
           <img
@@ -24,9 +24,14 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
               <p>{item.quantity}</p>
             </div>
           </div>
-          <p className="product-price">
-            ${(item.product.price * item.quantity).toFixed(2)}
-          </p>
+          <div className="product-price-giftwrap">
+            <p className="product-price">
+              {(item.product.price * item.quantity).toFixed(2)} $
+            </p>
+            <em style={{ fontSize: "0.8em" }}>
+              {item.giftwrapping ? "Giftwrapped" : ""}
+            </em>
+          </div>
         </div>
       </td>
     </tr>
@@ -52,15 +57,15 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
             <section className="order-total">
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Subtotal:</p>
-                <p>${subtotalPrice.toFixed(2)}</p>
+                <p>{subtotalPrice.toFixed(2)} $</p>
               </div>
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Shipping:</p>
-                <p> ${shippingCost.toFixed(2)}</p>
+                <p> {shippingCost.toFixed(2)} $</p>
               </div>
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Total:</p>
-                <p> ${totalPrice.toFixed(2)}</p>
+                <p> {totalPrice.toFixed(2)} $</p>
               </div>
             </section>
           </div>
