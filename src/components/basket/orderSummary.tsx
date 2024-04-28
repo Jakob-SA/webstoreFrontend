@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { getShippingCost, useTotalPrice, useDiscountAmount } from "./totalPrice";
 function OrderSummary() {
-  const totalPrice = useTotalPrice();
+  const totalPrice = useTotalPrice().totalPrice
   const shippingCost = getShippingCost();
   const showWarning = totalPrice < 300; // Check if total price is less than 300
 
