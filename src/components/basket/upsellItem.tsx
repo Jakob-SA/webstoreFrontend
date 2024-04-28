@@ -1,59 +1,49 @@
-import "./basket.css";
+import "./upsellItem.css";
 import { useShopContext } from "../../contexts/useShopContext";
 
-function handleClick() {
-  alert("Taking you back to the shop!");
-}
 export function UpsellItem() {
-  const { basketLines: basketItems } = useShopContext();
+  const { products, basketLines } = useShopContext();
+  const basketItemIds = basketLines.map((item) => item.product.id);
+  const upsellItems = products.filter(
+    (product) => !basketItemIds.includes(product.id)
+  );
 
-  const upsellItems = basketItems;
-
-  if (upsellItems.length === 0) {
+  if (upsellItems.length === 0 || products.length === 0) {
     return <div>Loading...</div>;
   }
 
   return (
-    //TODO: vary the displayed upsellProduct, based on the context of the basket.
-    //Right now it is hardcoded to display the first product in the basket.
     <>
-      <section className="upsellItems">
-        <h3>Products you might also like!</h3>
-        <img
-          src={
-            "productPics/product" +
-            (upsellItems[0].product.id ? upsellItems[0].product.id : 0) +
-            ".jpg"
-          }
-          className="productImages"
-          width="150"
-          height="150"
-        />
-        <ul>
-          <ul>
-            <b>Product </b>
-            {}
-          </ul>
-          <ul>
-            <b>
-              Price{" "}
-              {upsellItems[0].product.price
-                ? upsellItems[0].product.price
-                : upsellItems[0].product.price}
-            </b>
-          </ul>
-          <button
-            className="continueShoppingButton"
-            onClick={() => {
-              handleClick();
-            }}
-          >
-            {" "}
-            Continue Shopping
-            <a href="."></a>{" "}
-          </button>
-        </ul>
-      </section>
+      <div>
+        <h2>Products you might also like!</h2>
+        <section className="upsellItemsContainer">
+          {upsellItems.slice(0, 3).map((item, index) => (
+            <div className="flip-card" key={index}>
+              <div className="flip-card-inner">
+                <div className="flip-card-front">
+                  <img
+                    src={"productPics/product" + item.id + ".jpg"}
+                    className="upsellImages"
+                    width="150"
+                  />
+                  <div className="upsellItemInformation">
+                    <p>{item.name}</p>
+                    <p>{item.price ? item.price : "finding price"} $</p>
+                  </div>
+                </div>
+                <div className="flip-card-back">
+                  <button onClick={() => {}}>ADD TO BASKET</button>
+                  <img
+                    src={"productPics/product" + item.id + ".jpg"}
+                    className="upsellImages"
+                    width="150"
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </section>
+      </div>
     </>
   );
 }

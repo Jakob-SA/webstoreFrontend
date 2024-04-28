@@ -1,39 +1,54 @@
 import {useShopContext } from "../../contexts/useShopContext";
+import {useState} from "react";
 
 
-function calculateDiscount(totalPrice: number): number {
-    if (totalPrice > 300) {
-      return totalPrice * 0.9;
+
+export const useDiscountAmount = () => {
+  const {totalPrice, discounted} = useTotalPrice();
+  if (discounted)
+  return (totalPrice / 0.9 - totalPrice)
+else return 0;
+}
+
+
+  //TODO: also make a function to return the total discount amount.
+  //
+
+export function useTotalPrice () {
+  const [discounted, setDiscounted] = useState(false);
+   const {basketLines} = useShopContext();
+
+   function calculateDiscount(totalPrice: number): number {
+    if ( totalPrice > 300 && !discounted ) {
+      setDiscounted(true);
+      return (totalPrice - totalPrice * 0.1);
+
     } else {
+      console.log(discounted)
 
       return totalPrice;
     }
   }
 
-  //TODO: also make a function to return the total discount amount.
-  // (totalPrice / 0.9 - totalPrice).toFixed(2)
 
-export const getTotalPrice = () => {
+    //Array of all the original line prices without rebate
+    const originalLinePrice = basketLines.map((item)=>item.quantity*item.product.price) ;
 
-    const {basketLines: basketItems} = useShopContext();
-    /* TODO: make this return the correct total price and rebate is calculated correctly.
-    It does seem to work now though.
-
-    const product = basketItems.map(item => item.product);
-    var originalLinePrice = product.forEach() * item.quantity;
-    const totalPrice = basketItems.reduce((sum, item) =>
-        item.quantity >= item.product.rebateQuantity
-    ? originalLinePrice * (1 - item.product.rebatePercent / 100)
-    : originalLinePrice, 0);
-*/
-    const totalPrice = basketItems.reduce((sum, item) =>
-        sum + item.totalLinePrice, 0);
-    return(calculateDiscount(totalPrice))
+    //total price of all productlines and takes rebate into account. Co pilot helped here.
+    const totalPrice = basketLines.reduce((sum, item, index) => {
+      const price = item.quantity >= item.product.rebateQuantity
+    ? originalLinePrice[index] * (1 - item.product.rebatePercent / 100)
+    : originalLinePrice[index]
+    return sum + price;
+  }, 0);
+    console.log(totalPrice)
+    return {totalPrice: calculateDiscount(totalPrice), discounted} //copilot helped here
 }
 
 export const getShippingCost = () => {
+  const {totalPrice} = useTotalPrice();
 
-  if (getTotalPrice() > 300) {
+  if (totalPrice> 300) {
     return 0.0;
   }
     return 10.0;
