@@ -28,7 +28,6 @@
 
 .product-name {
   vertical-align: top;
-  font-weight: bold;
 }
 
 .confirmation-basket-row td {
@@ -79,7 +78,8 @@
 }
 
 .quantity-label,
-.order-total-subclass-text {
+.order-total-subclass-text,
+.product-name {
   font-weight: bold;
 }
 
