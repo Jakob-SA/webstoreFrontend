@@ -61,8 +61,8 @@
 }
 .upsellItemsContainer .upsellImages {
   height: 100%;
-  width: 7em;
-  min-width: 7em;
+  width: 6em;
+  min-width: 6em;
   object-fit: cover;
   border-radius: 15px;
   vertical-align: middle;
