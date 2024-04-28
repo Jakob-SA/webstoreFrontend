@@ -1,11 +1,11 @@
 import "./basket.css";
-import { useShopContext } from "../../contexts/shopContext";
+import { useShopContext } from "../../contexts/useShopContext";
 
 function handleClick() {
   alert("Taking you back to the shop!");
 }
 export function UpsellItem() {
-  const { basketItems } = useShopContext();
+  const { basketLines: basketItems } = useShopContext();
 
   const upsellItems = basketItems;
 

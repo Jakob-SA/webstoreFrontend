@@ -20,7 +20,7 @@ describe(ProductLine.name, () => {
       <QuantityInput
         quantity={quantity}
         setQuantity={mockSetQuantity}
-        product={product}
+        rebateQuantity={product.rebateQuantity}
       />
     );
     const incrementQuantity = screen.getByRole("button", { name: "-" });

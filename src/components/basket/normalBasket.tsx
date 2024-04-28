@@ -1,4 +1,14 @@
-function NormalBasket({ basketLines }: { basketLines: any }) {
+import { useShopContext } from "../../contexts/useShopContext";
+import { ProductLine } from "./productLine/productLine";
+
+function NormalBasket() {
+  const { basketLines } = useShopContext();
+  const productLines = basketLines.map((productLine) => {
+    return (
+      <ProductLine key={productLine.product.id} productLine={productLine} />
+    );
+  });
+
   return (
     <table>
       <tbody>
@@ -19,7 +29,7 @@ function NormalBasket({ basketLines }: { basketLines: any }) {
           <th> </th>
           <th></th>
         </tr>
-        {basketLines}
+        {productLines}
       </tbody>
     </table>
   );

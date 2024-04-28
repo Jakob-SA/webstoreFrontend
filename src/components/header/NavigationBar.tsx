@@ -8,7 +8,6 @@ export default function NavigationBar() {
   const [step, setStep] = useState<Steps>();
 
   useEffect(() => {
-    console.log(location.pathname);
     switch (location.pathname) {
       case "/":
         setStep(Steps.Basket);
@@ -42,15 +41,11 @@ export default function NavigationBar() {
     <nav>
       <ul>
         <li className={decideClass(Steps.Basket)}>
-          <Link className="bubble" to="/">
-            Basket
-          </Link>
+          <p className="bubble">Basket</p>
         </li>
         <div className={decideClass(Steps.Basket) + "divider"}></div>
         <li className={decideClass(Steps.Delivery)}>
-          <Link className="bubble" to="/delivery">
-            Delivery
-          </Link>
+          <p className="bubble">Delivery</p>
         </li>
         <div className={decideClass(Steps.Delivery) + "divider"}></div>
         <li className={decideClass(Steps.Confirmation)}>
