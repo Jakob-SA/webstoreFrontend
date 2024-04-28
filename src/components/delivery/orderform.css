@@ -167,7 +167,12 @@ input::placeholder {
   flex-direction: row;
   justify-content: space-between;
 }
-
+.deliveryPage h3,
+p,
+.container {
+  margin: 0;
+  line-height: 1.2em;
+}
 @media (max-width: 725px) {
   .deliveryPage {
     width: 90%;
