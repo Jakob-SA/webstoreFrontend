@@ -1,4 +1,3 @@
-import { s } from "vitest/dist/reporters-MmQN-57K.js";
 import {useShopContext } from "../../contexts/useShopContext";
 import {useState} from "react";
 
@@ -10,10 +9,10 @@ export const useDiscountAmount = () => {
   return (totalPrice / 0.9 - totalPrice)
 else return 0;
 }
-  
+
 
   //TODO: also make a function to return the total discount amount.
-  // 
+  //
 
 export function useTotalPrice () {
   const [discounted, setDiscounted] = useState(false);
@@ -23,17 +22,17 @@ export function useTotalPrice () {
     if ( totalPrice > 300 && !discounted ) {
       setDiscounted(true);
       return (totalPrice - totalPrice * 0.1);
-     
+
     } else {
       console.log(discounted)
-      
+
       return totalPrice;
     }
   }
-  
-   
+
+
     //Array of all the original line prices without rebate
-    var originalLinePrice = basketLines.map((item)=>item.quantity*item.product.price) ;
+    const originalLinePrice = basketLines.map((item)=>item.quantity*item.product.price) ;
 
     //total price of all productlines and takes rebate into account. Co pilot helped here.
     const totalPrice = basketLines.reduce((sum, item, index) => {
