@@ -233,6 +233,9 @@ function Orderform() {
                 handleZipCode(e.target.value, "user_zip");
               }}
             />
+            <label htmlFor="user_zip">
+              Zip code<span className="required"></span>
+            </label>
             {zipTouched && !city && <div>Invalid zip code</div>}
           </div>
           <div className="input-wrapper" data-required>
@@ -344,6 +347,9 @@ function Orderform() {
                     handleZipCode(e.target.value, "user_deliveryZip");
                   }}
                 />
+                <label htmlFor="user_deliveryZip">
+                  Zip code<span className="required"></span>
+                </label>
                 {zipDeliveryTouched && !deliveryCity && (
                   <div>Invalid zip code</div>
                 )}
