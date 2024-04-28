@@ -37,14 +37,20 @@ function Orderform() {
       const city = await ZipCodeChecker({ zipCode: zip });
       if (zipId === "user_zip") {
         setCity(city);
+        setZipCodeIsValid(true);
       }
       if (zipId === "user_deliveryZip") {
         setDeliveryCity(city);
+        setDeliveryZipCodeIsValid(true);
       }
     } catch (error) {
       console.error("Invalid zip code", error);
-      setZipCodeIsValid(true);
-      setDeliveryZipCodeIsValid(true);
+      if (zipId === "user_zip") {
+        setZipCodeIsValid(false);
+      }
+      if (zipId === "user_deliveryZip") {
+        setDeliveryZipCodeIsValid(false);
+      }
     }
   };
 
