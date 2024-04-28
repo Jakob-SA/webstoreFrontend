@@ -2,15 +2,19 @@ import { useState } from "react";
 
 interface ZipCodeCheckerProps {
   zipCode: string;
+  zipId: string;
   onZipChange: (zipCode: string) => void;
   city: string;
+  cityId: string;
   onCityChange: (city: string) => void;
 }
 
 export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
   zipCode,
+  zipId,
   onZipChange,
   city,
+  cityId,
   onCityChange,
 }) => {
   const [validZip, setValidZip] = useState(true);
@@ -43,7 +47,7 @@ export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
         <input
           type="text"
           required
-          id="zip"
+          id={zipId}
           name="user_zip"
           value={zipCode}
           onChange={(e) => onZipChange(e.target.value)}
@@ -52,7 +56,7 @@ export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
             handleZipCode(e.target.value);
           }}
         />
-      <label htmlFor="zip">
+      <label htmlFor={zipId}>
         Zip Code<span className="required"></span>
       </label>
       </div>
@@ -63,12 +67,12 @@ export const ZipCodeChecker: React.FC<ZipCodeCheckerProps> = ({
         <input
           type="text"
           required
-          id="city"
+          id={cityId}
           name="user_city"
           value={city}
           onChange={(e) => onCityChange(e.target.value)}
         />
-      <label htmlFor="city">
+      <label htmlFor={cityId}>
         City<span className="required"></span>
       </label>
       </div>

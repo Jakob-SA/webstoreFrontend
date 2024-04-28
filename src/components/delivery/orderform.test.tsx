@@ -1,8 +1,9 @@
-import { fireEvent, render, waitFor} from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import Orderform from "./orderform";
 import mockResponse from "../../assets/media/mockResponse.json";
+import { BrowserRouter as Router } from "react-router-dom";
 
 describe(Orderform.name, () => {
   afterEach(() => {
@@ -16,10 +17,14 @@ describe(Orderform.name, () => {
       } as Response;
     });
 
-    const { getByLabelText } = render(<Orderform />);
+    const { getByLabelText } = render(
+      <Router>
+        <Orderform />
+      </Router>
+    );
 
-    const zipCodeInput = getByLabelText("Zip Code:*");
-    const cityInput = getByLabelText("City:*");
+    const zipCodeInput = getByLabelText("Zip Code");
+    const cityInput = getByLabelText("City");
     await user.type(zipCodeInput, "2200");
     fireEvent.blur(zipCodeInput);
 
@@ -35,43 +40,47 @@ describe(Orderform.name, () => {
 
 
 test("Should show loading after submitting form", async () => {
-    const { getByRole, getByLabelText, findByText } = render(<Orderform />);
-    const firstNameInput = getByLabelText("First Name:*");
-    const lastNameInput = getByLabelText("Last Name:*");
-    const addressInput = getByLabelText("Adress:*");
-    const zipCodeInput = getByLabelText("Zip Code:*");
-    const cityInput = getByLabelText("City:*");
-    const emailInput = getByLabelText("Email:*");
-    const phoneNumberInput = getByLabelText("Phonenumber:*");
+  const { getByRole, getByLabelText, findByText } = render(
+    <Router>
+      <Orderform />
+    </Router>
+  );
+  const firstNameInput = getByLabelText("First Name");
+  const lastNameInput = getByLabelText("Last Name");
+  const addressInput = getByLabelText("Address");
+  const zipCodeInput = getByLabelText("Zip Code");
+  const cityInput = getByLabelText("City");
+  const emailInput = getByLabelText("Email");
+  const phoneNumberInput = getByLabelText("Phone Number");
 
-    const submitButton = getByRole("button", { name: "Submit order" });
-    const termsCheckbox = getByRole("checkbox", { name: "Agree to terms & conditions" });
+  const submitButton = getByRole("button", { name: "Submit order" });
+  const termsCheckbox = getByRole("checkbox", { name: "Agree to terms & conditions" });
 
-    fireEvent.change(firstNameInput, { target: { value: "John" } });
-    expect(firstNameInput).toHaveValue("John");
+  fireEvent.change(firstNameInput, { target: { value: "John" } });
+  expect(firstNameInput).toHaveValue("John");
 
-    fireEvent.change(lastNameInput, { target: { value: "Doe" } });
-    expect(lastNameInput).toHaveValue("Doe");
+  fireEvent.change(lastNameInput, { target: { value: "Doe" } });
+  expect(lastNameInput).toHaveValue("Doe");
 
-    fireEvent.change(addressInput, { target: { value: "Testvej 1" } });
-    expect(addressInput).toHaveValue("Testvej 1");
+  fireEvent.change(addressInput, { target: { value: "Testvej 1" } });
+  expect(addressInput).toHaveValue("Testvej 1");
 
-    fireEvent.change(zipCodeInput, { target: { value: "2200" } });
-    expect(zipCodeInput).toHaveValue("2200");
+  fireEvent.change(zipCodeInput, { target: { value: "2200" } });
+  expect(zipCodeInput).toHaveValue("2200");
 
-    fireEvent.blur(zipCodeInput);
-    await waitFor(() => {
-      expect(cityInput).toHaveValue("København N");
-    });
+  fireEvent.blur(zipCodeInput);
+  await waitFor(() => {
+    expect(cityInput).toHaveValue("København N");
+  });
 
-    fireEvent.change(emailInput, { target: { value: "JohnDoe@gmail.com" } });
-    expect(emailInput).toHaveValue("JohnDoe@gmail.com");
+  fireEvent.change(emailInput, { target: { value: "JohnDoe@gmail.com" } });
+  expect(emailInput).toHaveValue("JohnDoe@gmail.com");
 
-    fireEvent.change(phoneNumberInput, { target: { value: "12345678" } });
-    expect(phoneNumberInput).toHaveValue("12345678");
-    
-    fireEvent.click(termsCheckbox);
-    fireEvent.click(submitButton);
+  fireEvent.change(phoneNumberInput, { target: { value: "12345678" } });
+  expect(phoneNumberInput).toHaveValue("12345678");
 
-    await findByText("Loading..."); 
+  fireEvent.click(termsCheckbox);
+  fireEvent.click(submitButton);
+
+  await findByText("Loading...");
 });

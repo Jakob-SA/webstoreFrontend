@@ -1,27 +1,46 @@
-import { Product } from "../product";
+import { useState } from "react";
+import {
+  ProductLine,
+  useDispatchShopContext,
+} from "../../../contexts/shopContext";
 import "./phoneProductLine.css";
 import { QuantityInput } from "./quantityInput";
 import { RemoveButton } from "./removeButton";
 
-function PhoneProductLine({ product }: { product: Product }) {
+function PhoneProductLine({ productLine }: { productLine: ProductLine }) {
+  const [isRemoving, setIsRemoving] = useState(false);
+  const dispatch = useDispatchShopContext();
+  isRemoving && console.log("Removing product", productLine.product.id);
+  const handleRemove = () => {
+    setIsRemoving(true);
+    setTimeout(
+      () =>
+        dispatch({
+          type: "REMOVE_FROM_BASKET",
+          productId: productLine.product.id,
+        }),
+      300
+    ); // Animation duration
+  };
   return (
     <section className="phoneProductLine">
       <img
-        src={"productPics/product" + product.id + ".jpg"}
+        src={"productPics/product" + productLine.product.id + ".jpg"}
         className="productImages"
         width="150"
         height="150"
       />
       <div>
-        <h3>{product.name}</h3>
-        <p>Price: {product.price} $</p>
+        <h3>{productLine.product.name}</h3>
+        <p>Price: {productLine.totalLinePrice.toFixed(2)} $</p>
         <div className="spaceBetween">
           <QuantityInput
-            quantity={1}
+            quantity={productLine.quantity}
             setQuantity={() => {}}
-            product={product}
+            product={productLine.product}
           />
-          <RemoveButton onClick={() => {}} />
+          <RemoveButton onClick={handleRemove} />
+          {/* FIX ANIMATION IN CSS CLASS */}
         </div>
       </div>
     </section>

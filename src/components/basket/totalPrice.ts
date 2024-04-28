@@ -37,5 +37,12 @@ export const useTotalPrice = () => {
   }, 0);
     console.log(totalPrice)
     return(calculateDiscount(totalPrice))
-   
+}
+
+export const getShippingCost = () => {
+
+  if (useTotalPrice() > 300) {
+    return 0.0;
+  }
+    return 10.0;
 }
