@@ -24,9 +24,14 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
               <p>{item.quantity}</p>
             </div>
           </div>
-          <p className="product-price">
-            ${(item.product.price * item.quantity).toFixed(2)}
-          </p>
+          <div className="product-price-giftwrap">
+            <p className="product-price">
+              ${(item.product.price * item.quantity).toFixed(2)}
+            </p>
+            <em style={{ fontSize: "0.8em" }}>
+              {item.giftwrapping ? "Giftwrapped" : ""}
+            </em>
+          </div>
         </div>
       </td>
     </tr>

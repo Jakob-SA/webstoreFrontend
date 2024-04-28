@@ -47,8 +47,19 @@ td {
   justify-content: space-between;
 }
 
-.product-price {
+.product-price,
+.product-price-giftwrap {
   margin-left: auto;
+}
+.product-price-giftwrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-giftwrap {
+  font-style: italic;
+  font-size: 0.8em;
 }
 
 .product-images {
