@@ -21,9 +21,12 @@ export function useTotalPrice () {
 
    function calculateDiscount(totalPrice: number): number {
     if ( totalPrice > 300 && !discounted ) {
+      setDiscounted(true);
       return (totalPrice - totalPrice * 0.1);
+     
     } else {
       console.log(discounted)
+      
       return totalPrice;
     }
   }
