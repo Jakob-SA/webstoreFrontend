@@ -210,7 +210,7 @@ function Orderform() {
         </div>
         <div className="input-wrapper" data-required>
           <input
-            type="email"
+            type="text"
             required
             id="email"
             name="user_email"
