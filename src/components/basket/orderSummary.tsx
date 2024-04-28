@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
-import { getShippingCost, useTotalPrice, useDiscountAmount } from "./totalPrice";
+import {
+  getShippingCost,
+  useTotalPrice,
+  useDiscountAmount,
+} from "./totalPrice";
 function OrderSummary() {
-  const totalPrice = useTotalPrice().totalPrice
+  const totalPrice = useTotalPrice().totalPrice;
   const shippingCost = getShippingCost();
   const showWarning = totalPrice < 300; // Check if total price is less than 300
 
@@ -14,28 +18,40 @@ function OrderSummary() {
         <p>{totalPrice.toFixed(2)} $</p>
       </div>
       <div>
-      {totalPrice >= 300 
-        ? <p style={{
-           color: "green",
-           textAlign: "center"}}>
-            Congratulations! You get a 10% discount! You have saved: {discountAmount.toFixed(2)}</p>
-
-        : <p style={{
-          color: "red",
-          textAlign: "center"}}>Buy for {(300 - totalPrice).toFixed(2)} $ more to get a 10% discount!</p>}
-       </div>
-    <div>
+        {totalPrice >= 300 ? (
+          <p
+            style={{
+              color: "green",
+              textAlign: "center",
+            }}
+          >
+            Congratulations! You get a 10% discount! You have saved:{" "}
+            {discountAmount.toFixed(2)} $
+          </p>
+        ) : (
+          <p
+            style={{
+              color: "red",
+              textAlign: "center",
+            }}
+          >
+            Buy for {(300 - totalPrice).toFixed(2)} $ more to get a 10%
+            discount!
+          </p>
+        )}
+      </div>
+      <div>
         <p>Shipping</p>
         <p>
           <i>{shippingCost} $</i>
         </p>
-      </div> 
+      </div>
       <div>
         <p>
           <b>Total</b>
         </p>
         <div style={{ display: "flex" }}>
-          <b>{(shippingCost+totalPrice).toFixed(2)} $</b>
+          <b>{(shippingCost + totalPrice).toFixed(2)} $</b>
         </div>
       </div>
 
@@ -46,7 +62,7 @@ function OrderSummary() {
             textAlign: "center",
           }}
         >
-          Free shipping for orders over $300!
+          Free shipping for orders over 300 $!
         </p>
       )}
 
