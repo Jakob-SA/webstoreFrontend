@@ -1,24 +1,23 @@
 import { useState } from "react";
-import { Product } from "../product";
 
 interface QuantityInputProps {
   quantity: number;
   setQuantity: (quantity: number) => void;
-  product: Product;
+  rebateQuantity: number;
 }
 
 export function QuantityInput({
   quantity,
   setQuantity,
-  product,
+  rebateQuantity,
 }: QuantityInputProps) {
   const [showTooltip, setShowTooltip] = useState(false);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const toolTipMessage =
-    "Buy at least " + product.rebateQuantity + " pairs to get a rebate";
+    "Buy at least " + rebateQuantity + " pairs to get a rebate";
   const [illigalQuantity, setIlligalQuantity] = useState(false);
 
-  const handleMouseMove = (e: { clientX: any; clientY: any }) => {
+  const handleMouseMove = (e: { clientX: number; clientY: number }) => {
     setCoords({ x: e.clientX, y: e.clientY });
     setShowTooltip(true);
   };
@@ -54,7 +53,7 @@ export function QuantityInput({
         <p>+</p>
       </button>
 
-      {quantity < product.rebateQuantity && showTooltip && (
+      {quantity < rebateQuantity && showTooltip && (
         <div
           className="tooltip"
           style={{ left: `${coords.x}px`, top: `${coords.y}px` }}

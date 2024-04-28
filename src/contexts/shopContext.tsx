@@ -2,64 +2,69 @@ import React, { useReducer, useEffect } from "react";
 import { Product, fetchProducts } from "../components/basket/product";
 
 //productLine type
-export interface productLine {
+export interface ProductLine {
   product: Product;
   quantity: number;
   totalLinePrice: number;
   rebatePercent: number;
+  giftwrapping: boolean;
 }
 
 //type of state
 interface ShopState {
   products: Product[];
-  basketItems: productLine[];
+  basketLines: ProductLine[];
 }
 
 //inital state
 const initialState: ShopState = {
   products: [],
-  basketItems: [],
+  basketLines: [],
 };
 
 // Type of actions
 type ShopAction =
   | { type: "SET_PRODUCTS"; products: Product[] }
-  | { type: "SET_BASKET_ITEMS"; basketItems: Product[] }
+  | { type: "SET_BASKET_ITEMS"; basketLines: Product[] }
   | { type: "REMOVE_FROM_BASKET"; productId: number }
-  | { type: "UPDATE_ITEM_QUANTITY"; productId: number; quantity: number };
+  | { type: "UPDATE_ITEM_QUANTITY"; productId: number; quantity: number }
+  | { type: "UPDATE_GIFTWRAPPING"; productId: number; giftwrapping: boolean };
+
+// Move the declarations outside of the switch case block
+const indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; //indices of items to select. might need later.
+const shuffledIndices = [...indices].sort(() => Math.random() - 0.5);
+const usedIndices = shuffledIndices.slice(0, 7); //selects 7 random indices from the shuffled indices.
 
 //Reducer. co pilot helped here.
+//We should not declare consts inside the switch case block.
 function shopReducer(state: ShopState, action: ShopAction): ShopState {
   switch (action.type) {
     case "SET_PRODUCTS":
       return { ...state, products: action.products };
 
     case "SET_BASKET_ITEMS":
-      const indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; //indices of items to select. might need later.
-      const shuffledIndices = [...indices].sort(() => Math.random() - 0.5);
-      const usedIndices = shuffledIndices.slice(0, 7); //selects 7 random indices from the shuffled indices.
       return {
         ...state,
-        basketItems: usedIndices.map((item) => ({
-          product: state.products[item], // Fix: Assign the product as a Product type
+        basketLines: usedIndices.map((item) => ({
+          product: state.products[item],
           quantity: 1,
-          totalLinePrice: state.products[item].price * 1, // Fix: Access the corresponding product's price
-          rebatePercent: state.products[item].rebatePercent || 0, // Fix: Provide a valid value for rebatePercent
+          totalLinePrice: state.products[item].price * 1,
+          rebatePercent: state.products[item].rebatePercent || 0,
+          giftwrapping: false,
         })),
       };
-    // return { ...state, basketItems: indices.map(index => action.basketItems[index]) };
 
-    case "REMOVE_FROM_BASKET": //copilot suggested this. Returns a new state with the item removed.
-      const updatedBasketItems = state.basketItems.filter(
+    case "REMOVE_FROM_BASKET":
+      const updatedBasketItems = state.basketLines.filter(
         (item) => item.product.id !== action.productId
       );
       return {
         ...state,
-        basketItems: updatedBasketItems,
+        basketLines: updatedBasketItems,
       };
 
-    case "UPDATE_ITEM_QUANTITY": // Copilot suggested this. Returns a new state with the quantity of the item updated if the product id matches the action product id.
-      const updatedBasketItems1 = state.basketItems.map((item) =>
+    case "UPDATE_ITEM_QUANTITY":
+      const updatedBasketItems1 = state.basketLines.map((item) =>
         item.product.id === action.productId
           ? {
               ...item,
@@ -68,7 +73,14 @@ function shopReducer(state: ShopState, action: ShopAction): ShopState {
             }
           : item
       );
-      return { ...state, basketItems: updatedBasketItems1 };
+      return { ...state, basketLines: updatedBasketItems1 };
+    case "UPDATE_GIFTWRAPPING":
+      const updatedBasketItems2 = state.basketLines.map((item) =>
+        item.product.id === action.productId
+          ? { ...item, giftwrapping: action.giftwrapping }
+          : item
+      );
+      return { ...state, basketLines: updatedBasketItems2 };
 
     default:
       return state;
@@ -82,8 +94,9 @@ export const ShopContext = React.createContext<ShopState>(initialState);
 export const DispatchShopContext =
   React.createContext<React.Dispatch<ShopAction> | null>(null);
 
-//ShopContextProvider.
-type MyProviderProps = React.PropsWithChildren<{ state?: ShopState }>;
+type MyProviderProps = {
+  children: React.ReactNode;
+};
 
 export function ShopContextProvider({ children }: MyProviderProps) {
   const [state, dispatch] = useReducer(shopReducer, initialState);
@@ -92,21 +105,9 @@ export function ShopContextProvider({ children }: MyProviderProps) {
   useEffect(() => {
     fetchProducts().then((products) => {
       dispatch({ type: "SET_PRODUCTS", products });
-      dispatch({ type: "SET_BASKET_ITEMS", basketItems: products });
+      dispatch({ type: "SET_BASKET_ITEMS", basketLines: products });
     });
   }, []);
-
-  //Might need some of the logic later.
-  /*const updateTotalPrice = (productID: number, price: number) => {
-        //would like this to not be stateful
-        setPrices(prices.set(productID, price));
-        var tempTotalPrice = 0;
-        Array.from(prices.values()).forEach((price) => {
-          tempTotalPrice += price;
-        });
-        setTotalPrice((calculateDiscount(tempTotalPrice)));
-      };
-   */
 
   return (
     <ShopContext.Provider value={state}>
@@ -115,23 +116,4 @@ export function ShopContextProvider({ children }: MyProviderProps) {
       </DispatchShopContext.Provider>
     </ShopContext.Provider>
   );
-}
-
-//Hook to use the shop context
-export function useShopContext() {
-  const context = React.useContext(ShopContext);
-  if (!context) {
-    throw new Error("useShopContext must be used within a ShopContextProvider");
-  }
-  return context;
-}
-// Hook to use the dispatch context
-export function useDispatchShopContext() {
-  const dispatch = React.useContext(DispatchShopContext);
-  if (!dispatch) {
-    throw new Error(
-      "useDispatchShopContext must be used within a ShopContextProvider"
-    );
-  }
-  return dispatch;
 }
