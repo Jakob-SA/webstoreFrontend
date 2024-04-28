@@ -156,7 +156,12 @@ input::placeholder {
   height: 6em;
   width: 60%;
 }
-
+.invalidZipcode {
+  position: absolute;
+  left: 35%;
+  top: 57px;
+  color: red;
+}
 .spacer {
   display: flex;
   flex-direction: row;

@@ -58,6 +58,7 @@
   margin-left: 1em;
   justify-content: center;
   overflow: hidden;
+  width: 100%;
 }
 .upsellItemsContainer .upsellImages {
   height: 100%;
@@ -80,5 +81,10 @@
 @media (max-width: 1500px) {
   .upsellItemsContainer {
     flex-direction: row;
+  }
+}
+@media (max-width: 970px) {
+  .upsellItemsContainer {
+    flex-direction: column;
   }
 }
