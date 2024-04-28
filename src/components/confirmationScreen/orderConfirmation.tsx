@@ -26,7 +26,7 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
           </div>
           <div className="product-price-giftwrap">
             <p className="product-price">
-              ${(item.product.price * item.quantity).toFixed(2)}
+              {(item.product.price * item.quantity).toFixed(2)} $
             </p>
             <em style={{ fontSize: "0.8em" }}>
               {item.giftwrapping ? "Giftwrapped" : ""}
@@ -57,15 +57,15 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
             <section className="order-total">
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Subtotal:</p>
-                <p>${subtotalPrice.toFixed(2)}</p>
+                <p>{subtotalPrice.toFixed(2)} $</p>
               </div>
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Shipping:</p>
-                <p> ${shippingCost.toFixed(2)}</p>
+                <p> {shippingCost.toFixed(2)} $</p>
               </div>
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Total:</p>
-                <p> ${totalPrice.toFixed(2)}</p>
+                <p> {totalPrice.toFixed(2)} $</p>
               </div>
             </section>
           </div>
