@@ -247,7 +247,7 @@ function Orderform() {
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
-            <label htmlFor="deliveryCity">
+            <label htmlFor="city">
               City<span className="required"></span>
             </label>
           </div>
