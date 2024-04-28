@@ -228,7 +228,6 @@ function Orderform() {
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
               onBlur={(e) => {
-                setCity("");
                 setZipTouched(true);
                 handleZipCode(e.target.value, "user_zip");
               }}
@@ -342,7 +341,6 @@ function Orderform() {
                   value={deliveryZipCode}
                   onChange={(e) => setDeliveryZipCode(e.target.value)}
                   onBlur={(e) => {
-                    setDeliveryCity("");
                     setzipDeliveryTouched(true);
                     handleZipCode(e.target.value, "user_deliveryZip");
                   }}
@@ -381,7 +379,12 @@ function Orderform() {
         <label htmlFor="orderComment"></label>
         <div className="container">
           <div>
-            <input type="checkbox" id="termsAndConditions" required data-testid="termsAndConditions"/>
+            <input
+              type="checkbox"
+              id="termsAndConditions"
+              required
+              data-testid="termsAndConditions"
+            />
             <label htmlFor="termsAndConditions" />
             <Link to="/terms-and-conditions" target="_blank">
               <span id="termsAndConditions">Agree to terms & conditions</span>
