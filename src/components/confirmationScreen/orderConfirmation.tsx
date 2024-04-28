@@ -10,7 +10,7 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
   const totalPrice = subtotalPrice + shippingCost;
 
   const basketSummary = basketItems.map((item) => (
-    <tr key={item.product.id}>
+    <tr key={item.product.id} className="confirmation-basket-row">
       <td>
         <div className="product-details">
           <img

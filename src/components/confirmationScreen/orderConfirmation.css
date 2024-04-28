@@ -31,7 +31,7 @@
   font-weight: bold;
 }
 
-td {
+.confirmation-basket-row td {
   border-top: 1px solid var(--color-text);
   padding: 0.5em;
 }
