@@ -381,11 +381,13 @@ function Orderform() {
         <label htmlFor="orderComment"></label>
         <div className="container">
           <div>
-            <input type="checkbox" id="termsAndConditions" required data-testid="termsAndConditions"/>
             <label htmlFor="termsAndConditions" />
             <Link to="/terms-and-conditions" target="_blank">
               <span id="termsAndConditions">Agree to terms & conditions</span>
             </Link>
+          </div>
+          <div>
+            <input type="checkbox" id="termsAndConditions" required data-testid="termsAndConditions"/>
           </div>
         </div>
         <div className="spacer">
