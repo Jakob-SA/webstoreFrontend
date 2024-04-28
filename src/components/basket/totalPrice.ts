@@ -2,11 +2,10 @@ import {useShopContext } from "../../contexts/useShopContext";
 
 var discounted = false;
 function calculateDiscount(totalPrice: number): number {
-    if (totalPrice > 300) {
+    if ( totalPrice > 300 && !discounted) {
       discounted = true;
-      return totalPrice * 0.9;
+      return totalPrice - (totalPrice* 0.1);
     } else {
-      discounted = false;
       return totalPrice;
     }
   }
@@ -23,13 +22,13 @@ function calculateDiscount(totalPrice: number): number {
 
 export function useTotalPrice () {
 
-    const {basketItems} = useShopContext();
+    const {basketLines} = useShopContext();
    
     //Array of all the original line prices without rebate
-    var originalLinePrice = basketItems.map((item)=>item.quantity*item.product.price) ;
+    var originalLinePrice = basketLines.map((item)=>item.quantity*item.product.price) ;
 
     //total price of all productlines and takes rebate into account. Co pilot helped here.
-    const totalPrice = basketItems.reduce((sum, item, index) => {
+    const totalPrice = basketLines.reduce((sum, item, index) => {
       const price = item.quantity >= item.product.rebateQuantity
     ? originalLinePrice[index] * (1 - item.product.rebatePercent / 100)
     : originalLinePrice[index]

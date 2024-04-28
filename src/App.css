@@ -9,6 +9,7 @@ body {
 
 main {
   display: grid;
+  align-items: start;
   grid-template-columns: 0.95fr 2.5fr 0.95fr;
   grid-column-gap: 1.5em;
   justify-items: center;

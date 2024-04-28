@@ -2,8 +2,8 @@ import "./basket.css";
 import { useShopContext } from "../../contexts/useShopContext";
 
 export function UpsellItem() {
-  const { products ,basketItems } = useShopContext();
-  const basketItemIds = basketItems.map(item => item.product.id);
+  const { products, basketLines } = useShopContext();
+  const basketItemIds = basketLines.map(item => item.product.id);
   const upsellItems = products.filter(
     product => !basketItemIds.includes(product.id)
   );
