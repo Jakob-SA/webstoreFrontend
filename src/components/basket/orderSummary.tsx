@@ -4,7 +4,6 @@ function OrderSummary() {
   const totalPrice = useTotalPrice().totalPrice
   const shippingCost = getShippingCost();
   const showWarning = totalPrice < 300; // Check if total price is less than 300
-
   const discountAmount = useDiscountAmount();
   return (
     <div className="orderSummary">
@@ -14,7 +13,7 @@ function OrderSummary() {
         <p>{totalPrice.toFixed(2)} $</p>
       </div>
       <div>
-      {totalPrice >= 300 
+      {totalPrice >= 300 && discountAmount > 0
         ? <p style={{
            color: "green",
            textAlign: "center"}}>

@@ -1,12 +1,13 @@
+
 import {useShopContext } from "../../contexts/useShopContext";
-import {useState} from "react";
+import { useRef} from "react";
 
 
 
 export const useDiscountAmount = () => {
   const {totalPrice, discounted} = useTotalPrice();
   if (discounted)
-  return (totalPrice / 0.9 - totalPrice)
+  return (totalPrice - (totalPrice*0.9))
 else return 0;
 }
 
@@ -15,17 +16,23 @@ else return 0;
   //
 
 export function useTotalPrice () {
-  const [discounted, setDiscounted] = useState(false);
+// const [discounted, setDiscounted] = useState(false);
    const {basketLines} = useShopContext();
-
-   function calculateDiscount(totalPrice: number): number {
-    if ( totalPrice > 300 && !discounted ) {
-      setDiscounted(true);
-      return (totalPrice - totalPrice * 0.1);
-
-    } else {
-      console.log(discounted)
-
+   const discounted = useRef(false)
+   
+   //let discounted = false;
+   function calculateDiscount(totalPrice: number){
+    if ( totalPrice > 300 && !discounted.current ) {
+      discounted.current = true;
+      console.log("Discount applied  " + totalPrice)
+      return (totalPrice * 0.9)
+    } 
+    if(discounted.current && totalPrice < 300){
+      discounted.current = false;
+      console.log("Discount removed")
+    }
+    else{
+      console.log(discounted.current)
       return totalPrice;
     }
   }
@@ -41,14 +48,14 @@ export function useTotalPrice () {
     : originalLinePrice[index]
     return sum + price;
   }, 0);
-    console.log(totalPrice)
-    return {totalPrice: calculateDiscount(totalPrice), discounted} //copilot helped here
+    return {totalPrice: calculateDiscount(totalPrice) || 0, discounted} //copilot helped here
 }
 
 export const getShippingCost = () => {
-  const {totalPrice} = useTotalPrice();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const {totalPrice, discounted} = useTotalPrice();
 
-  if (totalPrice> 300) {
+  if (totalPrice> 300 && discounted) {
     return 0.0;
   }
     return 10.0;
