@@ -236,7 +236,9 @@ function Orderform() {
             <label htmlFor="user_zip">
               Zip code<span className="required"></span>
             </label>
-            {zipTouched && !city && <div>Invalid zip code</div>}
+            {zipTouched && !city && (
+              <div className="invalidZipcode">Invalid zip code</div>
+            )}
           </div>
           <div className="input-wrapper" data-required>
             <input
@@ -351,7 +353,7 @@ function Orderform() {
                   Zip code<span className="required"></span>
                 </label>
                 {zipDeliveryTouched && !deliveryCity && (
-                  <div>Invalid zip code</div>
+                  <div className="invalidZipcode">Invalid zip code</div>
                 )}
               </div>
               <div className="input-wrapper" data-required>
