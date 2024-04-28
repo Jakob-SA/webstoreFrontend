@@ -117,9 +117,6 @@ function Orderform() {
     return (
       <>
         <h3>Please enter your delivery information</h3>
-        <Link to="/" className="basket-button">
-          <button type="button">Back to Basket</button>
-        </Link>
         <p>
           Fields marked with <span className="asterisk">*</span> are required
         </p>
@@ -237,7 +234,7 @@ function Orderform() {
               }}
             />
             <label htmlFor="user_zip">
-              Zip code<span className="required"></span>
+              Zip Code<span className="required"></span>
             </label>
             {zipTouched && !city && <div>Invalid zip code</div>}
           </div>
@@ -250,7 +247,7 @@ function Orderform() {
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
-            <label htmlFor="deliveryCity">
+            <label htmlFor="city">
               City<span className="required"></span>
             </label>
           </div>
@@ -374,29 +371,32 @@ function Orderform() {
           </div>
         )}
         <div className="input-wrapper">
-        <textarea
-          placeholder="Add a comment to your order (optional)"
-          name="orderComment"
-          id="orderComment"
-          className="orderComment"
-        />
+          <textarea
+            placeholder="Add a comment to your order (optional)"
+            name="orderComment"
+            id="orderComment"
+            className="orderComment"
+          />
         </div>
         <label htmlFor="orderComment"></label>
         <div className="container">
           <div>
+            <input type="checkbox" id="termsAndConditions" required data-testid="termsAndConditions"/>
             <label htmlFor="termsAndConditions" />
             <Link to="/terms-and-conditions" target="_blank">
               <span id="termsAndConditions">Agree to terms & conditions</span>
             </Link>
           </div>
-          <div>
-            <input type="checkbox" id="termsAndConditions" required />
-          </div>
         </div>
-        {loading && <p>Submitting order, please hold...</p>}
-        <button type="submit" className="acceptButton">
-          Submit order
-        </button>
+        <div className="spacer">
+          <Link to="/" className="backButton">
+            <button type="button">Back to Basket</button>
+          </Link>
+          {loading && <p>Submitting order, please hold...</p>}
+          <button type="submit" className="acceptButton">
+            Submit order
+          </button>
+        </div>
       </form>
     </>
   );
