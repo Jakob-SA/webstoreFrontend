@@ -139,9 +139,9 @@
 
 .stockElementInStock::before {
   content: "✓";
-  font-size: 1.1em;
+  font-size: 1em;
   display: inline-block;
-  padding: 0px 7px;
+  padding: 0.1em 0.3em;
   margin-right: 8px;
   border-radius: 50%;
   background-color: rgb(46, 153, 46);
@@ -152,7 +152,7 @@
   content: "✗";
   font-size: 1em;
   display: inline-block;
-  padding: 0px 7px;
+  padding: 0.1em 0.3em;
   margin-right: 8px;
   border-radius: 50%;
   background-color: red;
@@ -162,7 +162,7 @@
   content: "!";
   font-size: 1.1em;
   display: inline-block;
-  padding: 0px 7px;
+  padding: 0.1em 0.5em;
   margin-right: 8px;
   border-radius: 50%;
   background-color: rgb(227, 157, 26);
