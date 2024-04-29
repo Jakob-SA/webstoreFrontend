@@ -214,8 +214,9 @@ function Orderform() {
             required
             id="email"
             name="user_email"
-            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // This is a pattern to validate the email has a .something at the end
+            pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" // This is a pattern to validate the email has a .something at the end
             autoComplete="email"
+            title="Please enter a valid email"
           />
           <label htmlFor="email">
             Email<span className="required"></span>
