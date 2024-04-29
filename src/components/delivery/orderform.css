@@ -11,7 +11,8 @@
   padding: 1em;
 }
 
-.deliveryPage input {
+.deliveryPage input,
+.deliveryPage textarea {
   position: relative;
   box-sizing: border-box;
   padding: 1.2em 0.8em;
@@ -20,22 +21,20 @@
   width: 90%;
   border: 0;
   outline: none;
-  border-radius: 1em;
+  border-radius: 8px;
   border: 1px solid transparent;
 }
 
-/* Maybe we dont want this design decision */
 .input-wrapper[data-required]::after {
   content: "*";
   color: red;
-  font-size: 3em;
+  font-size: 2em;
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-45%);
 }
 
-/* Maybe we dont want this */
 .input-wrapper {
   position: relative;
   width: 100%;
@@ -121,13 +120,13 @@ input::placeholder {
   white-space: nowrap;
 }
 
-.acceptButton:not([disabled]):focus {
+.acceptButton:focus {
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
     -0.125rem -0.125rem 1rem rgba(37, 223, 53, 0.5),
     0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
-.acceptButton:not([disabled]):hover {
+.acceptButton:hover {
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
     -0.125rem -0.125rem 1rem rgba(37, 223, 53, 0.5),
     0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
@@ -149,12 +148,35 @@ input::placeholder {
   margin: 0;
   padding: 0;
 }
-
-.basket-button a {
-  color: var(--color-button-secondary);
+.input-wrapper textarea {
+  font-size: 0.9em;
+  font-family: inherit;
+  height: 6em;
+  width: 60%;
+}
+.invalidZipcode {
+  position: absolute;
+  left: 35%;
+  top: 57px;
+  color: red;
+}
+.spacer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.deliveryPage h3,
+p,
+.container {
+  margin: 0;
+  line-height: 1.2em;
 }
 
-@media (max-width: 970px) {
+.submitErrorMessage {
+  margin-top: 0.5em;
+}
+
+@media (max-width: 725px) {
   .deliveryPage {
     width: 90%;
   }

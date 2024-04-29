@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-/* import { act } from "react-dom/test-utils */
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { ProductLine } from "./productLine";
 import { Product } from "../product";

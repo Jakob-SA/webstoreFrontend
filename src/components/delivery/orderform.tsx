@@ -1,7 +1,7 @@
 import "./orderform.css";
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useShopContext } from "../../contexts/useShopContext";
 import { ZipCodeChecker } from "./zipCodeChecker";
 
 // This component is a form for the user to fill in their shipping information. It uses the ZipCodeChecker hook to validate the postal code and fill in the city name.
@@ -9,23 +9,50 @@ import { ZipCodeChecker } from "./zipCodeChecker";
 // GitHub copilot has been used to generate some of the comments.
 
 function Orderform() {
-  const [isBusiness, setIsBusiness] = useState(false);
+  const [isBusinessOrder, setIsBusinessOrder] = useState(false);
   const [loading, setLoading] = useState(false);
   const [zipCode, setZipCode] = useState("");
+  const [zipCodeIsValid, setZipCodeIsValid] = useState(true);
   const [city, setCity] = useState("");
+  const [zipTouched, setZipTouched] = useState(false);
+  const [deliveryZipTouched, setdeliveryZipTouched] = useState(false);
   const [deliveryZipCode, setDeliveryZipCode] = useState("");
+  const [deliveryZipCodeIsValid, setDeliveryZipCodeIsValid] = useState(true);
   const [deliveryCity, setDeliveryCity] = useState("");
   const [isDeliveryAddress, setIsDeliveryAddress] = useState(false);
+  const [errorDuringSubmit, setErrorDuringSubmit] = useState(false);
   const navigate = useNavigate();
 
   // This function is used to toggle the business name and VAT number fields
   const handleBusinessChange = () => {
-    setIsBusiness(!isBusiness);
+    setIsBusinessOrder(!isBusinessOrder);
   };
 
   // This function is used to toggle the delivery adress fields
   const handleDeliveryAdressChange = () => {
     setIsDeliveryAddress(!isDeliveryAddress);
+  };
+
+  const handleZipCode = async (zip: string, zipId: string) => {
+    try {
+      const city = await ZipCodeChecker({ zipCode: zip });
+      if (zipId === "user_zip") {
+        setCity(city);
+        setZipCodeIsValid(true);
+      }
+      if (zipId === "user_deliveryZip") {
+        setDeliveryCity(city);
+        setDeliveryZipCodeIsValid(true);
+      }
+    } catch (error) {
+      console.error("Invalid zip code", error);
+      if (zipId === "user_zip") {
+        setZipCodeIsValid(false);
+      }
+      if (zipId === "user_deliveryZip") {
+        setDeliveryZipCodeIsValid(false);
+      }
+    }
   };
 
   const getFormData = (elements: any) => ({
@@ -34,13 +61,13 @@ function Orderform() {
     country: elements.country.value,
     address1: elements.address1.value,
     address2: elements.address2.value,
-    zip_code: elements.zip.value,
+    zip_code: elements.user_zip.value,
     city: elements.city.value,
     email: elements.email.value,
     telephone_number: elements.telephoneNumber.value,
     order_comment: elements.orderComment.value,
-    business_name: isBusiness ? elements.businessName.value : undefined,
-    vat: isBusiness ? elements.VAT.value : undefined,
+    business_name: isBusinessOrder ? elements.businessName.value : undefined,
+    vat: isBusinessOrder ? elements.VAT.value : undefined,
     delivery_country: isDeliveryAddress
       ? elements.deliveryCountry.value
       : undefined,
@@ -50,9 +77,21 @@ function Orderform() {
     delivery_address2: isDeliveryAddress
       ? elements.deliveryAdress2.value
       : undefined,
-    delivery_zip: isDeliveryAddress ? elements.deliveryZip.value : undefined,
+    delivery_zip: isDeliveryAddress
+      ? elements.user_deliveryZip.value
+      : undefined,
     delivery_city: isDeliveryAddress ? elements.deliveryCity.value : undefined,
   });
+
+  const { basketLines } = useShopContext();
+
+  const basketItems = basketLines.map((line) => ({
+    productId: line.product.id,
+    quantity: line.quantity,
+    totalLinePrice: line.totalLinePrice,
+    rebatePercent: line.rebatePercent,
+    giftwrapping: line.giftwrapping,
+  }));
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -61,25 +100,26 @@ function Orderform() {
     const form = e.currentTarget;
     const formData = getFormData(form.elements);
 
+    const payload = {
+      customerInfo: formData,
+      basketItems: basketItems,
+    };
+
     try {
-      const response = await fetch(
-        "https://dtu62597.eduhost.dk:10272/api/create/",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("https://eoi9wdj8cv1ukqb.m.pipedream.net", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
       if (response.ok) {
-        alert("Order submitted, thank you for your purchase!");
         navigate("/confirmation"); // Navigate on successful submit
       } else {
-        alert("Order failed, please try again later");
+        setErrorDuringSubmit(true);
       }
     } catch (error) {
       console.error("Failed to submit order", error);
-      alert("Order failed, please try again later");
+      setErrorDuringSubmit(true);
     } finally {
       setLoading(false);
     }
@@ -88,9 +128,6 @@ function Orderform() {
     return (
       <>
         <h3>Please enter your delivery information</h3>
-        <Link to="/" className="basket-button">
-          <button type="button">Back to Basket</button>
-        </Link>
         <p>
           Fields marked with <span className="asterisk">*</span> are required
         </p>
@@ -103,7 +140,7 @@ function Orderform() {
               type="checkbox"
               id="businessOrder"
               name="user_businessOrder"
-              checked={isBusiness}
+              checked={isBusinessOrder}
               onChange={handleBusinessChange}
             />
           </div>
@@ -112,10 +149,11 @@ function Orderform() {
     );
   };
 
-  const BusinessOrder = () => {
-    return (
-      <>
-        {isBusiness && (
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <FormHeader />
+        {isBusinessOrder && (
           <div className="duoBox">
             <div className="input-wrapper" data-required>
               <input
@@ -139,15 +177,6 @@ function Orderform() {
             </div>
           </div>
         )}
-      </>
-    );
-  };
-
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <FormHeader />
-        <BusinessOrder />
         <div className="duoBox">
           <div className="input-wrapper" data-required>
             <input
@@ -170,11 +199,13 @@ function Orderform() {
         </div>
         <div className="input-wrapper" data-required>
           <input
-            type="email"
+            type="text"
             required
             id="email"
             name="user_email"
+            pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" // This is a pattern to validate the email has a .something at the end
             autoComplete="email"
+            title="Please enter a valid email"
           />
           <label htmlFor="email">
             Email<span className="required"></span>
@@ -192,14 +223,42 @@ function Orderform() {
             <label htmlFor="address2">Appartment, suite etc.</label>
           </div>
         </div>
-        <ZipCodeChecker
-          zipCode={zipCode}
-          zipId="zip"
-          onZipChange={setZipCode}
-          city={city}
-          cityId="city"
-          onCityChange={setCity}
-        />
+        <div className="duoBox">
+          <div className="input-wrapper" data-required>
+            <input
+              type="text"
+              required
+              id="user_zip"
+              name="user_zip"
+              pattern="^\d{4}$" // This is a pattern to validate the postal code to the danish format
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
+              onBlur={(e) => {
+                setZipTouched(true);
+                handleZipCode(e.target.value, "user_zip");
+              }}
+            />
+            <label htmlFor="user_zip">
+              Zip Code<span className="required"></span>
+            </label>
+            {zipTouched && !zipCodeIsValid && (
+              <div className="invalidZipcode">Invalid zip code</div>
+            )}
+          </div>
+          <div className="input-wrapper" data-required>
+            <input
+              type="text"
+              required
+              id="city"
+              name="user_city"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <label htmlFor="city">
+              City<span className="required"></span>
+            </label>
+          </div>
+        </div>
         <div className="duoBox">
           <div className="input-wrapper" data-required>
             <input
@@ -280,42 +339,89 @@ function Orderform() {
                 <label htmlFor="deliveryAdress2">Appartment, suite etc.</label>
               </div>
             </div>
-            <ZipCodeChecker
-              zipCode={deliveryZipCode}
-              zipId="deliveryZip"
-              onZipChange={setDeliveryZipCode}
-              city={deliveryCity}
-              cityId="deliveryCity"
-              onCityChange={setDeliveryCity}
-            />
+            <div className="duoBox">
+              <div className="input-wrapper" data-required>
+                <input
+                  type="text"
+                  required
+                  id="user_deliveryZip"
+                  name="user_deliveryZip"
+                  pattern="^\d{4}$" // This is a pattern to validate the postal code to the danish format
+                  value={deliveryZipCode}
+                  onChange={(e) => setDeliveryZipCode(e.target.value)}
+                  onBlur={(e) => {
+                    setdeliveryZipTouched(true);
+                    handleZipCode(e.target.value, "user_deliveryZip");
+                  }}
+                />
+                <label htmlFor="user_deliveryZip">
+                  Zip code<span className="required"></span>
+                </label>
+                {deliveryZipTouched && !deliveryZipCodeIsValid && (
+                  <div className="invalidZipcode">Invalid zip code</div>
+                )}
+              </div>
+              <div className="input-wrapper" data-required>
+                <input
+                  type="text"
+                  required
+                  id="deliveryCity"
+                  name="user_deliveryCity"
+                  value={deliveryCity}
+                  onChange={(e) => setDeliveryCity(e.target.value)}
+                />
+                <label htmlFor="deliveryCity">
+                  City<span className="required"></span>
+                </label>
+              </div>
+            </div>
           </div>
         )}
+        <div className="input-wrapper">
+          <textarea
+            placeholder="Add a comment to your order (optional)"
+            name="orderComment"
+            id="orderComment"
+            className="orderComment"
+          />
+        </div>
         <label htmlFor="orderComment"></label>
-        <textarea
-          placeholder="Here you can leave a comment for your order"
-          name="orderComment"
-          id="orderComment"
-          rows={2}
-          cols={50}
-        />
         <div className="container">
           <div>
-            <label htmlFor="termsAndConditions">
-              Agree to{" "}
-              <a href="/terms-and-conditions" target="_blank">
-                terms & conditions
-              </a>
+            <label htmlFor="termsAndConditionsCheckbox">
+              <Link to="/terms-and-conditions" target="_blank">
+                <span id="termsAndConditions">Agree to terms & conditions</span>
+              </Link>
             </label>
           </div>
           <div>
-            <input type="checkbox" id="termsAndConditions" required />
+            <input
+              type="checkbox"
+              id="termsAndConditionsCheckbox"
+              required
+              data-testid="termsAndConditions"
+            />
           </div>
         </div>
-        {loading && <p>Loading...</p>}
-        <button type="submit" className="acceptButton">
-          Submit order
-        </button>
+        <div className="spacer">
+          <Link to="/" className="backButton">
+            <button type="button">Back to Basket</button>
+          </Link>
+          {loading && <p>Submitting order, please hold...</p>}
+          <button type="submit" className="acceptButton">
+            Submit order
+          </button>
+        </div>
       </form>
+      {errorDuringSubmit && (
+        <div className="submitErrorMessage">
+          <p>
+            Oops we had a problem submitting your order.. It's not you, it's us.
+          </p>
+          <p>Please try again, if the problem persist reach out to us on:</p>
+          <p>support@gruppe17.dk</p>
+        </div>
+      )}
     </>
   );
 }

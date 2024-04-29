@@ -22,6 +22,7 @@
   --color-text-secondary: #49414e;
   --color-text-tertiary: #b71901;
   --color-text-inverse: #ffffff;
+  --color-nav-shadow: rgba(255, 255, 255, 0);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -91,6 +92,7 @@ button:focus-visible {
     --color-text-secondary: #49414e;
     --color-text-tertiary: #b71901;
     --color-text-inverse: #ffffff;
+    --color-nav-shadow: black;
   }
   button:active {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);

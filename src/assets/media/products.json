@@ -17,7 +17,7 @@
     "rebateQuantity": 3,
     "rebatePercent": 15,
     "upsellProductId": 7,
-    "amountInStock": 70
+    "amountInStock": 3
   },
   {
     "id": 3,
@@ -27,7 +27,7 @@
     "rebateQuantity": 2,
     "rebatePercent": 10,
     "upsellProductId": 8,
-    "amountInStock": 40
+    "amountInStock": 12
   },
   {
     "id": 4,
@@ -44,8 +44,8 @@
     "name": "Leather Shoe Care Kit",
     "price": 19.99,
     "currency": "USD",
-    "rebateQuantity": 50,
-    "rebatePercent": 0,
+    "rebateQuantity": 20,
+    "rebatePercent": 5,
     "upsellProductId": 0,
     "amountInStock": 100
   },
@@ -57,7 +57,7 @@
     "rebateQuantity": 3,
     "rebatePercent": 20,
     "upsellProductId": 10,
-    "amountInStock": 30
+    "amountInStock": 6
   },
   {
     "id": 7,
@@ -67,7 +67,7 @@
     "rebateQuantity": 5,
     "rebatePercent": 10,
     "upsellProductId": 12,
-    "amountInStock": 80
+    "amountInStock": 1
   },
   {
     "id": 8,
@@ -94,8 +94,8 @@
     "name": "Suede Shoe Brush",
     "price": 9.99,
     "currency": "USD",
-    "rebateQuantity": 50,
-    "rebatePercent": 0,
+    "rebateQuantity": 20,
+    "rebatePercent": 5,
     "upsellProductId": 0,
     "amountInStock": 120
   }

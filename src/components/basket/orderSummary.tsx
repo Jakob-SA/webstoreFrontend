@@ -1,25 +1,58 @@
 import { Link } from "react-router-dom";
-
-import { getShippingCost, getTotalPrice } from "./totalPrice";
+import {
+  getShippingCost,
+  useTotalPrice,
+  useDiscountAmount,
+  calculateDiscount,
+} from "./totalPrice";
 function OrderSummary() {
-  const totalPrice = getTotalPrice();
+  const totalPrice = useTotalPrice();
   const shippingCost = getShippingCost();
   const showWarning = totalPrice < 300; // Check if total price is less than 300
-
+  const discountAmount = useDiscountAmount();
+  const subtotal = calculateDiscount(totalPrice);
   return (
     <div className="orderSummary">
       <h2>Order Summary</h2>
       <div>
-        <b>Subtotal</b>
-        <p>${totalPrice.toFixed(2)}</p>
+        <p>Subtotal</p>
+        <p>{totalPrice.toFixed(2)} $</p>
       </div>
       <div>
-        <b>Shipping</b>
-        <p>${shippingCost.toFixed(2)}</p>
+        {totalPrice > subtotal ? (
+          <p
+            style={{
+              color: "green",
+              textAlign: "center",
+            }}
+          >
+            Congratulations! You get a 10% discount! You have saved:{" "}
+            {discountAmount.toFixed(2) + " $"}
+          </p>
+        ) : (
+          <p
+            style={{
+              color: "red",
+              textAlign: "center",
+            }}
+          >
+            Buy for {(300 - subtotal).toFixed(2)} $ more to get a 10% discount!
+          </p>
+        )}
       </div>
       <div>
-        <b>Total</b>
-        <p>${totalPrice.toFixed(2)}</p>
+        <p>Shipping</p>
+        <p>
+          <i>{shippingCost.toFixed(2)} $</i>
+        </p>
+      </div>
+      <div>
+        <p>
+          <b>Total</b>
+        </p>
+        <div style={{ display: "flex" }}>
+          <b>{(shippingCost + subtotal).toFixed(2)} $</b>
+        </div>
       </div>
 
       {showWarning && (
@@ -29,7 +62,7 @@ function OrderSummary() {
             textAlign: "center",
           }}
         >
-          Free shipping for orders over $300!
+          Free shipping for orders over 300 $!
         </p>
       )}
 
