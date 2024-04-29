@@ -152,37 +152,6 @@ function Orderform() {
     );
   };
 
-  const BusinessOrder = () => {
-    return (
-      <>
-        {isBusiness && (
-          <div className="duoBox">
-            <div className="input-wrapper" data-required>
-              <input
-                type="text"
-                required
-                id="businessName"
-                name="user_businessName"
-              />
-              <label htmlFor="businessName">Business Name</label>
-            </div>
-            <div className="input-wrapper" data-required>
-              <input
-                type="text"
-                required
-                id="VAT"
-                name="user_VAT"
-                pattern="^\d{8}$" // This is a pattern to validate the VAT number to the danish format
-                title="Please enter a valid danish VAT number"
-              />
-              <label htmlFor="VAT">Vat Number</label>
-            </div>
-          </div>
-        )}
-      </>
-    );
-  };
-
   return (
     <>
       <form onSubmit={handleSubmit}>
