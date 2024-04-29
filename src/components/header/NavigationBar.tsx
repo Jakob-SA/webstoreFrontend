@@ -48,9 +48,7 @@ export default function NavigationBar() {
         </li>
         <div className={decideClass(Steps.Delivery) + "divider"}></div>
         <li className={decideClass(Steps.Confirmation)}>
-          <Link className="bubble" to="/confirmation">
-            Confirmation
-          </Link>
+          <p className="bubble">Confirmation</p>
         </li>
       </ul>
     </nav>

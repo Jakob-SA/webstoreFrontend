@@ -106,11 +106,14 @@ function Orderform() {
     };
 
     try {
-      const response = await fetch("https://eoi9wdj8cv1ukqb.m.pipedream.net", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://dtu62597.eduhost.dk:10272/api/create/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (response.ok) {
         navigate("/confirmation"); // Navigate on successful submit
