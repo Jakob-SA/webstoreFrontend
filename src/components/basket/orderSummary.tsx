@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
-import { getShippingCost, useTotalPrice, useDiscountAmount, calculateDiscount } from "./totalPrice";
+import {
+  getShippingCost,
+  useTotalPrice,
+  useDiscountAmount, calculateDiscount,
+} from "./totalPrice";
 function OrderSummary() {
   const totalPrice = useTotalPrice()
   const shippingCost = getShippingCost();
@@ -29,7 +33,7 @@ function OrderSummary() {
         <p>
           <i>{shippingCost} $</i>
         </p>
-      </div> 
+      </div>
       <div>
         <p>
           <b>Total</b>
@@ -46,7 +50,7 @@ function OrderSummary() {
             textAlign: "center",
           }}
         >
-          Free shipping for orders over $300!
+          Free shipping for orders over 300 $!
         </p>
       )}
 

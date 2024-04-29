@@ -12,10 +12,12 @@ function Orderform() {
   const [isBusiness, setIsBusiness] = useState(false);
   const [loading, setLoading] = useState(false);
   const [zipCode, setZipCode] = useState("");
+  const [zipCodeIsValid, setZipCodeIsValid] = useState(true);
   const [city, setCity] = useState("");
   const [zipTouched, setZipTouched] = useState(false);
   const [zipDeliveryTouched, setzipDeliveryTouched] = useState(false);
   const [deliveryZipCode, setDeliveryZipCode] = useState("");
+  const [zipDeliveryCodeIsValid, setDeliveryZipCodeIsValid] = useState(true);
   const [deliveryCity, setDeliveryCity] = useState("");
   const [isDeliveryAddress, setIsDeliveryAddress] = useState(false);
   const navigate = useNavigate();
@@ -33,10 +35,22 @@ function Orderform() {
   const handleZipCode = async (zip: string, zipId: string) => {
     try {
       const city = await ZipCodeChecker({ zipCode: zip });
-      if (zipId === "user_zip") setCity(city);
-      if (zipId === "user_deliveryZip") setDeliveryCity(city);
+      if (zipId === "user_zip") {
+        setCity(city);
+        setZipCodeIsValid(true);
+      }
+      if (zipId === "user_deliveryZip") {
+        setDeliveryCity(city);
+        setDeliveryZipCodeIsValid(true);
+      }
     } catch (error) {
       console.error("Invalid zip code", error);
+      if (zipId === "user_zip") {
+        setZipCodeIsValid(false);
+      }
+      if (zipId === "user_deliveryZip") {
+        setDeliveryZipCodeIsValid(false);
+      }
     }
   };
 
@@ -117,9 +131,6 @@ function Orderform() {
     return (
       <>
         <h3>Please enter your delivery information</h3>
-        <Link to="/" className="basket-button">
-          <button type="button">Back to Basket</button>
-        </Link>
         <p>
           Fields marked with <span className="asterisk">*</span> are required
         </p>
@@ -199,11 +210,13 @@ function Orderform() {
         </div>
         <div className="input-wrapper" data-required>
           <input
-            type="email"
+            type="text"
             required
             id="email"
             name="user_email"
+            pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" // This is a pattern to validate the email has a .something at the end
             autoComplete="email"
+            title="Please enter a valid email"
           />
           <label htmlFor="email">
             Email<span className="required"></span>
@@ -228,15 +241,20 @@ function Orderform() {
               required
               id="user_zip"
               name="user_zip"
+              pattern="^\d{4}$" // This is a pattern to validate the postal code to the danish format
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
               onBlur={(e) => {
-                setCity("");
                 setZipTouched(true);
                 handleZipCode(e.target.value, "user_zip");
               }}
             />
-            {zipTouched && !city && <div>Invalid zip code</div>}
+            <label htmlFor="user_zip">
+              Zip Code<span className="required"></span>
+            </label>
+            {zipTouched && !zipCodeIsValid && (
+              <div className="invalidZipcode">Invalid zip code</div>
+            )}
           </div>
           <div className="input-wrapper" data-required>
             <input
@@ -247,7 +265,7 @@ function Orderform() {
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
-            <label htmlFor="deliveryCity">
+            <label htmlFor="city">
               City<span className="required"></span>
             </label>
           </div>
@@ -339,16 +357,19 @@ function Orderform() {
                   required
                   id="user_deliveryZip"
                   name="user_deliveryZip"
+                  pattern="^\d{4}$" // This is a pattern to validate the postal code to the danish format
                   value={deliveryZipCode}
                   onChange={(e) => setDeliveryZipCode(e.target.value)}
                   onBlur={(e) => {
-                    setDeliveryCity("");
                     setzipDeliveryTouched(true);
                     handleZipCode(e.target.value, "user_deliveryZip");
                   }}
                 />
-                {zipDeliveryTouched && !deliveryCity && (
-                  <div>Invalid zip code</div>
+                <label htmlFor="user_deliveryZip">
+                  Zip code<span className="required"></span>
+                </label>
+                {zipDeliveryTouched && !zipDeliveryCodeIsValid && (
+                  <div className="invalidZipcode">Invalid zip code</div>
                 )}
               </div>
               <div className="input-wrapper" data-required>
@@ -367,14 +388,15 @@ function Orderform() {
             </div>
           </div>
         )}
+        <div className="input-wrapper">
+          <textarea
+            placeholder="Add a comment to your order (optional)"
+            name="orderComment"
+            id="orderComment"
+            className="orderComment"
+          />
+        </div>
         <label htmlFor="orderComment"></label>
-        <textarea
-          placeholder="Here you can leave a comment for your order"
-          name="orderComment"
-          id="orderComment"
-          rows={2}
-          cols={50}
-        />
         <div className="container">
           <div>
             <label htmlFor="termsAndConditions" />
@@ -383,13 +405,23 @@ function Orderform() {
             </Link>
           </div>
           <div>
-            <input type="checkbox" id="termsAndConditions" required />
+            <input
+              type="checkbox"
+              id="termsAndConditions"
+              required
+              data-testid="termsAndConditions"
+            />
           </div>
         </div>
-        {loading && <p>Submitting order, please hold...</p>}
-        <button type="submit" className="acceptButton">
-          Submit order
-        </button>
+        <div className="spacer">
+          <Link to="/" className="backButton">
+            <button type="button">Back to Basket</button>
+          </Link>
+          {loading && <p>Submitting order, please hold...</p>}
+          <button type="submit" className="acceptButton">
+            Submit order
+          </button>
+        </div>
       </form>
     </>
   );

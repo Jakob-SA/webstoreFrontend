@@ -36,51 +36,51 @@ describe(Orderform.name, () => {
       "https://api.dataforsyningen.dk/postnumre/2200"
     );
   });
-});
 
 
-test("Should show loading after submitting form", async () => {
-  const { getByRole, getByLabelText, findByText } = render(
-    <Router>
-      <Orderform />
-    </Router>
-  );
-  const firstNameInput = getByLabelText("First Name");
-  const lastNameInput = getByLabelText("Last Name");
-  const addressInput = getByLabelText("Address");
-  const zipCodeInput = getByLabelText("Zip Code");
-  const cityInput = getByLabelText("City");
-  const emailInput = getByLabelText("Email");
-  const phoneNumberInput = getByLabelText("Phone Number");
+  test("Should show loading after submitting form", async () => {
+    const { getByRole, getByLabelText, findByText, getByTestId } = render(
+      <Router>
+        <Orderform />
+      </Router>
+    );
+    const firstNameInput = getByLabelText("First Name");
+    const lastNameInput = getByLabelText("Last Name");
+    const addressInput = getByLabelText("Address");
+    const zipCodeInput = getByLabelText("Zip Code");
+    const cityInput = getByLabelText("City");
+    const emailInput = getByLabelText("Email");
+    const phoneNumberInput = getByLabelText("Phone Number");
 
-  const submitButton = getByRole("button", { name: "Submit order" });
-  const termsCheckbox = getByRole("checkbox", { name: "Agree to terms & conditions" });
+    const submitButton = getByRole("button", { name: "Submit order" });
+    const termsCheckbox = getByTestId("termsAndConditions");
 
-  fireEvent.change(firstNameInput, { target: { value: "John" } });
-  expect(firstNameInput).toHaveValue("John");
+    fireEvent.change(firstNameInput, { target: { value: "John" } });
+    expect(firstNameInput).toHaveValue("John");
 
-  fireEvent.change(lastNameInput, { target: { value: "Doe" } });
-  expect(lastNameInput).toHaveValue("Doe");
+    fireEvent.change(lastNameInput, { target: { value: "Doe" } });
+    expect(lastNameInput).toHaveValue("Doe");
 
-  fireEvent.change(addressInput, { target: { value: "Testvej 1" } });
-  expect(addressInput).toHaveValue("Testvej 1");
+    fireEvent.change(addressInput, { target: { value: "Testvej 1" } });
+    expect(addressInput).toHaveValue("Testvej 1");
 
-  fireEvent.change(zipCodeInput, { target: { value: "2200" } });
-  expect(zipCodeInput).toHaveValue("2200");
+    fireEvent.change(zipCodeInput, { target: { value: "2200" } });
+    expect(zipCodeInput).toHaveValue("2200");
 
-  fireEvent.blur(zipCodeInput);
-  await waitFor(() => {
-    expect(cityInput).toHaveValue("København N");
+    fireEvent.blur(zipCodeInput);
+    await waitFor(() => {
+      expect(cityInput).toHaveValue("København N");
+    });
+
+    fireEvent.change(emailInput, { target: { value: "JohnDoe@gmail.com" } });
+    expect(emailInput).toHaveValue("JohnDoe@gmail.com");
+
+    fireEvent.change(phoneNumberInput, { target: { value: "12345678" } });
+    expect(phoneNumberInput).toHaveValue("12345678");
+
+    fireEvent.click(termsCheckbox);
+    fireEvent.click(submitButton);
+
+    await findByText("Submitting order, please hold...");
   });
-
-  fireEvent.change(emailInput, { target: { value: "JohnDoe@gmail.com" } });
-  expect(emailInput).toHaveValue("JohnDoe@gmail.com");
-
-  fireEvent.change(phoneNumberInput, { target: { value: "12345678" } });
-  expect(phoneNumberInput).toHaveValue("12345678");
-
-  fireEvent.click(termsCheckbox);
-  fireEvent.click(submitButton);
-
-  await findByText("Loading...");
 });

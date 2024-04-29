@@ -2,7 +2,7 @@ import { useShopContext } from "../../contexts/useShopContext";
 import { getShippingCost, useTotalPrice, calculateDiscount, useDiscountAmount } from "../basket/totalPrice";
 import "./orderConfirmation.css";
 
-function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
+function OrderConfirmation() {
   const { basketLines: basketItems } = useShopContext();
   const price = useTotalPrice()
   const currentDate = new Date();
@@ -12,7 +12,7 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
   
 
   const basketSummary = basketItems.map((item) => (
-    <tr key={item.product.id}>
+    <tr key={item.product.id} className="confirmation-basket-row">
       <td>
         <div className="product-details">
           <img
@@ -26,9 +26,14 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
               <p>{item.quantity}</p>
             </div>
           </div>
-          <p className="product-price">
-            ${(item.product.price * item.quantity).toFixed(2)}
-          </p>
+          <div className="product-price-giftwrap">
+            <p className="product-price">
+              {(item.product.price * item.quantity).toFixed(2)} $
+            </p>
+            <em style={{ fontSize: "0.8em" }}>
+              {item.giftwrapping ? "Giftwrapped" : ""}
+            </em>
+          </div>
         </div>
       </td>
     </tr>
@@ -47,7 +52,7 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
               Order Date: {currentDate.getDate()}/{currentDate.getMonth()}/
               {currentDate.getFullYear()}
             </div>
-            <div className="order-number">Order Number: {orderNumber}</div>
+            <div className="order-status">Order Status: Pending</div>
           </div>
           {basketSummary}
           <div className="order-total-border-top">
@@ -62,7 +67,7 @@ function OrderConfirmation({ orderNumber }: { orderNumber: number }) {
               </div>
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Shipping:</p>
-                <p> ${shippingCost.toFixed(2)}</p>
+                <p> {shippingCost.toFixed(2)} $</p>
               </div>
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Total:</p>
