@@ -1,13 +1,15 @@
 import { useShopContext } from "../../contexts/useShopContext";
-import { getShippingCost, useTotalPrice } from "../basket/totalPrice";
+import { getShippingCost, useTotalPrice, calculateDiscount, useDiscountAmount } from "../basket/totalPrice";
 import "./orderConfirmation.css";
 
 function OrderConfirmation() {
   const { basketLines: basketItems } = useShopContext();
-  const subtotalPrice = useTotalPrice().totalPrice;
+  const price = useTotalPrice()
   const currentDate = new Date();
   const shippingCost = getShippingCost();
-  const totalPrice = subtotalPrice + shippingCost;
+  const subtotalPrice = calculateDiscount(price) + shippingCost;
+  const discount = useDiscountAmount()
+  
 
   const basketSummary = basketItems.map((item) => (
     <tr key={item.product.id} className="confirmation-basket-row">
@@ -57,7 +59,11 @@ function OrderConfirmation() {
             <section className="order-total">
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Subtotal:</p>
-                <p>{subtotalPrice.toFixed(2)} $</p>
+                <p>${price.toFixed(2)}</p>
+              </div>
+              <div className="order-total-subclass">
+                <p className="order-total-subclass-text">Discount:</p>
+                <p> ${discount.toFixed(2)}</p>
               </div>
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Shipping:</p>
@@ -65,7 +71,7 @@ function OrderConfirmation() {
               </div>
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Total:</p>
-                <p> {totalPrice.toFixed(2)} $</p>
+                <p> ${subtotalPrice.toFixed(2)}</p>
               </div>
             </section>
           </div>

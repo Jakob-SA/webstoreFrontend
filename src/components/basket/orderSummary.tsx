@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import {
   getShippingCost,
   useTotalPrice,
-  useDiscountAmount,
+  useDiscountAmount, calculateDiscount,
 } from "./totalPrice";
 function OrderSummary() {
-  const totalPrice = useTotalPrice().totalPrice;
+  const totalPrice = useTotalPrice()
   const shippingCost = getShippingCost();
   const showWarning = totalPrice < 300; // Check if total price is less than 300
-
   const discountAmount = useDiscountAmount();
+  const subtotal = calculateDiscount(totalPrice);
   return (
     <div className="orderSummary">
       <h2>Order Summary</h2>
@@ -18,29 +18,17 @@ function OrderSummary() {
         <p>{totalPrice.toFixed(2)} $</p>
       </div>
       <div>
-        {totalPrice >= 300 ? (
-          <p
-            style={{
-              color: "green",
-              textAlign: "center",
-            }}
-          >
-            Congratulations! You get a 10% discount! You have saved:{" "}
-            {discountAmount.toFixed(2)} $
-          </p>
-        ) : (
-          <p
-            style={{
-              color: "red",
-              textAlign: "center",
-            }}
-          >
-            Buy for {(300 - totalPrice).toFixed(2)} $ more to get a 10%
-            discount!
-          </p>
-        )}
-      </div>
-      <div>
+      {totalPrice > subtotal
+        ? <p style={{
+           color: "green",
+           textAlign: "center"}}>
+            Congratulations! You get a 10% discount! You have saved: {discountAmount.toFixed(2)}</p>
+
+        : <p style={{
+          color: "red",
+          textAlign: "center"}}>Buy for {(300 - subtotal).toFixed(2)} $ more to get a 10% discount!</p>}
+       </div>
+    <div>
         <p>Shipping</p>
         <p>
           <i>{shippingCost} $</i>
@@ -51,7 +39,7 @@ function OrderSummary() {
           <b>Total</b>
         </p>
         <div style={{ display: "flex" }}>
-          <b>{(shippingCost + totalPrice).toFixed(2)} $</b>
+          <b>{(shippingCost+subtotal).toFixed(2)} $</b>
         </div>
       </div>
 
