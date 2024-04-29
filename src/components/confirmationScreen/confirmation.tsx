@@ -10,7 +10,9 @@ function Confirmation() {
       <NavigationBar />
       <main>
         <div className="order-confirmation-page">
-          <OrderConfirmation />
+
+            <OrderConfirmation />
+
         </div>
       </main>
       <aside></aside>

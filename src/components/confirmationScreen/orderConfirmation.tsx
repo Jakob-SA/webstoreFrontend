@@ -58,7 +58,9 @@ function OrderConfirmation() {
             </div>
             <div className="order-status">Order Status: Pending</div>
           </div>
-          {basketSummary}
+          <table>
+            <tbody>{basketSummary}</tbody>
+          </table>
           <div className="order-total-border-top">
             <section className="order-total">
               <div className="order-total-subclass">
