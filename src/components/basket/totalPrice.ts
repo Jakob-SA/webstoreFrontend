@@ -1,42 +1,40 @@
 
 import {useShopContext } from "../../contexts/useShopContext";
-import { useRef} from "react";
+
+let discounted = false
 
 
 
 export const useDiscountAmount = () => {
-  const {totalPrice, discounted} = useTotalPrice();
-  if (discounted)
-  return (totalPrice - (totalPrice*0.9))
+  const totalPrice = useTotalPrice();
+  if (discounted){
+  return (totalPrice*0.1 )}
 else return 0;
 }
 
+export const calculateDiscount = (totalPrice:number) => {
+  if ( totalPrice > 300 ) {
+    discounted = true;
+    console.log("Discount applied  " + totalPrice)
+    return (totalPrice * 0.9)
+  } 
+  else{
+    console.log(discounted)
+    discounted = false;
+    return totalPrice;
+  }
+}
 
-  //TODO: also make a function to return the total discount amount.
-  //
+export const getShippingCost = () => {
+  const totalPrice = useTotalPrice();
+  if (totalPrice> 300 && discounted) {
+    return 0.0;
+  }
+    return 10.0;
+}
 
 export function useTotalPrice () {
-// const [discounted, setDiscounted] = useState(false);
    const {basketLines} = useShopContext();
-   const discounted = useRef(false)
-   
-   //let discounted = false;
-   function calculateDiscount(totalPrice: number){
-    if ( totalPrice > 300 && !discounted.current ) {
-      discounted.current = true;
-      console.log("Discount applied  " + totalPrice)
-      return (totalPrice * 0.9)
-    } 
-    if(discounted.current && totalPrice < 300){
-      discounted.current = false;
-      console.log("Discount removed")
-    }
-    else{
-      console.log(discounted.current)
-      return totalPrice;
-    }
-  }
-
 
     //Array of all the original line prices without rebate
     const originalLinePrice = basketLines.map((item)=>item.quantity*item.product.price) ;
@@ -48,15 +46,6 @@ export function useTotalPrice () {
     : originalLinePrice[index]
     return sum + price;
   }, 0);
-    return {totalPrice: calculateDiscount(totalPrice) || 0, discounted} //copilot helped here
+    return (totalPrice) 
 }
 
-export const getShippingCost = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const {totalPrice, discounted} = useTotalPrice();
-
-  if (totalPrice> 300 && discounted) {
-    return 0.0;
-  }
-    return 10.0;
-}
