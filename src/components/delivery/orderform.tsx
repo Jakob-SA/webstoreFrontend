@@ -12,10 +12,12 @@ function Orderform() {
   const [isBusiness, setIsBusiness] = useState(false);
   const [loading, setLoading] = useState(false);
   const [zipCode, setZipCode] = useState("");
+  const [zipCodeIsValid, setZipCodeIsValid] = useState(true);
   const [city, setCity] = useState("");
   const [zipTouched, setZipTouched] = useState(false);
   const [zipDeliveryTouched, setzipDeliveryTouched] = useState(false);
   const [deliveryZipCode, setDeliveryZipCode] = useState("");
+  const [zipDeliveryCodeIsValid, setDeliveryZipCodeIsValid] = useState(true);
   const [deliveryCity, setDeliveryCity] = useState("");
   const [isDeliveryAddress, setIsDeliveryAddress] = useState(false);
   const navigate = useNavigate();
@@ -33,10 +35,22 @@ function Orderform() {
   const handleZipCode = async (zip: string, zipId: string) => {
     try {
       const city = await ZipCodeChecker({ zipCode: zip });
-      if (zipId === "user_zip") setCity(city);
-      if (zipId === "user_deliveryZip") setDeliveryCity(city);
+      if (zipId === "user_zip") {
+        setCity(city);
+        setZipCodeIsValid(true);
+      }
+      if (zipId === "user_deliveryZip") {
+        setDeliveryCity(city);
+        setDeliveryZipCodeIsValid(true);
+      }
     } catch (error) {
       console.error("Invalid zip code", error);
+      if (zipId === "user_zip") {
+        setZipCodeIsValid(false);
+      }
+      if (zipId === "user_deliveryZip") {
+        setDeliveryZipCodeIsValid(false);
+      }
     }
   };
 
@@ -196,10 +210,11 @@ function Orderform() {
         </div>
         <div className="input-wrapper" data-required>
           <input
-            type="email"
+            type="text"
             required
             id="email"
             name="user_email"
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // This is a pattern to validate the email has a .something at the end
             autoComplete="email"
           />
           <label htmlFor="email">
@@ -225,6 +240,7 @@ function Orderform() {
               required
               id="user_zip"
               name="user_zip"
+              pattern="^\d{4}$" // This is a pattern to validate the postal code to the danish format
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
               onBlur={(e) => {
@@ -235,7 +251,7 @@ function Orderform() {
             <label htmlFor="user_zip">
               Zip Code<span className="required"></span>
             </label>
-            {zipTouched && !city && (
+            {zipTouched && !zipCodeIsValid && (
               <div className="invalidZipcode">Invalid zip code</div>
             )}
           </div>
@@ -340,6 +356,7 @@ function Orderform() {
                   required
                   id="user_deliveryZip"
                   name="user_deliveryZip"
+                  pattern="^\d{4}$" // This is a pattern to validate the postal code to the danish format
                   value={deliveryZipCode}
                   onChange={(e) => setDeliveryZipCode(e.target.value)}
                   onBlur={(e) => {
@@ -350,7 +367,7 @@ function Orderform() {
                 <label htmlFor="user_deliveryZip">
                   Zip code<span className="required"></span>
                 </label>
-                {zipDeliveryTouched && !deliveryCity && (
+                {zipDeliveryTouched && !zipDeliveryCodeIsValid && (
                   <div className="invalidZipcode">Invalid zip code</div>
                 )}
               </div>
