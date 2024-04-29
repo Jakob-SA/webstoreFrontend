@@ -20,6 +20,7 @@ function Orderform() {
   const [zipDeliveryCodeIsValid, setDeliveryZipCodeIsValid] = useState(true);
   const [deliveryCity, setDeliveryCity] = useState("");
   const [isDeliveryAddress, setIsDeliveryAddress] = useState(false);
+  const [errorDuringSubmit, setErrorDuringSubmit] = useState(false);
   const navigate = useNavigate();
 
   // This function is used to toggle the business name and VAT number fields
@@ -118,11 +119,11 @@ function Orderform() {
         alert("Order submitted, thank you for your purchase!");
         navigate("/confirmation"); // Navigate on successful submit
       } else {
-        alert("Order failed, please try again later");
+        setErrorDuringSubmit(true);
       }
     } catch (error) {
       console.error("Failed to submit order", error);
-      alert("Order failed, please try again later");
+      setErrorDuringSubmit(true);
     } finally {
       setLoading(false);
     }
@@ -423,6 +424,15 @@ function Orderform() {
           </button>
         </div>
       </form>
+      {errorDuringSubmit && (
+        <div className="submitErrorMessage">
+          <p>
+            Oops we had a problem submitting you order.. It's not you, it's us.
+          </p>
+          <p>Please try again, if the problem persist reach out to us on:</p>
+          <p>support@gruppe17.dk</p>
+        </div>
+      )}
     </>
   );
 }
