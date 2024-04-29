@@ -25,18 +25,16 @@
   border: 1px solid transparent;
 }
 
-/* Maybe we dont want this design decision */
 .input-wrapper[data-required]::after {
   content: "*";
   color: red;
-  font-size: 3em;
+  font-size: 2em;
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-45%);
 }
 
-/* Maybe we dont want this */
 .input-wrapper {
   position: relative;
   width: 100%;
@@ -174,7 +172,7 @@ p,
   line-height: 1.2em;
 }
 
-.submitErrorMessage{
+.submitErrorMessage {
   margin-top: 0.5em;
 }
 

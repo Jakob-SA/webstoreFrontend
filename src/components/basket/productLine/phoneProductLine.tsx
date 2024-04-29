@@ -18,7 +18,7 @@ function PhoneProductLine({ productLine }: { productLine: ProductLine }) {
           productId: productLine.product.id,
         }),
       300
-    ); // Animation duration
+    );
   };
   const updateQuantity = (newQuantity: number) => {
     dispatch({

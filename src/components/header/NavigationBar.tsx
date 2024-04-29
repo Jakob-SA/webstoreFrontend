@@ -18,7 +18,6 @@ export default function NavigationBar() {
       case "/confirmation":
         setStep(Steps.Confirmation);
         break;
-      // Add more cases as needed...
 
       default:
         setStep(Steps.Basket);
@@ -57,22 +56,3 @@ export default function NavigationBar() {
     </nav>
   );
 }
-
-/*
-import { Link } from "react-router-dom";
-
-export default function NavigationBar() {
-  return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Basket</Link>
-        </li>
-        <li>
-          <Link to="/orderform">Delivery</Link>
-        </li>
-      </ul>
-    </nav>
-  );
-}
-*/
