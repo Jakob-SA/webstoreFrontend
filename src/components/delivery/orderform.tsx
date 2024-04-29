@@ -116,7 +116,6 @@ function Orderform() {
       );
 
       if (response.ok) {
-        alert("Order submitted, thank you for your purchase!");
         navigate("/confirmation"); // Navigate on successful submit
       } else {
         setErrorDuringSubmit(true);
