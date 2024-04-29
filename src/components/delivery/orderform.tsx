@@ -388,15 +388,16 @@ function Orderform() {
         <label htmlFor="orderComment"></label>
         <div className="container">
           <div>
-            <label htmlFor="termsAndConditions" />
-            <Link to="/terms-and-conditions" target="_blank">
-              <span id="termsAndConditions">Agree to terms & conditions</span>
-            </Link>
+            <label htmlFor="termsAndConditionsCheckbox">
+              <Link to="/terms-and-conditions" target="_blank">
+                <span id="termsAndConditions">Agree to terms & conditions</span>
+              </Link>
+            </label>
           </div>
           <div>
             <input
               type="checkbox"
-              id="termsAndConditions"
+              id="termsAndConditionsCheckbox"
               required
               data-testid="termsAndConditions"
             />
