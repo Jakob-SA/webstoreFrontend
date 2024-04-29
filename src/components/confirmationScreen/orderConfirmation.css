@@ -21,7 +21,6 @@
 }
 
 .order-confirmation-page td p {
-  display: flex;
   align-items: start;
   font-size: 0.9em;
 }
@@ -44,7 +43,7 @@
 .product-name-quantity {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   padding-left: 0.8em;
 }
 
@@ -55,7 +54,7 @@
 .product-price-giftwrap {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .product-giftwrap {
@@ -63,13 +62,13 @@
   font-size: 0.8em;
 }
 
-.product-images {
+.order-confirmation-page .product-images {
   transition: transform 0.5s ease-out;
   border-radius: 5%;
   width: 8em;
   height: 8em;
 }
-.product-images:hover {
+.order-confirmation-page .product-images:hover {
   transform: scale(1.5);
 }
 
@@ -116,11 +115,17 @@
     width: 100%;
     box-sizing: border-box;
   }
-  .product-images{
-    width: 6em;
-    height: 6em;
+  .order-confirmation-page .product-images{
+    width: 15vw;
+    height: 15vw;
   }
-  .product-name, .product-price, .order-total {
-    font-size: 0.5em;
+  .quantity-label,
+  .order-total-subclass-text,
+  .product-name,
+  .product-price{
+    white-space: nowrap;
+  }
+  .product-name-quantity{
+    font-size: 2.5vw;
   }
 }
