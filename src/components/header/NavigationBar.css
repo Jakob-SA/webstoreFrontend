@@ -52,7 +52,8 @@ nav .bubble {
   height: 7.5rem;
   font-size: 1.1em;
   color: var(--color-text);
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-shadow: -1px 0 var(--color-nav-shadow), 0 1px var(--color-nav-shadow),
+    1px 0 var(--color-nav-shadow), 0 -1px var(--color-nav-shadow);
 }
 nav .bubble:hover {
   color: var(--color-text);
