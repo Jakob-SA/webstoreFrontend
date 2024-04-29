@@ -22,7 +22,7 @@
   --color-text-secondary: #49414e;
   --color-text-tertiary: #b71901;
   --color-text-inverse: #ffffff;
-  --color-nav-shadow: white;
+  --color-nav-shadow: rgba(255, 255, 255, 0);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

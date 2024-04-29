@@ -15,11 +15,9 @@ else return 0;
 export const calculateDiscount = (totalPrice:number) => {
   if ( totalPrice > 300 ) {
     discounted = true;
-    console.log("Discount applied  " + totalPrice)
     return (totalPrice * 0.9)
-  } 
+  }
   else{
-    console.log(discounted)
     discounted = false;
     return totalPrice;
   }
@@ -46,6 +44,6 @@ export function useTotalPrice () {
     : originalLinePrice[index]
     return sum + price;
   }, 0);
-    return (totalPrice) 
+    return (totalPrice)
 }
 
