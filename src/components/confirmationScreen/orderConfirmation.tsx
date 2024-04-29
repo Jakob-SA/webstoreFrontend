@@ -50,7 +50,7 @@ function OrderConfirmation() {
         <p className="confirmation-message">Thank you for your order!</p>
         <p className="confirmation-message">Your order details:</p>
 
-        <section>
+        <div>
           <div className="orderInfo-container">
             <div className="order-date">
               Order Date: {currentDate.getDate()}/{currentDate.getMonth()}/
@@ -79,7 +79,7 @@ function OrderConfirmation() {
               </div>
             </section>
           </div>
-        </section>
+        </div>
 
         <p className="confirmation-message">
           Your order details have been sent to your email.
