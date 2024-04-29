@@ -37,7 +37,6 @@ describe(Orderform.name, () => {
     );
   });
 
-
   test("Should show loading after submitting form", async () => {
     const { getByRole, getByLabelText, findByText, getByTestId } = render(
       <Router>
@@ -81,6 +80,6 @@ describe(Orderform.name, () => {
     fireEvent.click(termsCheckbox);
     fireEvent.click(submitButton);
 
-    await findByText("Submitting order, please hold...");
+    findByText("Submitting order, please hold...");
   });
 });
