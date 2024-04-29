@@ -427,7 +427,7 @@ function Orderform() {
       {errorDuringSubmit && (
         <div className="submitErrorMessage">
           <p>
-            Oops we had a problem submitting you order.. It's not you, it's us.
+            Oops we had a problem submitting your order.. It's not you, it's us.
           </p>
           <p>Please try again, if the problem persist reach out to us on:</p>
           <p>support@gruppe17.dk</p>
