@@ -67,7 +67,7 @@ function OrderConfirmation() {
               </div>
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Discount:</p>
-                <p> {discount.toFixed(2)} $</p>
+                <p> - {discount.toFixed(2)} $</p>
               </div>
               <div className="order-total-subclass">
                 <p className="order-total-subclass-text">Shipping:</p>
