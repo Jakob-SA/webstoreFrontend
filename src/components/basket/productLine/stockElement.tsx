@@ -11,7 +11,7 @@ function StockElement({
       content = "Out of stock";
       return "OutOfStock";
     } else if (stock < quantity) {
-      content = "Not enough stock";
+      content = "No stock";
       return "NotEnoughStock";
     } else if (stock <= 5) {
       content = "Low stock";
