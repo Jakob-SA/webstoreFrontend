@@ -9,15 +9,15 @@ import { ZipCodeChecker } from "./zipCodeChecker";
 // GitHub copilot has been used to generate some of the comments.
 
 function Orderform() {
-  const [isBusiness, setIsBusiness] = useState(false);
+  const [isBusinessOrder, setIsBusinessOrder] = useState(false);
   const [loading, setLoading] = useState(false);
   const [zipCode, setZipCode] = useState("");
   const [zipCodeIsValid, setZipCodeIsValid] = useState(true);
   const [city, setCity] = useState("");
   const [zipTouched, setZipTouched] = useState(false);
-  const [zipDeliveryTouched, setzipDeliveryTouched] = useState(false);
+  const [deliveryZipTouched, setdeliveryZipTouched] = useState(false);
   const [deliveryZipCode, setDeliveryZipCode] = useState("");
-  const [zipDeliveryCodeIsValid, setDeliveryZipCodeIsValid] = useState(true);
+  const [deliveryZipCodeIsValid, setDeliveryZipCodeIsValid] = useState(true);
   const [deliveryCity, setDeliveryCity] = useState("");
   const [isDeliveryAddress, setIsDeliveryAddress] = useState(false);
   const [errorDuringSubmit, setErrorDuringSubmit] = useState(false);
@@ -25,7 +25,7 @@ function Orderform() {
 
   // This function is used to toggle the business name and VAT number fields
   const handleBusinessChange = () => {
-    setIsBusiness(!isBusiness);
+    setIsBusinessOrder(!isBusinessOrder);
   };
 
   // This function is used to toggle the delivery adress fields
@@ -66,8 +66,8 @@ function Orderform() {
     email: elements.email.value,
     telephone_number: elements.telephoneNumber.value,
     order_comment: elements.orderComment.value,
-    business_name: isBusiness ? elements.businessName.value : undefined,
-    vat: isBusiness ? elements.VAT.value : undefined,
+    business_name: isBusinessOrder ? elements.businessName.value : undefined,
+    vat: isBusinessOrder ? elements.VAT.value : undefined,
     delivery_country: isDeliveryAddress
       ? elements.deliveryCountry.value
       : undefined,
@@ -140,7 +140,7 @@ function Orderform() {
               type="checkbox"
               id="businessOrder"
               name="user_businessOrder"
-              checked={isBusiness}
+              checked={isBusinessOrder}
               onChange={handleBusinessChange}
             />
           </div>
@@ -153,7 +153,7 @@ function Orderform() {
     <>
       <form onSubmit={handleSubmit}>
         <FormHeader />
-        {isBusiness && (
+        {isBusinessOrder && (
           <div className="duoBox">
             <div className="input-wrapper" data-required>
               <input
@@ -350,14 +350,14 @@ function Orderform() {
                   value={deliveryZipCode}
                   onChange={(e) => setDeliveryZipCode(e.target.value)}
                   onBlur={(e) => {
-                    setzipDeliveryTouched(true);
+                    setdeliveryZipTouched(true);
                     handleZipCode(e.target.value, "user_deliveryZip");
                   }}
                 />
                 <label htmlFor="user_deliveryZip">
                   Zip code<span className="required"></span>
                 </label>
-                {zipDeliveryTouched && !zipDeliveryCodeIsValid && (
+                {deliveryZipTouched && !deliveryZipCodeIsValid && (
                   <div className="invalidZipcode">Invalid zip code</div>
                 )}
               </div>
