@@ -14,7 +14,7 @@ async function fetchData(url: any) {
 export async function getProducts() {
 
   try {
-    const data = fetchData('https://raw.githubusercontent.com/CDIO-gr-17/FrontendWebApp/Dev/src/assets/media/products.json');
+    const data = fetchData('https://dtu62597.eduhost.dk:10272/api/products');
     return data;
   } catch (error) {
     console.error('Error:', error);
